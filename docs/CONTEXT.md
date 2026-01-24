@@ -9,33 +9,40 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | FASE 1: Project Setup |
-| **Laatste update** | [DATUM] |
-| **Volgende taak** | 1.1 - Maak GitHub repository |
+| **Huidige fase** | FASE 3: Basis UI |
+| **Laatste update** | 2026-01-24 |
+| **Volgende taak** | 3.1 - Layout component met iOS-style header |
 | **Blokkades** | Geen |
 
 ---
 
 ## ✅ VOLTOOIDE TAKEN
 
-### FASE 1: Project Setup
-- [ ] 1.1 - GitHub repository aangemaakt
-- [ ] 1.2 - Repository gecloned
-- [ ] 1.3 - Next.js project geïnitialiseerd
-- [ ] 1.4 - Dependencies geïnstalleerd
-- [ ] 1.5 - Prisma + SQLite setup
-- [ ] 1.6 - Mappenstructuur aangemaakt
-- [ ] 1.7 - ESLint + Prettier geconfigureerd
-- [ ] 1.8 - Eerste commit gemaakt
+### FASE 1: Project Setup ✅ COMPLEET
+- [x] 1.1 - GitHub repository aangemaakt
+- [x] 1.2 - Repository gecloned
+- [x] 1.3 - Next.js project geïnitialiseerd
+- [x] 1.4 - Dependencies geïnstalleerd
+- [x] 1.5 - Prisma + SQLite setup
+- [x] 1.6 - Mappenstructuur aangemaakt
+- [x] 1.7 - ESLint + Prettier geconfigureerd
+- [x] 1.8 - Eerste commit gemaakt
 
-### FASE 2: Authenticatie
-- [ ] 2.1 - NextAuth.js setup
-- [ ] 2.2 - Register pagina
-- [ ] 2.3 - Login pagina
-- [ ] 2.4 - Auth middleware
-- [ ] 2.5 - Profiel pagina
-- [ ] 2.6 - Auth flow getest
-- [ ] 2.7 - Commit gemaakt
+### FASE 2: Authenticatie ✅ COMPLEET
+- [x] 2.1 - NextAuth.js setup (met credentials provider)
+- [x] 2.2 - Register pagina + API endpoint
+- [x] 2.3 - Login pagina
+- [x] 2.4 - Auth middleware (route protection)
+- [x] 2.5 - Profiel pagina
+- [x] 2.6 - Auth flow getest (build succesvol)
+- [x] 2.7 - Commit gemaakt
+
+### FASE 3: Basis UI
+- [ ] 3.1 - Layout component met iOS-style header
+- [ ] 3.2 - Bottom navigation (Map, Teams, Profile)
+- [ ] 3.3 - Basis UI componenten (Button, Input, Card)
+- [ ] 3.4 - Dark mode toggle
+- [ ] 3.5 - Commit gemaakt
 
 *(Verdere fases worden toegevoegd als ze beginnen)*
 
@@ -44,13 +51,21 @@
 ## 🔄 HUIDIGE SESSIE
 
 ### Wat er deze sessie is gedaan:
-- [Lijst van acties]
+- FASE 1 afgerond en gecommit
+- Documentatie bestanden gecorrigeerd (dubbele .md extensie verwijderd)
+- FASE 2: Complete authenticatie systeem geïmplementeerd
+  - NextAuth.js met credentials provider
+  - Register API met wachtwoord hashing (bcryptjs)
+  - Login/Register pagina's met iOS-achtige styling
+  - Middleware voor route protection
+  - Profiel pagina met logout functionaliteit
+  - Prisma 7 adapter configuratie (better-sqlite3)
 
 ### Wat er nog moet gebeuren deze sessie:
-- [Lijst van taken]
+- FASE 3: Basis UI componenten
 
 ### Open vragen voor Damian:
-- [Vragen die beantwoord moeten worden]
+- Geen
 
 ---
 
