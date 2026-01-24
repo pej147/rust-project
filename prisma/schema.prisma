@@ -1,0 +1,183 @@
+// Rust Console Intel Map - Database Schema
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ============================================
+// USER & AUTH
+// ============================================
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  displayName  String
+  role         Role     @default(USER)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relaties
+  teamMembers TeamMember[]
+  markers     Marker[]
+  mapSessions MapSession[]
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+// ============================================
+// TEAMS
+// ============================================
+
+model Team {
+  id        String   @id @default(cuid())
+  name      String
+  code      String   @unique // Join code voor team
+  createdAt DateTime @default(now())
+
+  // Relaties
+  members     TeamMember[]
+  markers     Marker[]
+  mapSessions MapSession[]
+}
+
+model TeamMember {
+  id       String   @id @default(cuid())
+  teamId   String
+  userId   String
+  role     TeamRole @default(MEMBER)
+  joinedAt DateTime @default(now())
+
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, userId])
+}
+
+enum TeamRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+// ============================================
+// MAP SESSIONS
+// ============================================
+
+model MapSession {
+  id         String    @id @default(cuid())
+  seed       String
+  serverName String?
+  mapSize    Int       @default(4000)
+  wipeDate   DateTime?
+  isActive   Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+
+  // Wie heeft deze map aangemaakt
+  createdById String
+  createdBy   User   @relation(fields: [createdById], references: [id])
+
+  // Optioneel: team-gebonden map
+  teamId String?
+  team   Team?   @relation(fields: [teamId], references: [id])
+
+  // Relaties
+  markers Marker[]
+
+  @@index([seed])
+}
+
+// ============================================
+// MARKERS
+// ============================================
+
+model Marker {
+  id          String     @id @default(cuid())
+  title       String
+  description String?
+  type        MarkerType
+  x           Float // Grid X coordinaat
+  y           Float // Grid Y coordinaat
+  color       String     @default("#FF0000")
+  icon        String?
+  visibility  Visibility @default(TEAM)
+  lastSeenAt  DateTime?
+  tags        String? // JSON array als string
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  // Relaties
+  mapSessionId String
+  mapSession   MapSession @relation(fields: [mapSessionId], references: [id], onDelete: Cascade)
+
+  createdById String
+  createdBy   User   @relation(fields: [createdById], references: [id])
+
+  teamId String?
+  team   Team?   @relation(fields: [teamId], references: [id])
+
+  // Enemy profile link
+  enemyProfileId String?
+  enemyProfile   EnemyProfile? @relation(fields: [enemyProfileId], references: [id])
+
+  @@index([mapSessionId])
+  @@index([type])
+}
+
+enum MarkerType {
+  ENEMY
+  TEAM_BASE
+  LOOT
+  MONUMENT
+  DANGER
+  NOTE
+  RAID
+}
+
+enum Visibility {
+  PRIVATE // Alleen maker ziet het
+  TEAM // Teamleden zien het
+  PUBLIC // Iedereen ziet het
+}
+
+// ============================================
+// ENEMY PROFILES
+// ============================================
+
+model EnemyProfile {
+  id          String   @id @default(cuid())
+  name        String
+  clanTag     String?
+  notes       String?
+  threatLevel Int      @default(1) // 1-5
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relaties
+  markers Marker[]
+}
+
+// ============================================
+// AUDIT LOG
+// ============================================
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  action     String
+  entityType String
+  entityId   String
+  userId     String
+  details    String? // JSON
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@index([entityType, entityId])
+}
