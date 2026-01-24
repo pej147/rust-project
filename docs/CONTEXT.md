@@ -9,9 +9,9 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | FASE 5: Interactieve Map |
+| **Huidige fase** | FASE 6: Markers CRUD |
 | **Laatste update** | 2026-01-24 |
-| **Volgende taak** | 5.1 - Integreer Leaflet.js |
+| **Volgende taak** | 6.1 - API endpoints voor markers |
 | **Blokkades** | Geen |
 
 ---
@@ -51,12 +51,21 @@
 - [x] 4.4 - Map detail pagina met afbeelding
 - [x] 4.5 - Commit gemaakt
 
-### FASE 5: Interactieve Map
-- [ ] 5.1 - Integreer Leaflet.js
-- [ ] 5.2 - Custom map component met seed afbeelding
-- [ ] 5.3 - Pan/zoom functionaliteit
-- [ ] 5.4 - Grid overlay met coördinaten
-- [ ] 5.5 - Test en commit
+### FASE 5: Interactieve Map ✅ COMPLEET
+- [x] 5.1 - Integreer Leaflet.js
+- [x] 5.2 - Custom RustMap component met seed afbeelding
+- [x] 5.3 - Pan/zoom functionaliteit
+- [x] 5.4 - Coördinaten display (linksonder)
+- [x] 5.5 - Commit gemaakt
+
+### FASE 6: Markers CRUD
+- [ ] 6.1 - API endpoints voor markers
+- [ ] 6.2 - "Add Marker" form (bottom sheet)
+- [ ] 6.3 - Markers op de map tonen
+- [ ] 6.4 - Marker detail view
+- [ ] 6.5 - Edit/delete marker functionaliteit
+- [ ] 6.6 - Filter markers op type
+- [ ] 6.7 - Test en commit
 
 *(Verdere fases worden toegevoegd als ze beginnen)*
 
