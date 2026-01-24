@@ -9,9 +9,9 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | FASE 3: Basis UI |
+| **Huidige fase** | FASE 4: Map Sessies |
 | **Laatste update** | 2026-01-24 |
-| **Volgende taak** | 3.1 - Layout component met iOS-style header |
+| **Volgende taak** | 4.1 - "Nieuwe Map" pagina |
 | **Blokkades** | Geen |
 
 ---
@@ -37,12 +37,19 @@
 - [x] 2.6 - Auth flow getest (build succesvol)
 - [x] 2.7 - Commit gemaakt
 
-### FASE 3: Basis UI
-- [ ] 3.1 - Layout component met iOS-style header
-- [ ] 3.2 - Bottom navigation (Map, Teams, Profile)
-- [ ] 3.3 - Basis UI componenten (Button, Input, Card)
-- [ ] 3.4 - Dark mode toggle
-- [ ] 3.5 - Commit gemaakt
+### FASE 3: Basis UI ✅ COMPLEET
+- [x] 3.1 - Layout component met iOS-style header
+- [x] 3.2 - Bottom navigation (Map, Teams, Profile)
+- [x] 3.3 - Basis UI componenten (Button, Input, Card)
+- [x] 3.4 - Dark mode (standaard dark theme geïmplementeerd)
+- [x] 3.5 - Commit gemaakt
+
+### FASE 4: Map Sessies
+- [ ] 4.1 - "Nieuwe Map" pagina (seed invoeren)
+- [ ] 4.2 - API endpoint voor map sessions CRUD
+- [ ] 4.3 - Map sessie lijst pagina
+- [ ] 4.4 - Test: maak map aan, bekijk lijst
+- [ ] 4.5 - Commit gemaakt
 
 *(Verdere fases worden toegevoegd als ze beginnen)*
 
@@ -54,15 +61,15 @@
 - FASE 1 afgerond en gecommit
 - Documentatie bestanden gecorrigeerd (dubbele .md extensie verwijderd)
 - FASE 2: Complete authenticatie systeem geïmplementeerd
-  - NextAuth.js met credentials provider
-  - Register API met wachtwoord hashing (bcryptjs)
-  - Login/Register pagina's met iOS-achtige styling
-  - Middleware voor route protection
-  - Profiel pagina met logout functionaliteit
-  - Prisma 7 adapter configuratie (better-sqlite3)
+- FASE 3: Basis UI componenten geïmplementeerd
+  - Header component met iOS-style blur effect
+  - Bottom navigation met Map, Teams, Profile tabs
+  - Button, Input, Card componenten
+  - Dashboard layout met bottom nav
+  - Placeholder pagina's voor Map en Teams
 
-### Wat er nog moet gebeuren deze sessie:
-- FASE 3: Basis UI componenten
+### Wat er nog moet gebeuren:
+- FASE 4: Map Sessies implementeren
 
 ### Open vragen voor Damian:
 - Geen
