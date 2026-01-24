@@ -9,9 +9,9 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | FASE 4: Map Sessies |
+| **Huidige fase** | FASE 5: Interactieve Map |
 | **Laatste update** | 2026-01-24 |
-| **Volgende taak** | 4.1 - "Nieuwe Map" pagina |
+| **Volgende taak** | 5.1 - Integreer Leaflet.js |
 | **Blokkades** | Geen |
 
 ---
@@ -44,12 +44,19 @@
 - [x] 3.4 - Dark mode (standaard dark theme geïmplementeerd)
 - [x] 3.5 - Commit gemaakt
 
-### FASE 4: Map Sessies
-- [ ] 4.1 - "Nieuwe Map" pagina (seed invoeren)
-- [ ] 4.2 - API endpoint voor map sessions CRUD
-- [ ] 4.3 - Map sessie lijst pagina
-- [ ] 4.4 - Test: maak map aan, bekijk lijst
-- [ ] 4.5 - Commit gemaakt
+### FASE 4: Map Sessies ✅ COMPLEET
+- [x] 4.1 - "Nieuwe Map" pagina (seed invoeren)
+- [x] 4.2 - API endpoint voor map sessions CRUD
+- [x] 4.3 - Map sessie lijst pagina
+- [x] 4.4 - Map detail pagina met afbeelding
+- [x] 4.5 - Commit gemaakt
+
+### FASE 5: Interactieve Map
+- [ ] 5.1 - Integreer Leaflet.js
+- [ ] 5.2 - Custom map component met seed afbeelding
+- [ ] 5.3 - Pan/zoom functionaliteit
+- [ ] 5.4 - Grid overlay met coördinaten
+- [ ] 5.5 - Test en commit
 
 *(Verdere fases worden toegevoegd als ze beginnen)*
 
@@ -59,17 +66,17 @@
 
 ### Wat er deze sessie is gedaan:
 - FASE 1 afgerond en gecommit
-- Documentatie bestanden gecorrigeerd (dubbele .md extensie verwijderd)
-- FASE 2: Complete authenticatie systeem geïmplementeerd
-- FASE 3: Basis UI componenten geïmplementeerd
-  - Header component met iOS-style blur effect
-  - Bottom navigation met Map, Teams, Profile tabs
-  - Button, Input, Card componenten
-  - Dashboard layout met bottom nav
-  - Placeholder pagina's voor Map en Teams
+- FASE 2: Complete authenticatie systeem
+- FASE 3: Basis UI componenten
+- FASE 4: Map Sessies geïmplementeerd
+  - API endpoints voor CRUD operaties
+  - Nieuwe map pagina met form
+  - Map sessie lijst overzicht
+  - Map detail pagina met afbeelding weergave
+  - Map afbeelding voor seed 10358 gedownload
 
 ### Wat er nog moet gebeuren:
-- FASE 4: Map Sessies implementeren
+- FASE 5: Interactieve Map met Leaflet.js
 
 ### Open vragen voor Damian:
 - Geen
@@ -110,7 +117,7 @@
 ### Bekende seeds:
 | Seed | Server | Map Size | Notities |
 |------|--------|----------|----------|
-| *Nog geen* | - | - | - |
+| 10358 | - | 4000 | Eerste test map, afbeelding via Discord |
 
 ---
 
