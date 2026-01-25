@@ -83,40 +83,32 @@
 
 ### Wat er deze sessie is gedaan (2026-01-25):
 
-#### CEO Dashboard Systeem
-- **CEO Dashboard toegevoegd aan CLAUDE.md**
-  - Claude werkt nu als CEO met Manager/Werknemer hiërarchie
-  - Dashboard toont actieve agents bovenaan elk bericht
-  - Uitgebreide weergave met status per agent
-  - Commit: `703f268`
+#### Nieuwe Richting Gekozen: Optie B
+- **Damian koos voor:** Landing Page + Guest Mode + Wiki (ipv Teams)
+- **Plan opgesteld en opgeslagen:** `.claude/plans/lazy-jumping-sutton.md`
 
-#### API Endpoints Test
-- **Alle 11 API endpoints getest en werkend bevonden:**
-  - `/api/auth/register` - POST ✅
-  - `/api/auth/[...nextauth]` - GET, POST ✅
-  - `/api/maps` - GET, POST ✅
-  - `/api/maps/[id]` - GET, PATCH, DELETE ✅
-  - `/api/markers` - GET, POST ✅
-  - `/api/markers/[id]` - GET, PATCH, DELETE ✅
-- Auth bescherming werkt (401 zonder login)
-- Validatie werkt (400 bij ongeldige data)
-- Foutmeldingen in het Nederlands
+#### Research gedaan:
+- RustClash wiki geanalyseerd (403 blocked, via alternatieven)
+- RustLabs → redirect naar RustClash (samengevoegd)
+- Databronnen gevonden:
+  - [Rust Item JSON](https://gist.github.com/Marcuzz/9e01a39a8f5f83dc673bfc6f6fa4aacc) - 1000+ items
+  - [Rust Item Images](https://gist.github.com/Bonfire/9b803c4b7c18b20c1c49e0fa78bd400e)
 
-#### Next.js 16 Migratie
-- **Middleware naar Proxy gemigreerd**
-  - `src/middleware.ts` → `src/proxy.ts`
-  - Functienaam `middleware()` → `proxy()`
-  - Deprecated warning opgelost
-  - Commit: `4246ada`
+#### Beslissingen genomen:
+- **Wiki storage:** Hybride (Database voor items + Markdown voor content)
+- **WikiItem model:** Met gameId, shortName, craftCost, raidCost als JSON
 
-### Eerdere sessie (FASE 6 compleet):
-- Taak 6.1-6.6 allemaal voltooid (markers CRUD, filters, etc.)
+### Eerdere sessies:
+- FASE 1-6 compleet
+- CEO Dashboard, API tests, middleware→proxy migratie
 
 ### Wat er nog moet gebeuren:
-- FASE 7: Teams (of nieuwe richting: Landing Page + Guest Mode + Wiki)
+1. **FASE A:** Landing Page (publiek, geen login nodig)
+2. **FASE B:** Guest Mode (map + localStorage markers)
+3. **FASE C:** Wiki (database items + categorieën)
 
 ### Open vragen voor Damian:
-- Geen
+- Geen - plan is klaar, wacht op volgende sessie
 
 ---
 
