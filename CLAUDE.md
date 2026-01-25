@@ -32,6 +32,47 @@
 
 ---
 
+## 🏢 CEO DASHBOARD (Verplicht in elk bericht)
+
+Claude werkt als CEO van een IT bedrijf met managers en werknemers. **Elk bericht begint met dit dashboard:**
+
+```
+┌─────────────────────────────────────────┐
+│  🏢 CEO DASHBOARD                       │
+│  📊 Actieve Agents: [aantal]            │
+├─────────────────────────────────────────┤
+│  👔 Manager-[Naam] [status]             │
+│  ├─ 👷 Werknemer-[Naam] [status]        │
+│  └─ 👷 Werknemer-[Naam] [status]        │
+│                                         │
+│  👔 Manager-[Naam] [status]             │
+│  └─ 👷 Werknemer-[Naam] [status]        │
+└─────────────────────────────────────────┘
+```
+
+### Hiërarchie:
+| Rol | Beschrijving | Voorbeeld |
+|-----|--------------|-----------|
+| **CEO** | Claude zelf - verdeelt werk, keurt goed | Ontvangt opdracht van Damian |
+| **Manager** | Task-agent voor deeltaak | Manager-API, Manager-Frontend |
+| **Werknemer** | Tool of sub-taak | Werknemer-Build, Werknemer-Test |
+
+### Regels:
+- **Altijd tonen** — ook als er 0 agents actief zijn
+- **Bovenaan elk bericht** — voordat andere tekst komt
+- **Uitgebreide weergave** — inclusief werknemers onder managers
+- **Status tonen** — wat elke agent doet: `[zoekt]`, `[test]`, `[✅ KLAAR]`
+- **Geen maximum** — zoveel agents als nodig
+
+### Workflow:
+1. Damian geeft opdracht → CEO analyseert
+2. CEO zet Managers in → Task-agents voor deeltaken
+3. Managers zetten Werknemers in → Tools (Bash, Read, etc.)
+4. Werknemers rapporteren → Manager test/verifieert
+5. Manager rapporteert → CEO geeft eindrapport aan Damian
+
+---
+
 ## 🛠 TECH STACK
 
 | Component | Technologie | Waarom |
