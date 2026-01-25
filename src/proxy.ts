@@ -15,12 +15,23 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized: ({ token }) => !!token,
+      authorized: ({ token, req }) => {
+        const pathname = req.nextUrl.pathname;
+
+        // /map en /map/guest/* zijn publiek (guest mode) - geen login nodig
+        if (pathname === "/map" || pathname.startsWith("/map/guest")) {
+          return true;
+        }
+
+        // Alle andere beschermde routes vereisen login
+        return !!token;
+      },
     },
   }
 );
 
 // Bescherm deze routes - vereist inloggen
+// Let op: /map is publiek (guest mode), maar /map/new en /map/[id] zijn beschermd
 export const config = {
-  matcher: ["/map/:path*", "/teams/:path*", "/profile/:path*", "/admin/:path*"],
+  matcher: ["/map", "/map/:path*", "/teams/:path*", "/profile/:path*", "/admin/:path*"],
 };
