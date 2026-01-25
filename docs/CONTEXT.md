@@ -9,10 +9,11 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | FASE 7: Teams |
+| **Huidige fase** | FASE 6 compleet, klaar voor FASE 7 of nieuwe richting |
 | **Laatste update** | 2026-01-25 |
-| **Volgende taak** | 7.1 - Team aanmaken pagina |
+| **Volgende taak** | FASE 7: Teams (of Landing Page + Wiki) |
 | **Blokkades** | Geen |
+| **CEO Dashboard** | ✅ Actief in alle sessies |
 
 ---
 
@@ -81,69 +82,81 @@
 ## 🔄 HUIDIGE SESSIE
 
 ### Wat er deze sessie is gedaan (2026-01-25):
-- **Taak 6.1 VOLTOOID:** API endpoints voor markers aangemaakt
-  - `src/app/api/markers/route.ts` - GET (lijst) en POST (create)
-  - `src/app/api/markers/[id]/route.ts` - GET, PATCH, DELETE
-  - Inclusief visibility filtering (PRIVATE/TEAM/PUBLIC)
-  - Inclusief team membership checks
-  - Type check en build succesvol
 
-- **Taak 6.2 VOLTOOID:** "Add Marker" form met bottom sheet
-  - `src/components/ui/bottom-sheet.tsx` - iOS-style slide-up panel
-  - `src/components/ui/select.tsx` - Herbruikbare select component
-  - `src/components/map/add-marker-form.tsx` - Formulier met:
-    - Titel (verplicht)
-    - Type selectie (Enemy, Team Base, Loot, etc.)
-    - Kleurkiezer (met standaard per type)
-    - Beschrijving (optioneel)
-    - Zichtbaarheid (Team/Privé/Publiek)
-  - Map detail pagina aangepast:
-    - Klik op map opent formulier met coördinaten
-    - FAB knop werkt nu ook
-    - Tip tekst toegevoegd
-  - Build + lint succesvol
+#### CEO Dashboard Systeem
+- **CEO Dashboard toegevoegd aan CLAUDE.md**
+  - Claude werkt nu als CEO met Manager/Werknemer hiërarchie
+  - Dashboard toont actieve agents bovenaan elk bericht
+  - Uitgebreide weergave met status per agent
+  - Commit: `703f268`
 
-- **Taak 6.3 VOLTOOID:** Markers op de map tonen
-  - Verbeterde marker iconen met emoji per type
-  - Type-specifieke configuratie (ENEMY=👤, TEAM_BASE=🏠, etc.)
-  - Dark theme popup met:
-    - Titel + icoon
-    - Type label met kleur indicator
-    - Beschrijving (indien aanwezig)
-    - Coördinaten + maker naam
-  - Custom CSS styling voor popups
-  - Hover effect op markers
-  - `onMarkerClick` callback toegevoegd
+#### API Endpoints Test
+- **Alle 11 API endpoints getest en werkend bevonden:**
+  - `/api/auth/register` - POST ✅
+  - `/api/auth/[...nextauth]` - GET, POST ✅
+  - `/api/maps` - GET, POST ✅
+  - `/api/maps/[id]` - GET, PATCH, DELETE ✅
+  - `/api/markers` - GET, POST ✅
+  - `/api/markers/[id]` - GET, PATCH, DELETE ✅
+- Auth bescherming werkt (401 zonder login)
+- Validatie werkt (400 bij ongeldige data)
+- Foutmeldingen in het Nederlands
 
-- **Taak 6.4 + 6.5 VOLTOOID:** Marker detail view met edit/delete
-  - `src/components/map/marker-detail-sheet.tsx` - Nieuw component:
-    - View mode: toont alle marker details
-    - Edit mode: inline bewerken van alle velden
-    - Delete functionaliteit
-    - Alleen eigenaar kan bewerken/verwijderen
-  - Geïntegreerd in map detail pagina
-  - Klik op marker → detail sheet opent
-  - Na edit/delete → map herlaadt automatisch
+#### Next.js 16 Migratie
+- **Middleware naar Proxy gemigreerd**
+  - `src/middleware.ts` → `src/proxy.ts`
+  - Functienaam `middleware()` → `proxy()`
+  - Deprecated warning opgelost
+  - Commit: `4246ada`
 
-- **Taak 6.6 VOLTOOID:** Filter markers op type
-  - `src/components/map/marker-filter.tsx` - Filter component:
-    - Collapsed state: compact knop met marker telling
-    - Expanded state: volledige filter panel
-    - Per-type toggle met icoon en count
-    - "Alles" en "Geen" quick actions
-    - Toont aantal zichtbare vs totale markers
-  - Geïntegreerd in map detail pagina (linksboven)
-  - Markers worden real-time gefilterd
+### Eerdere sessie (FASE 6 compleet):
+- Taak 6.1-6.6 allemaal voltooid (markers CRUD, filters, etc.)
 
 ### Wat er nog moet gebeuren:
-- **6.7** - Test en commit
-- **6.4** - Marker detail view
-- **6.5** - Edit/delete marker functionaliteit
-- **6.6** - Filter markers op type
-- **6.7** - Test en commit
+- FASE 7: Teams (of nieuwe richting: Landing Page + Guest Mode + Wiki)
 
 ### Open vragen voor Damian:
 - Geen
+
+---
+
+## 🚀 NIEUWE FEATURES GEPLAND (2026-01-25)
+
+### Richting wijziging
+Het project krijgt een nieuwe focus:
+1. **Site bruikbaar zonder login** (zoals reddead.gg)
+2. **Login meer verborgen** - niet prominent op homepage
+3. **Rust Wiki toevoegen** - eigen content, geen externe links
+
+### Geplande features:
+
+#### 1. Landing Page (`/`)
+- Hero sectie met titel "Rust Console Intel Map"
+- Features uitleg (Map, Teams, Wiki)
+- "Bekijk Map" knop (werkt zonder login)
+- "Bekijk Wiki" knop
+- Kleine "Login" link in de header (niet prominent)
+
+#### 2. Guest Mode (Map zonder login)
+- Iedereen kan de map bekijken
+- Guest markers opgeslagen in localStorage (browser)
+- Pas bij login worden markers gesynchroniseerd naar account
+- Visual indicator dat je als guest werkt
+
+#### 3. Rust Wiki (`/wiki`)
+- Eigen wiki pagina's (zelf beheerd)
+- Categorieën:
+  - 🏛️ Monuments - Alle monuments met loot info
+  - 🔫 Weapons - Wapens, damage, crafting
+  - 🏠 Building - Base designs, upkeep, materials
+  - 💣 Raiding - Raid costs, explosives, strategies
+  - 🎒 Items - Alle items in het spel
+  - 🗺️ Map Tips - Console-specifieke tips
+- Admin kan wiki content bewerken
+
+### Inspiratie:
+- **wiki.rustclash.com** - Fijne wiki layout (zonder de goksite)
+- **reddead.gg** - Goede UX, site bruikbaar zonder login
 
 ---
 
@@ -151,29 +164,49 @@
 
 | Issue | Prioriteit | Status | Notities |
 |-------|------------|--------|----------|
-| Statusline token display | Laag | In onderzoek | Zie hieronder |
+| Geen actieve issues | - | - | - |
 
-### Statusline configuratie (2026-01-25)
+---
 
-**Doel:** Token-verbruik tonen in de Claude Code statusline.
+## 🖥️ STATUSLINE CONFIGURATIE ✅ COMPLEET
 
-**Wat geprobeerd is:**
-1. Eerst bash commando → werkt niet op Windows
-2. Daarna PowerShell commando → moet nog getest worden na herstart
+**Laatste update:** 2026-01-25
 
-**Huidige configuratie in `C:\Users\Damian\.claude\settings.json`:**
+### Bestanden:
+- **Settings:** `C:\Users\Damian\.claude\settings.json`
+- **Script:** `C:\Users\Damian\.claude\statusline.ps1`
+
+### Wat de statusline toont:
+```
+🤖 Claude Opus 4 | 📁 rust-project | 🌿 main +2 ~1 ?3 | [████████░░░░] 45% (90K/200K) | ⏰ 14:35
+```
+
+| Onderdeel | Beschrijving | Kleur |
+|-----------|--------------|-------|
+| 🤖 Model | Claude model naam | wit |
+| 📁 Directory | Huidige map (alleen folder naam) | blauw |
+| 🌿 Git branch | Branch naam | groen |
+| +N | Staged files | geel |
+| ~N | Modified/unstaged files | rood |
+| ?N | Untracked files | grijs |
+| Progress bar | Context window gebruik | groen→geel→rood |
+| Percentage | Token gebruik (gebruikt/totaal) | past bij bar |
+| ⏰ Tijd | Huidige tijd HH:MM | cyaan |
+
+### Settings.json configuratie:
 ```json
-"statusLine": {
-  "type": "command",
-  "command": "powershell -NoProfile -Command \"$j = [Console]::In.ReadToEnd() | ConvertFrom-Json; $m = $j.model.display_name; $i = $j.context_window.total_input_tokens; $o = $j.context_window.total_output_tokens; $c = [math]::Round($j.context_window.used_percentage, 1); Write-Host \\\"$m | Tokens: $i in / $o out | Context: $c%\\\"\""
+{
+  "statusLine": {
+    "type": "command",
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File C:\\Users\\Damian\\.claude\\statusline.ps1"
+  }
 }
 ```
 
-**Volgende stappen als het niet werkt:**
-1. Controleer of PowerShell correct is geïnstalleerd
-2. Test het commando handmatig in terminal
-3. Probeer alternatief: `pwsh` in plaats van `powershell`
-4. Of gebruik `/cost` commando als workaround
+### Git status betekenis:
+- **+N** = N bestanden staged (klaar voor commit)
+- **~N** = N bestanden gewijzigd maar niet staged
+- **?N** = N nieuwe bestanden (untracked)
 
 ---
 
@@ -295,4 +328,4 @@ De volgende taak is: [TAAK]
 
 ---
 
-*Laatste update: 2026-01-25 — Taak 6.1 voltooid, klaar voor 6.2*
+*Laatste update: 2026-01-25 — CEO Dashboard toegevoegd, API endpoints getest, middleware→proxy migratie*
