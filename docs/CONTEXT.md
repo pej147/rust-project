@@ -9,10 +9,10 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | Wiki Data Schema compleet, wacht op browser extractie |
+| **Huidige fase** | FASE C: Wiki (data structuur bepalen) |
 | **Laatste update** | 2026-01-25 |
-| **Volgende taak** | Browser extractie van wiki.rustclash.com raid data |
-| **Blokkades** | Wiki data moet handmatig worden geëxtraheerd (403 block) |
+| **Volgende taak** | Wiki database schema + pagina's bouwen |
+| **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 
 ---
@@ -68,14 +68,35 @@
 - [x] 6.6 - Filter markers op type ✅
 - [x] 6.7 - Test en commit ✅
 
-### FASE 7: Teams
+### FASE A: Landing Page ✅ COMPLEET
+- [x] A.1 - Hero sectie met gradient title
+- [x] A.2 - Features uitleg (Map, Teams, Wiki)
+- [x] A.3 - CTA buttons naar /map en /wiki
+- [x] A.4 - Commit gemaakt en gepusht
+
+### FASE B: Guest Mode ✅ COMPLEET
+- [x] B.1 - `useGuestMarkers` hook (localStorage)
+- [x] B.2 - Guest map pagina (`/map/guest/[seed]`)
+- [x] B.3 - Guest add marker form
+- [x] B.4 - Guest marker detail sheet (view/edit/delete)
+- [x] B.5 - Map pagina dual mode (guest/logged-in)
+- [x] B.6 - Proxy.ts updated voor publieke routes
+- [x] B.7 - Commit gemaakt en gepusht
+
+### FASE C: Wiki (IN PROGRESS)
+- [ ] C.1 - Wiki database schema bepalen
+- [ ] C.2 - Raid costs data structuur
+- [ ] C.3 - Wiki UI pagina's bouwen
+- [ ] C.4 - Item detail pagina's
+
+### FASE 7: Teams (UITGESTELD)
 - [ ] 7.1 - Team aanmaken pagina
 - [ ] 7.2 - Team join met code
 - [ ] 7.3 - Team members overzicht
 - [ ] 7.4 - Marker visibility (private/team/public)
 - [ ] 7.5 - Test en commit
 
-*(Verdere fases worden toegevoegd als ze beginnen)*
+*(Teams is uitgesteld, focus ligt nu op Guest Mode + Wiki)*
 
 ---
 
@@ -83,42 +104,42 @@
 
 ### Wat er deze sessie is gedaan (2026-01-25):
 
-#### Wiki Data Schema Gebouwd
-- **Opdracht:** RustClash wiki data extraheren voor programmeerbaar gebruik
-- **Blocker:** wiki.rustclash.com geeft 403 voor bot-verkeer
-- **Oplossing:** Schema met placeholders voor handmatige browser extractie
+#### FASE A: Landing Page ✅
+- Nieuwe landing page op `src/app/page.tsx`
+- Hero sectie met gradient title "Rust Console Intel Map"
+- Features sectie (Map, Teams, Wiki)
+- CTA buttons naar /map en /wiki
 
-#### Bestanden aangemaakt:
+#### FASE B: Guest Mode ✅
 | Bestand | Beschrijving |
 |---------|--------------|
-| `src/types/game-data.ts` | TypeScript types voor raid costs, explosives, buildings |
-| `src/data/raid-costs.json` | 52 entries met placeholders (pending_browser_extract) |
-| `src/lib/game-data.ts` | Helper functies voor data loading/searching |
-| `docs/WIKI-EXTRACTION-PLAN.md` | Instructies voor handmatige extractie |
+| `src/hooks/use-guest-markers.ts` | localStorage hook voor guest markers |
+| `src/components/map/guest-add-marker-form.tsx` | Form voor markers toevoegen |
+| `src/components/map/guest-marker-detail-sheet.tsx` | Detail sheet (view/edit/delete) |
+| `src/app/(dashboard)/map/guest/[seed]/page.tsx` | Guest map detail pagina |
+| `src/app/(dashboard)/map/page.tsx` | Updated voor dual guest/logged-in mode |
+| `src/proxy.ts` | Publieke routes voor /map en /map/guest/* |
 
-#### Data structuur:
-- **Buildings:** 30 entries (wall, foundation, floor, roof, door_frame, window_frame × 5 tiers)
-- **Doors:** 11 entries (wooden, sheet metal, garage, armored, hatches, windows)
-- **Deployables:** 11 entries (TC, externals, vending, turrets, etc.)
+#### Statusline bugfix
+- Fixed percentage berekening in `C:\Users\Damian\.claude\statusline.ps1`
+- Was: API waarde gebruiken (incorrect)
+- Nu: Zelf berekenen: `($usedTokens / $ctxSize) * 100`
 
-#### Beslissingen:
-- **Enige bron:** wiki.rustclash.com (geen alternatieve bronnen)
-- **Data status:** `pending_browser_extract` tot handmatig ingevuld
-- **Sulfur berekening:** Automatisch via `explosive_sulfur_costs` referentie
+#### Wiki Research
+- User deelde HTML van wiki.rustclash.com (Sheet Metal Door pagina)
+- Waardevolle data structuur gevonden voor FASE C
 
 ### Eerdere sessies:
 - FASE 1-6 compleet
-- Landing Page + Wiki placeholder pagina
-- CEO Dashboard, API tests, middleware→proxy migratie
+- CEO Dashboard actief
+- Middleware→proxy migratie
 
 ### Wat er nog moet gebeuren:
-1. **Prioriteit 1:** Explosive sulfur costs invullen (nodig voor berekeningen)
-2. **Prioriteit 2:** Raid costs tabel data invullen
-3. **Prioriteit 3:** Wiki UI bouwen om data te tonen
-4. **Later:** Weapons, items, crafting recipes schemas
+1. **FASE C:** Wiki database schema + UI
+2. **Later:** Teams functionaliteit
 
 ### Open vragen voor Damian:
-- Geen - schema is klaar, wacht op browser data extractie
+- Wil je FASE C starten op basis van rustclash wiki structuur?
 
 ---
 
@@ -360,4 +381,4 @@ De volgende taak is: [TAAK]
 
 ---
 
-*Laatste update: 2026-01-25 — Wiki data schema toegevoegd (raid-costs.json, game-data.ts types, extractieplan)*
+*Laatste update: 2026-01-25 — FASE A (Landing Page) + FASE B (Guest Mode) COMPLEET, statusline bugfix*
