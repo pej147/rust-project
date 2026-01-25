@@ -1,0 +1,945 @@
+{
+  "version": "1.0.0",
+  "source": "wiki.rustclash.com",
+  "extraction_date": null,
+
+  "_schema_notes": {
+    "status_values": ["pending_manual_fill", "pending_browser_extract", "verified"],
+    "null_values": "All null values require manual extraction from wiki.rustclash.com",
+    "sulfur_calculation": "sulfur_cost = quantity × sulfur_per_explosive (from explosive_sulfur_costs)"
+  },
+
+  "explosive_sulfur_costs": {
+    "rocket": null,
+    "c4": null,
+    "satchel": null,
+    "explosive_ammo": null,
+    "high_velocity_rocket": null,
+    "incendiary_rocket": null,
+    "f1_grenade": null,
+    "beancan_grenade": null
+  },
+
+  "buildings": [
+    {
+      "id": "wall_twig",
+      "target_name": "Twig Wall",
+      "target_type": "building",
+      "tier": "twig",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "wall_wood",
+      "target_name": "Wood Wall",
+      "target_type": "building",
+      "tier": "wood",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "wall_stone",
+      "target_name": "Stone Wall",
+      "target_type": "building",
+      "tier": "stone",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "wall_metal",
+      "target_name": "Sheet Metal Wall",
+      "target_type": "building",
+      "tier": "metal",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "wall_armored",
+      "target_name": "Armored Wall",
+      "target_type": "building",
+      "tier": "armored",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "foundation_twig",
+      "target_name": "Twig Foundation",
+      "target_type": "building",
+      "tier": "twig",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "foundation_wood",
+      "target_name": "Wood Foundation",
+      "target_type": "building",
+      "tier": "wood",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "foundation_stone",
+      "target_name": "Stone Foundation",
+      "target_type": "building",
+      "tier": "stone",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "foundation_metal",
+      "target_name": "Sheet Metal Foundation",
+      "target_type": "building",
+      "tier": "metal",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "foundation_armored",
+      "target_name": "Armored Foundation",
+      "target_type": "building",
+      "tier": "armored",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "floor_twig",
+      "target_name": "Twig Floor",
+      "target_type": "building",
+      "tier": "twig",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "floor_wood",
+      "target_name": "Wood Floor",
+      "target_type": "building",
+      "tier": "wood",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "floor_stone",
+      "target_name": "Stone Floor",
+      "target_type": "building",
+      "tier": "stone",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "floor_metal",
+      "target_name": "Sheet Metal Floor",
+      "target_type": "building",
+      "tier": "metal",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "floor_armored",
+      "target_name": "Armored Floor",
+      "target_type": "building",
+      "tier": "armored",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "roof_twig",
+      "target_name": "Twig Roof",
+      "target_type": "building",
+      "tier": "twig",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "roof_wood",
+      "target_name": "Wood Roof",
+      "target_type": "building",
+      "tier": "wood",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "roof_stone",
+      "target_name": "Stone Roof",
+      "target_type": "building",
+      "tier": "stone",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "roof_metal",
+      "target_name": "Sheet Metal Roof",
+      "target_type": "building",
+      "tier": "metal",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "roof_armored",
+      "target_name": "Armored Roof",
+      "target_type": "building",
+      "tier": "armored",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "door_frame_twig",
+      "target_name": "Twig Door Frame",
+      "target_type": "building",
+      "tier": "twig",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "door_frame_wood",
+      "target_name": "Wood Door Frame",
+      "target_type": "building",
+      "tier": "wood",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "door_frame_stone",
+      "target_name": "Stone Door Frame",
+      "target_type": "building",
+      "tier": "stone",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "door_frame_metal",
+      "target_name": "Sheet Metal Door Frame",
+      "target_type": "building",
+      "tier": "metal",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "door_frame_armored",
+      "target_name": "Armored Door Frame",
+      "target_type": "building",
+      "tier": "armored",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "window_frame_twig",
+      "target_name": "Twig Window Frame",
+      "target_type": "building",
+      "tier": "twig",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "window_frame_wood",
+      "target_name": "Wood Window Frame",
+      "target_type": "building",
+      "tier": "wood",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "window_frame_stone",
+      "target_name": "Stone Window Frame",
+      "target_type": "building",
+      "tier": "stone",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "window_frame_metal",
+      "target_name": "Sheet Metal Window Frame",
+      "target_type": "building",
+      "tier": "metal",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "window_frame_armored",
+      "target_name": "Armored Window Frame",
+      "target_type": "building",
+      "tier": "armored",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    }
+  ],
+
+  "doors": [
+    {
+      "id": "wooden_door",
+      "target_name": "Wooden Door",
+      "target_type": "door",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "sheet_metal_door",
+      "target_name": "Sheet Metal Door",
+      "target_type": "door",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "double_sheet_metal_door",
+      "target_name": "Double Sheet Metal Door",
+      "target_type": "door",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "garage_door",
+      "target_name": "Garage Door",
+      "target_type": "door",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "armored_door",
+      "target_name": "Armored Door",
+      "target_type": "door",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "armored_double_door",
+      "target_name": "Armored Double Door",
+      "target_type": "door",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "ladder_hatch",
+      "target_name": "Ladder Hatch",
+      "target_type": "door",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "floor_grill",
+      "target_name": "Floor Grill",
+      "target_type": "door",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "strengthened_glass_window",
+      "target_name": "Strengthened Glass Window",
+      "target_type": "door",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "metal_window_bars",
+      "target_name": "Metal Window Bars",
+      "target_type": "door",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "reinforced_glass_window",
+      "target_name": "Reinforced Glass Window",
+      "target_type": "door",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    }
+  ],
+
+  "deployables": [
+    {
+      "id": "tool_cupboard",
+      "target_name": "Tool Cupboard",
+      "target_type": "deployable",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "high_external_wood_wall",
+      "target_name": "High External Wood Wall",
+      "target_type": "deployable",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "high_external_stone_wall",
+      "target_name": "High External Stone Wall",
+      "target_type": "deployable",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "high_external_wood_gate",
+      "target_name": "High External Wood Gate",
+      "target_type": "deployable",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "high_external_stone_gate",
+      "target_name": "High External Stone Gate",
+      "target_type": "deployable",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "vending_machine",
+      "target_name": "Vending Machine",
+      "target_type": "deployable",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "auto_turret",
+      "target_name": "Auto Turret",
+      "target_type": "deployable",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "flame_turret",
+      "target_name": "Flame Turret",
+      "target_type": "deployable",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "shotgun_trap",
+      "target_name": "Shotgun Trap",
+      "target_type": "deployable",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "sam_site",
+      "target_name": "SAM Site",
+      "target_type": "deployable",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    },
+    {
+      "id": "large_wood_box",
+      "target_name": "Large Wood Box",
+      "target_type": "deployable",
+      "hp": null,
+      "rockets": { "quantity": null, "sulfur_cost": null },
+      "c4": { "quantity": null, "sulfur_cost": null },
+      "satchels": { "quantity": null, "sulfur_cost": null },
+      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
+      "cheapest_sulfur": null,
+      "cheapest_method": null,
+      "meta": {
+        "status": "pending_browser_extract",
+        "source_page": "wiki.rustclash.com/raid-chart",
+        "last_updated": null
+      }
+    }
+  ]
+}
