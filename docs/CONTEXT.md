@@ -9,9 +9,9 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | FASE 6: Markers CRUD |
+| **Huidige fase** | FASE 7: Teams |
 | **Laatste update** | 2026-01-25 |
-| **Volgende taak** | 6.7 - Test en commit |
+| **Volgende taak** | 7.1 - Team aanmaken pagina |
 | **Blokkades** | Geen |
 
 ---
@@ -58,17 +58,21 @@
 - [x] 5.4 - Coördinaten display (linksonder)
 - [x] 5.5 - Commit gemaakt
 
-### FASE 6: Markers CRUD
+### FASE 6: Markers CRUD ✅ COMPLEET
 - [x] 6.1 - API endpoints voor markers ✅
 - [x] 6.2 - "Add Marker" form (bottom sheet) ✅
 - [x] 6.3 - Markers op de map tonen ✅
 - [x] 6.4 - Marker detail view ✅
 - [x] 6.5 - Edit/delete marker functionaliteit ✅
 - [x] 6.6 - Filter markers op type ✅
-- [ ] 6.4 - Marker detail view
-- [ ] 6.5 - Edit/delete marker functionaliteit
-- [ ] 6.6 - Filter markers op type
-- [ ] 6.7 - Test en commit
+- [x] 6.7 - Test en commit ✅
+
+### FASE 7: Teams
+- [ ] 7.1 - Team aanmaken pagina
+- [ ] 7.2 - Team join met code
+- [ ] 7.3 - Team members overzicht
+- [ ] 7.4 - Marker visibility (private/team/public)
+- [ ] 7.5 - Test en commit
 
 *(Verdere fases worden toegevoegd als ze beginnen)*
 
