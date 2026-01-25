@@ -549,6 +549,19 @@ Dit zorgt ervoor dat context behouden blijft tussen sessies.
 5. **ALTIJD uitleggen** wat je doet en waarom
 6. **NOOIT grote refactors** zonder eerst te vragen
 7. **BIJ TWIJFEL:** Vraag Damian om bevestiging
+8. **ALTIJD direct committen en pushen** na elke code-wijziging (voor sync met Claude Web)
+
+### 🔴 Git Sync Protocol (VERPLICHT)
+
+Omdat Damian wisselt tussen Claude Code CLI en Claude Web, moet GitHub ALTIJD up-to-date zijn.
+
+**Na ELKE code-wijziging:**
+1. `git add` de gewijzigde bestanden
+2. `git commit` met duidelijke message
+3. `git push` naar GitHub
+4. Toon bevestiging: `🔴 PUSHED → [commit message]`
+
+Dit zorgt ervoor dat Claude Web altijd de laatste code heeft.
 
 ---
 
