@@ -9,10 +9,10 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | FASE 6 compleet, klaar voor FASE 7 of nieuwe richting |
+| **Huidige fase** | Wiki Data Schema compleet, wacht op browser extractie |
 | **Laatste update** | 2026-01-25 |
-| **Volgende taak** | FASE 7: Teams (of Landing Page + Wiki) |
-| **Blokkades** | Geen |
+| **Volgende taak** | Browser extractie van wiki.rustclash.com raid data |
+| **Blokkades** | Wiki data moet handmatig worden geëxtraheerd (403 block) |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 
 ---
@@ -83,32 +83,42 @@
 
 ### Wat er deze sessie is gedaan (2026-01-25):
 
-#### Nieuwe Richting Gekozen: Optie B
-- **Damian koos voor:** Landing Page + Guest Mode + Wiki (ipv Teams)
-- **Plan opgesteld en opgeslagen:** `.claude/plans/lazy-jumping-sutton.md`
+#### Wiki Data Schema Gebouwd
+- **Opdracht:** RustClash wiki data extraheren voor programmeerbaar gebruik
+- **Blocker:** wiki.rustclash.com geeft 403 voor bot-verkeer
+- **Oplossing:** Schema met placeholders voor handmatige browser extractie
 
-#### Research gedaan:
-- RustClash wiki geanalyseerd (403 blocked, via alternatieven)
-- RustLabs → redirect naar RustClash (samengevoegd)
-- Databronnen gevonden:
-  - [Rust Item JSON](https://gist.github.com/Marcuzz/9e01a39a8f5f83dc673bfc6f6fa4aacc) - 1000+ items
-  - [Rust Item Images](https://gist.github.com/Bonfire/9b803c4b7c18b20c1c49e0fa78bd400e)
+#### Bestanden aangemaakt:
+| Bestand | Beschrijving |
+|---------|--------------|
+| `src/types/game-data.ts` | TypeScript types voor raid costs, explosives, buildings |
+| `src/data/raid-costs.json` | 52 entries met placeholders (pending_browser_extract) |
+| `src/lib/game-data.ts` | Helper functies voor data loading/searching |
+| `docs/WIKI-EXTRACTION-PLAN.md` | Instructies voor handmatige extractie |
 
-#### Beslissingen genomen:
-- **Wiki storage:** Hybride (Database voor items + Markdown voor content)
-- **WikiItem model:** Met gameId, shortName, craftCost, raidCost als JSON
+#### Data structuur:
+- **Buildings:** 30 entries (wall, foundation, floor, roof, door_frame, window_frame × 5 tiers)
+- **Doors:** 11 entries (wooden, sheet metal, garage, armored, hatches, windows)
+- **Deployables:** 11 entries (TC, externals, vending, turrets, etc.)
+
+#### Beslissingen:
+- **Enige bron:** wiki.rustclash.com (geen alternatieve bronnen)
+- **Data status:** `pending_browser_extract` tot handmatig ingevuld
+- **Sulfur berekening:** Automatisch via `explosive_sulfur_costs` referentie
 
 ### Eerdere sessies:
 - FASE 1-6 compleet
+- Landing Page + Wiki placeholder pagina
 - CEO Dashboard, API tests, middleware→proxy migratie
 
 ### Wat er nog moet gebeuren:
-1. **FASE A:** Landing Page (publiek, geen login nodig)
-2. **FASE B:** Guest Mode (map + localStorage markers)
-3. **FASE C:** Wiki (database items + categorieën)
+1. **Prioriteit 1:** Explosive sulfur costs invullen (nodig voor berekeningen)
+2. **Prioriteit 2:** Raid costs tabel data invullen
+3. **Prioriteit 3:** Wiki UI bouwen om data te tonen
+4. **Later:** Weapons, items, crafting recipes schemas
 
 ### Open vragen voor Damian:
-- Geen - plan is klaar, wacht op volgende sessie
+- Geen - schema is klaar, wacht op browser data extractie
 
 ---
 
@@ -152,11 +162,41 @@ Het project krijgt een nieuwe focus:
 
 ---
 
+## 📊 WIKI DATA EXTRACTIE STATUS
+
+### RustClash Wiki Data (`wiki.rustclash.com`)
+
+| Categorie | Entries | Status | Bron Pagina |
+|-----------|---------|--------|-------------|
+| Explosive Sulfur Costs | 8 | `pending_browser_extract` | `/item/*` |
+| Building Raid Costs | 30 | `pending_browser_extract` | `/raid-chart` |
+| Door Raid Costs | 11 | `pending_browser_extract` | `/raid-chart` |
+| Deployable Raid Costs | 11 | `pending_browser_extract` | `/raid-chart` |
+| Building HP/Upkeep | — | `pending_manual_fill` | `/building` |
+| Weapons | — | `pending_manual_fill` | `/weapons` |
+| Items | — | `pending_manual_fill` | `/items` |
+
+### Velden per Raid Entry:
+```
+hp, rockets, c4, satchels, explosive_ammo, cheapest_sulfur, cheapest_method
+```
+
+### Extractie Workflow:
+1. Open `wiki.rustclash.com/raid-chart` in browser
+2. Lees de tabel data af
+3. Vul in `src/data/raid-costs.json`
+4. Update `meta.status` naar `verified`
+5. Commit en push
+
+Zie `docs/WIKI-EXTRACTION-PLAN.md` voor volledige instructies.
+
+---
+
 ## 🐛 BEKENDE ISSUES
 
 | Issue | Prioriteit | Status | Notities |
 |-------|------------|--------|----------|
-| Geen actieve issues | - | - | - |
+| Wiki 403 block | Medium | Workaround | Handmatige browser extractie nodig |
 
 ---
 
@@ -320,4 +360,4 @@ De volgende taak is: [TAAK]
 
 ---
 
-*Laatste update: 2026-01-25 — CEO Dashboard toegevoegd, API endpoints getest, middleware→proxy migratie*
+*Laatste update: 2026-01-25 — Wiki data schema toegevoegd (raid-costs.json, game-data.ts types, extractieplan)*
