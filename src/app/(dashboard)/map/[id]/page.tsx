@@ -1,11 +1,27 @@
 "use client";
 
-import { useEffect, useState, use } from "react";
+import { useEffect, useState, use, useCallback } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { useSession } from "next-auth/react";
 import { Header } from "@/components/layout/header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { BottomSheet } from "@/components/ui/bottom-sheet";
+import { AddMarkerForm } from "@/components/map/add-marker-form";
+import { MarkerDetailSheet } from "@/components/map/marker-detail-sheet";
+import { MarkerFilter } from "@/components/map/marker-filter";
+
+// Alle marker types voor default filter
+const ALL_MARKER_TYPES = [
+  "ENEMY",
+  "TEAM_BASE",
+  "LOOT",
+  "MONUMENT",
+  "DANGER",
+  "NOTE",
+  "RAID",
+];
 
 // Dynamic import voor Leaflet (client-side only)
 const RustMap = dynamic(
@@ -20,6 +36,22 @@ const RustMap = dynamic(
   }
 );
 
+interface MarkerData {
+  id: string;
+  title: string;
+  type: string;
+  x: number;
+  y: number;
+  color?: string;
+  description?: string;
+  visibility?: string;
+  createdAt?: string;
+  createdBy?: {
+    id: string;
+    displayName: string;
+  };
+}
+
 interface MapSession {
   id: string;
   seed: string;
@@ -32,14 +64,7 @@ interface MapSession {
     id: string;
     displayName: string;
   };
-  markers: Array<{
-    id: string;
-    title: string;
-    type: string;
-    x: number;
-    y: number;
-    color?: string;
-  }>;
+  markers: MarkerData[];
 }
 
 export default function MapDetailPage({
@@ -48,16 +73,24 @@ export default function MapDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
+  const { data: session } = useSession();
   const [map, setMap] = useState<MapSession | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [showInfo, setShowInfo] = useState(false);
 
-  useEffect(() => {
-    fetchMap();
-  }, [id]);
+  // Marker toevoegen state
+  const [showAddMarker, setShowAddMarker] = useState(false);
+  const [markerPosition, setMarkerPosition] = useState<{ x: number; y: number } | null>(null);
 
-  const fetchMap = async () => {
+  // Marker detail state
+  const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
+  const [showMarkerDetail, setShowMarkerDetail] = useState(false);
+
+  // Filter state
+  const [activeFilters, setActiveFilters] = useState<string[]>(ALL_MARKER_TYPES);
+
+  const fetchMap = useCallback(async () => {
     try {
       const response = await fetch(`/api/maps/${id}`);
       if (!response.ok) {
@@ -70,12 +103,57 @@ export default function MapDetailPage({
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchMap();
+  }, [fetchMap]);
 
   const handleMapClick = (x: number, y: number) => {
-    // Voor nu alleen console log, later marker toevoegen
-    console.log(`Clicked at: ${x}, ${y}`);
+    setMarkerPosition({ x, y });
+    setShowAddMarker(true);
   };
+
+  const handleMarkerAdded = () => {
+    setShowAddMarker(false);
+    setMarkerPosition(null);
+    // Herlaad de map om de nieuwe marker te tonen
+    fetchMap();
+  };
+
+  const handleCloseAddMarker = () => {
+    setShowAddMarker(false);
+    setMarkerPosition(null);
+  };
+
+  const handleMarkerClick = (marker: MarkerData) => {
+    setSelectedMarker(marker);
+    setShowMarkerDetail(true);
+  };
+
+  const handleCloseMarkerDetail = () => {
+    setShowMarkerDetail(false);
+    setSelectedMarker(null);
+  };
+
+  const handleMarkerUpdated = () => {
+    // Herlaad de map om wijzigingen te tonen
+    fetchMap();
+  };
+
+  // Bereken marker counts per type
+  const markerCounts = map?.markers.reduce(
+    (acc, marker) => {
+      acc[marker.type] = (acc[marker.type] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  ) || {};
+
+  // Filter markers op basis van actieve filters
+  const filteredMarkers = map?.markers.filter((marker) =>
+    activeFilters.includes(marker.type)
+  ) || [];
 
   if (isLoading) {
     return (
@@ -162,15 +240,27 @@ export default function MapDetailPage({
         <RustMap
           seed={map.seed}
           mapSize={map.mapSize}
-          markers={map.markers}
+          markers={filteredMarkers}
           onMapClick={handleMapClick}
+          onMarkerClick={handleMarkerClick}
+        />
+
+        {/* Marker Filter */}
+        <MarkerFilter
+          activeFilters={activeFilters}
+          onFilterChange={setActiveFilters}
+          markerCounts={markerCounts}
         />
 
         {/* Floating action button */}
         <button
+          onClick={() => {
+            // Gebruik center van de map als default positie
+            setMarkerPosition({ x: map.mapSize / 2, y: map.mapSize / 2 });
+            setShowAddMarker(true);
+          }}
           className="absolute bottom-20 right-4 z-[1000] flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
-          title="Marker toevoegen (coming soon)"
-          disabled
+          title="Marker toevoegen"
         >
           <svg
             className="h-6 w-6"
@@ -186,7 +276,38 @@ export default function MapDetailPage({
             />
           </svg>
         </button>
+
+        {/* Tip voor gebruiker */}
+        <div className="absolute bottom-20 left-4 z-[1000] rounded-lg bg-zinc-800/80 px-3 py-2 text-xs text-zinc-300 backdrop-blur-sm">
+          Klik op de map om een marker te plaatsen
+        </div>
       </div>
+
+      {/* Add Marker Bottom Sheet */}
+      <BottomSheet
+        isOpen={showAddMarker}
+        onClose={handleCloseAddMarker}
+        title="Marker Toevoegen"
+      >
+        {markerPosition && (
+          <AddMarkerForm
+            mapSessionId={map.id}
+            initialX={markerPosition.x}
+            initialY={markerPosition.y}
+            onSuccess={handleMarkerAdded}
+            onCancel={handleCloseAddMarker}
+          />
+        )}
+      </BottomSheet>
+
+      {/* Marker Detail Bottom Sheet */}
+      <MarkerDetailSheet
+        marker={selectedMarker}
+        isOpen={showMarkerDetail}
+        onClose={handleCloseMarkerDetail}
+        onUpdate={handleMarkerUpdated}
+        currentUserId={session?.user?.id}
+      />
     </div>
   );
 }

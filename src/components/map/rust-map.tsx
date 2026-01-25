@@ -3,22 +3,44 @@
 import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import "./map-styles.css";
+
+// Marker type configuratie met iconen
+const MARKER_CONFIG: Record<string, { icon: string; label: string }> = {
+  ENEMY: { icon: "👤", label: "Vijand" },
+  TEAM_BASE: { icon: "🏠", label: "Team Base" },
+  LOOT: { icon: "📦", label: "Loot" },
+  MONUMENT: { icon: "🏛️", label: "Monument" },
+  DANGER: { icon: "⚠️", label: "Gevaar" },
+  NOTE: { icon: "📝", label: "Notitie" },
+  RAID: { icon: "💥", label: "Raid" },
+};
+
+interface MarkerData {
+  id: string;
+  title: string;
+  type: string;
+  x: number;
+  y: number;
+  color?: string;
+  description?: string;
+  visibility?: string;
+  createdAt?: string;
+  createdBy?: {
+    id: string;
+    displayName: string;
+  };
+}
 
 interface RustMapProps {
   seed: string;
   mapSize: number;
-  markers?: Array<{
-    id: string;
-    title: string;
-    type: string;
-    x: number;
-    y: number;
-    color?: string;
-  }>;
+  markers?: MarkerData[];
   onMapClick?: (x: number, y: number) => void;
+  onMarkerClick?: (marker: MarkerData) => void;
 }
 
-export function RustMap({ seed, mapSize, markers = [], onMapClick }: RustMapProps) {
+export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick }: RustMapProps) {
   const mapRef = useRef<L.Map | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [imageError, setImageError] = useState(false);
@@ -104,26 +126,103 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick }: RustMapProp
     // Voeg nieuwe markers toe
     markers.forEach((marker) => {
       const latLng: L.LatLngExpression = [mapSize - marker.y, marker.x];
+      const config = MARKER_CONFIG[marker.type] || { icon: "📍", label: marker.type };
 
       const icon = L.divIcon({
         className: "custom-marker",
-        html: `<div style="
-          width: 24px;
-          height: 24px;
-          background-color: ${marker.color || "#FF0000"};
-          border: 2px solid white;
-          border-radius: 50%;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        "></div>`,
-        iconSize: [24, 24],
-        iconAnchor: [12, 12],
+        html: `
+          <div style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: ${marker.color || "#FF0000"};
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            font-size: 18px;
+            cursor: pointer;
+          ">${config.icon}</div>
+        `,
+        iconSize: [36, 36],
+        iconAnchor: [18, 18],
       });
 
-      L.marker(latLng, { icon })
-        .bindPopup(`<b>${marker.title}</b><br>${marker.type}`)
+      // Popup inhoud met dark theme styling
+      const popupContent = `
+        <div style="
+          background: #18181b;
+          color: white;
+          padding: 12px;
+          border-radius: 12px;
+          min-width: 180px;
+          font-family: system-ui, -apple-system, sans-serif;
+        ">
+          <div style="
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+          ">
+            <span style="font-size: 20px;">${config.icon}</span>
+            <span style="
+              font-weight: 600;
+              font-size: 16px;
+            ">${marker.title}</span>
+          </div>
+          <div style="
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #a1a1aa;
+            font-size: 12px;
+            margin-bottom: 4px;
+          ">
+            <span style="
+              background: ${marker.color || "#FF0000"};
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+            "></span>
+            ${config.label}
+          </div>
+          ${marker.description ? `
+            <div style="
+              color: #d4d4d8;
+              font-size: 13px;
+              margin-top: 8px;
+              padding-top: 8px;
+              border-top: 1px solid #27272a;
+            ">${marker.description}</div>
+          ` : ""}
+          <div style="
+            color: #71717a;
+            font-size: 11px;
+            margin-top: 8px;
+          ">
+            📍 ${Math.round(marker.x)}, ${Math.round(marker.y)}
+            ${marker.createdBy ? `<br>Door: ${marker.createdBy.displayName}` : ""}
+          </div>
+        </div>
+      `;
+
+      const leafletMarker = L.marker(latLng, { icon })
+        .bindPopup(popupContent, {
+          className: "custom-popup",
+          closeButton: true,
+          maxWidth: 300,
+        })
         .addTo(mapRef.current!);
+
+      // Click handler voor marker details
+      if (onMarkerClick) {
+        leafletMarker.on("click", () => {
+          onMarkerClick(marker);
+        });
+      }
     });
-  }, [markers, mapSize]);
+  }, [markers, mapSize, onMarkerClick]);
 
   if (imageError) {
     return (

@@ -1,0 +1,42 @@
+/* Custom Leaflet popup styling voor dark theme */
+
+.custom-popup .leaflet-popup-content-wrapper {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.custom-popup .leaflet-popup-content {
+  margin: 0;
+}
+
+.custom-popup .leaflet-popup-tip-container {
+  display: none;
+}
+
+.custom-popup .leaflet-popup-close-button {
+  color: #a1a1aa !important;
+  font-size: 20px !important;
+  width: 24px !important;
+  height: 24px !important;
+  top: 8px !important;
+  right: 8px !important;
+}
+
+.custom-popup .leaflet-popup-close-button:hover {
+  color: white !important;
+}
+
+/* Marker hover effect */
+.custom-marker div {
+  transition: transform 0.15s ease;
+}
+
+.custom-marker:hover div {
+  transform: scale(1.15);
+}
+
+/* Remove default Leaflet marker shadow */
+.leaflet-marker-shadow {
+  display: none;
+}

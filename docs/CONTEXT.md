@@ -10,8 +10,8 @@
 | Aspect | Status |
 |--------|--------|
 | **Huidige fase** | FASE 6: Markers CRUD |
-| **Laatste update** | 2026-01-24 |
-| **Volgende taak** | 6.1 - API endpoints voor markers |
+| **Laatste update** | 2026-01-25 |
+| **Volgende taak** | 6.7 - Test en commit |
 | **Blokkades** | Geen |
 
 ---
@@ -59,9 +59,12 @@
 - [x] 5.5 - Commit gemaakt
 
 ### FASE 6: Markers CRUD
-- [ ] 6.1 - API endpoints voor markers
-- [ ] 6.2 - "Add Marker" form (bottom sheet)
-- [ ] 6.3 - Markers op de map tonen
+- [x] 6.1 - API endpoints voor markers ✅
+- [x] 6.2 - "Add Marker" form (bottom sheet) ✅
+- [x] 6.3 - Markers op de map tonen ✅
+- [x] 6.4 - Marker detail view ✅
+- [x] 6.5 - Edit/delete marker functionaliteit ✅
+- [x] 6.6 - Filter markers op type ✅
 - [ ] 6.4 - Marker detail view
 - [ ] 6.5 - Edit/delete marker functionaliteit
 - [ ] 6.6 - Filter markers op type
@@ -73,19 +76,67 @@
 
 ## 🔄 HUIDIGE SESSIE
 
-### Wat er deze sessie is gedaan:
-- FASE 1 afgerond en gecommit
-- FASE 2: Complete authenticatie systeem
-- FASE 3: Basis UI componenten
-- FASE 4: Map Sessies geïmplementeerd
-  - API endpoints voor CRUD operaties
-  - Nieuwe map pagina met form
-  - Map sessie lijst overzicht
-  - Map detail pagina met afbeelding weergave
-  - Map afbeelding voor seed 10358 gedownload
+### Wat er deze sessie is gedaan (2026-01-25):
+- **Taak 6.1 VOLTOOID:** API endpoints voor markers aangemaakt
+  - `src/app/api/markers/route.ts` - GET (lijst) en POST (create)
+  - `src/app/api/markers/[id]/route.ts` - GET, PATCH, DELETE
+  - Inclusief visibility filtering (PRIVATE/TEAM/PUBLIC)
+  - Inclusief team membership checks
+  - Type check en build succesvol
+
+- **Taak 6.2 VOLTOOID:** "Add Marker" form met bottom sheet
+  - `src/components/ui/bottom-sheet.tsx` - iOS-style slide-up panel
+  - `src/components/ui/select.tsx` - Herbruikbare select component
+  - `src/components/map/add-marker-form.tsx` - Formulier met:
+    - Titel (verplicht)
+    - Type selectie (Enemy, Team Base, Loot, etc.)
+    - Kleurkiezer (met standaard per type)
+    - Beschrijving (optioneel)
+    - Zichtbaarheid (Team/Privé/Publiek)
+  - Map detail pagina aangepast:
+    - Klik op map opent formulier met coördinaten
+    - FAB knop werkt nu ook
+    - Tip tekst toegevoegd
+  - Build + lint succesvol
+
+- **Taak 6.3 VOLTOOID:** Markers op de map tonen
+  - Verbeterde marker iconen met emoji per type
+  - Type-specifieke configuratie (ENEMY=👤, TEAM_BASE=🏠, etc.)
+  - Dark theme popup met:
+    - Titel + icoon
+    - Type label met kleur indicator
+    - Beschrijving (indien aanwezig)
+    - Coördinaten + maker naam
+  - Custom CSS styling voor popups
+  - Hover effect op markers
+  - `onMarkerClick` callback toegevoegd
+
+- **Taak 6.4 + 6.5 VOLTOOID:** Marker detail view met edit/delete
+  - `src/components/map/marker-detail-sheet.tsx` - Nieuw component:
+    - View mode: toont alle marker details
+    - Edit mode: inline bewerken van alle velden
+    - Delete functionaliteit
+    - Alleen eigenaar kan bewerken/verwijderen
+  - Geïntegreerd in map detail pagina
+  - Klik op marker → detail sheet opent
+  - Na edit/delete → map herlaadt automatisch
+
+- **Taak 6.6 VOLTOOID:** Filter markers op type
+  - `src/components/map/marker-filter.tsx` - Filter component:
+    - Collapsed state: compact knop met marker telling
+    - Expanded state: volledige filter panel
+    - Per-type toggle met icoon en count
+    - "Alles" en "Geen" quick actions
+    - Toont aantal zichtbare vs totale markers
+  - Geïntegreerd in map detail pagina (linksboven)
+  - Markers worden real-time gefilterd
 
 ### Wat er nog moet gebeuren:
-- FASE 5: Interactieve Map met Leaflet.js
+- **6.7** - Test en commit
+- **6.4** - Marker detail view
+- **6.5** - Edit/delete marker functionaliteit
+- **6.6** - Filter markers op type
+- **6.7** - Test en commit
 
 ### Open vragen voor Damian:
 - Geen
@@ -96,7 +147,29 @@
 
 | Issue | Prioriteit | Status | Notities |
 |-------|------------|--------|----------|
-| *Geen issues* | - | - | - |
+| Statusline token display | Laag | In onderzoek | Zie hieronder |
+
+### Statusline configuratie (2026-01-25)
+
+**Doel:** Token-verbruik tonen in de Claude Code statusline.
+
+**Wat geprobeerd is:**
+1. Eerst bash commando → werkt niet op Windows
+2. Daarna PowerShell commando → moet nog getest worden na herstart
+
+**Huidige configuratie in `C:\Users\Damian\.claude\settings.json`:**
+```json
+"statusLine": {
+  "type": "command",
+  "command": "powershell -NoProfile -Command \"$j = [Console]::In.ReadToEnd() | ConvertFrom-Json; $m = $j.model.display_name; $i = $j.context_window.total_input_tokens; $o = $j.context_window.total_output_tokens; $c = [math]::Round($j.context_window.used_percentage, 1); Write-Host \\\"$m | Tokens: $i in / $o out | Context: $c%\\\"\""
+}
+```
+
+**Volgende stappen als het niet werkt:**
+1. Controleer of PowerShell correct is geïnstalleerd
+2. Test het commando handmatig in terminal
+3. Probeer alternatief: `pwsh` in plaats van `powershell`
+4. Of gebruik `/cost` commando als workaround
 
 ---
 
@@ -218,4 +291,4 @@ De volgende taak is: [TAAK]
 
 ---
 
-*Laatste update: [DATUM + TIJD]*
+*Laatste update: 2026-01-25 — Taak 6.1 voltooid, klaar voor 6.2*
