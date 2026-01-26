@@ -62,17 +62,17 @@
       "target_name": "Stone Wall",
       "target_type": "building",
       "tier": "stone",
-      "hp": null,
-      "rockets": { "quantity": null, "sulfur_cost": null },
-      "c4": { "quantity": null, "sulfur_cost": null },
-      "satchels": { "quantity": null, "sulfur_cost": null },
-      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
-      "cheapest_sulfur": null,
-      "cheapest_method": null,
+      "hp": 500,
+      "rockets": { "quantity": 4, "sulfur_cost": 5600 },
+      "c4": { "quantity": 2, "sulfur_cost": 4400 },
+      "satchels": { "quantity": 10, "sulfur_cost": 4800 },
+      "explosive_ammo": { "quantity": 185, "sulfur_cost": 4625 },
+      "cheapest_sulfur": 4400,
+      "cheapest_method": "c4",
       "meta": {
-        "status": "pending_browser_extract",
-        "source_page": "wiki.rustclash.com/raid-chart",
-        "last_updated": null
+        "status": "verified",
+        "source_page": "rustraidcost.com",
+        "last_updated": "2026-01-26"
       }
     },
     {
@@ -80,17 +80,17 @@
       "target_name": "Sheet Metal Wall",
       "target_type": "building",
       "tier": "metal",
-      "hp": null,
-      "rockets": { "quantity": null, "sulfur_cost": null },
-      "c4": { "quantity": null, "sulfur_cost": null },
-      "satchels": { "quantity": null, "sulfur_cost": null },
-      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
-      "cheapest_sulfur": null,
-      "cheapest_method": null,
+      "hp": 1000,
+      "rockets": { "quantity": 8, "sulfur_cost": 11200 },
+      "c4": { "quantity": 4, "sulfur_cost": 8800 },
+      "satchels": { "quantity": 23, "sulfur_cost": 11040 },
+      "explosive_ammo": { "quantity": 400, "sulfur_cost": 10000 },
+      "cheapest_sulfur": 8800,
+      "cheapest_method": "c4",
       "meta": {
-        "status": "pending_browser_extract",
-        "source_page": "wiki.rustclash.com/raid-chart",
-        "last_updated": null
+        "status": "verified",
+        "source_page": "rustraidcost.com",
+        "last_updated": "2026-01-26"
       }
     },
     {
@@ -98,17 +98,17 @@
       "target_name": "Armored Wall",
       "target_type": "building",
       "tier": "armored",
-      "hp": null,
-      "rockets": { "quantity": null, "sulfur_cost": null },
-      "c4": { "quantity": null, "sulfur_cost": null },
-      "satchels": { "quantity": null, "sulfur_cost": null },
-      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
-      "cheapest_sulfur": null,
-      "cheapest_method": null,
+      "hp": 2000,
+      "rockets": { "quantity": 15, "sulfur_cost": 21000 },
+      "c4": { "quantity": 8, "sulfur_cost": 17600 },
+      "satchels": { "quantity": 46, "sulfur_cost": 22080 },
+      "explosive_ammo": { "quantity": 799, "sulfur_cost": 19975 },
+      "cheapest_sulfur": 17600,
+      "cheapest_method": "c4",
       "meta": {
-        "status": "pending_browser_extract",
-        "source_page": "wiki.rustclash.com/raid-chart",
-        "last_updated": null
+        "status": "verified",
+        "source_page": "rustraidcost.com",
+        "last_updated": "2026-01-26"
       }
     },
     {
@@ -568,17 +568,17 @@
       "id": "wooden_door",
       "target_name": "Wooden Door",
       "target_type": "door",
-      "hp": null,
-      "rockets": { "quantity": null, "sulfur_cost": null },
-      "c4": { "quantity": null, "sulfur_cost": null },
-      "satchels": { "quantity": null, "sulfur_cost": null },
-      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
-      "cheapest_sulfur": null,
-      "cheapest_method": null,
+      "hp": 200,
+      "rockets": { "quantity": 1, "sulfur_cost": 1400 },
+      "c4": { "quantity": 1, "sulfur_cost": 2200 },
+      "satchels": { "quantity": 2, "sulfur_cost": 960 },
+      "explosive_ammo": { "quantity": 28, "sulfur_cost": 700 },
+      "cheapest_sulfur": 700,
+      "cheapest_method": "explosive_ammo",
       "meta": {
-        "status": "pending_browser_extract",
-        "source_page": "wiki.rustclash.com/raid-chart",
-        "last_updated": null
+        "status": "verified",
+        "source_page": "rustraidcost.com",
+        "last_updated": "2026-01-26"
       }
     },
     {
@@ -602,85 +602,85 @@
       "id": "double_sheet_metal_door",
       "target_name": "Double Sheet Metal Door",
       "target_type": "door",
-      "hp": null,
-      "rockets": { "quantity": null, "sulfur_cost": null },
-      "c4": { "quantity": null, "sulfur_cost": null },
-      "satchels": { "quantity": null, "sulfur_cost": null },
-      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
-      "cheapest_sulfur": null,
-      "cheapest_method": null,
+      "hp": 250,
+      "rockets": { "quantity": 2, "sulfur_cost": 2800 },
+      "c4": { "quantity": 1, "sulfur_cost": 2200 },
+      "satchels": { "quantity": 4, "sulfur_cost": 1920 },
+      "explosive_ammo": { "quantity": 63, "sulfur_cost": 1575 },
+      "cheapest_sulfur": 1575,
+      "cheapest_method": "explosive_ammo",
       "meta": {
-        "status": "pending_browser_extract",
-        "source_page": "wiki.rustclash.com/raid-chart",
-        "last_updated": null
+        "status": "verified",
+        "source_page": "rustraidcost.com",
+        "last_updated": "2026-01-26"
       }
     },
     {
       "id": "garage_door",
       "target_name": "Garage Door",
       "target_type": "door",
-      "hp": null,
-      "rockets": { "quantity": null, "sulfur_cost": null },
-      "c4": { "quantity": null, "sulfur_cost": null },
-      "satchels": { "quantity": null, "sulfur_cost": null },
-      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
-      "cheapest_sulfur": null,
-      "cheapest_method": null,
+      "hp": 600,
+      "rockets": { "quantity": 3, "sulfur_cost": 4200 },
+      "c4": { "quantity": 2, "sulfur_cost": 4400 },
+      "satchels": { "quantity": 9, "sulfur_cost": 4320 },
+      "explosive_ammo": { "quantity": 150, "sulfur_cost": 3750 },
+      "cheapest_sulfur": 3750,
+      "cheapest_method": "explosive_ammo",
       "meta": {
-        "status": "pending_browser_extract",
-        "source_page": "wiki.rustclash.com/raid-chart",
-        "last_updated": null
+        "status": "verified",
+        "source_page": "rustraidcost.com",
+        "last_updated": "2026-01-26"
       }
     },
     {
       "id": "armored_door",
       "target_name": "Armored Door",
       "target_type": "door",
-      "hp": null,
-      "rockets": { "quantity": null, "sulfur_cost": null },
-      "c4": { "quantity": null, "sulfur_cost": null },
-      "satchels": { "quantity": null, "sulfur_cost": null },
-      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
-      "cheapest_sulfur": null,
-      "cheapest_method": null,
+      "hp": 800,
+      "rockets": { "quantity": 4, "sulfur_cost": 5600 },
+      "c4": { "quantity": 2, "sulfur_cost": 4400 },
+      "satchels": { "quantity": 12, "sulfur_cost": 5760 },
+      "explosive_ammo": { "quantity": 200, "sulfur_cost": 5000 },
+      "cheapest_sulfur": 4400,
+      "cheapest_method": "c4",
       "meta": {
-        "status": "pending_browser_extract",
-        "source_page": "wiki.rustclash.com/raid-chart",
-        "last_updated": null
+        "status": "verified",
+        "source_page": "rustraidcost.com",
+        "last_updated": "2026-01-26"
       }
     },
     {
       "id": "armored_double_door",
       "target_name": "Armored Double Door",
       "target_type": "door",
-      "hp": null,
-      "rockets": { "quantity": null, "sulfur_cost": null },
-      "c4": { "quantity": null, "sulfur_cost": null },
-      "satchels": { "quantity": null, "sulfur_cost": null },
-      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
-      "cheapest_sulfur": null,
-      "cheapest_method": null,
+      "hp": 800,
+      "rockets": { "quantity": 4, "sulfur_cost": 5600 },
+      "c4": { "quantity": 2, "sulfur_cost": 4400 },
+      "satchels": { "quantity": 12, "sulfur_cost": 5760 },
+      "explosive_ammo": { "quantity": 200, "sulfur_cost": 5000 },
+      "cheapest_sulfur": 4400,
+      "cheapest_method": "c4",
       "meta": {
-        "status": "pending_browser_extract",
-        "source_page": "wiki.rustclash.com/raid-chart",
-        "last_updated": null
+        "status": "verified",
+        "source_page": "rustraidcost.com",
+        "last_updated": "2026-01-26"
       }
     },
     {
       "id": "ladder_hatch",
       "target_name": "Ladder Hatch",
       "target_type": "door",
-      "hp": null,
-      "rockets": { "quantity": null, "sulfur_cost": null },
-      "c4": { "quantity": null, "sulfur_cost": null },
-      "satchels": { "quantity": null, "sulfur_cost": null },
-      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
-      "cheapest_sulfur": null,
-      "cheapest_method": null,
+      "hp": 250,
+      "rockets": { "quantity": 2, "sulfur_cost": 2800 },
+      "c4": { "quantity": 1, "sulfur_cost": 2200 },
+      "satchels": { "quantity": 4, "sulfur_cost": 1920 },
+      "explosive_ammo": { "quantity": 63, "sulfur_cost": 1575 },
+      "cheapest_sulfur": 1575,
+      "cheapest_method": "explosive_ammo",
       "meta": {
-        "status": "pending_browser_extract",
-        "source_page": "wiki.rustclash.com/raid-chart",
-        "last_updated": null
+        "status": "verified",
+        "source_page": "rustraidcost.com",
+        "last_updated": "2026-01-26"
       }
     },
     {
@@ -758,51 +758,51 @@
       "id": "tool_cupboard",
       "target_name": "Tool Cupboard",
       "target_type": "deployable",
-      "hp": null,
-      "rockets": { "quantity": null, "sulfur_cost": null },
-      "c4": { "quantity": null, "sulfur_cost": null },
-      "satchels": { "quantity": null, "sulfur_cost": null },
-      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
-      "cheapest_sulfur": null,
-      "cheapest_method": null,
+      "hp": 250,
+      "rockets": { "quantity": 2, "sulfur_cost": 2800 },
+      "c4": { "quantity": 1, "sulfur_cost": 2200 },
+      "satchels": { "quantity": 4, "sulfur_cost": 1920 },
+      "explosive_ammo": { "quantity": 63, "sulfur_cost": 1575 },
+      "cheapest_sulfur": 1575,
+      "cheapest_method": "explosive_ammo",
       "meta": {
-        "status": "pending_browser_extract",
-        "source_page": "wiki.rustclash.com/raid-chart",
-        "last_updated": null
+        "status": "verified",
+        "source_page": "rustraidcost.com",
+        "last_updated": "2026-01-26"
       }
     },
     {
       "id": "high_external_wood_wall",
       "target_name": "High External Wood Wall",
       "target_type": "deployable",
-      "hp": null,
-      "rockets": { "quantity": null, "sulfur_cost": null },
-      "c4": { "quantity": null, "sulfur_cost": null },
-      "satchels": { "quantity": null, "sulfur_cost": null },
-      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
-      "cheapest_sulfur": null,
-      "cheapest_method": null,
+      "hp": 500,
+      "rockets": { "quantity": 2, "sulfur_cost": 2800 },
+      "c4": { "quantity": 1, "sulfur_cost": 2200 },
+      "satchels": { "quantity": 3, "sulfur_cost": 1440 },
+      "explosive_ammo": { "quantity": 50, "sulfur_cost": 1250 },
+      "cheapest_sulfur": 1250,
+      "cheapest_method": "explosive_ammo",
       "meta": {
-        "status": "pending_browser_extract",
-        "source_page": "wiki.rustclash.com/raid-chart",
-        "last_updated": null
+        "status": "verified",
+        "source_page": "rustraidcost.com",
+        "last_updated": "2026-01-26"
       }
     },
     {
       "id": "high_external_stone_wall",
       "target_name": "High External Stone Wall",
       "target_type": "deployable",
-      "hp": null,
-      "rockets": { "quantity": null, "sulfur_cost": null },
-      "c4": { "quantity": null, "sulfur_cost": null },
-      "satchels": { "quantity": null, "sulfur_cost": null },
-      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
-      "cheapest_sulfur": null,
-      "cheapest_method": null,
+      "hp": 500,
+      "rockets": { "quantity": 2, "sulfur_cost": 2800 },
+      "c4": { "quantity": 1, "sulfur_cost": 2200 },
+      "satchels": { "quantity": 4, "sulfur_cost": 1920 },
+      "explosive_ammo": { "quantity": 100, "sulfur_cost": 2500 },
+      "cheapest_sulfur": 1920,
+      "cheapest_method": "satchels",
       "meta": {
-        "status": "pending_browser_extract",
-        "source_page": "wiki.rustclash.com/raid-chart",
-        "last_updated": null
+        "status": "verified",
+        "source_page": "rustraidcost.com",
+        "last_updated": "2026-01-26"
       }
     },
     {
@@ -860,17 +860,17 @@
       "id": "auto_turret",
       "target_name": "Auto Turret",
       "target_type": "deployable",
-      "hp": null,
-      "rockets": { "quantity": null, "sulfur_cost": null },
-      "c4": { "quantity": null, "sulfur_cost": null },
-      "satchels": { "quantity": null, "sulfur_cost": null },
-      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
-      "cheapest_sulfur": null,
-      "cheapest_method": null,
+      "hp": 1000,
+      "rockets": { "quantity": 3, "sulfur_cost": 4200 },
+      "c4": { "quantity": 2, "sulfur_cost": 4400 },
+      "satchels": { "quantity": 7, "sulfur_cost": 3360 },
+      "explosive_ammo": { "quantity": 100, "sulfur_cost": 2500 },
+      "cheapest_sulfur": 2500,
+      "cheapest_method": "explosive_ammo",
       "meta": {
-        "status": "pending_browser_extract",
-        "source_page": "wiki.rustclash.com/raid-chart",
-        "last_updated": null
+        "status": "verified",
+        "source_page": "rustraidcost.com",
+        "last_updated": "2026-01-26"
       }
     },
     {
