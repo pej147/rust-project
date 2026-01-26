@@ -10,14 +10,14 @@
   },
 
   "explosive_sulfur_costs": {
-    "rocket": null,
-    "c4": null,
-    "satchel": null,
-    "explosive_ammo": null,
-    "high_velocity_rocket": null,
-    "incendiary_rocket": null,
-    "f1_grenade": null,
-    "beancan_grenade": null
+    "rocket": 1400,
+    "c4": 2200,
+    "satchel": 480,
+    "explosive_ammo": 25,
+    "high_velocity_rocket": 200,
+    "incendiary_rocket": 610,
+    "f1_grenade": 60,
+    "beancan_grenade": 120
   },
 
   "buildings": [
@@ -585,17 +585,17 @@
       "id": "sheet_metal_door",
       "target_name": "Sheet Metal Door",
       "target_type": "door",
-      "hp": null,
-      "rockets": { "quantity": null, "sulfur_cost": null },
-      "c4": { "quantity": null, "sulfur_cost": null },
-      "satchels": { "quantity": null, "sulfur_cost": null },
-      "explosive_ammo": { "quantity": null, "sulfur_cost": null },
-      "cheapest_sulfur": null,
-      "cheapest_method": null,
+      "hp": 250,
+      "rockets": { "quantity": 2, "sulfur_cost": 2800 },
+      "c4": { "quantity": 1, "sulfur_cost": 2200 },
+      "satchels": { "quantity": 4, "sulfur_cost": 1920 },
+      "explosive_ammo": { "quantity": 63, "sulfur_cost": 1575 },
+      "cheapest_sulfur": 1575,
+      "cheapest_method": "explosive_ammo",
       "meta": {
-        "status": "pending_browser_extract",
-        "source_page": "wiki.rustclash.com/raid-chart",
-        "last_updated": null
+        "status": "verified",
+        "source_page": "wiki.rustclash.com/item/door.hinged.metal",
+        "last_updated": "2026-01-26"
       }
     },
     {

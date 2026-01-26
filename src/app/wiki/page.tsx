@@ -56,12 +56,13 @@ export default function WikiPage() {
               description="Base designs, upkeep kosten, en materials"
               comingSoon
             />
-            <WikiCard
-              emoji="💣"
-              title="Raiding"
-              description="Raid costs, explosives, en strategieen"
-              comingSoon
-            />
+            <Link href="/wiki/raiding">
+              <WikiCard
+                emoji="💣"
+                title="Raiding"
+                description="Raid costs, explosives, en strategieen"
+              />
+            </Link>
             <WikiCard
               emoji="🎒"
               title="Items"
