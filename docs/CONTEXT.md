@@ -83,12 +83,12 @@
 - [x] B.6 - Proxy.ts updated voor publieke routes
 - [x] B.7 - Commit gemaakt en gepusht
 
-### FASE C: Wiki (IN PROGRESS)
+### FASE C: Wiki ✅ COMPLEET (Raiding)
 - [x] C.1 - Wiki data schema bepalen (items.ts + raid-costs.json)
-- [x] C.2 - Raid costs data structuur (met Sheet Metal Door als voorbeeld)
+- [x] C.2 - Raid costs data structuur
 - [x] C.3 - Wiki Raiding pagina bouwen (/wiki/raiding)
 - [x] C.4 - Item detail pagina's (/wiki/raiding/[id])
-- [ ] C.5 - Meer raid data invullen (andere doors, walls, deployables)
+- [x] C.5 - Raid data voor 13 items (6 doors, 3 walls, 4 deployables)
 
 ### FASE 7: Teams (UITGESTELD)
 - [ ] 7.1 - Team aanmaken pagina
@@ -109,17 +109,39 @@
 - `/wiki/raiding` - Raid cost chart pagina met tabel
 - `/wiki/raiding/[id]` - Detail pagina per item
 - `src/data/items.ts` - Item details (crafting, upkeep, tips)
-- Sheet Metal Door data ingevuld als voorbeeld:
-  - HP: 250
-  - Rockets: 2 (2,800 sulfur)
-  - C4: 1 (2,200 sulfur)
-  - Satchels: 4 (1,920 sulfur)
-  - Explosive Ammo: 63 (1,575 sulfur) ← cheapest
-- Explosive sulfur costs toegevoegd aan raid-costs.json
 - `report.md` gebruikt als format voorbeeld
+
+#### Raid Data toegevoegd (13 items totaal):
+
+**Doors (6):**
+| Item | HP | Cheapest Method | Sulfur |
+|------|-----|-----------------|--------|
+| Wooden Door | 200 | Explo Ammo (28) | 700 |
+| Sheet Metal Door | 250 | Explo Ammo (63) | 1,575 |
+| Double Sheet Metal | 250 | Explo Ammo (63) | 1,575 |
+| Garage Door | 600 | Explo Ammo (150) | 3,750 |
+| Armored Door | 800 | C4 (2) | 4,400 |
+| Ladder Hatch | 250 | Explo Ammo (63) | 1,575 |
+
+**Walls (3):**
+| Item | HP | Cheapest Method | Sulfur |
+|------|-----|-----------------|--------|
+| Stone Wall | 500 | C4 (2) | 4,400 |
+| Sheet Metal Wall | 1000 | C4 (4) | 8,800 |
+| Armored Wall | 2000 | C4 (8) | 17,600 |
+
+**Deployables (4):**
+| Item | HP | Cheapest Method | Sulfur |
+|------|-----|-----------------|--------|
+| Tool Cupboard | 250 | Explo Ammo (63) | 1,575 |
+| Auto Turret | 1000 | Explo Ammo (100) | 2,500 |
+| High External Wood | 500 | Explo Ammo (50) | 1,250 |
+| High External Stone | 500 | Satchels (4) | 1,920 |
 
 #### Commits:
 - `dfa3aa5` - feat: Add Wiki Raiding page with raid cost chart
+- `e6e7848` - docs: Update CONTEXT.md with wiki raiding progress
+- `faaf206` - feat: Add raid cost data for doors, walls, and deployables
 
 ### Eerdere sessies:
 - FASE 1-6 compleet
@@ -128,11 +150,11 @@
 - CEO Dashboard actief
 
 ### Wat er nog moet gebeuren:
-1. **FASE C:** Meer raid data invullen (andere doors, walls, deployables)
+1. **FASE C:** Meer wiki categorieën (Monuments, Weapons, Items)
 2. **Later:** Teams functionaliteit
 
 ### Volgende stap:
-Meer raid data toevoegen voor andere items (Wooden Door, Armored Door, Garage Door, Walls, etc.)
+Wiki verder uitbreiden met andere categorieën of meer raid items toevoegen.
 
 ---
 
