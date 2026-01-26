@@ -84,10 +84,11 @@
 - [x] B.7 - Commit gemaakt en gepusht
 
 ### FASE C: Wiki (IN PROGRESS)
-- [ ] C.1 - Wiki database schema bepalen
-- [ ] C.2 - Raid costs data structuur
-- [ ] C.3 - Wiki UI pagina's bouwen
-- [ ] C.4 - Item detail pagina's
+- [x] C.1 - Wiki data schema bepalen (items.ts + raid-costs.json)
+- [x] C.2 - Raid costs data structuur (met Sheet Metal Door als voorbeeld)
+- [x] C.3 - Wiki Raiding pagina bouwen (/wiki/raiding)
+- [x] C.4 - Item detail pagina's (/wiki/raiding/[id])
+- [ ] C.5 - Meer raid data invullen (andere doors, walls, deployables)
 
 ### FASE 7: Teams (UITGESTELD)
 - [ ] 7.1 - Team aanmaken pagina
@@ -102,44 +103,36 @@
 
 ## 🔄 HUIDIGE SESSIE
 
-### Wat er deze sessie is gedaan (2026-01-25):
+### Wat er deze sessie is gedaan (2026-01-26):
 
-#### FASE A: Landing Page ✅
-- Nieuwe landing page op `src/app/page.tsx`
-- Hero sectie met gradient title "Rust Console Intel Map"
-- Features sectie (Map, Teams, Wiki)
-- CTA buttons naar /map en /wiki
+#### Wiki Raiding UI gebouwd
+- `/wiki/raiding` - Raid cost chart pagina met tabel
+- `/wiki/raiding/[id]` - Detail pagina per item
+- `src/data/items.ts` - Item details (crafting, upkeep, tips)
+- Sheet Metal Door data ingevuld als voorbeeld:
+  - HP: 250
+  - Rockets: 2 (2,800 sulfur)
+  - C4: 1 (2,200 sulfur)
+  - Satchels: 4 (1,920 sulfur)
+  - Explosive Ammo: 63 (1,575 sulfur) ← cheapest
+- Explosive sulfur costs toegevoegd aan raid-costs.json
+- `report.md` gebruikt als format voorbeeld
 
-#### FASE B: Guest Mode ✅
-| Bestand | Beschrijving |
-|---------|--------------|
-| `src/hooks/use-guest-markers.ts` | localStorage hook voor guest markers |
-| `src/components/map/guest-add-marker-form.tsx` | Form voor markers toevoegen |
-| `src/components/map/guest-marker-detail-sheet.tsx` | Detail sheet (view/edit/delete) |
-| `src/app/(dashboard)/map/guest/[seed]/page.tsx` | Guest map detail pagina |
-| `src/app/(dashboard)/map/page.tsx` | Updated voor dual guest/logged-in mode |
-| `src/proxy.ts` | Publieke routes voor /map en /map/guest/* |
-
-#### Statusline bugfix
-- Fixed percentage berekening in `C:\Users\Damian\.claude\statusline.ps1`
-- Was: API waarde gebruiken (incorrect)
-- Nu: Zelf berekenen: `($usedTokens / $ctxSize) * 100`
-
-#### Wiki Research
-- User deelde HTML van wiki.rustclash.com (Sheet Metal Door pagina)
-- Waardevolle data structuur gevonden voor FASE C
+#### Commits:
+- `dfa3aa5` - feat: Add Wiki Raiding page with raid cost chart
 
 ### Eerdere sessies:
 - FASE 1-6 compleet
+- FASE A (Landing Page) compleet
+- FASE B (Guest Mode) compleet
 - CEO Dashboard actief
-- Middleware→proxy migratie
 
 ### Wat er nog moet gebeuren:
-1. **FASE C:** Wiki database schema + UI
+1. **FASE C:** Meer raid data invullen (andere doors, walls, deployables)
 2. **Later:** Teams functionaliteit
 
-### Open vragen voor Damian:
-- Wil je FASE C starten op basis van rustclash wiki structuur?
+### Volgende stap:
+Meer raid data toevoegen voor andere items (Wooden Door, Armored Door, Garage Door, Walls, etc.)
 
 ---
 
