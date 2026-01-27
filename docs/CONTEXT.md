@@ -9,9 +9,9 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | FASE 8: Admin Dashboard ✅ COMPLEET |
+| **Huidige fase** | Enemy Marker Residents ✅ COMPLEET |
 | **Laatste update** | 2026-01-27 |
-| **Volgende taak** | FASE 9: Command Bar of Building wiki |
+| **Volgende taak** | FASE 9: Command Bar, Building wiki, of UI vertalen |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 | **Totaal Wiki Pagina's** | 208 |
@@ -152,7 +152,21 @@
 
 ### Wat er deze sessie is gedaan (2026-01-27):
 
-#### FASE 8: Admin Dashboard Implemented
+#### Enemy Marker Residents Feature ✅
+- **Database:** Added `MarkerResident` model for many-to-many relation
+  - A marker can now have multiple enemy profiles (residents)
+  - Each resident has a threat level (1-5 skulls)
+- **API Endpoints:**
+  - `GET/POST /api/enemies` - Search and create enemy profiles
+  - `GET/POST/DELETE /api/markers/[id]/residents` - Manage residents
+- **Frontend:**
+  - `EnemyMarkerSheet` component - shows residents when clicking ENEMY marker
+  - Add player form with name, clan tag, threat level
+  - Remove player button for marker owners
+  - Settings button → opens normal MarkerDetailSheet
+- **Flow:** Click ENEMY marker → See residents → Settings for edit/delete
+
+#### Previous: FASE 8: Admin Dashboard Implemented
 - **Admin guard:** Server-side `requireAdmin()` function
 - **Client-side:** `isAdmin()` helper in separate file (for client components)
 - **Hooks:** `useAdminStats`, `useAdminUsers`, `useAdminMaps`, `useAuditLogs`
