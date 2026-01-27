@@ -52,18 +52,30 @@ export default function WikiWeaponsPage() {
           </p>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
             <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
               <div className="text-3xl font-bold text-orange-500">{meleeWeapons.length}</div>
               <div className="text-zinc-400 text-sm">Melee</div>
             </div>
             <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
               <div className="text-3xl font-bold text-green-500">{bowWeapons.length}</div>
-              <div className="text-zinc-400 text-sm">Bows & Arrows</div>
+              <div className="text-zinc-400 text-sm">Bows</div>
             </div>
             <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
-              <div className="text-3xl font-bold text-zinc-500">{pistolWeapons.length + smgWeapons.length + rifleWeapons.length + shotgunWeapons.length}</div>
-              <div className="text-zinc-400 text-sm">Guns (coming soon)</div>
+              <div className="text-3xl font-bold text-blue-500">{pistolWeapons.length}</div>
+              <div className="text-zinc-400 text-sm">Pistols</div>
+            </div>
+            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+              <div className="text-3xl font-bold text-purple-500">{smgWeapons.length}</div>
+              <div className="text-zinc-400 text-sm">SMGs</div>
+            </div>
+            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+              <div className="text-3xl font-bold text-red-500">{rifleWeapons.length}</div>
+              <div className="text-zinc-400 text-sm">Rifles</div>
+            </div>
+            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+              <div className="text-3xl font-bold text-yellow-500">{shotgunWeapons.length}</div>
+              <div className="text-zinc-400 text-sm">Shotguns</div>
             </div>
           </div>
 
@@ -151,14 +163,205 @@ export default function WikiWeaponsPage() {
             </div>
           </section>
 
-          {/* Coming Soon Sections */}
+          {/* Pistols Section */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-zinc-500">
-              <span>🔫</span> Guns
-              <span className="text-xs bg-zinc-800 text-zinc-400 px-2 py-1 rounded-full ml-2">Coming Soon</span>
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span>🔫</span> Pistols
             </h2>
-            <div className="bg-zinc-900 rounded-xl p-6 border border-zinc-800 text-center">
-              <p className="text-zinc-500">Pistols, SMGs, Rifles, and Shotguns coming soon!</p>
+            <p className="text-zinc-400 text-sm mb-6">
+              Sidearms and handguns - from Eoka to M92
+            </p>
+
+            <div className="space-y-6">
+              {/* Primitive */}
+              {pistolWeapons.filter(w => w.subcategory === "primitive").length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Primitive</h3>
+                  <div className="grid gap-2">
+                    {pistolWeapons
+                      .filter(w => w.subcategory === "primitive")
+                      .map(weapon => (
+                        <WeaponRow key={weapon.id} weapon={weapon} />
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Craftable */}
+              {pistolWeapons.filter(w => w.subcategory === "craftable").length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Craftable</h3>
+                  <div className="grid gap-2">
+                    {pistolWeapons
+                      .filter(w => w.subcategory === "craftable")
+                      .map(weapon => (
+                        <WeaponRow key={weapon.id} weapon={weapon} />
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Military */}
+              {pistolWeapons.filter(w => w.subcategory === "military").length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Military</h3>
+                  <div className="grid gap-2">
+                    {pistolWeapons
+                      .filter(w => w.subcategory === "military")
+                      .map(weapon => (
+                        <WeaponRow key={weapon.id} weapon={weapon} />
+                      ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* SMGs Section */}
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span>🔫</span> SMGs
+            </h2>
+            <p className="text-zinc-400 text-sm mb-6">
+              Submachine guns - fast fire rate, close to medium range
+            </p>
+
+            <div className="space-y-6">
+              {/* Craftable */}
+              {smgWeapons.filter(w => w.subcategory === "craftable").length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Craftable</h3>
+                  <div className="grid gap-2">
+                    {smgWeapons
+                      .filter(w => w.subcategory === "craftable")
+                      .map(weapon => (
+                        <WeaponRow key={weapon.id} weapon={weapon} />
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Military */}
+              {smgWeapons.filter(w => w.subcategory === "military").length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Military</h3>
+                  <div className="grid gap-2">
+                    {smgWeapons
+                      .filter(w => w.subcategory === "military")
+                      .map(weapon => (
+                        <WeaponRow key={weapon.id} weapon={weapon} />
+                      ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* Rifles Section */}
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span>🎯</span> Rifles
+            </h2>
+            <p className="text-zinc-400 text-sm mb-6">
+              Assault rifles and sniper rifles - medium to long range dominance
+            </p>
+
+            <div className="space-y-6">
+              {/* Craftable */}
+              {rifleWeapons.filter(w => w.subcategory === "craftable").length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Craftable</h3>
+                  <div className="grid gap-2">
+                    {rifleWeapons
+                      .filter(w => w.subcategory === "craftable")
+                      .map(weapon => (
+                        <WeaponRow key={weapon.id} weapon={weapon} />
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Military */}
+              {rifleWeapons.filter(w => w.subcategory === "military").length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Military</h3>
+                  <div className="grid gap-2">
+                    {rifleWeapons
+                      .filter(w => w.subcategory === "military")
+                      .map(weapon => (
+                        <WeaponRow key={weapon.id} weapon={weapon} />
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Snipers */}
+              {rifleWeapons.filter(w => w.subcategory === "sniper").length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Sniper Rifles</h3>
+                  <div className="grid gap-2">
+                    {rifleWeapons
+                      .filter(w => w.subcategory === "sniper")
+                      .map(weapon => (
+                        <WeaponRow key={weapon.id} weapon={weapon} />
+                      ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* Shotguns Section */}
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span>💥</span> Shotguns
+            </h2>
+            <p className="text-zinc-400 text-sm mb-6">
+              Close range devastation - from Waterpipe to Spas-12
+            </p>
+
+            <div className="space-y-6">
+              {/* Primitive */}
+              {shotgunWeapons.filter(w => w.subcategory === "primitive").length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Primitive</h3>
+                  <div className="grid gap-2">
+                    {shotgunWeapons
+                      .filter(w => w.subcategory === "primitive")
+                      .map(weapon => (
+                        <WeaponRow key={weapon.id} weapon={weapon} />
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Craftable */}
+              {shotgunWeapons.filter(w => w.subcategory === "craftable").length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Craftable</h3>
+                  <div className="grid gap-2">
+                    {shotgunWeapons
+                      .filter(w => w.subcategory === "craftable")
+                      .map(weapon => (
+                        <WeaponRow key={weapon.id} weapon={weapon} />
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Military */}
+              {shotgunWeapons.filter(w => w.subcategory === "military").length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Military</h3>
+                  <div className="grid gap-2">
+                    {shotgunWeapons
+                      .filter(w => w.subcategory === "military")
+                      .map(weapon => (
+                        <WeaponRow key={weapon.id} weapon={weapon} />
+                      ))}
+                  </div>
+                </div>
+              )}
             </div>
           </section>
         </div>
@@ -170,19 +373,37 @@ export default function WikiWeaponsPage() {
 function WeaponRow({ weapon }: { weapon: typeof weapons[0] }) {
   const isAmmo = weapon.subcategory === "ammo";
 
+  const getCategoryEmoji = (category: string) => {
+    switch (category) {
+      case "melee": return "🗡️";
+      case "bow": return "🏹";
+      case "pistol": return "🔫";
+      case "smg": return "🔫";
+      case "rifle": return "🎯";
+      case "shotgun": return "💥";
+      default: return "🔫";
+    }
+  };
+
   return (
     <Link href={`/wiki/weapons/${weapon.id}`}>
       <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800 hover:border-zinc-600 transition-colors">
         <div className="flex items-start justify-between">
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center text-xl">
-              {weapon.category === "melee" ? "🗡️" : "🏹"}
+              {getCategoryEmoji(weapon.category)}
             </div>
             <div>
               <div className="font-medium">{weapon.name}</div>
-              <div className="text-zinc-500 text-sm mt-1 flex items-center gap-3">
+              <div className="text-zinc-500 text-sm mt-1 flex items-center gap-3 flex-wrap">
                 {!isAmmo && (
                   <span className="text-red-400">{weapon.damage} DMG</span>
+                )}
+                {weapon.rateOfFire && (
+                  <span className="text-blue-400">{weapon.rateOfFire} RPM</span>
+                )}
+                {weapon.magazineSize && (
+                  <span className="text-green-400">{weapon.magazineSize} mag</span>
                 )}
                 {weapon.range && (
                   <span>{weapon.range}</span>
