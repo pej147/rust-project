@@ -9,10 +9,10 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | Enemy Marker Click Fix 🔧 IN PROGRESS |
+| **Huidige fase** | FASE 9: Command Bar |
 | **Laatste update** | 2026-01-27 |
-| **Volgende taak** | Fix enemy marker bottom sheet, then FASE 9 |
-| **Blokkades** | Enemy marker click not showing player names |
+| **Volgende taak** | Implement floating command bar |
+| **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 | **Totaal Wiki Pagina's** | 208 |
 | **Taal** | English (UI) / Dutch (Wiki - to be translated) |
@@ -152,24 +152,17 @@
 
 ### Wat er deze sessie is gedaan (2026-01-27):
 
-#### Enemy Marker Click Fix 🔧 IN PROGRESS
-- **Issue:** Clicking ENEMY marker doesn't show player names (residents)
-- **Expected:** Click ENEMY marker → see EnemyMarkerSheet with residents
-- **Attempted fix:** Modified rust-map.tsx to not show Leaflet popup for ENEMY markers
-- **Status:** Fix committed but still not working - needs further investigation
+#### Enemy Marker Click Fix ✅ FIXED
+- **Issue:** Clicking ENEMY marker didn't show player names (residents)
+- **Root cause:** Click event was propagating to the map, opening Add Marker sheet instead
+- **Fix:** Added proper event propagation stopping in rust-map.tsx
+  - `L.DomEvent.stopPropagation(e)`
+  - `e.originalEvent.stopPropagation()`
+  - `e.originalEvent.preventDefault()`
+- **Status:** ✅ Fixed and pushed to GitHub
 
 **Files modified:**
-- `src/components/map/rust-map.tsx` - ENEMY markers skip popup, only use click handler
-
-**Components involved:**
-- `RustMap` - handles marker clicks
-- `EnemyMarkerSheet` - bottom sheet showing residents
-- `map/[id]/page.tsx` - connects marker click to sheet
-
-**API endpoints:**
-- `GET /api/markers/[id]/residents` - fetches residents for a marker
-- `POST /api/markers/[id]/residents` - adds a resident
-- `DELETE /api/markers/[id]/residents` - removes a resident
+- `src/components/map/rust-map.tsx` - improved click event handling for ENEMY markers
 
 #### UI Translation Dutch → English ✅
 - **Translated 10 files** from Dutch to English
@@ -373,7 +366,7 @@ Zie `docs/WIKI-EXTRACTION-PLAN.md` voor volledige instructies.
 
 | Issue | Prioriteit | Status | Notities |
 |-------|------------|--------|----------|
-| **Enemy marker click** | **High** | **Open** | Clicking ENEMY marker doesn't show player names |
+| ~~Enemy marker click~~ | ~~High~~ | ✅ Fixed | Event propagation fix applied |
 | Wiki 403 block | Medium | Workaround | Handmatige browser extractie nodig |
 
 ---
