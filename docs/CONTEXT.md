@@ -9,9 +9,9 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | FASE 7: Teams ✅ COMPLEET |
+| **Huidige fase** | FASE 8: Admin Dashboard ✅ COMPLEET |
 | **Laatste update** | 2026-01-27 |
-| **Volgende taak** | Building wiki of Marker visibility per team |
+| **Volgende taak** | FASE 9: Command Bar of Building wiki |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 | **Totaal Wiki Pagina's** | 208 |
@@ -112,13 +112,56 @@
 - Member can: leave team
 - All UI in English
 
+### FASE 8: Admin Dashboard ✅ COMPLEET
+- [x] 8.1 - Admin-only route guard (`requireAdmin` helper) ✅
+- [x] 8.2 - Users management (list, create, update role, delete) ✅
+- [x] 8.3 - Map sessions overview (list, delete) ✅
+- [x] 8.4 - Add/remove user functionality ✅
+- [x] 8.5 - Audit log viewer with pagination ✅
+- [x] 8.6 - Build tested and committed ✅
+
+**API Routes created:**
+- `GET /api/admin/stats` - Dashboard statistics
+- `GET/POST /api/admin/users` - List and create users
+- `GET/PATCH/DELETE /api/admin/users/[id]` - User management
+- `GET /api/admin/maps` - List all map sessions
+- `DELETE /api/admin/maps/[id]` - Delete map session
+- `GET /api/admin/audit` - Audit logs with pagination
+
+**Frontend pages:**
+- `/admin` - Dashboard with stats and quick links
+- `/admin/users` - User management table
+- `/admin/maps` - Map sessions grid
+- `/admin/audit` - Audit log viewer
+
+**Features:**
+- Admin nav item in bottom navigation (only for admins)
+- Stats overview (users, maps, markers, teams)
+- User role distribution chart
+- Marker type distribution
+- Create new users
+- Change user roles (cannot demote yourself)
+- Delete users (cannot delete yourself)
+- View and delete map sessions
+- Paginated audit logs with action colors
+- All actions are logged to AuditLog
+
 ---
 
 ## 🔄 HUIDIGE SESSIE
 
 ### Wat er deze sessie is gedaan (2026-01-27):
 
-#### FASE 7: Teams Implemented
+#### FASE 8: Admin Dashboard Implemented
+- **Admin guard:** Server-side `requireAdmin()` function
+- **Client-side:** `isAdmin()` helper in separate file (for client components)
+- **Hooks:** `useAdminStats`, `useAdminUsers`, `useAdminMaps`, `useAuditLogs`
+- **Stats API:** Totals, recent activity, distributions
+- **Full CRUD:** Users and maps management
+- **Audit logging:** All admin actions are logged
+- **Bottom nav:** Admin link only shown for admin users
+
+#### Previous: FASE 7: Teams Implemented
 - **API Routes created:**
   - `POST /api/teams` - Create team
   - `GET /api/teams` - List user's teams
@@ -190,11 +233,13 @@
 | **Pagina's** | **208** | |
 
 ### Wat er nog kan:
-1. **Teams functionaliteit (FASE 7)**
-2. **Building wiki:** Base designs, upkeep
+1. **FASE 9: Command Bar** - Floating input voor snelle marker commands
+2. **FASE 10: Polish & Extras** - Backup script, error handling, responsive check
+3. **Building wiki:** Base designs, upkeep
+4. **Marker team visibility:** Markers delen met team (private/team/public)
 
 ### Volgende stap:
-Gebruiker kan kiezen: teams of building wiki.
+Gebruiker kan kiezen: Command Bar (FASE 9), Polish (FASE 10), of Building wiki.
 
 ---
 
@@ -436,4 +481,4 @@ De volgende taak is: [TAAK]
 
 ---
 
-*Laatste update: 2026-01-25 — FASE A (Landing Page) + FASE B (Guest Mode) COMPLEET, statusline bugfix*
+*Laatste update: 2026-01-27 — FASE 8 (Admin Dashboard) COMPLEET*
