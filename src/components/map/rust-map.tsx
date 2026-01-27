@@ -218,19 +218,32 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
         </div>
       `;
 
-      const leafletMarker = L.marker(latLng, { icon })
-        .bindPopup(popupContent, {
+      const leafletMarker = L.marker(latLng, { icon }).addTo(mapRef.current!);
+
+      // For ENEMY markers, only use the click handler (show bottom sheet)
+      // For other markers, show popup on hover and click handler for details
+      if (marker.type === "ENEMY") {
+        // ENEMY markers: only click handler, no popup
+        if (onMarkerClick) {
+          leafletMarker.on("click", (e) => {
+            L.DomEvent.stopPropagation(e);
+            onMarkerClick(marker);
+          });
+        }
+      } else {
+        // Other markers: bind popup
+        leafletMarker.bindPopup(popupContent, {
           className: "custom-popup",
           closeButton: true,
           maxWidth: 300,
-        })
-        .addTo(mapRef.current!);
-
-      // Click handler voor marker details
-      if (onMarkerClick) {
-        leafletMarker.on("click", () => {
-          onMarkerClick(marker);
         });
+
+        // Click handler for marker details
+        if (onMarkerClick) {
+          leafletMarker.on("click", () => {
+            onMarkerClick(marker);
+          });
+        }
       }
     });
   }, [markers, mapSize, onMarkerClick]);
