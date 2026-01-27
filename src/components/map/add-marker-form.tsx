@@ -47,7 +47,7 @@ export function AddMarkerForm({
   const [visibility, setVisibility] = useState("TEAM");
   const [color, setColor] = useState(MARKER_TYPES[0].color);
 
-  // Update kleur wanneer type verandert
+  // Update color when type changes
   const handleTypeChange = (newType: string) => {
     setType(newType);
     const markerType = MARKER_TYPES.find((t) => t.value === newType);
@@ -79,12 +79,12 @@ export function AddMarkerForm({
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.error || "Kon marker niet aanmaken");
+        throw new Error(data.error || "Could not create marker");
       }
 
       onSuccess();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Er ging iets mis");
+      setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setIsSubmitting(false);
     }
@@ -100,18 +100,18 @@ export function AddMarkerForm({
         </span>
       </div>
 
-      {/* Titel */}
+      {/* Title */}
       <Input
         id="title"
-        label="Titel *"
-        placeholder="bv. Nakeds base, Loot crate"
+        label="Title *"
+        placeholder="e.g. Nakeds base, Loot crate"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         required
         autoFocus
       />
 
-      {/* Type selectie */}
+      {/* Type selection */}
       <Select
         id="type"
         label="Type"
@@ -120,7 +120,7 @@ export function AddMarkerForm({
         onChange={(e) => handleTypeChange(e.target.value)}
       />
 
-      {/* Kleur preview met type */}
+      {/* Color preview with type */}
       <div className="flex items-center gap-3">
         <div
           className="h-8 w-8 rounded-full border-2 border-zinc-600"
@@ -132,7 +132,7 @@ export function AddMarkerForm({
             value={color}
             onChange={(e) => setColor(e.target.value)}
             className="h-10 w-full cursor-pointer rounded-lg border-0 bg-transparent"
-            title="Kies een andere kleur"
+            title="Choose a different color"
           />
         </div>
       </div>
@@ -147,7 +147,7 @@ export function AddMarkerForm({
         </label>
         <textarea
           id="description"
-          placeholder="Extra notities..."
+          placeholder="Additional notes..."
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={2}

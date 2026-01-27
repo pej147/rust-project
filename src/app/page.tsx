@@ -27,7 +27,7 @@ export default async function LandingPage() {
                 href="/map"
                 className="text-zinc-400 hover:text-white transition-colors text-sm"
               >
-                Mijn Map
+                My Map
               </Link>
             ) : (
               <Link
@@ -49,7 +49,7 @@ export default async function LandingPage() {
               Rust Console Intel Map
             </h1>
             <p className="text-xl md:text-2xl text-zinc-400 mb-8 max-w-2xl mx-auto">
-              Track vijanden, deel markers met je team, en domineer de server met gedeelde intel.
+              Track enemies, share markers with your team, and dominate the server with shared intel.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -58,19 +58,19 @@ export default async function LandingPage() {
                 className="inline-flex items-center justify-center gap-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold px-8 py-4 rounded-2xl text-lg transition-colors"
               >
                 <span>🗺️</span>
-                Bekijk Map
+                View Map
               </Link>
               <Link
                 href="/wiki"
                 className="inline-flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white font-semibold px-8 py-4 rounded-2xl text-lg transition-colors"
               >
                 <span>📚</span>
-                Bekijk Wiki
+                View Wiki
               </Link>
             </div>
 
             <p className="mt-6 text-zinc-500 text-sm">
-              Geen account nodig om te beginnen
+              No account needed to get started
             </p>
           </div>
         </section>
@@ -79,17 +79,17 @@ export default async function LandingPage() {
         <section className="py-20 px-4 bg-zinc-900/50">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">
-              Alles wat je nodig hebt
+              Everything you need
             </h2>
 
             <div className="grid md:grid-cols-3 gap-8">
               {/* Feature 1: Map */}
               <div className="bg-zinc-800/50 rounded-3xl p-8 border border-zinc-700/50">
                 <div className="text-4xl mb-4">🗺️</div>
-                <h3 className="text-xl font-bold mb-3">Interactieve Map</h3>
+                <h3 className="text-xl font-bold mb-3">Interactive Map</h3>
                 <p className="text-zinc-400">
-                  Upload je server seed en plaats markers voor vijanden, bases, loot spots, en meer.
-                  Volledig draaibaar en zoombaar.
+                  Upload your server seed and place markers for enemies, bases, loot spots, and more.
+                  Fully rotatable and zoomable.
                 </p>
               </div>
 
@@ -98,8 +98,8 @@ export default async function LandingPage() {
                 <div className="text-4xl mb-4">👥</div>
                 <h3 className="text-xl font-bold mb-3">Team Sharing</h3>
                 <p className="text-zinc-400">
-                  Deel markers met je team in real-time.
-                  Iedereen ziet dezelfde intel en kan bijdragen.
+                  Share markers with your team in real-time.
+                  Everyone sees the same intel and can contribute.
                 </p>
               </div>
 
@@ -108,8 +108,8 @@ export default async function LandingPage() {
                 <div className="text-4xl mb-4">📚</div>
                 <h3 className="text-xl font-bold mb-3">Rust Wiki</h3>
                 <p className="text-zinc-400">
-                  Alles over monuments, wapens, raiding, en meer.
-                  Console-specifieke tips en strategieen.
+                  Everything about monuments, weapons, raiding, and more.
+                  Console-specific tips and strategies.
                 </p>
               </div>
             </div>
@@ -120,16 +120,16 @@ export default async function LandingPage() {
         <section className="py-20 px-4">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-4">
-              Klaar om te domineren?
+              Ready to dominate?
             </h2>
             <p className="text-zinc-400 mb-8">
-              Begin direct met het tracken van je server. Maak later een account aan om je markers te synchroniseren.
+              Start tracking your server right away. Create an account later to sync your markers.
             </p>
             <Link
               href="/map"
               className="inline-flex items-center justify-center gap-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold px-8 py-4 rounded-2xl text-lg transition-colors"
             >
-              Start Nu
+              Start Now
               <span>→</span>
             </Link>
           </div>
@@ -152,7 +152,7 @@ export default async function LandingPage() {
             </Link>
             {!session && (
               <Link href="/register" className="hover:text-white transition-colors">
-                Account maken
+                Create Account
               </Link>
             )}
           </div>

@@ -86,9 +86,9 @@ export default function MapPage() {
   if (status === "loading" || (isLoggedIn && isLoading)) {
     return (
       <>
-        <Header title="Intel Map" subtitle="Track je vijanden" />
+        <Header title="Intel Map" subtitle="Track your enemies" />
         <div className="flex justify-center py-8">
-          <p className="text-zinc-400">Laden...</p>
+          <p className="text-zinc-400">Loading...</p>
         </div>
       </>
     );
@@ -116,11 +116,11 @@ export default function MapPage() {
               <div>
                 <h3 className="font-semibold text-white">Guest Mode</h3>
                 <p className="text-sm text-zinc-400 mt-1">
-                  Je markers worden lokaal in je browser opgeslagen.{" "}
+                  Your markers are saved locally in your browser.{" "}
                   <Link href="/register" className="text-orange-400 hover:underline">
-                    Maak een account
+                    Create an account
                   </Link>{" "}
-                  om te synchroniseren tussen apparaten.
+                  to sync across devices.
                 </p>
               </div>
             </div>
@@ -130,21 +130,21 @@ export default function MapPage() {
           <Card variant="elevated">
             <CardContent className="py-4">
               <h2 className="text-lg font-semibold text-white mb-4">
-                Nieuwe Map Starten
+                Start New Map
               </h2>
               <form onSubmit={handleGuestStart} className="space-y-4">
                 <Input
                   id="seed"
                   label="Map Seed *"
-                  placeholder="bv. 12345678"
+                  placeholder="e.g. 12345678"
                   value={guestSeed}
                   onChange={(e) => setGuestSeed(e.target.value)}
                   required
                 />
                 <Input
                   id="serverName"
-                  label="Server Naam (optioneel)"
-                  placeholder="bv. Rustafied EU Main"
+                  label="Server Name (optional)"
+                  placeholder="e.g. Rustafied EU Main"
                   value={guestServerName}
                   onChange={(e) => setGuestServerName(e.target.value)}
                 />
@@ -159,7 +159,7 @@ export default function MapPage() {
           {guestLoaded && guestMaps.length > 0 && (
             <div>
               <h2 className="text-lg font-semibold text-white mb-3">
-                Je Maps ({guestMaps.length})
+                Your Maps ({guestMaps.length})
               </h2>
               <div className="space-y-3">
                 {guestMaps.map((map) => (
@@ -217,10 +217,10 @@ export default function MapPage() {
     <>
       <Header
         title="Intel Map"
-        subtitle="Track je vijanden"
+        subtitle="Track your enemies"
         rightAction={
           <Link href="/map/new" className="text-blue-500">
-            + Nieuw
+            + New
           </Link>
         }
       />
@@ -238,7 +238,7 @@ export default function MapPage() {
                   fetchMaps();
                 }}
               >
-                Opnieuw proberen
+                Try again
               </Button>
             </CardContent>
           </Card>
@@ -261,13 +261,13 @@ export default function MapPage() {
                 </svg>
               </div>
               <h2 className="mb-2 text-xl font-semibold text-white">
-                Nog geen map sessies
+                No map sessions yet
               </h2>
               <p className="mb-6 text-center text-zinc-400">
-                Start een nieuwe map sessie om markers toe te voegen
+                Start a new map session to add markers
               </p>
               <Link href="/map/new">
-                <Button>Nieuwe Map Sessie</Button>
+                <Button>New Map Session</Button>
               </Link>
             </CardContent>
           </Card>

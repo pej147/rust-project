@@ -41,14 +41,14 @@ export default function RegisterPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.error || "Registratie mislukt");
+        setError(data.error || "Registration failed");
         return;
       }
 
       // Redirect naar login met success message
       router.push("/login?registered=true");
     } catch {
-      setError("Er is iets misgegaan");
+      setError("Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -57,7 +57,7 @@ export default function RegisterPage() {
   return (
     <div className="rounded-3xl bg-zinc-900 p-8 shadow-xl">
       <h1 className="mb-2 text-center text-3xl font-bold text-white">
-        Account aanmaken
+        Create Account
       </h1>
       <p className="mb-8 text-center text-zinc-400">
         Start tracking your Rust intel
@@ -75,7 +75,7 @@ export default function RegisterPage() {
             htmlFor="displayName"
             className="mb-2 block text-sm font-medium text-zinc-300"
           >
-            Weergavenaam
+            Display Name
           </label>
           <input
             id="displayName"
@@ -86,7 +86,7 @@ export default function RegisterPage() {
             minLength={2}
             maxLength={50}
             className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            placeholder="Je gamer tag"
+            placeholder="Your gamer tag"
           />
         </div>
 
@@ -104,7 +104,7 @@ export default function RegisterPage() {
             onChange={(e) => setEmail(e.target.value)}
             required
             className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            placeholder="jouw@email.com"
+            placeholder="your@email.com"
           />
         </div>
 
@@ -113,7 +113,7 @@ export default function RegisterPage() {
             htmlFor="password"
             className="mb-2 block text-sm font-medium text-zinc-300"
           >
-            Wachtwoord
+            Password
           </label>
           <input
             id="password"
@@ -123,7 +123,7 @@ export default function RegisterPage() {
             required
             minLength={8}
             className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            placeholder="Minimaal 8 karakters"
+            placeholder="Minimum 8 characters"
           />
         </div>
 
@@ -132,7 +132,7 @@ export default function RegisterPage() {
             htmlFor="confirmPassword"
             className="mb-2 block text-sm font-medium text-zinc-300"
           >
-            Bevestig wachtwoord
+            Confirm Password
           </label>
           <input
             id="confirmPassword"
@@ -141,7 +141,7 @@ export default function RegisterPage() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
             className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            placeholder="Herhaal je wachtwoord"
+            placeholder="Repeat your password"
           />
         </div>
 
@@ -150,7 +150,7 @@ export default function RegisterPage() {
           disabled={isLoading}
           className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isLoading ? "Account aanmaken..." : "Registreren"}
+          {isLoading ? "Create Account..." : "Register"}
         </button>
       </form>
 
@@ -160,7 +160,7 @@ export default function RegisterPage() {
           href="/login"
           className="font-medium text-blue-400 hover:text-blue-300"
         >
-          Log hier in
+          Log in here
         </Link>
       </p>
     </div>

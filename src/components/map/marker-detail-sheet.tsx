@@ -113,13 +113,13 @@ export function MarkerDetailSheet({
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.error || "Kon marker niet updaten");
+        throw new Error(data.error || "Could not update marker");
       }
 
       setIsEditing(false);
       onUpdate();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Er ging iets mis");
+      setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setIsSaving(false);
     }
@@ -136,13 +136,13 @@ export function MarkerDetailSheet({
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.error || "Kon marker niet verwijderen");
+        throw new Error(data.error || "Could not delete marker");
       }
 
       onClose();
       onUpdate();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Er ging iets mis");
+      setError(err instanceof Error ? err.message : "Something went wrong");
       setIsDeleting(false);
     }
   };
@@ -164,7 +164,7 @@ export function MarkerDetailSheet({
         <div className="space-y-4">
           <Input
             id="edit-title"
-            label="Titel"
+            label="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
@@ -245,7 +245,7 @@ export function MarkerDetailSheet({
       ) : (
         // View mode
         <div className="space-y-4">
-          {/* Header met icoon en titel */}
+          {/* Header with icon and title */}
           <div className="flex items-start gap-4">
             <div
               className="flex h-14 w-14 items-center justify-center rounded-2xl text-2xl"
@@ -284,7 +284,7 @@ export function MarkerDetailSheet({
             </div>
           </div>
 
-          {/* Gemaakt door */}
+          {/* Created by */}
           {marker.createdBy && (
             <div className="rounded-xl bg-zinc-800 p-3">
               <p className="text-xs text-zinc-500">Added by</p>

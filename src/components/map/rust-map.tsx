@@ -49,8 +49,8 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
-    // Bereken bounds gebaseerd op map grootte
-    // Rust maps zijn vierkant, coördinaten lopen van 0 tot mapSize
+    // Calculate bounds based on map size
+    // Rust maps are square, coordinates run from 0 to mapSize
     const bounds = L.latLngBounds(
       [0, 0],
       [mapSize, mapSize]
@@ -67,13 +67,13 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
       attributionControl: false,
     });
 
-    // Voeg zoom controls toe rechtsboven
+    // Add zoom controls to top right
     L.control.zoom({ position: "topright" }).addTo(map);
 
-    // Voeg de map afbeelding toe als overlay
+    // Add the map image as overlay
     const imageUrl = `/maps/${seed}.png`;
 
-    // Check of de afbeelding bestaat
+    // Check if the image exists
     const img = new Image();
     img.onload = () => {
       // Check if map still exists and has a valid container
@@ -97,7 +97,7 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
     // Store map reference before async operations
     mapRef.current = map;
 
-    // Track mouse positie voor coördinaten display
+    // Track mouse position for coordinates display
     map.on("mousemove", (e) => {
       const x = Math.round(e.latlng.lng);
       const y = Math.round(mapSize - e.latlng.lat); // Invert Y axis
@@ -123,18 +123,18 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
     };
   }, [seed, mapSize, onMapClick]);
 
-  // Update markers wanneer ze veranderen
+  // Update markers when they change
   useEffect(() => {
     if (!mapRef.current) return;
 
-    // Verwijder bestaande markers
+    // Remove existing markers
     mapRef.current.eachLayer((layer) => {
       if (layer instanceof L.Marker) {
         mapRef.current?.removeLayer(layer);
       }
     });
 
-    // Voeg nieuwe markers toe
+    // Add new markers
     markers.forEach((marker) => {
       const latLng: L.LatLngExpression = [mapSize - marker.y, marker.x];
       const config = MARKER_CONFIG[marker.type] || { icon: "📍", label: marker.type };
@@ -160,7 +160,7 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
         iconAnchor: [18, 18],
       });
 
-      // Popup inhoud met dark theme styling
+      // Popup content with dark theme styling
       const popupContent = `
         <div style="
           background: #18181b;
@@ -213,7 +213,7 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
             margin-top: 8px;
           ">
             📍 ${Math.round(marker.x)}, ${Math.round(marker.y)}
-            ${marker.createdBy ? `<br>Door: ${marker.createdBy.displayName}` : ""}
+            ${marker.createdBy ? `<br>By: ${marker.createdBy.displayName}` : ""}
           </div>
         </div>
       `;
@@ -251,9 +251,9 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
             d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
           />
         </svg>
-        <p className="mb-2 text-zinc-400">Map afbeelding niet gevonden</p>
+        <p className="mb-2 text-zinc-400">Map image not found</p>
         <p className="text-sm text-zinc-500">
-          Upload de map naar:
+          Upload the map to:
           <br />
           <code className="rounded bg-zinc-700 px-2 py-1">
             public/maps/{seed}.png
@@ -267,14 +267,14 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
     <div className="relative h-full w-full">
       <div ref={containerRef} className="h-full w-full bg-zinc-900" />
 
-      {/* Coördinaten overlay */}
+      {/* Coordinates overlay */}
       {coords && (
         <div className="absolute bottom-2 left-2 z-[1000] rounded-lg bg-zinc-900/90 px-3 py-1.5 font-mono text-sm text-white backdrop-blur-sm">
           X: {coords.x} | Y: {coords.y}
         </div>
       )}
 
-      {/* Grid toggle - voor later */}
+      {/* Grid toggle - for later */}
       <div className="absolute right-2 top-16 z-[1000]">
         <button
           className="rounded-lg bg-zinc-900/90 p-2 text-zinc-400 backdrop-blur-sm transition-colors hover:bg-zinc-800 hover:text-white"

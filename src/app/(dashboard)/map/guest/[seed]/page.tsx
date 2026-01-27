@@ -12,7 +12,7 @@ import { GuestMarkerDetailSheet } from "@/components/map/guest-marker-detail-she
 import { MarkerFilter } from "@/components/map/marker-filter";
 import { useGuestMarkers, type GuestMarker } from "@/hooks/use-guest-markers";
 
-// Alle marker types voor default filter
+// All marker types for default filter
 const ALL_MARKER_TYPES = [
   "ENEMY",
   "TEAM_BASE",
@@ -55,7 +55,7 @@ export default function GuestMapDetailPage({
 
   const [showInfo, setShowInfo] = useState(false);
 
-  // Marker toevoegen state
+  // Add marker state
   const [showAddMarker, setShowAddMarker] = useState(false);
   const [markerPosition, setMarkerPosition] = useState<{ x: number; y: number } | null>(null);
 
@@ -132,7 +132,7 @@ export default function GuestMapDetailPage({
   if (!isLoaded) {
     return (
       <>
-        <Header title="Laden..." />
+        <Header title="Loading..." />
         <div className="flex h-[calc(100vh-8rem)] items-center justify-center">
           <p className="text-zinc-400">Loading map...</p>
         </div>
@@ -183,14 +183,14 @@ export default function GuestMapDetailPage({
           <div className="flex items-center gap-2">
             <span className="text-orange-400">👤</span>
             <span className="text-sm text-orange-400">
-              Guest Mode - markers lokaal opgeslagen
+              Guest Mode - markers saved locally
             </span>
           </div>
           <Link
             href="/login"
             className="text-xs text-orange-400 hover:text-orange-300 underline"
           >
-            Login om te synchroniseren
+            Login to sync
           </Link>
         </div>
       </div>
@@ -234,7 +234,7 @@ export default function GuestMapDetailPage({
             setShowAddMarker(true);
           }}
           className="absolute bottom-20 right-4 z-[1000] flex h-14 w-14 items-center justify-center rounded-full bg-orange-600 text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
-          title="Marker toevoegen"
+          title="Add marker"
         >
           <svg
             className="h-6 w-6"

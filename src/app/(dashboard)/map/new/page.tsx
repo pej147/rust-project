@@ -38,13 +38,13 @@ export default function NewMapPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.error || "Kon map niet aanmaken");
+        setError(data.error || "Could not create map");
         return;
       }
 
       router.push(`/map/${data.id}`);
     } catch {
-      setError("Er is iets misgegaan");
+      setError("Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -53,7 +53,7 @@ export default function NewMapPage() {
   return (
     <>
       <Header
-        title="Nieuwe Map"
+        title="New Map"
         leftAction={
           <Link href="/map" className="text-blue-500">
             Back
@@ -75,16 +75,16 @@ export default function NewMapPage() {
                 label="Map Seed *"
                 value={seed}
                 onChange={(e) => setSeed(e.target.value)}
-                placeholder="bijv. 10358"
+                placeholder="e.g. 10358"
                 required
               />
 
               <Input
                 id="serverName"
-                label="Server Naam (optioneel)"
+                label="Server Name (optional)"
                 value={serverName}
                 onChange={(e) => setServerName(e.target.value)}
-                placeholder="bijv. Rustafied EU Main"
+                placeholder="e.g. Rustafied EU Main"
               />
 
               <div>
@@ -92,7 +92,7 @@ export default function NewMapPage() {
                   htmlFor="mapSize"
                   className="mb-2 block text-sm font-medium text-zinc-300"
                 >
-                  Map Grootte
+                  Map Size
                 </label>
                 <select
                   id="mapSize"
@@ -111,7 +111,7 @@ export default function NewMapPage() {
 
               <Input
                 id="wipeDate"
-                label="Wipe Datum (optioneel)"
+                label="Wipe Date (optional)"
                 type="date"
                 value={wipeDate}
                 onChange={(e) => setWipeDate(e.target.value)}
@@ -123,7 +123,7 @@ export default function NewMapPage() {
                   disabled={isLoading || !seed}
                   className="w-full"
                 >
-                  {isLoading ? "Map aanmaken..." : "Map Sessie Starten"}
+                  {isLoading ? "Creating map..." : "Start Map Session"}
                 </Button>
               </div>
             </form>
@@ -131,7 +131,7 @@ export default function NewMapPage() {
         </Card>
 
         <p className="mt-4 text-center text-sm text-zinc-500">
-          De map afbeelding moet je zelf uploaden naar{" "}
+          You need to upload the map image to{" "}
           <code className="rounded bg-zinc-800 px-1">public/maps/[seed].png</code>
         </p>
       </div>

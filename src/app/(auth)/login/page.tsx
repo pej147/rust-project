@@ -34,7 +34,7 @@ function LoginForm() {
         router.refresh();
       }
     } catch {
-      setError("Er is iets misgegaan");
+      setError("Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -62,7 +62,7 @@ function LoginForm() {
           onChange={(e) => setEmail(e.target.value)}
           required
           className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          placeholder="jouw@email.com"
+          placeholder="your@email.com"
         />
       </div>
 
@@ -71,7 +71,7 @@ function LoginForm() {
           htmlFor="password"
           className="mb-2 block text-sm font-medium text-zinc-300"
         >
-          Wachtwoord
+          Password
         </label>
         <input
           id="password"
@@ -89,7 +89,7 @@ function LoginForm() {
         disabled={isLoading}
         className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {isLoading ? "Inloggen..." : "Inloggen"}
+        {isLoading ? "Logging in..." : "Log in"}
       </button>
     </form>
   );
@@ -99,16 +99,16 @@ export default function LoginPage() {
   return (
     <div className="rounded-3xl bg-zinc-900 p-8 shadow-xl">
       <h1 className="mb-2 text-center text-3xl font-bold text-white">
-        Welkom terug
+        Welcome back
       </h1>
       <p className="mb-8 text-center text-zinc-400">
-        Log in op je Rust Intel account
+        Log in to your Rust Intel account
       </p>
 
       <Suspense
         fallback={
           <div className="flex justify-center py-8">
-            <div className="text-zinc-400">Laden...</div>
+            <div className="text-zinc-400">Loading...</div>
           </div>
         }
       >
@@ -121,7 +121,7 @@ export default function LoginPage() {
           href="/register"
           className="font-medium text-blue-400 hover:text-blue-300"
         >
-          Registreer hier
+          Register here
         </Link>
       </p>
     </div>

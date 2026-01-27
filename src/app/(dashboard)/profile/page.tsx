@@ -13,9 +13,9 @@ export default function ProfilePage() {
   if (status === "loading") {
     return (
       <>
-        <Header title="Profiel" />
+        <Header title="Profile" />
         <div className="flex items-center justify-center p-8">
-          <div className="text-zinc-400">Laden...</div>
+          <div className="text-zinc-400">Loading...</div>
         </div>
       </>
     );
@@ -33,7 +33,7 @@ export default function ProfilePage() {
 
   return (
     <>
-      <Header title="Profiel" />
+      <Header title="Profile" />
       <div className="p-4">
         <Card variant="elevated">
           <CardContent>
@@ -69,7 +69,7 @@ export default function ProfilePage() {
             className="w-full bg-red-600/20 text-red-400 hover:bg-red-600/30"
             onClick={handleLogout}
           >
-            Uitloggen
+            Log out
           </Button>
         </div>
       </div>
