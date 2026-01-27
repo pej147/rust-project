@@ -9,9 +9,9 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | FASE 9: Command Bar |
+| **Huidige fase** | Enemy Marker UI Redesign |
 | **Laatste update** | 2026-01-27 |
-| **Volgende taak** | Implement floating command bar |
+| **Volgende taak** | Interactive popup menu for ENEMY markers (overlay on map) |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 | **Totaal Wiki Pagina's** | 208 |
@@ -155,14 +155,32 @@
 #### Enemy Marker Click Fix ✅ FIXED
 - **Issue:** Clicking ENEMY marker didn't show player names (residents)
 - **Root cause:** Click event was propagating to the map, opening Add Marker sheet instead
-- **Fix:** Added proper event propagation stopping in rust-map.tsx
-  - `L.DomEvent.stopPropagation(e)`
-  - `e.originalEvent.stopPropagation()`
-  - `e.originalEvent.preventDefault()`
+- **Fix:** Used ref flag to prevent map click after marker click
 - **Status:** ✅ Fixed and pushed to GitHub
 
 **Files modified:**
-- `src/components/map/rust-map.tsx` - improved click event handling for ENEMY markers
+- `src/components/map/rust-map.tsx` - added markerClickedRef to block map click after marker click
+
+#### Guest Mode Enemy Sheet ✅ IMPLEMENTED
+- **Added:** `GuestEnemyMarkerSheet` component for guest mode
+- **Added:** `residents` field to GuestMarker interface
+- **Added:** Guest mode now shows Enemy Base sheet for ENEMY markers
+- **Changed:** All `/map` routes are now public (login optional)
+
+**Files created/modified:**
+- `src/components/map/guest-enemy-marker-sheet.tsx` - NEW
+- `src/app/(dashboard)/map/guest/[seed]/page.tsx` - added enemy sheet
+- `src/hooks/use-guest-markers.ts` - added GuestResident interface
+- `src/proxy.ts` - made all /map routes public
+
+#### Next: Interactive Popup Menu 🎯 TODO
+- **Request:** User wants interactive menu that stays over the map (not bottom sheet)
+- **Design:** Popup/tooltip style menu near the marker
+- **Features:**
+  - Shows residents list
+  - Add/remove players
+  - Gear icon (⚙️) to open marker settings
+- **Inspiration:** Context menu or popover style
 
 #### UI Translation Dutch → English ✅
 - **Translated 10 files** from Dutch to English
