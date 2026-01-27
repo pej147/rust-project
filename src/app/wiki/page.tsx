@@ -52,12 +52,13 @@ export default function WikiPage() {
                 description="Melee, bows, en meer - met damage stats"
               />
             </Link>
-            <WikiCard
-              emoji="🏠"
-              title="Building"
-              description="Base designs, upkeep kosten, en materials"
-              comingSoon
-            />
+            <Link href="/wiki/ammo">
+              <WikiCard
+                emoji="🎯"
+                title="Ammo"
+                description="Alle ammo types met crafting en tips"
+              />
+            </Link>
             <Link href="/wiki/raiding">
               <WikiCard
                 emoji="💣"
