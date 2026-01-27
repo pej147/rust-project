@@ -9,13 +9,13 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | Enemy Marker Residents ✅ COMPLEET |
+| **Huidige fase** | UI Translation ✅ COMPLEET |
 | **Laatste update** | 2026-01-27 |
-| **Volgende taak** | FASE 9: Command Bar, Building wiki, of UI vertalen |
+| **Volgende taak** | FASE 9: Command Bar, Building wiki, of Wiki vertalen |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 | **Totaal Wiki Pagina's** | 208 |
-| **Taal** | English (UI text) |
+| **Taal** | English (UI) / Dutch (Wiki - to be translated) |
 
 ---
 
@@ -152,6 +152,28 @@
 
 ### Wat er deze sessie is gedaan (2026-01-27):
 
+#### UI Translation Dutch → English ✅
+- **Translated 10 files** from Dutch to English
+- **Auth pages:** login, register (labels, placeholders, errors)
+- **Profile page:** title, logout button
+- **Landing page:** all hero, features, CTA sections
+- **Map pages:** main, new, guest mode (error messages, placeholders)
+- **Marker components:** add-marker-form, marker-detail-sheet (all text)
+- **Rust map:** error messages, comments, tooltips
+- **Wiki pages:** Left in Dutch (to be translated later)
+
+**Files changed:**
+- `src/app/(auth)/login/page.tsx`
+- `src/app/(auth)/register/page.tsx`
+- `src/app/(dashboard)/profile/page.tsx`
+- `src/app/(dashboard)/map/page.tsx`
+- `src/app/(dashboard)/map/new/page.tsx`
+- `src/app/(dashboard)/map/guest/[seed]/page.tsx`
+- `src/app/page.tsx`
+- `src/components/map/add-marker-form.tsx`
+- `src/components/map/marker-detail-sheet.tsx`
+- `src/components/map/rust-map.tsx`
+
 #### Enemy Marker Residents Feature ✅
 - **Database:** Added `MarkerResident` model for many-to-many relation
   - A marker can now have multiple enemy profiles (residents)
@@ -250,10 +272,11 @@
 1. **FASE 9: Command Bar** - Floating input voor snelle marker commands
 2. **FASE 10: Polish & Extras** - Backup script, error handling, responsive check
 3. **Building wiki:** Base designs, upkeep
-4. **Marker team visibility:** Markers delen met team (private/team/public)
+4. **Wiki Translation:** Translate wiki pages from Dutch to English
+5. **Marker team visibility:** Markers delen met team (private/team/public)
 
 ### Volgende stap:
-Gebruiker kan kiezen: Command Bar (FASE 9), Polish (FASE 10), of Building wiki.
+User can choose: Command Bar (FASE 9), Polish (FASE 10), Building wiki, or Wiki translation.
 
 ---
 
@@ -495,4 +518,4 @@ De volgende taak is: [TAAK]
 
 ---
 
-*Laatste update: 2026-01-27 — FASE 8 (Admin Dashboard) COMPLEET*
+*Laatste update: 2026-01-27 — UI Translation Dutch → English COMPLEET*
