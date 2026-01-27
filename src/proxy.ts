@@ -18,8 +18,8 @@ export default withAuth(
       authorized: ({ token, req }) => {
         const pathname = req.nextUrl.pathname;
 
-        // /map en /map/guest/* zijn publiek (guest mode) - geen login nodig
-        if (pathname === "/map" || pathname.startsWith("/map/guest")) {
+        // Alle /map routes zijn publiek - login is optioneel
+        if (pathname.startsWith("/map")) {
           return true;
         }
 
@@ -30,8 +30,8 @@ export default withAuth(
   }
 );
 
-// Bescherm deze routes - vereist inloggen
-// Let op: /map is publiek (guest mode), maar /map/new en /map/[id] zijn beschermd
+// Bescherm deze routes
+// Let op: /map/* is volledig publiek - login is optioneel
 export const config = {
   matcher: ["/map", "/map/:path*", "/teams/:path*", "/profile/:path*", "/admin/:path*"],
 };

@@ -9,8 +9,9 @@ import { Button } from "@/components/ui/button";
 import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { GuestAddMarkerForm } from "@/components/map/guest-add-marker-form";
 import { GuestMarkerDetailSheet } from "@/components/map/guest-marker-detail-sheet";
+import { GuestEnemyMarkerSheet } from "@/components/map/guest-enemy-marker-sheet";
 import { MarkerFilter } from "@/components/map/marker-filter";
-import { useGuestMarkers, type GuestMarker } from "@/hooks/use-guest-markers";
+import { useGuestMarkers, type GuestMarker, type GuestResident } from "@/hooks/use-guest-markers";
 
 // All marker types for default filter
 const ALL_MARKER_TYPES = [
@@ -62,6 +63,7 @@ export default function GuestMapDetailPage({
   // Marker detail state
   const [selectedMarker, setSelectedMarker] = useState<GuestMarker | null>(null);
   const [showMarkerDetail, setShowMarkerDetail] = useState(false);
+  const [showEnemySheet, setShowEnemySheet] = useState(false);
 
   // Filter state
   const [activeFilters, setActiveFilters] = useState<string[]>(ALL_MARKER_TYPES);
@@ -101,14 +103,42 @@ export default function GuestMapDetailPage({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleMarkerClick = (marker: any) => {
     // Cast to GuestMarker - we know these are GuestMarkers from localStorage
-    setSelectedMarker(marker as GuestMarker);
-    setShowMarkerDetail(true);
+    const guestMarker = marker as GuestMarker;
+    setSelectedMarker(guestMarker);
+    // For ENEMY markers, show the enemy sheet first
+    if (guestMarker.type === "ENEMY") {
+      setShowEnemySheet(true);
+    } else {
+      setShowMarkerDetail(true);
+    }
   };
 
   const handleCloseMarkerDetail = () => {
     setShowMarkerDetail(false);
     setSelectedMarker(null);
   };
+
+  const handleCloseEnemySheet = () => {
+    setShowEnemySheet(false);
+    setSelectedMarker(null);
+  };
+
+  const handleOpenSettingsFromEnemy = () => {
+    // Close enemy sheet, open marker detail sheet
+    setShowEnemySheet(false);
+    setShowMarkerDetail(true);
+  };
+
+  const handleUpdateResidents = useCallback(
+    (markerId: string, residents: GuestResident[]) => {
+      updateMarker(seed, markerId, { residents });
+      // Update selected marker to reflect changes
+      if (selectedMarker && selectedMarker.id === markerId) {
+        setSelectedMarker({ ...selectedMarker, residents });
+      }
+    },
+    [seed, updateMarker, selectedMarker]
+  );
 
   const handleMarkerUpdate = useCallback(
     (markerId: string, updates: Partial<Omit<GuestMarker, "id" | "createdAt">>) => {
@@ -273,6 +303,15 @@ export default function GuestMapDetailPage({
           />
         )}
       </BottomSheet>
+
+      {/* Enemy Marker Sheet - shows residents first */}
+      <GuestEnemyMarkerSheet
+        marker={selectedMarker}
+        isOpen={showEnemySheet}
+        onClose={handleCloseEnemySheet}
+        onOpenSettings={handleOpenSettingsFromEnemy}
+        onUpdateResidents={handleUpdateResidents}
+      />
 
       {/* Marker Detail Bottom Sheet */}
       <GuestMarkerDetailSheet

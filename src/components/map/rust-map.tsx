@@ -43,6 +43,7 @@ interface RustMapProps {
 export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick }: RustMapProps) {
   const mapRef = useRef<L.Map | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const markerClickedRef = useRef(false); // Flag to prevent map click after marker click
   const [imageError, setImageError] = useState(false);
   const [coords, setCoords] = useState<{ x: number; y: number } | null>(null);
 
@@ -111,8 +112,16 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
     // Handle click events
     if (onMapClick) {
       map.on("click", (e) => {
+        console.log("MAP CLICK - markerClickedRef:", markerClickedRef.current);
+        // Skip if a marker was just clicked
+        if (markerClickedRef.current) {
+          markerClickedRef.current = false;
+          console.log("MAP CLICK BLOCKED");
+          return;
+        }
         const x = Math.round(e.latlng.lng);
         const y = Math.round(mapSize - e.latlng.lat);
+        console.log("MAP CLICK ALLOWED at", x, y);
         onMapClick(x, y);
       });
     }
@@ -220,35 +229,24 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
 
       const leafletMarker = L.marker(latLng, { icon }).addTo(mapRef.current!);
 
-      // For ENEMY markers, only use the click handler (show bottom sheet)
-      // For other markers, show popup on hover and click handler for details
-      if (marker.type === "ENEMY") {
-        // ENEMY markers: only click handler, no popup
-        if (onMarkerClick) {
-          leafletMarker.on("click", (e) => {
-            // Stop event from reaching the map click handler
-            L.DomEvent.stopPropagation(e);
-            if (e.originalEvent) {
-              e.originalEvent.stopPropagation();
-              e.originalEvent.preventDefault();
-            }
-            onMarkerClick(marker);
-          });
-        }
-      } else {
-        // Other markers: bind popup
+      // Click handler for all markers
+      if (onMarkerClick) {
+        leafletMarker.on("click", () => {
+          console.log("MARKER CLICK:", marker.type, marker.title);
+          // Set flag to prevent map click from triggering
+          markerClickedRef.current = true;
+          console.log("Set markerClickedRef to TRUE");
+          onMarkerClick(marker);
+        });
+      }
+
+      // For non-ENEMY markers, also bind popup
+      if (marker.type !== "ENEMY") {
         leafletMarker.bindPopup(popupContent, {
           className: "custom-popup",
           closeButton: true,
           maxWidth: 300,
         });
-
-        // Click handler for marker details
-        if (onMarkerClick) {
-          leafletMarker.on("click", () => {
-            onMarkerClick(marker);
-          });
-        }
       }
     });
   }, [markers, mapSize, onMarkerClick]);

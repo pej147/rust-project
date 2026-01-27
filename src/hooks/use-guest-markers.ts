@@ -2,6 +2,13 @@
 
 import { useState, useEffect, useCallback } from "react";
 
+export interface GuestResident {
+  id: string;
+  name: string;
+  clanTag?: string;
+  threatLevel: number;
+}
+
 export interface GuestMarker {
   id: string;
   title: string;
@@ -11,6 +18,7 @@ export interface GuestMarker {
   y: number;
   color: string;
   createdAt: string;
+  residents?: GuestResident[];
 }
 
 export interface GuestMapSession {
