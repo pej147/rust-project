@@ -9,11 +9,12 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | FASE C: Wiki (raid data compleet) |
+| **Huidige fase** | FASE C: Wiki (volledig compleet!) |
 | **Laatste update** | 2026-01-27 |
-| **Volgende taak** | Meer wiki categorieën (Monuments, Weapons) |
+| **Volgende taak** | Teams functionaliteit of meer wapens |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
+| **Totaal Wiki Pagina's** | 170 |
 
 ---
 
@@ -83,13 +84,16 @@
 - [x] B.6 - Proxy.ts updated voor publieke routes
 - [x] B.7 - Commit gemaakt en gepusht
 
-### FASE C: Wiki ✅ COMPLEET (Raiding)
+### FASE C: Wiki ✅ VOLLEDIG COMPLEET
 - [x] C.1 - Wiki data schema bepalen (items.ts + raid-costs.json)
 - [x] C.2 - Raid costs data structuur
 - [x] C.3 - Wiki Raiding pagina bouwen (/wiki/raiding)
 - [x] C.4 - Item detail pagina's (/wiki/raiding/[id])
 - [x] C.5 - Raid data voor 13 items (6 doors, 3 walls, 4 deployables)
-- [x] C.6 - ALLE raid data ingevuld (50+ items totaal)
+- [x] C.6 - ALLE raid data ingevuld (52 items totaal)
+- [x] C.7 - Wiki Items (58 items: resources, components, tools, medical)
+- [x] C.8 - Wiki Monuments (24 monuments: T1, T2, T3, Safe Zones)
+- [x] C.9 - Wiki Weapons (19 items: melee, bows, arrows)
 
 ### FASE 7: Teams (UITGESTELD)
 - [ ] 7.1 - Team aanmaken pagina
@@ -106,38 +110,42 @@
 
 ### Wat er deze sessie is gedaan (2026-01-27):
 
-#### Alle Raid Data Ingevuld met Manager Agents
-3 managers parallel ingezet:
-- **Manager-Doors**: 4 items (Floor Grill, Glass Windows, Metal Bars)
-- **CEO-Buildings**: 27 items (alle tiers: walls, foundations, floors, roofs, frames)
-- **CEO-Deployables**: 5 items (Vending Machine, Turrets, SAM Site, Wood Box)
+#### Wiki Items Toegevoegd (58 items)
+- **Resources (17):** Wood, Stone, Metal Ore, Sulfur, HQM, etc.
+- **Components (18):** Gears, Springs, Pipes, Weapon Bodies, etc.
+- **Tools (14):** Rock → Stone → Metal → Salvaged → Power tools
+- **Medical (9):** Bandages, Syringes, Med Kits, Teas
 
-#### Totaal aantal raid items: 50+
+#### Wiki Monuments Toegevoegd (24 monuments)
+- **Tier 1 Green (10):** Lighthouse, Supermarket, Harbor, Satellite, etc.
+- **Tier 2 Blue (7):** Train Yard, Water Treatment, Power Plant, Airfield, Dome, etc.
+- **Tier 3 Red (5):** Launch Site, Military Tunnels, Oil Rigs, Underwater Labs
+- **Safe Zones (2):** Outpost, Bandit Camp
 
-**Buildings per tier (5 tiers × 6 types = 30 items):**
-- Walls, Foundations, Floors, Roofs, Door Frames, Window Frames
-- Tiers: Twig (10 HP), Wood (250 HP), Stone (500 HP), Metal (1000 HP), Armored (2000 HP)
+#### Wiki Weapons Toegevoegd (19 items)
+- **Melee Primitive (5):** Rock, Spears, Bone Club, Bone Knife
+- **Melee Salvaged (3):** Salvaged Sword, Cleaver, Machete
+- **Melee Military (3):** Longsword, Mace, Combat Knife
+- **Bows (4):** Hunting Bow, Crossbow, Compound Bow, Nail Gun
+- **Arrows (4):** Wooden, High Velocity, Bone, Fire
 
-**Doors (11 items):**
-- Wooden, Sheet Metal, Double Sheet Metal, Garage, Armored, Armored Double
-- Ladder Hatch, Floor Grill, Metal Window Bars, Strengthened/Reinforced Glass
+### Wiki Totaal Overzicht:
+| Categorie | Items | Status |
+|-----------|-------|--------|
+| 💣 Raiding | 52 | ✅ Compleet |
+| 🎒 Items | 58 | ✅ Compleet |
+| 🏛️ Monuments | 24 | ✅ Compleet |
+| 🔫 Weapons | 19 | Melee & Bows klaar |
+| **Totaal** | **153 entries** | |
+| **Pagina's** | **170** | |
 
-**Deployables (11 items):**
-- Tool Cupboard, Auto Turret, Flame Turret, Shotgun Trap, SAM Site
-- High External Wood/Stone Wall & Gate, Vending Machine, Large Wood Box
-
-### Eerdere sessies:
-- FASE 1-6 compleet
-- FASE A (Landing Page) compleet
-- FASE B (Guest Mode) compleet
-- CEO Dashboard actief
-
-### Wat er nog moet gebeuren:
-1. **FASE C:** Meer wiki categorieën (Monuments, Weapons, Items)
-2. **Later:** Teams functionaliteit
+### Wat er nog kan:
+1. **Weapons uitbreiden:** Pistols, SMGs, Rifles, Shotguns
+2. **Teams functionaliteit (FASE 7)**
+3. **Building wiki:** Base designs, upkeep
 
 ### Volgende stap:
-Wiki verder uitbreiden met andere categorieën of meer raid items toevoegen.
+Gebruiker kan kiezen: meer wapens, teams, of building wiki.
 
 ---
 

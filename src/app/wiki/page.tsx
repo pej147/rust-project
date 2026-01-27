@@ -45,12 +45,13 @@ export default function WikiPage() {
                 description="Alle monuments met loot tabellen en puzzels"
               />
             </Link>
-            <WikiCard
-              emoji="🔫"
-              title="Wapens"
-              description="Damage stats, recoil patterns, en attachments"
-              comingSoon
-            />
+            <Link href="/wiki/weapons">
+              <WikiCard
+                emoji="🔫"
+                title="Wapens"
+                description="Melee, bows, en meer - met damage stats"
+              />
+            </Link>
             <WikiCard
               emoji="🏠"
               title="Building"
