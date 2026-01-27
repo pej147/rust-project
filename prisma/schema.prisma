@@ -124,12 +124,29 @@ model Marker {
   teamId String?
   team   Team?   @relation(fields: [teamId], references: [id])
 
-  // Enemy profile link
-  enemyProfileId String?
-  enemyProfile   EnemyProfile? @relation(fields: [enemyProfileId], references: [id])
+  // Enemy residents (multiple players per base)
+  residents MarkerResident[]
 
   @@index([mapSessionId])
   @@index([type])
+}
+
+// ============================================
+// MARKER RESIDENTS (Enemy players at a base)
+// ============================================
+
+model MarkerResident {
+  id        String   @id @default(cuid())
+  markerId  String
+  marker    Marker   @relation(fields: [markerId], references: [id], onDelete: Cascade)
+
+  enemyProfileId String
+  enemyProfile   EnemyProfile @relation(fields: [enemyProfileId], references: [id], onDelete: Cascade)
+
+  addedAt DateTime @default(now())
+
+  @@unique([markerId, enemyProfileId])
+  @@index([markerId])
 }
 
 enum MarkerType {
@@ -157,12 +174,12 @@ model EnemyProfile {
   name        String
   clanTag     String?
   notes       String?
-  threatLevel Int      @default(1) // 1-5
+  threatLevel Int      @default(1) // 1-5 skulls
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  // Relaties
-  markers Marker[]
+  // Relaties - where this enemy lives
+  residences MarkerResident[]
 }
 
 // ============================================

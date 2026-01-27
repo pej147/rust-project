@@ -101,7 +101,11 @@ export async function GET(request: NextRequest) {
         createdBy: {
           select: { id: true, displayName: true },
         },
-        enemyProfile: true,
+        residents: {
+          include: {
+            enemyProfile: true,
+          },
+        },
       },
       orderBy: { createdAt: "desc" },
     });

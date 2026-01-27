@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { AddMarkerForm } from "@/components/map/add-marker-form";
 import { MarkerDetailSheet } from "@/components/map/marker-detail-sheet";
+import { EnemyMarkerSheet } from "@/components/map/enemy-marker-sheet";
 import { MarkerFilter } from "@/components/map/marker-filter";
 
 // Alle marker types voor default filter
@@ -86,6 +87,7 @@ export default function MapDetailPage({
   // Marker detail state
   const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
   const [showMarkerDetail, setShowMarkerDetail] = useState(false);
+  const [showEnemySheet, setShowEnemySheet] = useState(false);
 
   // Filter state
   const [activeFilters, setActiveFilters] = useState<string[]>(ALL_MARKER_TYPES);
@@ -128,12 +130,28 @@ export default function MapDetailPage({
 
   const handleMarkerClick = (marker: MarkerData) => {
     setSelectedMarker(marker);
-    setShowMarkerDetail(true);
+    // For ENEMY markers, show the enemy sheet first
+    if (marker.type === "ENEMY") {
+      setShowEnemySheet(true);
+    } else {
+      setShowMarkerDetail(true);
+    }
   };
 
   const handleCloseMarkerDetail = () => {
     setShowMarkerDetail(false);
     setSelectedMarker(null);
+  };
+
+  const handleCloseEnemySheet = () => {
+    setShowEnemySheet(false);
+    setSelectedMarker(null);
+  };
+
+  const handleOpenSettingsFromEnemy = () => {
+    // Close enemy sheet, open marker detail sheet
+    setShowEnemySheet(false);
+    setShowMarkerDetail(true);
   };
 
   const handleMarkerUpdated = () => {
@@ -299,6 +317,15 @@ export default function MapDetailPage({
           />
         )}
       </BottomSheet>
+
+      {/* Enemy Marker Sheet - shows residents first */}
+      <EnemyMarkerSheet
+        marker={selectedMarker}
+        isOpen={showEnemySheet}
+        onClose={handleCloseEnemySheet}
+        onOpenSettings={handleOpenSettingsFromEnemy}
+        currentUserId={session?.user?.id}
+      />
 
       {/* Marker Detail Bottom Sheet */}
       <MarkerDetailSheet

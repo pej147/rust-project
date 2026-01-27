@@ -40,7 +40,11 @@ export async function GET(
         mapSession: {
           select: { id: true, seed: true, serverName: true, teamId: true },
         },
-        enemyProfile: true,
+        residents: {
+          include: {
+            enemyProfile: true,
+          },
+        },
       },
     });
 
