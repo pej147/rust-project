@@ -65,7 +65,7 @@ export default async function ItemDetailPage({
           {/* Item Header */}
           <div className="flex items-start gap-4 mb-8">
             <div className="w-20 h-20 bg-zinc-900 rounded-2xl border border-zinc-800 flex items-center justify-center text-4xl">
-              {item.category === "resources" ? "📦" : "⚙️"}
+              {categoryInfo.emoji}
             </div>
             <div>
               <span className="text-xs bg-zinc-800 text-zinc-400 px-2 py-1 rounded-full">

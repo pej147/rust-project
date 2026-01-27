@@ -797,6 +797,545 @@ export const wikiItems: WikiItem[] = [
       "Usually better to recycle for cloth",
     ],
   },
+
+  // ============================================
+  // TOOLS - Gathering & Building
+  // ============================================
+  {
+    id: "rock",
+    name: "Rock",
+    description: "The starting tool in Rust. Every player spawns with a rock. Used for gathering basic resources and as a weak melee weapon.",
+    category: "tools",
+    subcategory: "starter",
+    stackSize: 1,
+    sources: [
+      "Spawned with on beach",
+      "Crafted from 10 Stone",
+    ],
+    crafting: {
+      ingredients: [{ item: "Stone", amount: 10 }],
+      output: 1,
+      time: 5,
+      workbench: 0,
+    },
+    tips: [
+      "Hit trees and nodes to get started",
+      "Aim for the red X on trees for bonus wood",
+      "Upgrade to Stone tools ASAP",
+    ],
+  },
+  {
+    id: "stone_pickaxe",
+    name: "Stone Pickaxe",
+    description: "Basic mining tool for gathering stone, metal ore, and sulfur ore from nodes.",
+    category: "tools",
+    subcategory: "stone",
+    stackSize: 1,
+    sources: [
+      "Crafting",
+    ],
+    crafting: {
+      ingredients: [
+        { item: "Wood", amount: 200 },
+        { item: "Stone", amount: 100 },
+      ],
+      output: 1,
+      time: 30,
+      workbench: 0,
+    },
+    tips: [
+      "First tool you should craft",
+      "Hit the sparkle on nodes for 30% bonus",
+      "Gathers ~30% more ore than rock",
+    ],
+  },
+  {
+    id: "stone_hatchet",
+    name: "Stone Hatchet",
+    description: "Basic wood gathering tool. Also used for harvesting animals and as a melee weapon.",
+    category: "tools",
+    subcategory: "stone",
+    stackSize: 1,
+    sources: [
+      "Crafting",
+    ],
+    crafting: {
+      ingredients: [
+        { item: "Wood", amount: 200 },
+        { item: "Stone", amount: 100 },
+      ],
+      output: 1,
+      time: 30,
+      workbench: 0,
+    },
+    tips: [
+      "Hit the red X on trees for bonus wood",
+      "Use for harvesting animals too",
+      "Slightly better damage than rock",
+    ],
+  },
+  {
+    id: "metal_pickaxe",
+    name: "Metal Pickaxe",
+    description: "Upgraded mining tool that gathers resources faster and more efficiently than stone tools.",
+    category: "tools",
+    subcategory: "metal",
+    stackSize: 1,
+    sources: [
+      "Crafting",
+    ],
+    crafting: {
+      ingredients: [
+        { item: "Wood", amount: 125 },
+        { item: "Metal Fragments", amount: 125 },
+      ],
+      output: 1,
+      time: 20,
+      workbench: 0,
+    },
+    tips: [
+      "~50% faster than stone pickaxe",
+      "Good balance of cost vs efficiency",
+      "Requires Metal Fragments to repair",
+    ],
+  },
+  {
+    id: "metal_hatchet",
+    name: "Metal Hatchet",
+    description: "Upgraded wood gathering tool. Faster and more durable than stone hatchet.",
+    category: "tools",
+    subcategory: "metal",
+    stackSize: 1,
+    sources: [
+      "Crafting",
+    ],
+    crafting: {
+      ingredients: [
+        { item: "Wood", amount: 100 },
+        { item: "Metal Fragments", amount: 75 },
+      ],
+      output: 1,
+      time: 20,
+      workbench: 0,
+    },
+    tips: [
+      "~50% faster wood gathering",
+      "Better for harvesting animals",
+      "Decent backup melee weapon",
+    ],
+  },
+  {
+    id: "salvaged_pickaxe",
+    name: "Salvaged Pickaxe",
+    description: "High-tier mining tool made from salvaged parts. Very efficient at gathering ore.",
+    category: "tools",
+    subcategory: "salvaged",
+    stackSize: 1,
+    sources: [
+      "Crafting (requires blueprint)",
+      "Crates at monuments",
+    ],
+    crafting: {
+      ingredients: [
+        { item: "Metal Pipe", amount: 1 },
+        { item: "Metal Fragments", amount: 125 },
+      ],
+      output: 1,
+      time: 15,
+      workbench: 1,
+    },
+    tips: [
+      "Best pickaxe before jackhammer",
+      "Gathers ~60% more than metal pick",
+      "Blueprint needed - research it early",
+    ],
+  },
+  {
+    id: "salvaged_axe",
+    name: "Salvaged Axe",
+    description: "High-tier wood gathering tool. The most efficient axe for chopping trees.",
+    category: "tools",
+    subcategory: "salvaged",
+    stackSize: 1,
+    sources: [
+      "Crafting (requires blueprint)",
+      "Crates at monuments",
+    ],
+    crafting: {
+      ingredients: [
+        { item: "Metal Pipe", amount: 1 },
+        { item: "Metal Fragments", amount: 150 },
+      ],
+      output: 1,
+      time: 15,
+      workbench: 1,
+    },
+    tips: [
+      "Best axe in the game for wood",
+      "Also great for harvesting animals",
+      "Strong melee weapon in a pinch",
+    ],
+  },
+  {
+    id: "jackhammer",
+    name: "Jackhammer",
+    description: "Powerful power tool for mining. Extremely fast but requires Low Grade Fuel to operate.",
+    category: "tools",
+    subcategory: "power",
+    stackSize: 1,
+    sources: [
+      "Outpost vending machine (150 Scrap)",
+      "Elite crates",
+    ],
+    tips: [
+      "Fastest mining tool in the game",
+      "Uses Low Grade Fuel (hold to mine)",
+      "Cannot be crafted - buy at Outpost",
+      "Completely depletes nodes in seconds",
+    ],
+  },
+  {
+    id: "chainsaw",
+    name: "Chainsaw",
+    description: "Power tool for cutting trees. Extremely fast but requires Low Grade Fuel.",
+    category: "tools",
+    subcategory: "power",
+    stackSize: 1,
+    sources: [
+      "Outpost vending machine (125 Scrap)",
+      "Elite crates",
+    ],
+    tips: [
+      "Fastest wood gathering tool",
+      "Uses Low Grade Fuel",
+      "Very loud - attracts attention",
+      "Cannot be crafted - buy at Outpost",
+    ],
+  },
+  {
+    id: "hammer",
+    name: "Hammer",
+    description: "Essential building tool for upgrading, repairing, and rotating building pieces.",
+    category: "tools",
+    subcategory: "building",
+    stackSize: 1,
+    sources: [
+      "Crafting",
+    ],
+    crafting: {
+      ingredients: [
+        { item: "Wood", amount: 100 },
+      ],
+      output: 1,
+      time: 10,
+      workbench: 0,
+    },
+    tips: [
+      "Hold E to see upgrade/repair options",
+      "Can rotate doors and walls (within time limit)",
+      "Essential for base building",
+      "Also a weak melee weapon",
+    ],
+  },
+  {
+    id: "building_plan",
+    name: "Building Plan",
+    description: "Required tool for placing building components like walls, floors, and foundations.",
+    category: "tools",
+    subcategory: "building",
+    stackSize: 1,
+    sources: [
+      "Crafting",
+    ],
+    crafting: {
+      ingredients: [
+        { item: "Wood", amount: 20 },
+      ],
+      output: 1,
+      time: 5,
+      workbench: 0,
+    },
+    tips: [
+      "Right-click to select building piece",
+      "Twig pieces are free to place",
+      "Must be in building privilege (TC)",
+      "Essential - always keep one",
+    ],
+  },
+  {
+    id: "torch",
+    name: "Torch",
+    description: "Basic light source. Provides light and can be used to ignite things.",
+    category: "tools",
+    subcategory: "utility",
+    stackSize: 1,
+    sources: [
+      "Spawned with on beach",
+      "Crafting",
+    ],
+    crafting: {
+      ingredients: [
+        { item: "Wood", amount: 30 },
+        { item: "Cloth", amount: 1 },
+      ],
+      output: 1,
+      time: 5,
+      workbench: 0,
+    },
+    tips: [
+      "Hold right-click to light/extinguish",
+      "Gives away your position at night",
+      "Can ignite campfires and furnaces",
+      "Low Grade Fuel burns longer",
+    ],
+  },
+  {
+    id: "flashlight",
+    name: "Flashlight",
+    description: "Battery-powered light. More practical than a torch as it doesn't require fuel.",
+    category: "tools",
+    subcategory: "utility",
+    stackSize: 1,
+    sources: [
+      "Crafting",
+      "Crates",
+    ],
+    crafting: {
+      ingredients: [
+        { item: "Metal Fragments", amount: 50 },
+      ],
+      output: 1,
+      time: 15,
+      workbench: 1,
+    },
+    tips: [
+      "Can be attached to weapons",
+      "Toggle with F key when attached",
+      "Does not consume resources",
+      "Reveals your position at night",
+    ],
+  },
+  {
+    id: "binoculars",
+    name: "Binoculars",
+    description: "Optical tool for scouting distant locations and enemies without alerting them.",
+    category: "tools",
+    subcategory: "utility",
+    stackSize: 1,
+    sources: [
+      "Crates at monuments",
+      "Sunken chests",
+    ],
+    tips: [
+      "Right-click to zoom in",
+      "Great for scouting bases",
+      "Silent - doesn't alert enemies",
+      "Cannot be crafted",
+    ],
+  },
+
+  // ============================================
+  // MEDICAL - Healing & Recovery
+  // ============================================
+  {
+    id: "bandage",
+    name: "Bandage",
+    description: "Basic healing item that stops bleeding and restores a small amount of health over time.",
+    category: "medical",
+    subcategory: "basic",
+    stackSize: 3,
+    sources: [
+      "Crafting",
+      "Barrels and crates",
+    ],
+    crafting: {
+      ingredients: [
+        { item: "Cloth", amount: 4 },
+      ],
+      output: 1,
+      time: 5,
+      workbench: 0,
+    },
+    tips: [
+      "Heals 5 HP instantly + 10 over time",
+      "Stops bleeding effect",
+      "Cheap and easy to make early game",
+      "Keep a few in your hotbar",
+    ],
+  },
+  {
+    id: "medical_syringe",
+    name: "Medical Syringe",
+    description: "Instant healing item that restores 15 health immediately plus 20 over time.",
+    category: "medical",
+    subcategory: "advanced",
+    stackSize: 2,
+    sources: [
+      "Crafting (requires blueprint)",
+      "Medical crates",
+      "Scientists",
+    ],
+    crafting: {
+      ingredients: [
+        { item: "Metal Fragments", amount: 10 },
+        { item: "Cloth", amount: 10 },
+      ],
+      output: 1,
+      time: 10,
+      workbench: 1,
+    },
+    tips: [
+      "15 HP instant + 20 HP over time",
+      "Essential for PvP combat",
+      "Can use while moving",
+      "Research priority - very useful",
+    ],
+  },
+  {
+    id: "med_kit",
+    name: "Med Kit",
+    description: "Advanced healing item that provides significant health restoration over time.",
+    category: "medical",
+    subcategory: "advanced",
+    stackSize: 1,
+    sources: [
+      "Crafting (requires blueprint)",
+      "Medical crates",
+      "Elite crates",
+    ],
+    crafting: {
+      ingredients: [
+        { item: "Cloth", amount: 15 },
+        { item: "Metal Fragments", amount: 30 },
+        { item: "Low Grade Fuel", amount: 10 },
+      ],
+      output: 1,
+      time: 20,
+      workbench: 2,
+    },
+    tips: [
+      "Heals 100 HP over 10 seconds",
+      "Cannot move while using",
+      "Best healing item for out-of-combat",
+      "Expensive but worth it",
+    ],
+  },
+  {
+    id: "large_medkit",
+    name: "Large Medkit",
+    description: "Military-grade medical kit that fully heals the user. Very rare and valuable.",
+    category: "medical",
+    subcategory: "military",
+    stackSize: 1,
+    sources: [
+      "Elite crates",
+      "Locked crates",
+      "Helicopter and Bradley",
+    ],
+    tips: [
+      "Heals to full health",
+      "Cannot be crafted",
+      "Very rare - save for emergencies",
+      "Found only at top-tier loot",
+    ],
+  },
+  {
+    id: "anti_rad_pills",
+    name: "Anti-Radiation Pills",
+    description: "Removes radiation poisoning instantly. Essential for monument runs.",
+    category: "medical",
+    subcategory: "radiation",
+    stackSize: 10,
+    sources: [
+      "Crafting",
+      "Medical crates",
+      "Food crates",
+    ],
+    crafting: {
+      ingredients: [
+        { item: "Cloth", amount: 3 },
+      ],
+      output: 1,
+      time: 5,
+      workbench: 0,
+    },
+    tips: [
+      "Instantly removes radiation",
+      "Cheap to craft - make plenty",
+      "Essential for rad towns",
+      "Does NOT prevent radiation buildup",
+    ],
+  },
+  {
+    id: "blood",
+    name: "Blood",
+    description: "Blood drawn from players or animals. Can be used to craft medical items or consumed directly for minor healing.",
+    category: "medical",
+    subcategory: "basic",
+    stackSize: 10,
+    sources: [
+      "Blood Draw Kit on players",
+      "Harvesting animals",
+    ],
+    tips: [
+      "Drinking restores small HP",
+      "Used to craft Med Kits",
+      "Blood Draw Kit takes your blood",
+      "Can trade blood at Bandit Camp",
+    ],
+  },
+  {
+    id: "pure_tea",
+    name: "Pure Healing Tea",
+    description: "A powerful healing tea that provides rapid health regeneration for a period of time.",
+    category: "medical",
+    subcategory: "tea",
+    stackSize: 10,
+    sources: [
+      "Mixing Table (requires berries)",
+      "Some crates",
+    ],
+    tips: [
+      "Provides healing over time buff",
+      "Stacks with other healing",
+      "Made from red berries at Mixing Table",
+      "Great for sustained fights",
+    ],
+  },
+  {
+    id: "pure_max_health_tea",
+    name: "Pure Max Health Tea",
+    description: "Increases maximum health temporarily, allowing you to survive more damage.",
+    category: "medical",
+    subcategory: "tea",
+    stackSize: 10,
+    sources: [
+      "Mixing Table (requires yellow berries)",
+    ],
+    tips: [
+      "Temporarily increases max HP",
+      "Great before raids or fights",
+      "Made from yellow berries",
+      "Effect stacks with healing items",
+    ],
+  },
+  {
+    id: "pure_anti_rad_tea",
+    name: "Pure Anti-Rad Tea",
+    description: "Provides radiation resistance for a period of time. Better than pills for extended monument runs.",
+    category: "medical",
+    subcategory: "tea",
+    stackSize: 10,
+    sources: [
+      "Mixing Table (requires green berries)",
+    ],
+    tips: [
+      "Provides radiation RESISTANCE (not removal)",
+      "Lasts several minutes",
+      "Better than pills for long runs",
+      "Stack with hazmat for full protection",
+    ],
+  },
 ];
 
 // Helper functie om items per categorie te krijgen
