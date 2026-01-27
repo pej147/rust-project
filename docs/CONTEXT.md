@@ -9,10 +9,10 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | UI Translation ✅ COMPLEET |
+| **Huidige fase** | Enemy Marker Click Fix 🔧 IN PROGRESS |
 | **Laatste update** | 2026-01-27 |
-| **Volgende taak** | FASE 9: Command Bar, Building wiki, of Wiki vertalen |
-| **Blokkades** | Geen |
+| **Volgende taak** | Fix enemy marker bottom sheet, then FASE 9 |
+| **Blokkades** | Enemy marker click not showing player names |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 | **Totaal Wiki Pagina's** | 208 |
 | **Taal** | English (UI) / Dutch (Wiki - to be translated) |
@@ -151,6 +151,25 @@
 ## 🔄 HUIDIGE SESSIE
 
 ### Wat er deze sessie is gedaan (2026-01-27):
+
+#### Enemy Marker Click Fix 🔧 IN PROGRESS
+- **Issue:** Clicking ENEMY marker doesn't show player names (residents)
+- **Expected:** Click ENEMY marker → see EnemyMarkerSheet with residents
+- **Attempted fix:** Modified rust-map.tsx to not show Leaflet popup for ENEMY markers
+- **Status:** Fix committed but still not working - needs further investigation
+
+**Files modified:**
+- `src/components/map/rust-map.tsx` - ENEMY markers skip popup, only use click handler
+
+**Components involved:**
+- `RustMap` - handles marker clicks
+- `EnemyMarkerSheet` - bottom sheet showing residents
+- `map/[id]/page.tsx` - connects marker click to sheet
+
+**API endpoints:**
+- `GET /api/markers/[id]/residents` - fetches residents for a marker
+- `POST /api/markers/[id]/residents` - adds a resident
+- `DELETE /api/markers/[id]/residents` - removes a resident
 
 #### UI Translation Dutch → English ✅
 - **Translated 10 files** from Dutch to English
@@ -354,6 +373,7 @@ Zie `docs/WIKI-EXTRACTION-PLAN.md` voor volledige instructies.
 
 | Issue | Prioriteit | Status | Notities |
 |-------|------------|--------|----------|
+| **Enemy marker click** | **High** | **Open** | Clicking ENEMY marker doesn't show player names |
 | Wiki 403 block | Medium | Workaround | Handmatige browser extractie nodig |
 
 ---
@@ -518,4 +538,4 @@ De volgende taak is: [TAAK]
 
 ---
 
-*Laatste update: 2026-01-27 — UI Translation Dutch → English COMPLEET*
+*Laatste update: 2026-01-27 — Enemy Marker Click Fix IN PROGRESS*
