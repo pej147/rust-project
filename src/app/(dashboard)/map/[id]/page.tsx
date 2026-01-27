@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { AddMarkerForm } from "@/components/map/add-marker-form";
 import { MarkerDetailSheet } from "@/components/map/marker-detail-sheet";
-import { EnemyMarkerSheet } from "@/components/map/enemy-marker-sheet";
+import { EnemyMarkerPopup } from "@/components/map/enemy-marker-popup";
 import { MarkerFilter } from "@/components/map/marker-filter";
 
 // All marker types for default filter
@@ -87,7 +87,8 @@ export default function MapDetailPage({
   // Marker detail state
   const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
   const [showMarkerDetail, setShowMarkerDetail] = useState(false);
-  const [showEnemySheet, setShowEnemySheet] = useState(false);
+  const [showEnemyPopup, setShowEnemyPopup] = useState(false);
+  const [enemyPopupPosition, setEnemyPopupPosition] = useState<{ x: number; y: number } | null>(null);
 
   // Filter state
   const [activeFilters, setActiveFilters] = useState<string[]>(ALL_MARKER_TYPES);
@@ -128,11 +129,12 @@ export default function MapDetailPage({
     setMarkerPosition(null);
   };
 
-  const handleMarkerClick = (marker: MarkerData) => {
+  const handleMarkerClick = (marker: MarkerData, screenPosition: { x: number; y: number }) => {
     setSelectedMarker(marker);
-    // For ENEMY markers, show the enemy sheet first
+    // For ENEMY markers, show the popup near the marker
     if (marker.type === "ENEMY") {
-      setShowEnemySheet(true);
+      setEnemyPopupPosition(screenPosition);
+      setShowEnemyPopup(true);
     } else {
       setShowMarkerDetail(true);
     }
@@ -143,14 +145,16 @@ export default function MapDetailPage({
     setSelectedMarker(null);
   };
 
-  const handleCloseEnemySheet = () => {
-    setShowEnemySheet(false);
+  const handleCloseEnemyPopup = () => {
+    setShowEnemyPopup(false);
+    setEnemyPopupPosition(null);
     setSelectedMarker(null);
   };
 
   const handleOpenSettingsFromEnemy = () => {
-    // Close enemy sheet, open marker detail sheet
-    setShowEnemySheet(false);
+    // Close enemy popup, open marker detail sheet
+    setShowEnemyPopup(false);
+    setEnemyPopupPosition(null);
     setShowMarkerDetail(true);
   };
 
@@ -318,11 +322,12 @@ export default function MapDetailPage({
         )}
       </BottomSheet>
 
-      {/* Enemy Marker Sheet - shows residents first */}
-      <EnemyMarkerSheet
+      {/* Enemy Marker Popup - shows residents near the marker */}
+      <EnemyMarkerPopup
         marker={selectedMarker}
-        isOpen={showEnemySheet}
-        onClose={handleCloseEnemySheet}
+        isOpen={showEnemyPopup}
+        position={enemyPopupPosition}
+        onClose={handleCloseEnemyPopup}
         onOpenSettings={handleOpenSettingsFromEnemy}
         currentUserId={session?.user?.id}
       />

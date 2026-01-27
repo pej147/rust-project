@@ -37,7 +37,7 @@ interface RustMapProps {
   mapSize: number;
   markers?: MarkerData[];
   onMapClick?: (x: number, y: number) => void;
-  onMarkerClick?: (marker: MarkerData) => void;
+  onMarkerClick?: (marker: MarkerData, screenPosition: { x: number; y: number }) => void;
 }
 
 export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick }: RustMapProps) {
@@ -231,12 +231,18 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
 
       // Click handler for all markers
       if (onMarkerClick) {
-        leafletMarker.on("click", () => {
+        leafletMarker.on("click", (e) => {
           console.log("MARKER CLICK:", marker.type, marker.title);
           // Set flag to prevent map click from triggering
           markerClickedRef.current = true;
           console.log("Set markerClickedRef to TRUE");
-          onMarkerClick(marker);
+
+          // Get screen position from the original DOM event
+          const screenPosition = {
+            x: e.originalEvent?.clientX ?? 0,
+            y: e.originalEvent?.clientY ?? 0,
+          };
+          onMarkerClick(marker, screenPosition);
         });
       }
 
