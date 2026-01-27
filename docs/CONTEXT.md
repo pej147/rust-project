@@ -9,12 +9,13 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | FASE C: Wiki (volledig compleet!) |
+| **Huidige fase** | FASE 7: Teams ✅ COMPLEET |
 | **Laatste update** | 2026-01-27 |
-| **Volgende taak** | Teams functionaliteit of Building wiki |
+| **Volgende taak** | Building wiki of Marker visibility per team |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 | **Totaal Wiki Pagina's** | 208 |
+| **Taal** | English (UI text) |
 
 ---
 
@@ -95,14 +96,21 @@
 - [x] C.8 - Wiki Monuments (24 monuments: T1, T2, T3, Safe Zones)
 - [x] C.9 - Wiki Weapons (19 items: melee, bows, arrows)
 
-### FASE 7: Teams (UITGESTELD)
-- [ ] 7.1 - Team aanmaken pagina
-- [ ] 7.2 - Team join met code
-- [ ] 7.3 - Team members overzicht
-- [ ] 7.4 - Marker visibility (private/team/public)
-- [ ] 7.5 - Test en commit
+### FASE 7: Teams ✅ COMPLEET
+- [x] 7.1 - Team create page + API ✅
+- [x] 7.2 - Team join with code ✅
+- [x] 7.3 - Team members overview ✅
+- [x] 7.4 - Role management (Owner/Admin/Member) ✅
+- [x] 7.5 - Build tested and committed ✅
 
-*(Teams is uitgesteld, focus ligt nu op Guest Mode + Wiki)*
+**Implemented features:**
+- Create team (generates unique 6-char code)
+- Join team by code
+- View team members with roles
+- Owner can: promote/demote, kick anyone, delete team
+- Admin can: kick members
+- Member can: leave team
+- All UI in English
 
 ---
 
@@ -110,13 +118,42 @@
 
 ### Wat er deze sessie is gedaan (2026-01-27):
 
-#### Wiki Items Toegevoegd (58 items)
+#### FASE 7: Teams Implemented
+- **API Routes created:**
+  - `POST /api/teams` - Create team
+  - `GET /api/teams` - List user's teams
+  - `POST /api/teams/join` - Join team by code
+  - `GET /api/teams/[id]` - Team details
+  - `PATCH /api/teams/[id]` - Update team
+  - `DELETE /api/teams/[id]` - Delete team
+  - `GET /api/teams/[id]/members` - List members
+  - `POST /api/teams/[id]/members` - Member actions (leave/remove/update role)
+
+- **Frontend components:**
+  - `useTeams` hook for state management
+  - TeamCard component
+  - CreateTeamSheet (bottom sheet)
+  - JoinTeamSheet (bottom sheet)
+  - TeamDetailSheet with member management
+  - RoleBadge component (Owner/Admin/Member)
+
+- **Features:**
+  - 6-character unique team codes
+  - Role-based permissions (OWNER > ADMIN > MEMBER)
+  - Copy team code to clipboard
+  - Promote/demote members
+  - Kick members (respects role hierarchy)
+  - Leave team / Delete team
+
+- **UI translated to English** (site is for English users)
+
+#### Previous: Wiki Items Toegevoegd (58 items)
 - **Resources (17):** Wood, Stone, Metal Ore, Sulfur, HQM, etc.
 - **Components (18):** Gears, Springs, Pipes, Weapon Bodies, etc.
 - **Tools (14):** Rock → Stone → Metal → Salvaged → Power tools
 - **Medical (9):** Bandages, Syringes, Med Kits, Teas
 
-#### Wiki Monuments Toegevoegd (24 monuments)
+#### Previous: Wiki Monuments Toegevoegd (24 monuments)
 - **Tier 1 Green (10):** Lighthouse, Supermarket, Harbor, Satellite, etc.
 - **Tier 2 Blue (7):** Train Yard, Water Treatment, Power Plant, Airfield, Dome, etc.
 - **Tier 3 Red (5):** Launch Site, Military Tunnels, Oil Rigs, Underwater Labs
