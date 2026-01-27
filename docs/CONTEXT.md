@@ -11,10 +11,10 @@
 |--------|--------|
 | **Huidige fase** | FASE C: Wiki (volledig compleet!) |
 | **Laatste update** | 2026-01-27 |
-| **Volgende taak** | Teams functionaliteit of meer wapens |
+| **Volgende taak** | Teams functionaliteit of meer content |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
-| **Totaal Wiki Pagina's** | 170 |
+| **Totaal Wiki Pagina's** | 188 |
 
 ---
 
@@ -122,12 +122,16 @@
 - **Tier 3 Red (5):** Launch Site, Military Tunnels, Oil Rigs, Underwater Labs
 - **Safe Zones (2):** Outpost, Bandit Camp
 
-#### Wiki Weapons Toegevoegd (19 items)
+#### Wiki Weapons Toegevoegd (37 items)
 - **Melee Primitive (5):** Rock, Spears, Bone Club, Bone Knife
 - **Melee Salvaged (3):** Salvaged Sword, Cleaver, Machete
 - **Melee Military (3):** Longsword, Mace, Combat Knife
 - **Bows (4):** Hunting Bow, Crossbow, Compound Bow, Nail Gun
 - **Arrows (4):** Wooden, High Velocity, Bone, Fire
+- **Pistols (5):** Eoka, Revolver, Semi-Auto Pistol, Python, M92
+- **SMGs (3):** Custom SMG, Thompson, MP5A4
+- **Rifles (6):** Semi-Auto Rifle, AK-47, LR-300, Bolt Action, L96, M39
+- **Shotguns (4):** Waterpipe, Double Barrel, Pump, Spas-12
 
 ### Wiki Totaal Overzicht:
 | Categorie | Items | Status |
@@ -135,17 +139,17 @@
 | 💣 Raiding | 52 | ✅ Compleet |
 | 🎒 Items | 58 | ✅ Compleet |
 | 🏛️ Monuments | 24 | ✅ Compleet |
-| 🔫 Weapons | 19 | Melee & Bows klaar |
-| **Totaal** | **153 entries** | |
-| **Pagina's** | **170** | |
+| 🔫 Weapons | 37 | ✅ Compleet |
+| **Totaal** | **171 entries** | |
+| **Pagina's** | **188** | |
 
 ### Wat er nog kan:
-1. **Weapons uitbreiden:** Pistols, SMGs, Rifles, Shotguns
-2. **Teams functionaliteit (FASE 7)**
-3. **Building wiki:** Base designs, upkeep
+1. **Teams functionaliteit (FASE 7)**
+2. **Building wiki:** Base designs, upkeep
+3. **Ammo wiki:** Alle ammo types met crafting info
 
 ### Volgende stap:
-Gebruiker kan kiezen: meer wapens, teams, of building wiki.
+Gebruiker kan kiezen: teams, building wiki, of ammo.
 
 ---
 
