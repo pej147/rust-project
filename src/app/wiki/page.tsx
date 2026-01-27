@@ -63,12 +63,13 @@ export default function WikiPage() {
                 description="Raid costs, explosives, en strategieen"
               />
             </Link>
-            <WikiCard
-              emoji="🎒"
-              title="Items"
-              description="Alle items in het spel met stats"
-              comingSoon
-            />
+            <Link href="/wiki/items">
+              <WikiCard
+                emoji="🎒"
+                title="Items"
+                description="Resources, components, en meer"
+              />
+            </Link>
             <WikiCard
               emoji="🗺️"
               title="Map Tips"
