@@ -38,12 +38,13 @@ export default function WikiPage() {
 
           {/* Categories */}
           <div className="grid sm:grid-cols-2 gap-4">
-            <WikiCard
-              emoji="🏛️"
-              title="Monuments"
-              description="Alle monuments met loot tabellen en puzzels"
-              comingSoon
-            />
+            <Link href="/wiki/monuments">
+              <WikiCard
+                emoji="🏛️"
+                title="Monuments"
+                description="Alle monuments met loot tabellen en puzzels"
+              />
+            </Link>
             <WikiCard
               emoji="🔫"
               title="Wapens"
