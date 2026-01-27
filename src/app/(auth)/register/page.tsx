@@ -20,12 +20,12 @@ export default function RegisterPage() {
 
     // Validatie
     if (password !== confirmPassword) {
-      setError("Wachtwoorden komen niet overeen");
+      setError("Passwords do not match");
       return;
     }
 
     if (password.length < 8) {
-      setError("Wachtwoord moet minimaal 8 karakters zijn");
+      setError("Password must be at least 8 characters");
       return;
     }
 
@@ -60,7 +60,7 @@ export default function RegisterPage() {
         Account aanmaken
       </h1>
       <p className="mb-8 text-center text-zinc-400">
-        Start met het tracken van je Rust intel
+        Start tracking your Rust intel
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -155,7 +155,7 @@ export default function RegisterPage() {
       </form>
 
       <p className="mt-6 text-center text-sm text-zinc-400">
-        Al een account?{" "}
+        Already have an account?{" "}
         <Link
           href="/login"
           className="font-medium text-blue-400 hover:text-blue-300"

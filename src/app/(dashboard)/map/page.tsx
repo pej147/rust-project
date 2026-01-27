@@ -56,12 +56,12 @@ export default function MapPage() {
     try {
       const response = await fetch("/api/maps");
       if (!response.ok) {
-        throw new Error("Kon maps niet laden");
+        throw new Error("Could not load maps");
       }
       const data = await response.json();
       setMaps(data);
     } catch {
-      setError("Kon maps niet laden");
+      setError("Could not load maps");
     } finally {
       setIsLoading(false);
     }
@@ -285,7 +285,7 @@ export default function MapPage() {
                           </h3>
                           {map.isActive && (
                             <span className="rounded-full bg-green-500/20 px-2 py-0.5 text-xs text-green-400">
-                              Actief
+                              Active
                             </span>
                           )}
                         </div>
@@ -300,7 +300,7 @@ export default function MapPage() {
                           {map.wipeDate && (
                             <span>
                               Wipe:{" "}
-                              {new Date(map.wipeDate).toLocaleDateString("nl-NL")}
+                              {new Date(map.wipeDate).toLocaleDateString("en-US")}
                             </span>
                           )}
                         </div>

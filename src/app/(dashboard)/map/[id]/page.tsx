@@ -13,7 +13,7 @@ import { MarkerDetailSheet } from "@/components/map/marker-detail-sheet";
 import { EnemyMarkerSheet } from "@/components/map/enemy-marker-sheet";
 import { MarkerFilter } from "@/components/map/marker-filter";
 
-// Alle marker types voor default filter
+// All marker types for default filter
 const ALL_MARKER_TYPES = [
   "ENEMY",
   "TEAM_BASE",
@@ -24,14 +24,14 @@ const ALL_MARKER_TYPES = [
   "RAID",
 ];
 
-// Dynamic import voor Leaflet (client-side only)
+// Dynamic import for Leaflet (client-side only)
 const RustMap = dynamic(
   () => import("@/components/map/rust-map").then((mod) => mod.RustMap),
   {
     ssr: false,
     loading: () => (
       <div className="flex h-full items-center justify-center bg-zinc-900">
-        <p className="text-zinc-400">Map laden...</p>
+        <p className="text-zinc-400">Loading map...</p>
       </div>
     ),
   }
@@ -80,7 +80,7 @@ export default function MapDetailPage({
   const [error, setError] = useState("");
   const [showInfo, setShowInfo] = useState(false);
 
-  // Marker toevoegen state
+  // Add marker state
   const [showAddMarker, setShowAddMarker] = useState(false);
   const [markerPosition, setMarkerPosition] = useState<{ x: number; y: number } | null>(null);
 
@@ -96,12 +96,12 @@ export default function MapDetailPage({
     try {
       const response = await fetch(`/api/maps/${id}`);
       if (!response.ok) {
-        throw new Error("Kon map niet laden");
+        throw new Error("Could not load map");
       }
       const data = await response.json();
       setMap(data);
     } catch {
-      setError("Kon map niet laden");
+      setError("Could not load map");
     } finally {
       setIsLoading(false);
     }
@@ -119,7 +119,7 @@ export default function MapDetailPage({
   const handleMarkerAdded = () => {
     setShowAddMarker(false);
     setMarkerPosition(null);
-    // Herlaad de map om de nieuwe marker te tonen
+    // Reload map to show the new marker
     fetchMap();
   };
 
@@ -155,11 +155,11 @@ export default function MapDetailPage({
   };
 
   const handleMarkerUpdated = () => {
-    // Herlaad de map om wijzigingen te tonen
+    // Reload map to show changes
     fetchMap();
   };
 
-  // Bereken marker counts per type
+  // Calculate marker counts per type
   const markerCounts = map?.markers.reduce(
     (acc, marker) => {
       acc[marker.type] = (acc[marker.type] || 0) + 1;
@@ -168,7 +168,7 @@ export default function MapDetailPage({
     {} as Record<string, number>
   ) || {};
 
-  // Filter markers op basis van actieve filters
+  // Filter markers based on active filters
   const filteredMarkers = map?.markers.filter((marker) =>
     activeFilters.includes(marker.type)
   ) || [];
@@ -176,9 +176,9 @@ export default function MapDetailPage({
   if (isLoading) {
     return (
       <>
-        <Header title="Laden..." />
+        <Header title="Loading..." />
         <div className="flex h-[calc(100vh-8rem)] items-center justify-center">
-          <p className="text-zinc-400">Map laden...</p>
+          <p className="text-zinc-400">Loading map...</p>
         </div>
       </>
     );
@@ -188,20 +188,20 @@ export default function MapDetailPage({
     return (
       <>
         <Header
-          title="Fout"
+          title="Error"
           leftAction={
             <Link href="/map" className="text-blue-500">
-              Terug
+              Back
             </Link>
           }
         />
         <div className="p-4">
           <Card variant="elevated">
             <CardContent className="py-8 text-center">
-              <p className="text-red-400">{error || "Map niet gevonden"}</p>
+              <p className="text-red-400">{error || "Map not found"}</p>
               <Link href="/map">
                 <Button variant="secondary" className="mt-4">
-                  Terug naar overzicht
+                  Back to overview
                 </Button>
               </Link>
             </CardContent>
@@ -240,13 +240,13 @@ export default function MapDetailPage({
               <span>{map.markers.length} markers</span>
               {map.wipeDate && (
                 <span>
-                  Wipe: {new Date(map.wipeDate).toLocaleDateString("nl-NL")}
+                  Wipe: {new Date(map.wipeDate).toLocaleDateString("en-US")}
                 </span>
               )}
             </div>
             {map.isActive && (
               <span className="rounded-full bg-green-500/20 px-2 py-0.5 text-xs text-green-400">
-                Actief
+                Active
               </span>
             )}
           </div>
@@ -273,12 +273,12 @@ export default function MapDetailPage({
         {/* Floating action button */}
         <button
           onClick={() => {
-            // Gebruik center van de map als default positie
+            // Use center of the map as default position
             setMarkerPosition({ x: map.mapSize / 2, y: map.mapSize / 2 });
             setShowAddMarker(true);
           }}
           className="absolute bottom-20 right-4 z-[1000] flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
-          title="Marker toevoegen"
+          title="Add marker"
         >
           <svg
             className="h-6 w-6"
@@ -295,9 +295,9 @@ export default function MapDetailPage({
           </svg>
         </button>
 
-        {/* Tip voor gebruiker */}
+        {/* Tip for user */}
         <div className="absolute bottom-20 left-4 z-[1000] rounded-lg bg-zinc-800/80 px-3 py-2 text-xs text-zinc-300 backdrop-blur-sm">
-          Klik op de map om een marker te plaatsen
+          Click on the map to place a marker
         </div>
       </div>
 
@@ -305,7 +305,7 @@ export default function MapDetailPage({
       <BottomSheet
         isOpen={showAddMarker}
         onClose={handleCloseAddMarker}
-        title="Marker Toevoegen"
+        title="Add Marker"
       >
         {markerPosition && (
           <AddMarkerForm

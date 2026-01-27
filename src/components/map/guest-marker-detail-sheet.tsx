@@ -8,12 +8,12 @@ import { Select } from "@/components/ui/select";
 import type { GuestMarker } from "@/hooks/use-guest-markers";
 
 const MARKER_TYPES = [
-  { value: "ENEMY", label: "Vijand", color: "#FF3B30" },
+  { value: "ENEMY", label: "Enemy", color: "#FF3B30" },
   { value: "TEAM_BASE", label: "Team Base", color: "#34C759" },
   { value: "LOOT", label: "Loot", color: "#FFCC00" },
   { value: "MONUMENT", label: "Monument", color: "#007AFF" },
-  { value: "DANGER", label: "Gevaar", color: "#FF9500" },
-  { value: "NOTE", label: "Notitie", color: "#8E8E93" },
+  { value: "DANGER", label: "Danger", color: "#FF9500" },
+  { value: "NOTE", label: "Note", color: "#8E8E93" },
   { value: "RAID", label: "Raid", color: "#AF52DE" },
 ];
 
@@ -93,13 +93,13 @@ export function GuestMarkerDetailSheet({
     <BottomSheet
       isOpen={isOpen}
       onClose={handleClose}
-      title={isEditing ? "Marker Bewerken" : marker.title}
+      title={isEditing ? "Edit Marker" : marker.title}
     >
       <div className="space-y-4">
         {/* Guest mode indicator */}
         <div className="rounded-xl bg-orange-500/10 border border-orange-500/20 p-3 text-center">
           <span className="text-sm text-orange-400">
-            Guest mode - lokaal opgeslagen
+            Guest mode - saved locally
           </span>
         </div>
 
@@ -108,7 +108,7 @@ export function GuestMarkerDetailSheet({
           <>
             <Input
               id="edit-title"
-              label="Titel *"
+              label="Title *"
               value={editTitle}
               onChange={(e) => setEditTitle(e.target.value)}
               required
@@ -142,7 +142,7 @@ export function GuestMarkerDetailSheet({
                 htmlFor="edit-description"
                 className="mb-2 block text-sm font-medium text-zinc-300"
               >
-                Beschrijving
+                Description
               </label>
               <textarea
                 id="edit-description"
@@ -159,7 +159,7 @@ export function GuestMarkerDetailSheet({
                 onClick={() => setIsEditing(false)}
                 className="flex-1"
               >
-                Annuleren
+                Cancel
               </Button>
               <Button
                 variant="primary"
@@ -167,7 +167,7 @@ export function GuestMarkerDetailSheet({
                 className="flex-1"
                 disabled={!editTitle.trim()}
               >
-                Opslaan
+                Save
               </Button>
             </div>
           </>
@@ -176,10 +176,10 @@ export function GuestMarkerDetailSheet({
           <div className="space-y-4">
             <div className="rounded-xl bg-red-500/10 p-4 text-center">
               <p className="text-red-400">
-                Weet je zeker dat je deze marker wilt verwijderen?
+                Are you sure you want to delete this marker?
               </p>
               <p className="mt-1 text-sm text-zinc-500">
-                Dit kan niet ongedaan worden gemaakt.
+                This cannot be undone.
               </p>
             </div>
             <div className="flex gap-3">
@@ -188,10 +188,10 @@ export function GuestMarkerDetailSheet({
                 onClick={() => setShowDeleteConfirm(false)}
                 className="flex-1"
               >
-                Annuleren
+                Cancel
               </Button>
               <Button variant="danger" onClick={handleDelete} className="flex-1">
-                Verwijderen
+                Delete
               </Button>
             </div>
           </div>
@@ -217,7 +217,7 @@ export function GuestMarkerDetailSheet({
 
             {/* Coordinates */}
             <div className="rounded-xl bg-zinc-800 p-3">
-              <span className="text-sm text-zinc-400">Positie: </span>
+              <span className="text-sm text-zinc-400">Position: </span>
               <span className="font-mono text-white">
                 {Math.round(marker.x)}, {Math.round(marker.y)}
               </span>
@@ -227,7 +227,7 @@ export function GuestMarkerDetailSheet({
             {marker.description && (
               <div>
                 <h4 className="mb-1 text-sm font-medium text-zinc-400">
-                  Beschrijving
+                  Description
                 </h4>
                 <p className="text-white">{marker.description}</p>
               </div>
@@ -235,8 +235,8 @@ export function GuestMarkerDetailSheet({
 
             {/* Created date */}
             <div className="text-sm text-zinc-500">
-              Gemaakt op{" "}
-              {new Date(marker.createdAt).toLocaleDateString("nl-NL", {
+              Created on{" "}
+              {new Date(marker.createdAt).toLocaleDateString("en-US", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
@@ -248,14 +248,14 @@ export function GuestMarkerDetailSheet({
             {/* Action buttons */}
             <div className="flex gap-3 pt-2">
               <Button variant="secondary" onClick={startEditing} className="flex-1">
-                Bewerken
+                Edit
               </Button>
               <Button
                 variant="danger"
                 onClick={() => setShowDeleteConfirm(true)}
                 className="flex-1"
               >
-                Verwijderen
+                Delete
               </Button>
             </div>
           </>

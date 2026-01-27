@@ -6,21 +6,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 
-// Marker type configuratie
+// Marker type configuration
 const MARKER_TYPES = [
-  { value: "ENEMY", label: "Vijand", icon: "👤", color: "#FF3B30" },
+  { value: "ENEMY", label: "Enemy", icon: "👤", color: "#FF3B30" },
   { value: "TEAM_BASE", label: "Team Base", icon: "🏠", color: "#34C759" },
   { value: "LOOT", label: "Loot", icon: "📦", color: "#FFCC00" },
   { value: "MONUMENT", label: "Monument", icon: "🏛️", color: "#007AFF" },
-  { value: "DANGER", label: "Gevaar", icon: "⚠️", color: "#FF9500" },
-  { value: "NOTE", label: "Notitie", icon: "📝", color: "#8E8E93" },
+  { value: "DANGER", label: "Danger", icon: "⚠️", color: "#FF9500" },
+  { value: "NOTE", label: "Note", icon: "📝", color: "#8E8E93" },
   { value: "RAID", label: "Raid", icon: "💥", color: "#AF52DE" },
 ];
 
 const VISIBILITY_OPTIONS = [
   { value: "TEAM", label: "Team" },
-  { value: "PRIVATE", label: "Privé" },
-  { value: "PUBLIC", label: "Publiek" },
+  { value: "PRIVATE", label: "Private" },
+  { value: "PUBLIC", label: "Public" },
 ];
 
 interface MarkerData {
@@ -157,7 +157,7 @@ export function MarkerDetailSheet({
     <BottomSheet
       isOpen={isOpen}
       onClose={handleClose}
-      title={isEditing ? "Marker Bewerken" : "Marker Details"}
+      title={isEditing ? "Edit Marker" : "Marker Details"}
     >
       {isEditing ? (
         // Edit mode
@@ -196,7 +196,7 @@ export function MarkerDetailSheet({
               htmlFor="edit-description"
               className="mb-2 block text-sm font-medium text-zinc-300"
             >
-              Beschrijving
+              Description
             </label>
             <textarea
               id="edit-description"
@@ -209,7 +209,7 @@ export function MarkerDetailSheet({
 
           <Select
             id="edit-visibility"
-            label="Zichtbaarheid"
+            label="Visibility"
             options={VISIBILITY_OPTIONS}
             value={visibility}
             onChange={(e) => setVisibility(e.target.value)}
@@ -229,7 +229,7 @@ export function MarkerDetailSheet({
               className="flex-1"
               disabled={isSaving}
             >
-              Annuleren
+              Cancel
             </Button>
             <Button
               type="button"
@@ -238,7 +238,7 @@ export function MarkerDetailSheet({
               className="flex-1"
               disabled={isSaving || !title.trim()}
             >
-              {isSaving ? "Opslaan..." : "Opslaan"}
+              {isSaving ? "Saving..." : "Save"}
             </Button>
           </div>
         </div>
@@ -261,7 +261,7 @@ export function MarkerDetailSheet({
             </div>
           </div>
 
-          {/* Beschrijving */}
+          {/* Description */}
           {marker.description && (
             <div className="rounded-xl bg-zinc-800 p-4">
               <p className="text-zinc-300">{marker.description}</p>
@@ -271,13 +271,13 @@ export function MarkerDetailSheet({
           {/* Info grid */}
           <div className="grid grid-cols-2 gap-3">
             <div className="rounded-xl bg-zinc-800 p-3">
-              <p className="text-xs text-zinc-500">Positie</p>
+              <p className="text-xs text-zinc-500">Position</p>
               <p className="font-mono text-white">
                 {Math.round(marker.x)}, {Math.round(marker.y)}
               </p>
             </div>
             <div className="rounded-xl bg-zinc-800 p-3">
-              <p className="text-xs text-zinc-500">Zichtbaarheid</p>
+              <p className="text-xs text-zinc-500">Visibility</p>
               <p className="text-white">
                 {VISIBILITY_OPTIONS.find((v) => v.value === marker.visibility)?.label || "Team"}
               </p>
@@ -287,11 +287,11 @@ export function MarkerDetailSheet({
           {/* Gemaakt door */}
           {marker.createdBy && (
             <div className="rounded-xl bg-zinc-800 p-3">
-              <p className="text-xs text-zinc-500">Toegevoegd door</p>
+              <p className="text-xs text-zinc-500">Added by</p>
               <p className="text-white">{marker.createdBy.displayName}</p>
               {marker.createdAt && (
                 <p className="text-xs text-zinc-500">
-                  {new Date(marker.createdAt).toLocaleDateString("nl-NL", {
+                  {new Date(marker.createdAt).toLocaleDateString("en-US", {
                     day: "numeric",
                     month: "long",
                     year: "numeric",
@@ -309,7 +309,7 @@ export function MarkerDetailSheet({
             </div>
           )}
 
-          {/* Acties - alleen voor eigenaar */}
+          {/* Actions - only for owner */}
           {isOwner && (
             <div className="flex gap-3 pt-2">
               <Button
@@ -319,7 +319,7 @@ export function MarkerDetailSheet({
                 className="flex-1"
                 disabled={isDeleting}
               >
-                {isDeleting ? "Verwijderen..." : "Verwijderen"}
+                {isDeleting ? "Deleting..." : "Delete"}
               </Button>
               <Button
                 type="button"
@@ -327,14 +327,14 @@ export function MarkerDetailSheet({
                 onClick={startEditing}
                 className="flex-1"
               >
-                Bewerken
+                Edit
               </Button>
             </div>
           )}
 
           {!isOwner && (
             <p className="text-center text-sm text-zinc-500">
-              Alleen de maker kan deze marker bewerken
+              Only the owner can edit this marker
             </p>
           )}
         </div>

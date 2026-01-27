@@ -6,14 +6,14 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import type { GuestMarker } from "@/hooks/use-guest-markers";
 
-// Marker types met Nederlandse labels en kleuren
+// Marker types with colors
 const MARKER_TYPES = [
-  { value: "ENEMY", label: "Vijand", color: "#FF3B30" },
+  { value: "ENEMY", label: "Enemy", color: "#FF3B30" },
   { value: "TEAM_BASE", label: "Team Base", color: "#34C759" },
   { value: "LOOT", label: "Loot", color: "#FFCC00" },
   { value: "MONUMENT", label: "Monument", color: "#007AFF" },
-  { value: "DANGER", label: "Gevaar", color: "#FF9500" },
-  { value: "NOTE", label: "Notitie", color: "#8E8E93" },
+  { value: "DANGER", label: "Danger", color: "#FF9500" },
+  { value: "NOTE", label: "Note", color: "#8E8E93" },
   { value: "RAID", label: "Raid", color: "#AF52DE" },
 ];
 
@@ -38,7 +38,7 @@ export function GuestAddMarkerForm({
   const [type, setType] = useState("ENEMY");
   const [color, setColor] = useState(MARKER_TYPES[0].color);
 
-  // Update kleur wanneer type verandert
+  // Update color when type changes
   const handleTypeChange = (newType: string) => {
     setType(newType);
     const markerType = MARKER_TYPES.find((t) => t.value === newType);
@@ -67,30 +67,30 @@ export function GuestAddMarkerForm({
       {/* Guest mode indicator */}
       <div className="rounded-xl bg-orange-500/10 border border-orange-500/20 p-3 text-center">
         <span className="text-sm text-orange-400">
-          Guest mode - markers worden lokaal opgeslagen
+          Guest mode - markers are saved locally
         </span>
       </div>
 
-      {/* Coordinaten weergave */}
+      {/* Coordinates display */}
       <div className="rounded-xl bg-zinc-800 p-3 text-center">
-        <span className="text-sm text-zinc-400">Positie: </span>
+        <span className="text-sm text-zinc-400">Position: </span>
         <span className="font-mono text-white">
           {Math.round(initialX)}, {Math.round(initialY)}
         </span>
       </div>
 
-      {/* Titel */}
+      {/* Title */}
       <Input
         id="title"
-        label="Titel *"
-        placeholder="bv. Nakeds base, Loot crate"
+        label="Title *"
+        placeholder="e.g. Naked's base, Loot crate"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         required
         autoFocus
       />
 
-      {/* Type selectie */}
+      {/* Type selection */}
       <Select
         id="type"
         label="Type"
@@ -99,7 +99,7 @@ export function GuestAddMarkerForm({
         onChange={(e) => handleTypeChange(e.target.value)}
       />
 
-      {/* Kleur preview met type */}
+      {/* Color preview */}
       <div className="flex items-center gap-3">
         <div
           className="h-8 w-8 rounded-full border-2 border-zinc-600"
@@ -111,22 +111,22 @@ export function GuestAddMarkerForm({
             value={color}
             onChange={(e) => setColor(e.target.value)}
             className="h-10 w-full cursor-pointer rounded-lg border-0 bg-transparent"
-            title="Kies een andere kleur"
+            title="Choose a different color"
           />
         </div>
       </div>
 
-      {/* Beschrijving */}
+      {/* Description */}
       <div className="w-full">
         <label
           htmlFor="description"
           className="mb-2 block text-sm font-medium text-zinc-300"
         >
-          Beschrijving
+          Description
         </label>
         <textarea
           id="description"
-          placeholder="Extra notities..."
+          placeholder="Extra notes..."
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={2}
@@ -142,7 +142,7 @@ export function GuestAddMarkerForm({
           onClick={onCancel}
           className="flex-1"
         >
-          Annuleren
+          Cancel
         </Button>
         <Button
           type="submit"
@@ -150,7 +150,7 @@ export function GuestAddMarkerForm({
           className="flex-1"
           disabled={!title.trim()}
         >
-          Marker Toevoegen
+          Add Marker
         </Button>
       </div>
     </form>

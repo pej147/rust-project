@@ -284,7 +284,7 @@ export default async function ItemPage({
             href="/wiki/raiding"
             className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
           >
-            ← Terug naar Raid Chart
+            ← Back to Raid Chart
           </Link>
         </div>
       </main>

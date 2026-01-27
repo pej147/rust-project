@@ -30,7 +30,7 @@ const RustMap = dynamic(
     ssr: false,
     loading: () => (
       <div className="flex h-full items-center justify-center bg-zinc-900">
-        <p className="text-zinc-400">Map laden...</p>
+        <p className="text-zinc-400">Loading map...</p>
       </div>
     ),
   }
@@ -134,7 +134,7 @@ export default function GuestMapDetailPage({
       <>
         <Header title="Laden..." />
         <div className="flex h-[calc(100vh-8rem)] items-center justify-center">
-          <p className="text-zinc-400">Map laden...</p>
+          <p className="text-zinc-400">Loading map...</p>
         </div>
       </>
     );
@@ -251,9 +251,9 @@ export default function GuestMapDetailPage({
           </svg>
         </button>
 
-        {/* Tip voor gebruiker */}
+        {/* Tip for user */}
         <div className="absolute bottom-20 left-4 z-[1000] rounded-lg bg-zinc-800/80 px-3 py-2 text-xs text-zinc-300 backdrop-blur-sm">
-          Klik op de map om een marker te plaatsen
+          Click on the map to place a marker
         </div>
       </div>
 
@@ -261,7 +261,7 @@ export default function GuestMapDetailPage({
       <BottomSheet
         isOpen={showAddMarker}
         onClose={handleCloseAddMarker}
-        title="Marker Toevoegen"
+        title="Add Marker"
       >
         {markerPosition && (
           <GuestAddMarkerForm

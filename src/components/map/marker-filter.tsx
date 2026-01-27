@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 
-// Marker types met configuratie
+// Marker types configuration
 const MARKER_TYPES = [
-  { value: "ENEMY", label: "Vijand", icon: "👤", color: "#FF3B30" },
+  { value: "ENEMY", label: "Enemy", icon: "👤", color: "#FF3B30" },
   { value: "TEAM_BASE", label: "Base", icon: "🏠", color: "#34C759" },
   { value: "LOOT", label: "Loot", icon: "📦", color: "#FFCC00" },
   { value: "MONUMENT", label: "Monument", icon: "🏛️", color: "#007AFF" },
-  { value: "DANGER", label: "Gevaar", icon: "⚠️", color: "#FF9500" },
-  { value: "NOTE", label: "Notitie", icon: "📝", color: "#8E8E93" },
+  { value: "DANGER", label: "Danger", icon: "⚠️", color: "#FF9500" },
+  { value: "NOTE", label: "Note", icon: "📝", color: "#8E8E93" },
   { value: "RAID", label: "Raid", icon: "💥", color: "#AF52DE" },
 ];
 
@@ -105,13 +105,13 @@ export function MarkerFilter({
               onClick={selectAll}
               className="flex-1 rounded-lg bg-zinc-800 px-2 py-1 text-xs text-zinc-300 hover:bg-zinc-700"
             >
-              Alles
+              All
             </button>
             <button
               onClick={selectNone}
               className="flex-1 rounded-lg bg-zinc-800 px-2 py-1 text-xs text-zinc-300 hover:bg-zinc-700"
             >
-              Geen
+              None
             </button>
           </div>
 
@@ -156,7 +156,7 @@ export function MarkerFilter({
 
           {/* Summary */}
           <div className="mt-2 text-center text-xs text-zinc-500">
-            {visibleMarkers} van {totalMarkers} markers zichtbaar
+            {visibleMarkers} of {totalMarkers} markers visible
           </div>
         </div>
       )}

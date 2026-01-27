@@ -5,21 +5,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 
-// Marker types met Nederlandse labels en kleuren
+// Marker types with colors
 const MARKER_TYPES = [
-  { value: "ENEMY", label: "Vijand", color: "#FF3B30" },
+  { value: "ENEMY", label: "Enemy", color: "#FF3B30" },
   { value: "TEAM_BASE", label: "Team Base", color: "#34C759" },
   { value: "LOOT", label: "Loot", color: "#FFCC00" },
   { value: "MONUMENT", label: "Monument", color: "#007AFF" },
-  { value: "DANGER", label: "Gevaar", color: "#FF9500" },
-  { value: "NOTE", label: "Notitie", color: "#8E8E93" },
+  { value: "DANGER", label: "Danger", color: "#FF9500" },
+  { value: "NOTE", label: "Note", color: "#8E8E93" },
   { value: "RAID", label: "Raid", color: "#AF52DE" },
 ];
 
 const VISIBILITY_OPTIONS = [
-  { value: "TEAM", label: "Team (alleen teamleden)" },
-  { value: "PRIVATE", label: "Privé (alleen jij)" },
-  { value: "PUBLIC", label: "Publiek (iedereen)" },
+  { value: "TEAM", label: "Team (team members only)" },
+  { value: "PRIVATE", label: "Private (only you)" },
+  { value: "PUBLIC", label: "Public (everyone)" },
 ];
 
 interface AddMarkerFormProps {
@@ -92,9 +92,9 @@ export function AddMarkerForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Coördinaten weergave */}
+      {/* Coordinates display */}
       <div className="rounded-xl bg-zinc-800 p-3 text-center">
-        <span className="text-sm text-zinc-400">Positie: </span>
+        <span className="text-sm text-zinc-400">Position: </span>
         <span className="font-mono text-white">
           {Math.round(initialX)}, {Math.round(initialY)}
         </span>
@@ -137,13 +137,13 @@ export function AddMarkerForm({
         </div>
       </div>
 
-      {/* Beschrijving */}
+      {/* Description */}
       <div className="w-full">
         <label
           htmlFor="description"
           className="mb-2 block text-sm font-medium text-zinc-300"
         >
-          Beschrijving
+          Description
         </label>
         <textarea
           id="description"
@@ -158,7 +158,7 @@ export function AddMarkerForm({
       {/* Visibility */}
       <Select
         id="visibility"
-        label="Zichtbaarheid"
+        label="Visibility"
         options={VISIBILITY_OPTIONS}
         value={visibility}
         onChange={(e) => setVisibility(e.target.value)}
@@ -180,7 +180,7 @@ export function AddMarkerForm({
           className="flex-1"
           disabled={isSubmitting}
         >
-          Annuleren
+          Cancel
         </Button>
         <Button
           type="submit"
@@ -188,7 +188,7 @@ export function AddMarkerForm({
           className="flex-1"
           disabled={isSubmitting || !title.trim()}
         >
-          {isSubmitting ? "Opslaan..." : "Marker Toevoegen"}
+          {isSubmitting ? "Saving..." : "Add Marker"}
         </Button>
       </div>
     </form>

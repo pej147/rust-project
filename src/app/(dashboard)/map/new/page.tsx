@@ -56,7 +56,7 @@ export default function NewMapPage() {
         title="Nieuwe Map"
         leftAction={
           <Link href="/map" className="text-blue-500">
-            Terug
+            Back
           </Link>
         }
       />

@@ -5,14 +5,14 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./map-styles.css";
 
-// Marker type configuratie met iconen
+// Marker type configuration with icons
 const MARKER_CONFIG: Record<string, { icon: string; label: string }> = {
-  ENEMY: { icon: "👤", label: "Vijand" },
+  ENEMY: { icon: "👤", label: "Enemy" },
   TEAM_BASE: { icon: "🏠", label: "Team Base" },
   LOOT: { icon: "📦", label: "Loot" },
   MONUMENT: { icon: "🏛️", label: "Monument" },
-  DANGER: { icon: "⚠️", label: "Gevaar" },
-  NOTE: { icon: "📝", label: "Notitie" },
+  DANGER: { icon: "⚠️", label: "Danger" },
+  NOTE: { icon: "📝", label: "Note" },
   RAID: { icon: "💥", label: "Raid" },
 };
 
@@ -76,13 +76,26 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
     // Check of de afbeelding bestaat
     const img = new Image();
     img.onload = () => {
-      L.imageOverlay(imageUrl, bounds).addTo(map);
-      map.fitBounds(bounds);
+      // Check if map still exists and has a valid container
+      if (mapRef.current && containerRef.current) {
+        try {
+          L.imageOverlay(imageUrl, bounds).addTo(map);
+          map.fitBounds(bounds);
+        } catch (e) {
+          console.warn("Map fitBounds failed:", e);
+        }
+      }
     };
     img.onerror = () => {
       setImageError(true);
     };
     img.src = imageUrl;
+
+    // Set initial view immediately
+    map.setView([mapSize / 2, mapSize / 2], -1);
+
+    // Store map reference before async operations
+    mapRef.current = map;
 
     // Track mouse positie voor coördinaten display
     map.on("mousemove", (e) => {
@@ -103,8 +116,6 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
         onMapClick(x, y);
       });
     }
-
-    mapRef.current = map;
 
     return () => {
       map.remove();
