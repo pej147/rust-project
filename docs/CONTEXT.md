@@ -11,10 +11,10 @@
 |--------|--------|
 | **Huidige fase** | FASE C: Wiki (volledig compleet!) |
 | **Laatste update** | 2026-01-27 |
-| **Volgende taak** | Teams functionaliteit of meer content |
+| **Volgende taak** | Teams functionaliteit of Building wiki |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
-| **Totaal Wiki Pagina's** | 188 |
+| **Totaal Wiki Pagina's** | 208 |
 
 ---
 
@@ -133,6 +133,14 @@
 - **Rifles (6):** Semi-Auto Rifle, AK-47, LR-300, Bolt Action, L96, M39
 - **Shotguns (4):** Waterpipe, Double Barrel, Pump, Spas-12
 
+#### Wiki Ammo Toegevoegd (20 items)
+- **Pistol Ammo (3):** Pistol Bullet, HV Pistol, Incendiary Pistol
+- **Rifle Ammo (4):** 5.56, HV 5.56, Incendiary 5.56, Explosive 5.56
+- **Shotgun Ammo (4):** Handmade Shell, Buckshot, Slug, Incendiary Shell
+- **Rockets (3):** Rocket, HV Rocket, Incendiary Rocket
+- **Throwables (4):** F1 Grenade, Beancan, Smoke, Flashbang
+- **Explosives (4):** C4, Satchel, Explosives component, Gunpowder
+
 ### Wiki Totaal Overzicht:
 | Categorie | Items | Status |
 |-----------|-------|--------|
@@ -140,16 +148,16 @@
 | 🎒 Items | 58 | ✅ Compleet |
 | 🏛️ Monuments | 24 | ✅ Compleet |
 | 🔫 Weapons | 37 | ✅ Compleet |
-| **Totaal** | **171 entries** | |
-| **Pagina's** | **188** | |
+| 🎯 Ammo | 20 | ✅ Compleet |
+| **Totaal** | **191 entries** | |
+| **Pagina's** | **208** | |
 
 ### Wat er nog kan:
 1. **Teams functionaliteit (FASE 7)**
 2. **Building wiki:** Base designs, upkeep
-3. **Ammo wiki:** Alle ammo types met crafting info
 
 ### Volgende stap:
-Gebruiker kan kiezen: teams, building wiki, of ammo.
+Gebruiker kan kiezen: teams of building wiki.
 
 ---
 
