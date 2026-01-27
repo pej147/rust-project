@@ -11,7 +11,7 @@
 |--------|--------|
 | **Huidige fase** | Enemy Marker UI Redesign |
 | **Laatste update** | 2026-01-27 |
-| **Volgende taak** | Interactive popup menu for ENEMY markers (overlay on map) |
+| **Volgende taak** | Testing popup + possible improvements |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 | **Totaal Wiki Pagina's** | 208 |
@@ -173,14 +173,28 @@
 - `src/hooks/use-guest-markers.ts` - added GuestResident interface
 - `src/proxy.ts` - made all /map routes public
 
-#### Next: Interactive Popup Menu 🎯 TODO
-- **Request:** User wants interactive menu that stays over the map (not bottom sheet)
-- **Design:** Popup/tooltip style menu near the marker
-- **Features:**
-  - Shows residents list
-  - Add/remove players
-  - Gear icon (⚙️) to open marker settings
-- **Inspiration:** Context menu or popover style
+#### Interactive Popup Menu ✅ IMPLEMENTED
+- **Request:** User wanted interactive menu that stays over the map (not bottom sheet)
+- **Solution:** Created popup/tooltip style menu near the marker
+
+**New components:**
+- `src/components/map/enemy-marker-popup.tsx` - For logged-in users
+- `src/components/map/guest-enemy-marker-popup.tsx` - For guest mode
+
+**Features:**
+- Popup appears near the clicked marker (not at bottom)
+- Auto-positions left/right based on screen edge
+- Arrow pointer points to the marker
+- Shows residents list with threat levels
+- Add/remove players (with form)
+- ⚙️ Settings button opens MarkerDetailSheet
+- Click outside closes popup
+- Smooth animation on open
+
+**Technical changes:**
+- `rust-map.tsx` - Pass screen coordinates from marker click event
+- `[id]/page.tsx` - Use popup instead of bottom sheet
+- `guest/[seed]/page.tsx` - Use guest popup instead of bottom sheet
 
 #### UI Translation Dutch → English ✅
 - **Translated 10 files** from Dutch to English
