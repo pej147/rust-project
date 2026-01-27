@@ -226,7 +226,12 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
         // ENEMY markers: only click handler, no popup
         if (onMarkerClick) {
           leafletMarker.on("click", (e) => {
+            // Stop event from reaching the map click handler
             L.DomEvent.stopPropagation(e);
+            if (e.originalEvent) {
+              e.originalEvent.stopPropagation();
+              e.originalEvent.preventDefault();
+            }
             onMarkerClick(marker);
           });
         }
