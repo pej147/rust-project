@@ -9,9 +9,9 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | FASE C: Wiki (data structuur bepalen) |
-| **Laatste update** | 2026-01-25 |
-| **Volgende taak** | Wiki database schema + pagina's bouwen |
+| **Huidige fase** | FASE C: Wiki (raid data compleet) |
+| **Laatste update** | 2026-01-27 |
+| **Volgende taak** | Meer wiki categorieën (Monuments, Weapons) |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 
@@ -89,6 +89,7 @@
 - [x] C.3 - Wiki Raiding pagina bouwen (/wiki/raiding)
 - [x] C.4 - Item detail pagina's (/wiki/raiding/[id])
 - [x] C.5 - Raid data voor 13 items (6 doors, 3 walls, 4 deployables)
+- [x] C.6 - ALLE raid data ingevuld (50+ items totaal)
 
 ### FASE 7: Teams (UITGESTELD)
 - [ ] 7.1 - Team aanmaken pagina
@@ -103,45 +104,27 @@
 
 ## 🔄 HUIDIGE SESSIE
 
-### Wat er deze sessie is gedaan (2026-01-26):
+### Wat er deze sessie is gedaan (2026-01-27):
 
-#### Wiki Raiding UI gebouwd
-- `/wiki/raiding` - Raid cost chart pagina met tabel
-- `/wiki/raiding/[id]` - Detail pagina per item
-- `src/data/items.ts` - Item details (crafting, upkeep, tips)
-- `report.md` gebruikt als format voorbeeld
+#### Alle Raid Data Ingevuld met Manager Agents
+3 managers parallel ingezet:
+- **Manager-Doors**: 4 items (Floor Grill, Glass Windows, Metal Bars)
+- **CEO-Buildings**: 27 items (alle tiers: walls, foundations, floors, roofs, frames)
+- **CEO-Deployables**: 5 items (Vending Machine, Turrets, SAM Site, Wood Box)
 
-#### Raid Data toegevoegd (13 items totaal):
+#### Totaal aantal raid items: 50+
 
-**Doors (6):**
-| Item | HP | Cheapest Method | Sulfur |
-|------|-----|-----------------|--------|
-| Wooden Door | 200 | Explo Ammo (28) | 700 |
-| Sheet Metal Door | 250 | Explo Ammo (63) | 1,575 |
-| Double Sheet Metal | 250 | Explo Ammo (63) | 1,575 |
-| Garage Door | 600 | Explo Ammo (150) | 3,750 |
-| Armored Door | 800 | C4 (2) | 4,400 |
-| Ladder Hatch | 250 | Explo Ammo (63) | 1,575 |
+**Buildings per tier (5 tiers × 6 types = 30 items):**
+- Walls, Foundations, Floors, Roofs, Door Frames, Window Frames
+- Tiers: Twig (10 HP), Wood (250 HP), Stone (500 HP), Metal (1000 HP), Armored (2000 HP)
 
-**Walls (3):**
-| Item | HP | Cheapest Method | Sulfur |
-|------|-----|-----------------|--------|
-| Stone Wall | 500 | C4 (2) | 4,400 |
-| Sheet Metal Wall | 1000 | C4 (4) | 8,800 |
-| Armored Wall | 2000 | C4 (8) | 17,600 |
+**Doors (11 items):**
+- Wooden, Sheet Metal, Double Sheet Metal, Garage, Armored, Armored Double
+- Ladder Hatch, Floor Grill, Metal Window Bars, Strengthened/Reinforced Glass
 
-**Deployables (4):**
-| Item | HP | Cheapest Method | Sulfur |
-|------|-----|-----------------|--------|
-| Tool Cupboard | 250 | Explo Ammo (63) | 1,575 |
-| Auto Turret | 1000 | Explo Ammo (100) | 2,500 |
-| High External Wood | 500 | Explo Ammo (50) | 1,250 |
-| High External Stone | 500 | Satchels (4) | 1,920 |
-
-#### Commits:
-- `dfa3aa5` - feat: Add Wiki Raiding page with raid cost chart
-- `e6e7848` - docs: Update CONTEXT.md with wiki raiding progress
-- `faaf206` - feat: Add raid cost data for doors, walls, and deployables
+**Deployables (11 items):**
+- Tool Cupboard, Auto Turret, Flame Turret, Shotgun Trap, SAM Site
+- High External Wood/Stone Wall & Gate, Vending Machine, Large Wood Box
 
 ### Eerdere sessies:
 - FASE 1-6 compleet
