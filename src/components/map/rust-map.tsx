@@ -31,11 +31,13 @@ interface MarkerData {
     displayName: string;
   };
   residents?: {
-    id: string;
+    id?: string;
     name: string;
     clanTag?: string;
     threatLevel: number;
   }[];
+  _source?: "guest" | "team";
+  sharedBy?: string;
 }
 
 interface RustMapProps {
@@ -153,9 +155,15 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
     markers.forEach((marker) => {
       const latLng: L.LatLngExpression = [mapSize - marker.y, marker.x];
       const config = MARKER_CONFIG[marker.type] || { icon: "📍", label: marker.type };
+      const isTeamMarker = marker._source === "team";
 
       const visibilityIcon = marker.visibility === "PRIVATE" ? "🔒"
         : marker.visibility === "PUBLIC" ? "🌐" : "👥";
+
+      // Team markers get dashed olive border, guest markers get solid white
+      const borderStyle = isTeamMarker
+        ? "border: 3px dashed #8B9A46;"
+        : "border: 3px solid white;";
 
       const icon = L.divIcon({
         className: "custom-marker",
@@ -168,7 +176,7 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
             width: 36px;
             height: 36px;
             background-color: ${marker.color || "#FF0000"};
-            border: 3px solid white;
+            ${borderStyle}
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(0,0,0,0.4);
             font-size: 18px;
@@ -253,6 +261,7 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
           ">
             📍 ${Math.round(marker.x)}, ${Math.round(marker.y)}
             ${marker.createdBy ? `<br>By: ${marker.createdBy.displayName}` : ""}
+            ${isTeamMarker && marker.sharedBy ? `<br><span style="color: #8B9A46;">Shared by: ${marker.sharedBy}</span>` : ""}
           </div>
           <div style="
             display: inline-flex;
@@ -280,6 +289,28 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
 
       if (marker.type === "ENEMY") {
         // Enemy markers: Leaflet popup with residents + settings button
+        const settingsSection = isTeamMarker ? "" : `
+            <div style="
+              padding: 6px 10px;
+              border-top: 1px solid #333333;
+            ">
+              <span class="enemy-settings-btn" data-marker-id="${marker.id}" style="
+                color: #8B9A46;
+                font-size: 10px;
+                cursor: pointer;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+              ">&#9881; Settings</span>
+            </div>`;
+
+        const sharedByLabel = isTeamMarker && marker.sharedBy ? `
+            <div style="
+              padding: 4px 10px;
+              border-top: 1px solid #333333;
+              color: #8B9A46;
+              font-size: 10px;
+            ">Shared by: ${marker.sharedBy}</div>` : "";
+
         const enemyPopupContent = `
           <div style="
             background: #1a1a1a;
@@ -307,18 +338,8 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
             ">
               <span style="color: #666666; font-size: 10px;">Loading...</span>
             </div>
-            <div style="
-              padding: 6px 10px;
-              border-top: 1px solid #333333;
-            ">
-              <span class="enemy-settings-btn" data-marker-id="${marker.id}" style="
-                color: #8B9A46;
-                font-size: 10px;
-                cursor: pointer;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-              ">&#9881; Settings</span>
-            </div>
+            ${sharedByLabel}
+            ${settingsSection}
           </div>
         `;
 
@@ -374,14 +395,14 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
           }
         });
       } else {
-        // Non-enemy markers: popup + click opens detail sheet
+        // Non-enemy markers: popup + click opens detail sheet (not for team markers)
         leafletMarker.bindPopup(popupContent, {
           className: "custom-popup",
           closeButton: true,
           maxWidth: 300,
         });
 
-        if (onMarkerClick) {
+        if (onMarkerClick && !isTeamMarker) {
           leafletMarker.on("click", (e) => {
             const screenPosition = {
               x: e.originalEvent?.clientX ?? 0,

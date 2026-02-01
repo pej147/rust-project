@@ -19,6 +19,9 @@ export interface GuestMarker {
   color: string;
   createdAt: string;
   residents?: GuestResident[];
+  _source?: "guest" | "team";
+  sharedBy?: string;
+  visibility?: string;
 }
 
 export interface GuestMapSession {
