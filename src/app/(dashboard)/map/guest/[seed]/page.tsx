@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { GuestAddMarkerForm } from "@/components/map/guest-add-marker-form";
 import { GuestMarkerDetailSheet } from "@/components/map/guest-marker-detail-sheet";
-import { GuestEnemyMarkerPopup } from "@/components/map/guest-enemy-marker-popup";
 import { MarkerFilter } from "@/components/map/marker-filter";
 import { useGuestMarkers, type GuestMarker, type GuestResident } from "@/hooks/use-guest-markers";
 
@@ -63,8 +62,6 @@ export default function GuestMapDetailPage({
   // Marker detail state
   const [selectedMarker, setSelectedMarker] = useState<GuestMarker | null>(null);
   const [showMarkerDetail, setShowMarkerDetail] = useState(false);
-  const [showEnemyPopup, setShowEnemyPopup] = useState(false);
-  const [enemyPopupPosition, setEnemyPopupPosition] = useState<{ x: number; y: number } | null>(null);
 
   // Filter state
   const [activeFilters, setActiveFilters] = useState<string[]>(ALL_MARKER_TYPES);
@@ -102,35 +99,15 @@ export default function GuestMapDetailPage({
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleMarkerClick = (marker: any, screenPosition: { x: number; y: number }) => {
-    // Cast to GuestMarker - we know these are GuestMarkers from localStorage
+  const handleMarkerClick = (marker: any) => {
     const guestMarker = marker as GuestMarker;
     setSelectedMarker(guestMarker);
-    // For ENEMY markers, show the popup near the marker
-    if (guestMarker.type === "ENEMY") {
-      setEnemyPopupPosition(screenPosition);
-      setShowEnemyPopup(true);
-    } else {
-      setShowMarkerDetail(true);
-    }
+    setShowMarkerDetail(true);
   };
 
   const handleCloseMarkerDetail = () => {
     setShowMarkerDetail(false);
     setSelectedMarker(null);
-  };
-
-  const handleCloseEnemyPopup = () => {
-    setShowEnemyPopup(false);
-    setEnemyPopupPosition(null);
-    setSelectedMarker(null);
-  };
-
-  const handleOpenSettingsFromEnemy = () => {
-    // Close enemy popup, open marker detail sheet
-    setShowEnemyPopup(false);
-    setEnemyPopupPosition(null);
-    setShowMarkerDetail(true);
   };
 
   const handleUpdateResidents = useCallback(
@@ -307,16 +284,6 @@ export default function GuestMapDetailPage({
           />
         )}
       </BottomSheet>
-
-      {/* Enemy Marker Popup - shows residents near the marker */}
-      <GuestEnemyMarkerPopup
-        marker={selectedMarker}
-        isOpen={showEnemyPopup}
-        position={enemyPopupPosition}
-        onClose={handleCloseEnemyPopup}
-        onOpenSettings={handleOpenSettingsFromEnemy}
-        onUpdateResidents={handleUpdateResidents}
-      />
 
       {/* Marker Detail Bottom Sheet */}
       <GuestMarkerDetailSheet

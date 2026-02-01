@@ -30,6 +30,12 @@ interface MarkerData {
     id: string;
     displayName: string;
   };
+  residents?: {
+    id: string;
+    name: string;
+    clanTag?: string;
+    threatLevel: number;
+  }[];
 }
 
 interface RustMapProps {
@@ -317,30 +323,40 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
           interactive: true,
         });
 
-        // When popup opens: fetch residents + bind settings button
+        // When popup opens: load residents + bind settings button
         leafletMarker.on("popupopen", async () => {
-          // Fetch residents
-          try {
-            const res = await fetch(`/api/markers/${marker.id}/residents`);
-            if (res.ok) {
-              const residents = await res.json();
-              const el = document.querySelector(`.enemy-residents[data-marker-id="${marker.id}"]`);
-              if (el) {
-                if (residents.length === 0) {
-                  el.innerHTML = '<span style="color:#71717a;font-size:10px;font-style:italic;">No players</span>';
-                } else {
-                  el.innerHTML = residents.map((r: { enemy: { clanTag?: string; name: string; threatLevel: number } }) => {
-                    let html = '<div style="font-size:11px;color:#d4d4d8;padding:1px 0;">';
-                    if (r.enemy.clanTag) html += `<span style="color:#71717a;">[${r.enemy.clanTag}]</span> `;
-                    html += r.enemy.name;
-                    if (r.enemy.threatLevel > 2) html += ' ' + '💀'.repeat(Math.min(r.enemy.threatLevel - 2, 3));
-                    html += '</div>';
-                    return html;
-                  }).join('');
-                }
-              }
+          const el = document.querySelector(`.enemy-residents[data-marker-id="${marker.id}"]`);
+
+          // Helper to render resident list into the popup DOM
+          const renderResidents = (list: { name: string; clanTag?: string; threatLevel: number }[]) => {
+            if (!el) return;
+            if (list.length === 0) {
+              el.innerHTML = '<span style="color:#71717a;font-size:10px;font-style:italic;">No players</span>';
+            } else {
+              el.innerHTML = list.map((r) => {
+                let html = '<div style="font-size:11px;color:#d4d4d8;padding:1px 0;">';
+                if (r.clanTag) html += `<span style="color:#71717a;">[${r.clanTag}]</span> `;
+                html += r.name;
+                if (r.threatLevel > 2) html += ' ' + '💀'.repeat(Math.min(r.threatLevel - 2, 3));
+                html += '</div>';
+                return html;
+              }).join('');
             }
-          } catch { /* ignore fetch errors */ }
+          };
+
+          if (marker.residents) {
+            // Guest mode: residents are on the marker object
+            renderResidents(marker.residents);
+          } else {
+            // Logged-in mode: fetch residents from API
+            try {
+              const res = await fetch(`/api/markers/${marker.id}/residents`);
+              if (res.ok) {
+                const data = await res.json();
+                renderResidents(data.map((r: { enemy: { name: string; clanTag?: string; threatLevel: number } }) => r.enemy));
+              }
+            } catch { /* ignore fetch errors */ }
+          }
 
           // Bind settings button
           const btn = document.querySelector(`.enemy-settings-btn[data-marker-id="${marker.id}"]`);
