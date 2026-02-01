@@ -514,6 +514,7 @@ Zie `docs/WIKI-EXTRACTION-PLAN.md` voor volledige instructies.
 | Seed | Server | Map Size | Notities |
 |------|--------|----------|----------|
 | 10358 | - | 4000 | Eerste test map, afbeelding via Discord |
+| 10445 | - | 4000 | Toegevoegd via Imgur, alle monuments gelabeld |
 
 ---
 
