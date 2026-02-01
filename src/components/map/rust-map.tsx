@@ -60,9 +60,9 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
     // Initialiseer de map
     const map = L.map(containerRef.current, {
       crs: L.CRS.Simple,
-      minZoom: -2,
+      minZoom: -1,
       maxZoom: 2,
-      maxBounds: bounds.pad(0.1),
+      maxBounds: bounds,
       maxBoundsViscosity: 1.0,
       zoomControl: false,
       attributionControl: false,
@@ -71,13 +71,8 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
     // Add zoom controls to top right
     L.control.zoom({ position: "topright" }).addTo(map);
 
-    // Add the map image as overlay + background
+    // Add the map image as overlay
     const imageUrl = `/maps/${seed}.png`;
-
-    // Set image as CSS background so there's no empty space around the map
-    containerRef.current.style.backgroundImage = `url(${imageUrl})`;
-    containerRef.current.style.backgroundSize = "cover";
-    containerRef.current.style.backgroundPosition = "center";
 
     // Check if the image exists
     const img = new Image();
