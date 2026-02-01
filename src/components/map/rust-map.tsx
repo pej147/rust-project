@@ -38,10 +38,9 @@ interface RustMapProps {
   markers?: MarkerData[];
   onMapClick?: (x: number, y: number) => void;
   onMarkerClick?: (marker: MarkerData, screenPosition: { x: number; y: number }) => void;
-  onMapMove?: () => void;
 }
 
-export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick, onMapMove }: RustMapProps) {
+export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick }: RustMapProps) {
   const mapRef = useRef<L.Map | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const markerClickedRef = useRef(false); // Flag to prevent map click after marker click
@@ -72,8 +71,13 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
     // Add zoom controls to top right
     L.control.zoom({ position: "topright" }).addTo(map);
 
-    // Add the map image as overlay
+    // Add the map image as overlay + background
     const imageUrl = `/maps/${seed}.png`;
+
+    // Set image as CSS background so there's no empty space around the map
+    containerRef.current.style.backgroundImage = `url(${imageUrl})`;
+    containerRef.current.style.backgroundSize = "cover";
+    containerRef.current.style.backgroundPosition = "center";
 
     // Check if the image exists
     const img = new Image();
@@ -110,13 +114,6 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
       setCoords(null);
     });
 
-    // Notify parent when map moves (pan/zoom)
-    if (onMapMove) {
-      map.on("movestart", () => {
-        onMapMove();
-      });
-    }
-
     // Handle click events
     if (onMapClick) {
       map.on("click", (e) => {
@@ -138,7 +135,7 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
       map.remove();
       mapRef.current = null;
     };
-  }, [seed, mapSize, onMapClick, onMapMove]);
+  }, [seed, mapSize, onMapClick]);
 
   // Update markers when they change
   useEffect(() => {
@@ -272,30 +269,110 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
 
       const leafletMarker = L.marker(latLng, { icon }).addTo(mapRef.current!);
 
-      // Click handler for all markers
-      if (onMarkerClick) {
-        leafletMarker.on("click", (e) => {
-          console.log("MARKER CLICK:", marker.type, marker.title);
-          // Set flag to prevent map click from triggering
-          markerClickedRef.current = true;
-          console.log("Set markerClickedRef to TRUE");
+      // Click handler — set flag to prevent map click
+      leafletMarker.on("click", () => {
+        markerClickedRef.current = true;
+      });
 
-          // Get screen position from the original DOM event
-          const screenPosition = {
-            x: e.originalEvent?.clientX ?? 0,
-            y: e.originalEvent?.clientY ?? 0,
-          };
-          onMarkerClick(marker, screenPosition);
+      if (marker.type === "ENEMY") {
+        // Enemy markers: Leaflet popup with residents + settings button
+        const enemyPopupContent = `
+          <div style="
+            background: #18181b;
+            color: white;
+            padding: 0;
+            border-radius: 12px;
+            min-width: 160px;
+            font-family: system-ui, -apple-system, sans-serif;
+          ">
+            <div style="
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              padding: 8px 10px;
+              border-bottom: 1px solid #27272a;
+            ">
+              <span style="font-size: 12px; font-weight: 600;">${marker.title}</span>
+              <span style="font-size: 9px;">${visibilityIcon}</span>
+            </div>
+            <div class="enemy-residents" data-marker-id="${marker.id}" style="
+              padding: 8px 10px;
+              max-height: 120px;
+              overflow-y: auto;
+            ">
+              <span style="color: #71717a; font-size: 10px;">Loading...</span>
+            </div>
+            <div style="
+              padding: 6px 10px;
+              border-top: 1px solid #27272a;
+            ">
+              <span class="enemy-settings-btn" data-marker-id="${marker.id}" style="
+                color: #60a5fa;
+                font-size: 10px;
+                cursor: pointer;
+              ">&#9881; Settings</span>
+            </div>
+          </div>
+        `;
+
+        leafletMarker.bindPopup(enemyPopupContent, {
+          className: "custom-popup",
+          closeButton: true,
+          maxWidth: 200,
+          interactive: true,
         });
-      }
 
-      // For non-ENEMY markers, also bind popup
-      if (marker.type !== "ENEMY") {
+        // When popup opens: fetch residents + bind settings button
+        leafletMarker.on("popupopen", async () => {
+          // Fetch residents
+          try {
+            const res = await fetch(`/api/markers/${marker.id}/residents`);
+            if (res.ok) {
+              const residents = await res.json();
+              const el = document.querySelector(`.enemy-residents[data-marker-id="${marker.id}"]`);
+              if (el) {
+                if (residents.length === 0) {
+                  el.innerHTML = '<span style="color:#71717a;font-size:10px;font-style:italic;">No players</span>';
+                } else {
+                  el.innerHTML = residents.map((r: { enemy: { clanTag?: string; name: string; threatLevel: number } }) => {
+                    let html = '<div style="font-size:11px;color:#d4d4d8;padding:1px 0;">';
+                    if (r.enemy.clanTag) html += `<span style="color:#71717a;">[${r.enemy.clanTag}]</span> `;
+                    html += r.enemy.name;
+                    if (r.enemy.threatLevel > 2) html += ' ' + '💀'.repeat(Math.min(r.enemy.threatLevel - 2, 3));
+                    html += '</div>';
+                    return html;
+                  }).join('');
+                }
+              }
+            }
+          } catch { /* ignore fetch errors */ }
+
+          // Bind settings button
+          const btn = document.querySelector(`.enemy-settings-btn[data-marker-id="${marker.id}"]`);
+          if (btn && onMarkerClick) {
+            btn.addEventListener("click", () => {
+              leafletMarker.closePopup();
+              onMarkerClick(marker, { x: 0, y: 0 });
+            });
+          }
+        });
+      } else {
+        // Non-enemy markers: popup + click opens detail sheet
         leafletMarker.bindPopup(popupContent, {
           className: "custom-popup",
           closeButton: true,
           maxWidth: 300,
         });
+
+        if (onMarkerClick) {
+          leafletMarker.on("click", (e) => {
+            const screenPosition = {
+              x: e.originalEvent?.clientX ?? 0,
+              y: e.originalEvent?.clientY ?? 0,
+            };
+            onMarkerClick(marker, screenPosition);
+          });
+        }
       }
     });
   }, [markers, mapSize, onMarkerClick]);

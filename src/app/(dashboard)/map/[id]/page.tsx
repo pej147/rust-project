@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { AddMarkerForm } from "@/components/map/add-marker-form";
 import { MarkerDetailSheet } from "@/components/map/marker-detail-sheet";
-import { EnemyMarkerPopup } from "@/components/map/enemy-marker-popup";
 import { MarkerFilter } from "@/components/map/marker-filter";
 
 // All marker types for default filter
@@ -87,8 +86,6 @@ export default function MapDetailPage({
   // Marker detail state
   const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
   const [showMarkerDetail, setShowMarkerDetail] = useState(false);
-  const [showEnemyPopup, setShowEnemyPopup] = useState(false);
-  const [enemyPopupPosition, setEnemyPopupPosition] = useState<{ x: number; y: number } | null>(null);
 
   // Filter state
   const [activeFilters, setActiveFilters] = useState<string[]>(ALL_MARKER_TYPES);
@@ -131,33 +128,14 @@ export default function MapDetailPage({
     setMarkerPosition(null);
   };
 
-  const handleMarkerClick = (marker: MarkerData, screenPosition: { x: number; y: number }) => {
+  const handleMarkerClick = (marker: MarkerData) => {
     setSelectedMarker(marker);
-    // For ENEMY markers, show the popup near the marker
-    if (marker.type === "ENEMY") {
-      setEnemyPopupPosition(screenPosition);
-      setShowEnemyPopup(true);
-    } else {
-      setShowMarkerDetail(true);
-    }
+    setShowMarkerDetail(true);
   };
 
   const handleCloseMarkerDetail = () => {
     setShowMarkerDetail(false);
     setSelectedMarker(null);
-  };
-
-  const handleCloseEnemyPopup = useCallback(() => {
-    setShowEnemyPopup(false);
-    setEnemyPopupPosition(null);
-    setSelectedMarker(null);
-  }, []);
-
-  const handleOpenSettingsFromEnemy = () => {
-    // Close enemy popup, open marker detail sheet
-    setShowEnemyPopup(false);
-    setEnemyPopupPosition(null);
-    setShowMarkerDetail(true);
   };
 
   const handleMarkerUpdated = () => {
@@ -278,7 +256,6 @@ export default function MapDetailPage({
           markers={filteredMarkers}
           onMapClick={handleMapClick}
           onMarkerClick={handleMarkerClick}
-          onMapMove={handleCloseEnemyPopup}
         />
 
         {/* Marker Filter */}
@@ -338,16 +315,6 @@ export default function MapDetailPage({
           />
         )}
       </BottomSheet>
-
-      {/* Enemy Marker Popup - shows residents near the marker */}
-      <EnemyMarkerPopup
-        marker={selectedMarker}
-        isOpen={showEnemyPopup}
-        position={enemyPopupPosition}
-        onClose={handleCloseEnemyPopup}
-        onOpenSettings={handleOpenSettingsFromEnemy}
-        currentUserId={session?.user?.id}
-      />
 
       {/* Marker Detail Bottom Sheet */}
       <MarkerDetailSheet
