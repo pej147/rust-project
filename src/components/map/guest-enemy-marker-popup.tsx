@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { type GuestMarker } from "@/hooks/use-guest-markers";
 
 interface Resident {
@@ -116,18 +114,20 @@ export function GuestEnemyMarkerPopup({
 
   if (!isOpen || !marker || !position) return null;
 
-  // Calculate popup position - position it to the right of the marker, or left if too close to edge
-  const popupWidth = 280;
-  const popupOffset = 20;
+  // Calculate popup position - position it directly next to the marker
+  const popupWidth = 220;
+  const popupOffset = 12;
   const screenWidth = typeof window !== "undefined" ? window.innerWidth : 1000;
+  const screenHeight = typeof window !== "undefined" ? window.innerHeight : 800;
 
   const positionRight = position.x + popupOffset + popupWidth < screenWidth;
   const left = positionRight
     ? position.x + popupOffset
     : position.x - popupOffset - popupWidth;
 
-  // Keep popup within vertical bounds
-  const top = Math.max(60, Math.min(position.y - 100, window.innerHeight - 400));
+  // Position popup centered on marker Y, keep within bounds
+  const popupHeight = 280;
+  const top = Math.max(10, Math.min(position.y - popupHeight / 3, screenHeight - popupHeight - 10));
 
   return (
     <div
@@ -139,44 +139,44 @@ export function GuestEnemyMarkerPopup({
         width: `${popupWidth}px`,
       }}
     >
-      <div className="rounded-2xl border border-zinc-700 bg-zinc-900 shadow-2xl shadow-black/50">
+      <div className="rounded-xl border border-zinc-700/50 bg-zinc-900/95 shadow-xl shadow-black/40 backdrop-blur-sm">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-zinc-800 px-4 py-3">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between border-b border-zinc-800/50 px-3 py-2">
+          <div className="flex items-center gap-2">
             <div
-              className="flex h-10 w-10 items-center justify-center rounded-xl text-lg"
+              className="flex h-7 w-7 items-center justify-center rounded-lg text-sm"
               style={{ backgroundColor: marker.color || "#FF3B30" }}
             >
               👤
             </div>
             <div>
-              <h3 className="font-semibold text-white">{marker.title}</h3>
-              <p className="font-mono text-xs text-zinc-500">
+              <h3 className="text-sm font-medium text-white">{marker.title}</h3>
+              <p className="font-mono text-[10px] text-zinc-500">
                 {Math.round(marker.x)}, {Math.round(marker.y)}
               </p>
             </div>
           </div>
           <button
             onClick={handleClose}
-            className="rounded-lg p-1.5 text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300"
+            className="rounded p-1 text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300"
           >
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
         {/* Content */}
-        <div className="max-h-[300px] overflow-y-auto p-3">
+        <div className="max-h-[180px] overflow-y-auto p-2">
           {/* Residents list */}
-          <div className="mb-3 flex items-center justify-between">
-            <h4 className="text-sm font-medium text-zinc-400">
+          <div className="mb-2 flex items-center justify-between">
+            <h4 className="text-xs font-medium text-zinc-500">
               Residents ({residents.length})
             </h4>
             {!isAdding && (
               <button
                 onClick={() => setIsAdding(true)}
-                className="text-xs text-blue-400 hover:text-blue-300"
+                className="text-[10px] text-blue-400 hover:text-blue-300"
               >
                 + Add
               </button>
@@ -184,18 +184,18 @@ export function GuestEnemyMarkerPopup({
           </div>
 
           {residents.length === 0 && !isAdding ? (
-            <div className="py-4 text-center text-sm text-zinc-500">
-              No players added yet
+            <div className="py-3 text-center text-xs text-zinc-500">
+              No players yet
             </div>
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-1">
               {residents.map((resident) => (
                 <div
                   key={resident.id}
-                  className="flex items-center justify-between rounded-lg bg-zinc-800/70 p-2.5"
+                  className="flex items-center justify-between rounded-md bg-zinc-800/50 px-2 py-1.5"
                 >
                   <div className="min-w-0 flex-1">
-                    <div className="truncate text-sm text-white">
+                    <div className="truncate text-xs text-white">
                       {resident.clanTag && (
                         <span className="text-zinc-400">
                           [{resident.clanTag}]{" "}
@@ -207,10 +207,10 @@ export function GuestEnemyMarkerPopup({
                   </div>
                   <button
                     onClick={() => handleRemovePlayer(resident.id)}
-                    className="ml-2 rounded p-1.5 text-zinc-500 hover:bg-zinc-700 hover:text-red-400"
-                    title="Remove player"
+                    className="ml-1 rounded p-1 text-zinc-500 hover:bg-zinc-700 hover:text-red-400"
+                    title="Remove"
                   >
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </button>
@@ -221,35 +221,32 @@ export function GuestEnemyMarkerPopup({
 
           {/* Add player form */}
           {isAdding && (
-            <form onSubmit={handleAddPlayer} className="mt-3 space-y-2 border-t border-zinc-800 pt-3">
-              <Input
-                id="player-name"
-                label="Player Name"
-                placeholder="Enter name"
+            <form onSubmit={handleAddPlayer} className="mt-2 space-y-1.5 border-t border-zinc-800/50 pt-2">
+              <input
+                type="text"
+                placeholder="Player name"
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
+                className="w-full rounded-md bg-zinc-800 px-2 py-1.5 text-xs text-white placeholder-zinc-500 outline-none focus:ring-1 focus:ring-blue-500"
                 required
                 autoFocus
               />
-              <Input
-                id="clan-tag"
-                label="Clan Tag"
-                placeholder="Optional"
+              <input
+                type="text"
+                placeholder="Clan tag (optional)"
                 value={newClanTag}
                 onChange={(e) => setNewClanTag(e.target.value)}
+                className="w-full rounded-md bg-zinc-800 px-2 py-1.5 text-xs text-white placeholder-zinc-500 outline-none focus:ring-1 focus:ring-blue-500"
                 maxLength={10}
               />
-              <div>
-                <label className="mb-1 block text-xs font-medium text-zinc-400">
-                  Threat Level
-                </label>
-                <div className="flex items-center gap-0.5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-0">
                   {[1, 2, 3, 4, 5].map((level) => (
                     <button
                       key={level}
                       type="button"
                       onClick={() => setNewThreatLevel(level)}
-                      className={`rounded p-1 text-base transition-colors ${
+                      className={`p-0.5 text-xs transition-colors ${
                         level <= newThreatLevel
                           ? "text-red-500"
                           : "text-zinc-600 hover:text-zinc-400"
@@ -259,46 +256,44 @@ export function GuestEnemyMarkerPopup({
                     </button>
                   ))}
                 </div>
-              </div>
-              <div className="flex gap-2 pt-1">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  onClick={() => setIsAdding(false)}
-                  className="flex-1 py-2 text-sm"
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  variant="primary"
-                  className="flex-1 py-2 text-sm"
-                  disabled={!newName.trim()}
-                >
-                  Add
-                </Button>
+                <div className="flex gap-1">
+                  <button
+                    type="button"
+                    onClick={() => setIsAdding(false)}
+                    className="rounded px-2 py-1 text-[10px] text-zinc-400 hover:bg-zinc-800"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={!newName.trim()}
+                    className="rounded bg-blue-600 px-2 py-1 text-[10px] text-white hover:bg-blue-500 disabled:opacity-50"
+                  >
+                    Add
+                  </button>
+                </div>
               </div>
             </form>
           )}
         </div>
 
         {/* Footer - Settings button */}
-        <div className="border-t border-zinc-800 p-3">
+        <div className="border-t border-zinc-800/50 p-2">
           <button
             onClick={onOpenSettings}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-zinc-800 py-2.5 text-sm font-medium text-zinc-300 transition-colors hover:bg-zinc-700"
+            className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-zinc-800/50 py-1.5 text-xs text-zinc-400 transition-colors hover:bg-zinc-700 hover:text-zinc-300"
           >
             <span>⚙️</span>
-            <span>Marker Settings</span>
+            <span>Settings</span>
           </button>
         </div>
       </div>
 
       {/* Arrow pointer to marker */}
       <div
-        className="absolute top-1/2 h-3 w-3 -translate-y-1/2 rotate-45 border-zinc-700 bg-zinc-900"
+        className="absolute top-1/3 h-2 w-2 -translate-y-1/2 rotate-45 border-zinc-700/50 bg-zinc-900/95"
         style={{
-          [positionRight ? "left" : "right"]: "-6px",
+          [positionRight ? "left" : "right"]: "-4px",
           borderLeft: positionRight ? "1px solid" : "none",
           borderBottom: positionRight ? "1px solid" : "none",
           borderRight: positionRight ? "none" : "1px solid",

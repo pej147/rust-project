@@ -1,20 +1,16 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 interface EnemyProfile {
   id: string;
   name: string;
   clanTag?: string | null;
-  notes?: string | null;
   threatLevel: number;
 }
 
 interface Resident {
   id: string;
-  addedAt: string;
   enemy: EnemyProfile;
 }
 
@@ -25,36 +21,18 @@ interface MarkerData {
   x: number;
   y: number;
   color?: string;
-  description?: string;
   createdBy?: {
     id: string;
-    displayName: string;
   };
 }
 
 interface EnemyMarkerPopupProps {
   marker: MarkerData | null;
   isOpen: boolean;
-  position: { x: number; y: number } | null; // Screen coordinates
+  position: { x: number; y: number } | null;
   onClose: () => void;
   onOpenSettings: () => void;
   currentUserId?: string;
-}
-
-// Threat level display with skulls
-function ThreatBadge({ level }: { level: number }) {
-  return (
-    <div className="flex items-center gap-0.5" title={`Threat level ${level}/5`}>
-      {Array.from({ length: 5 }).map((_, i) => (
-        <span
-          key={i}
-          className={`text-xs ${i < level ? "text-red-500" : "text-zinc-600"}`}
-        >
-          💀
-        </span>
-      ))}
-    </div>
-  );
 }
 
 export function EnemyMarkerPopup({
@@ -68,337 +46,123 @@ export function EnemyMarkerPopup({
   const popupRef = useRef<HTMLDivElement>(null);
   const [residents, setResidents] = useState<Resident[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  // Add player form state
-  const [isAdding, setIsAdding] = useState(false);
-  const [newName, setNewName] = useState("");
-  const [newClanTag, setNewClanTag] = useState("");
-  const [newThreatLevel, setNewThreatLevel] = useState(1);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isOwner = currentUserId === marker?.createdBy?.id;
 
   // Fetch residents
   const fetchResidents = useCallback(async () => {
     if (!marker?.id) return;
-
     setIsLoading(true);
-    setError("");
-
     try {
       const res = await fetch(`/api/markers/${marker.id}/residents`);
-      if (!res.ok) {
-        throw new Error("Could not fetch residents");
+      if (res.ok) {
+        setResidents(await res.json());
       }
-      const data = await res.json();
-      setResidents(data);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Unknown error");
     } finally {
       setIsLoading(false);
     }
   }, [marker?.id]);
 
-  // Fetch on open
   useEffect(() => {
     if (isOpen && marker?.id) {
       fetchResidents();
     }
   }, [isOpen, marker?.id, fetchResidents]);
 
-  // Handle click outside
+  // Close on click outside
   useEffect(() => {
     if (!isOpen) return;
-
-    const handleClickOutside = (event: MouseEvent) => {
-      if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
-        handleClose();
+    const handle = (e: MouseEvent) => {
+      if (popupRef.current && !popupRef.current.contains(e.target as Node)) {
+        onClose();
       }
     };
+    const t = setTimeout(() => document.addEventListener("mousedown", handle), 50);
+    return () => { clearTimeout(t); document.removeEventListener("mousedown", handle); };
+  }, [isOpen, onClose]);
 
-    // Add slight delay so the popup doesn't close immediately
-    const timer = setTimeout(() => {
-      document.addEventListener("mousedown", handleClickOutside);
-    }, 100);
+  // Close on map move (listen for any mouse drag on the map container)
+  useEffect(() => {
+    if (!isOpen) return;
+    const mapContainer = document.querySelector(".leaflet-container");
+    if (!mapContainer) return;
 
-    return () => {
-      clearTimeout(timer);
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
-
-  // Reset form on close
-  const handleClose = () => {
-    setIsAdding(false);
-    setNewName("");
-    setNewClanTag("");
-    setNewThreatLevel(1);
-    setError("");
-    onClose();
-  };
-
-  // Add new player
-  const handleAddPlayer = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!marker?.id || !newName.trim()) return;
-
-    setIsSubmitting(true);
-    setError("");
-
-    try {
-      const res = await fetch(`/api/markers/${marker.id}/residents`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: newName.trim(),
-          clanTag: newClanTag.trim() || undefined,
-          threatLevel: newThreatLevel,
-        }),
-      });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || "Could not add player");
-      }
-
-      // Reset form and refresh
-      setNewName("");
-      setNewClanTag("");
-      setNewThreatLevel(1);
-      setIsAdding(false);
-      await fetchResidents();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Unknown error");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  // Remove player
-  const handleRemovePlayer = async (residentId: string) => {
-    if (!marker?.id) return;
-
-    try {
-      const res = await fetch(
-        `/api/markers/${marker.id}/residents?residentId=${residentId}`,
-        { method: "DELETE" }
-      );
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || "Could not remove player");
-      }
-
-      await fetchResidents();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Unknown error");
-    }
-  };
+    const handleMove = () => onClose();
+    mapContainer.addEventListener("mousedown", (e) => {
+      if (popupRef.current?.contains(e.target as Node)) return;
+      const handleDrag = () => { handleMove(); document.removeEventListener("mousemove", handleDrag); };
+      document.addEventListener("mousemove", handleDrag, { once: true });
+    });
+  }, [isOpen, onClose]);
 
   if (!isOpen || !marker || !position) return null;
 
-  // Calculate popup position - position it to the right of the marker, or left if too close to edge
-  const popupWidth = 280;
-  const popupOffset = 20;
+  const popupWidth = 160;
   const screenWidth = typeof window !== "undefined" ? window.innerWidth : 1000;
-
-  const positionRight = position.x + popupOffset + popupWidth < screenWidth;
-  const left = positionRight
-    ? position.x + popupOffset
-    : position.x - popupOffset - popupWidth;
-
-  // Keep popup within vertical bounds
-  const top = Math.max(60, Math.min(position.y - 100, window.innerHeight - 400));
+  const positionRight = position.x + 15 + popupWidth < screenWidth;
+  const left = positionRight ? position.x + 15 : position.x - 15 - popupWidth;
+  const top = Math.max(50, position.y - 40);
 
   return (
     <div
       ref={popupRef}
-      className="fixed z-[2000] animate-in fade-in slide-in-from-left-2 duration-200"
-      style={{
-        left: `${left}px`,
-        top: `${top}px`,
-        width: `${popupWidth}px`,
-      }}
+      className="fixed z-[2000]"
+      style={{ left: `${left}px`, top: `${top}px` }}
     >
-      <div className="rounded-2xl border border-zinc-700 bg-zinc-900 shadow-2xl shadow-black/50">
-        {/* Header */}
-        <div className="flex items-center justify-between border-b border-zinc-800 px-4 py-3">
-          <div className="flex items-center gap-3">
-            <div
-              className="flex h-10 w-10 items-center justify-center rounded-xl text-lg"
-              style={{ backgroundColor: marker.color || "#FF3B30" }}
+      <div className="rounded-lg border border-zinc-700/60 bg-zinc-900/95 shadow-lg backdrop-blur-sm">
+        {/* Compact header */}
+        <div className="flex items-center justify-between gap-2 border-b border-zinc-800/40 px-2.5 py-1.5">
+          <span className="text-xs font-medium text-white truncate max-w-[100px]">{marker.title}</span>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={onOpenSettings}
+              className="p-1 text-zinc-500 hover:text-zinc-300"
+              title="Settings"
             >
-              👤
-            </div>
-            <div>
-              <h3 className="font-semibold text-white">{marker.title}</h3>
-              <p className="font-mono text-xs text-zinc-500">
-                {Math.round(marker.x)}, {Math.round(marker.y)}
-              </p>
-            </div>
+              <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </button>
+            <button onClick={onClose} className="p-1 text-zinc-500 hover:text-zinc-300">
+              <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </div>
-          <button
-            onClick={handleClose}
-            className="rounded-lg p-1.5 text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300"
-          >
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
         </div>
 
-        {/* Content */}
-        <div className="max-h-[300px] overflow-y-auto p-3">
-          {/* Residents list */}
-          <div className="mb-3 flex items-center justify-between">
-            <h4 className="text-sm font-medium text-zinc-400">
-              Residents ({residents.length})
-            </h4>
-            {isOwner && !isAdding && (
-              <button
-                onClick={() => setIsAdding(true)}
-                className="text-xs text-blue-400 hover:text-blue-300"
-              >
-                + Add
-              </button>
-            )}
-          </div>
-
+        {/* Names only */}
+        <div className="px-2.5 py-2 max-h-[120px] overflow-y-auto">
           {isLoading ? (
-            <div className="py-4 text-center text-sm text-zinc-500">Loading...</div>
-          ) : residents.length === 0 && !isAdding ? (
-            <div className="py-4 text-center text-sm text-zinc-500">
-              No players added yet
-            </div>
+            <div className="text-[10px] text-zinc-500">...</div>
+          ) : residents.length === 0 ? (
+            <div className="text-[10px] text-zinc-500 italic">No players</div>
           ) : (
-            <div className="space-y-2">
-              {residents.map((resident) => (
-                <div
-                  key={resident.id}
-                  className="flex items-center justify-between rounded-lg bg-zinc-800/70 p-2.5"
-                >
-                  <div className="min-w-0 flex-1">
-                    <div className="truncate text-sm text-white">
-                      {resident.enemy.clanTag && (
-                        <span className="text-zinc-400">
-                          [{resident.enemy.clanTag}]{" "}
-                        </span>
-                      )}
-                      {resident.enemy.name}
-                    </div>
-                    <ThreatBadge level={resident.enemy.threatLevel} />
-                  </div>
-                  {isOwner && (
-                    <button
-                      onClick={() => handleRemovePlayer(resident.id)}
-                      className="ml-2 rounded p-1.5 text-zinc-500 hover:bg-zinc-700 hover:text-red-400"
-                      title="Remove player"
-                    >
-                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
-                  )}
+            <div className="space-y-0.5">
+              {residents.map((r) => (
+                <div key={r.id} className="text-[11px] text-zinc-300 truncate">
+                  {r.enemy.clanTag && <span className="text-zinc-500">[{r.enemy.clanTag}] </span>}
+                  {r.enemy.name}
+                  {r.enemy.threatLevel > 2 && <span className="ml-1 text-red-500">{"💀".repeat(Math.min(r.enemy.threatLevel - 2, 3))}</span>}
                 </div>
               ))}
             </div>
           )}
-
-          {/* Add player form */}
-          {isAdding && (
-            <form onSubmit={handleAddPlayer} className="mt-3 space-y-2 border-t border-zinc-800 pt-3">
-              <Input
-                id="player-name"
-                label="Player Name"
-                placeholder="Enter name"
-                value={newName}
-                onChange={(e) => setNewName(e.target.value)}
-                required
-                autoFocus
-              />
-              <Input
-                id="clan-tag"
-                label="Clan Tag"
-                placeholder="Optional"
-                value={newClanTag}
-                onChange={(e) => setNewClanTag(e.target.value)}
-                maxLength={10}
-              />
-              <div>
-                <label className="mb-1 block text-xs font-medium text-zinc-400">
-                  Threat Level
-                </label>
-                <div className="flex items-center gap-0.5">
-                  {[1, 2, 3, 4, 5].map((level) => (
-                    <button
-                      key={level}
-                      type="button"
-                      onClick={() => setNewThreatLevel(level)}
-                      className={`rounded p-1 text-base transition-colors ${
-                        level <= newThreatLevel
-                          ? "text-red-500"
-                          : "text-zinc-600 hover:text-zinc-400"
-                      }`}
-                    >
-                      💀
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className="flex gap-2 pt-1">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  onClick={() => setIsAdding(false)}
-                  className="flex-1 py-2 text-sm"
-                  disabled={isSubmitting}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  variant="primary"
-                  className="flex-1 py-2 text-sm"
-                  disabled={isSubmitting || !newName.trim()}
-                >
-                  {isSubmitting ? "..." : "Add"}
-                </Button>
-              </div>
-            </form>
-          )}
-
-          {/* Error message */}
-          {error && (
-            <div className="mt-2 rounded-lg bg-red-500/10 p-2 text-center text-xs text-red-400">
-              {error}
-            </div>
-          )}
         </div>
 
-        {/* Footer - Settings button */}
-        <div className="border-t border-zinc-800 p-3">
-          <button
-            onClick={onOpenSettings}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-zinc-800 py-2.5 text-sm font-medium text-zinc-300 transition-colors hover:bg-zinc-700"
-          >
-            <span>⚙️</span>
-            <span>Marker Settings</span>
-          </button>
-        </div>
+        {/* Add button for owner */}
+        {isOwner && (
+          <div className="border-t border-zinc-800/40 px-2.5 py-1.5">
+            <button
+              onClick={onOpenSettings}
+              className="text-[10px] text-blue-400 hover:text-blue-300"
+            >
+              + Add player
+            </button>
+          </div>
+        )}
       </div>
-
-      {/* Arrow pointer to marker */}
-      <div
-        className="absolute top-1/2 h-3 w-3 -translate-y-1/2 rotate-45 border-zinc-700 bg-zinc-900"
-        style={{
-          [positionRight ? "left" : "right"]: "-6px",
-          borderLeft: positionRight ? "1px solid" : "none",
-          borderBottom: positionRight ? "1px solid" : "none",
-          borderRight: positionRight ? "none" : "1px solid",
-          borderTop: positionRight ? "none" : "1px solid",
-        }}
-      />
     </div>
   );
 }
