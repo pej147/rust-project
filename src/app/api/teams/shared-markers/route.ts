@@ -62,6 +62,7 @@ export async function GET(request: NextRequest) {
         color: true,
         visibility: true,
         createdAt: true,
+        guestName: true,
         createdBy: {
           select: {
             displayName: true,
@@ -92,7 +93,7 @@ export async function GET(request: NextRequest) {
       color: m.color,
       visibility: m.visibility,
       createdAt: m.createdAt.toISOString(),
-      sharedBy: m.createdBy.displayName,
+      sharedBy: m.createdBy?.displayName || m.guestName || "Guest",
       residents: m.residents.map((r) => ({
         name: r.enemyProfile.name,
         clanTag: r.enemyProfile.clanTag,

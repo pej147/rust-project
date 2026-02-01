@@ -9,7 +9,7 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | UI Restyling COMPLEET — Klaar voor nieuwe features |
+| **Huidige fase** | Guest Team Feature COMPLEET — Klaar voor volgende features |
 | **Laatste update** | 2026-02-01 |
 | **Volgende taak** | FASE 9: Command Bar / FASE 10: Polish & Extras |
 | **Blokkades** | Geen |
@@ -173,6 +173,41 @@
 - Alle `rounded-xl/2xl/3xl` → `rounded-lg`
 - Uppercase labels en titels
 - 46 bestanden gewijzigd, 985 toevoegingen, 813 verwijderingen
+
+---
+
+### FASE E: Guest Team Feature ✅ COMPLEET
+- [x] E.1 - Prisma schema update (guestToken op Team, nullable createdById, guestName/guestToken op Marker)
+- [x] E.2 - POST /api/teams/guest endpoint (create guest team, no auth)
+- [x] E.3 - POST /api/teams/guest/sync endpoint (sync guest markers to team)
+- [x] E.4 - Shared-markers endpoint updated (guestName fallback for sharedBy)
+- [x] E.5 - Auto-sync in use-guest-markers hook (fire-and-forget after add/edit/delete)
+- [x] E.6 - Create Team UI in guest map page (create flow + sync status)
+- [x] E.7 - Prisma db push + build check succesvol
+
+**Schema wijzigingen:**
+- `Team.guestToken` — secret token for guest team management
+- `MapSession.createdById` — nullable (guests have no userId)
+- `Marker.createdById` — nullable (guests have no userId)
+- `Marker.guestName` — display name for guest markers
+- `Marker.guestToken` — identifies which guest owns the marker
+
+**API Routes:**
+- `POST /api/teams/guest` — Create guest team (no auth, returns code + guestToken)
+- `POST /api/teams/guest/sync` — Sync markers (validates guestToken, per-guest sync)
+
+**Frontend changes:**
+- Guest map: "Create Team" button + flow (name + guest name → code)
+- Guest map: "Connect" flow now also asks for name and enables syncing
+- Guest map: Sync status indicator + share code display
+- use-guest-markers: auto-sync on add/edit/delete + manual triggerSync()
+
+**Flow:**
+1. Guest opens map → clicks "Team Intel" → "Create Team"
+2. Enters team name + own name → gets 6-char code + secret token
+3. Shares code with friends → friends enter code → see team markers
+4. All marker changes auto-sync to server (fire-and-forget)
+5. Multiple guests can sync to same team (per-guestToken isolation)
 
 ---
 
@@ -386,11 +421,12 @@ Commit: `style: Complete UI restyling from iOS to Rust Console game theme` (46 b
 
 ### Wat er nog kan:
 1. ~~**🔄 UI Restyling afronden**~~ ✅ COMPLEET — Alle 7 fases afgerond
-2. **FASE 9: Command Bar** - Floating input voor snelle marker commands
-3. **FASE 10: Polish & Extras** - Backup script, error handling, responsive check
-4. **Building wiki:** Base designs, upkeep
-5. **Wiki Translation:** Translate wiki pages from Dutch to English
-6. ~~**Marker team visibility:** Markers delen met team (private/team/public)~~ ✅ Visuele feedback toegevoegd
+2. ~~**Guest Team Feature**~~ ✅ COMPLEET — Gasten kunnen teams aanmaken en markers syncen
+3. **FASE 9: Command Bar** - Floating input voor snelle marker commands
+4. **FASE 10: Polish & Extras** - Backup script, error handling, responsive check
+5. **Building wiki:** Base designs, upkeep
+6. **Wiki Translation:** Translate wiki pages from Dutch to English
+7. ~~**Marker team visibility:** Markers delen met team (private/team/public)~~ ✅ Visuele feedback toegevoegd
 
 ### Volgende stap:
 FASE 9: Command Bar, FASE 10: Polish & Extras, of Wiki uitbreiden.
@@ -639,4 +675,4 @@ De volgende taak is: [TAAK]
 
 ---
 
-*Laatste update: 2026-02-01 — UI Restyling COMPLEET (iOS → Rust Console Game)*
+*Laatste update: 2026-02-01 — Guest Team Feature COMPLEET*

@@ -38,10 +38,11 @@ enum Role {
 // ============================================
 
 model Team {
-  id        String   @id @default(cuid())
-  name      String
-  code      String   @unique // Join code voor team
-  createdAt DateTime @default(now())
+  id         String   @id @default(cuid())
+  name       String
+  code       String   @unique // Join code voor team
+  guestToken String?  // Secret token for guest team management
+  createdAt  DateTime @default(now())
 
   // Relaties
   members     TeamMember[]
@@ -81,9 +82,9 @@ model MapSession {
   isActive   Boolean   @default(true)
   createdAt  DateTime  @default(now())
 
-  // Wie heeft deze map aangemaakt
-  createdById String
-  createdBy   User   @relation(fields: [createdById], references: [id])
+  // Wie heeft deze map aangemaakt (null for guest-created sessions)
+  createdById String?
+  createdBy   User?   @relation(fields: [createdById], references: [id])
 
   // Optioneel: team-gebonden map
   teamId String?
@@ -118,11 +119,15 @@ model Marker {
   mapSessionId String
   mapSession   MapSession @relation(fields: [mapSessionId], references: [id], onDelete: Cascade)
 
-  createdById String
-  createdBy   User   @relation(fields: [createdById], references: [id])
+  createdById String?
+  createdBy   User?   @relation(fields: [createdById], references: [id])
 
   teamId String?
   team   Team?   @relation(fields: [teamId], references: [id])
+
+  // Guest marker fields
+  guestName  String?  // Display name for guest markers
+  guestToken String?  // Identifies which guest owns the marker
 
   // Enemy residents (multiple players per base)
   residents MarkerResident[]

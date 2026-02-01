@@ -49,6 +49,7 @@ export default function GuestMapDetailPage({
     updateMarker,
     deleteMarker,
     isLoaded,
+    triggerSync,
   } = useGuestMarkers();
 
   const [showInfo, setShowInfo] = useState(false);
@@ -72,6 +73,19 @@ export default function GuestMapDetailPage({
   const [teamError, setTeamError] = useState<string | null>(null);
   const [teamLoading, setTeamLoading] = useState(false);
   const teamCodeRef = useRef<string | null>(null);
+
+  // Create team state
+  const [showCreateTeam, setShowCreateTeam] = useState(false);
+  const [createTeamName, setCreateTeamName] = useState("");
+  const [createGuestName, setCreateGuestName] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("rust-intel-guest-name") || "";
+    }
+    return "";
+  });
+  const [createTeamLoading, setCreateTeamLoading] = useState(false);
+  const [createdTeamCode, setCreatedTeamCode] = useState<string | null>(null);
+  const [isSynced, setIsSynced] = useState(false);
 
   // Get or create the map on load
   const map = getMapBySeed(seed);
@@ -124,22 +138,100 @@ export default function GuestMapDetailPage({
       setTeamCodeInput(savedCode);
       fetchTeamMarkers(savedCode);
     }
+    // Check if we have a guestToken (we created/joined this team)
+    const savedToken = localStorage.getItem(`rust-intel-team-token-${seed}`);
+    if (savedToken && savedCode) {
+      setIsSynced(true);
+    }
+    // Restore guest name
+    const savedGuestName = localStorage.getItem("rust-intel-guest-name");
+    if (savedGuestName) {
+      setCreateGuestName(savedGuestName);
+    }
   }, [seed, fetchTeamMarkers]);
 
-  const handleTeamConnect = () => {
+  const handleTeamConnect = async () => {
     const code = teamCodeInput.trim().toUpperCase();
     if (code.length < 2) return;
-    fetchTeamMarkers(code);
+
+    // If connecting and we have a guest name, also set up syncing
+    const guestName = createGuestName.trim() || localStorage.getItem("rust-intel-guest-name");
+    if (guestName) {
+      localStorage.setItem("rust-intel-guest-name", guestName);
+
+      // Generate a guestToken if we don't have one
+      const existingToken = localStorage.getItem(`rust-intel-team-token-${seed}`);
+      if (!existingToken) {
+        const token = Array.from(crypto.getRandomValues(new Uint8Array(16)))
+          .map((b) => b.toString(16).padStart(2, "0"))
+          .join("");
+        localStorage.setItem(`rust-intel-team-token-${seed}`, token);
+      }
+      setIsSynced(true);
+    }
+
+    await fetchTeamMarkers(code);
+
+    // Trigger sync after connecting
+    if (guestName) {
+      setTimeout(() => triggerSync(seed), 500);
+    }
   };
 
   const handleTeamDisconnect = () => {
     localStorage.removeItem(`rust-intel-team-code-${seed}`);
+    localStorage.removeItem(`rust-intel-team-token-${seed}`);
     setConnectedTeam(null);
     setTeamMarkers([]);
     setTeamCodeInput("");
     setTeamError(null);
     teamCodeRef.current = null;
     setShowTeamInput(false);
+    setIsSynced(false);
+    setCreatedTeamCode(null);
+    setShowCreateTeam(false);
+  };
+
+  const handleCreateTeam = async () => {
+    if (!createTeamName.trim() || !createGuestName.trim()) return;
+    setCreateTeamLoading(true);
+    setTeamError(null);
+    try {
+      const res = await fetch("/api/teams/guest", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: createTeamName.trim(),
+          guestName: createGuestName.trim(),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setTeamError(data.error || "Could not create team");
+        return;
+      }
+      // Save to localStorage
+      localStorage.setItem(`rust-intel-team-code-${seed}`, data.code);
+      localStorage.setItem(`rust-intel-team-token-${seed}`, data.guestToken);
+      localStorage.setItem("rust-intel-guest-name", createGuestName.trim());
+
+      setCreatedTeamCode(data.code);
+      setConnectedTeam(data.teamName);
+      setTeamCodeInput(data.code);
+      teamCodeRef.current = data.code;
+      setShowCreateTeam(false);
+      setIsSynced(true);
+
+      // Trigger initial sync
+      triggerSync(seed);
+
+      // Fetch team markers (will include our just-synced markers)
+      setTimeout(() => fetchTeamMarkers(data.code), 1000);
+    } catch {
+      setTeamError("Connection error");
+    } finally {
+      setCreateTeamLoading(false);
+    }
   };
 
   const handleMapClick = (x: number, y: number) => {
@@ -297,44 +389,120 @@ export default function GuestMapDetailPage({
         {showTeamInput && (
           <div className="bg-rust-surface px-4 py-3 border-t border-rust-border">
             {connectedTeam ? (
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-[#8B9A46]">
-                    Connected to <strong>{connectedTeam}</strong>
-                  </span>
-                  <span className="text-xs text-rust-text-muted">
-                    ({teamMarkers.length} markers)
-                  </span>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-[#8B9A46]">
+                      Connected to <strong>{connectedTeam}</strong>
+                    </span>
+                    <span className="text-xs text-rust-text-muted">
+                      ({teamMarkers.length} markers)
+                    </span>
+                    {isSynced && (
+                      <span className="text-xs text-[#8B9A46]/70">• Synced</span>
+                    )}
+                  </div>
+                  <button
+                    onClick={handleTeamDisconnect}
+                    className="text-xs px-2 py-1 rounded-md bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500/20 transition-colors"
+                  >
+                    Disconnect
+                  </button>
                 </div>
+                {/* Show team code for sharing */}
+                {createdTeamCode && (
+                  <div className="flex items-center gap-2 bg-rust-bg/50 rounded-md px-3 py-2">
+                    <span className="text-xs text-rust-text-secondary">Share code:</span>
+                    <span className="font-mono text-sm text-[#8B9A46] tracking-wider font-bold">{createdTeamCode}</span>
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(createdTeamCode);
+                      }}
+                      className="text-xs px-2 py-0.5 rounded bg-rust-surface-elevated text-rust-text-secondary hover:text-rust-text transition-colors"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : showCreateTeam ? (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-rust-text-secondary font-medium">Create a Team</span>
+                  <button
+                    onClick={() => setShowCreateTeam(false)}
+                    className="text-xs text-rust-text-muted hover:text-rust-text"
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <input
+                  type="text"
+                  value={createTeamName}
+                  onChange={(e) => setCreateTeamName(e.target.value)}
+                  placeholder="Team name"
+                  maxLength={30}
+                  className="w-full bg-rust-bg border border-rust-border rounded-md px-3 py-1.5 text-sm text-rust-text placeholder:text-rust-text-muted focus:outline-none focus:border-[#8B9A46]"
+                />
+                <input
+                  type="text"
+                  value={createGuestName}
+                  onChange={(e) => setCreateGuestName(e.target.value)}
+                  placeholder="Your name"
+                  maxLength={20}
+                  className="w-full bg-rust-bg border border-rust-border rounded-md px-3 py-1.5 text-sm text-rust-text placeholder:text-rust-text-muted focus:outline-none focus:border-[#8B9A46]"
+                />
                 <button
-                  onClick={handleTeamDisconnect}
-                  className="text-xs px-2 py-1 rounded-md bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500/20 transition-colors"
+                  onClick={handleCreateTeam}
+                  disabled={createTeamLoading || !createTeamName.trim() || !createGuestName.trim()}
+                  className="w-full px-3 py-1.5 rounded-md bg-[#8B9A46] text-white text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#7a8a3d] transition-colors"
                 >
-                  Disconnect
+                  {createTeamLoading ? "Creating..." : "Create Team"}
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-2">
+              <div className="space-y-2">
                 <input
                   type="text"
-                  value={teamCodeInput}
-                  onChange={(e) => {
-                    setTeamCodeInput(e.target.value.toUpperCase());
-                    setTeamError(null);
-                  }}
-                  placeholder="Team code (e.g. ABC123)"
-                  maxLength={6}
-                  className="flex-1 bg-rust-bg border border-rust-border rounded-md px-3 py-1.5 text-sm text-rust-text placeholder:text-rust-text-muted focus:outline-none focus:border-[#8B9A46] font-mono tracking-wider"
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") handleTeamConnect();
-                  }}
+                  value={createGuestName}
+                  onChange={(e) => setCreateGuestName(e.target.value)}
+                  placeholder="Your name (for shared markers)"
+                  maxLength={20}
+                  className="w-full bg-rust-bg border border-rust-border rounded-md px-3 py-1.5 text-sm text-rust-text placeholder:text-rust-text-muted focus:outline-none focus:border-[#8B9A46]"
                 />
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={teamCodeInput}
+                    onChange={(e) => {
+                      setTeamCodeInput(e.target.value.toUpperCase());
+                      setTeamError(null);
+                    }}
+                    placeholder="Team code (e.g. ABC123)"
+                    maxLength={6}
+                    className="flex-1 bg-rust-bg border border-rust-border rounded-md px-3 py-1.5 text-sm text-rust-text placeholder:text-rust-text-muted focus:outline-none focus:border-[#8B9A46] font-mono tracking-wider"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") handleTeamConnect();
+                    }}
+                  />
+                  <button
+                    onClick={handleTeamConnect}
+                    disabled={teamLoading || teamCodeInput.trim().length < 2}
+                    className="px-3 py-1.5 rounded-md bg-[#8B9A46] text-white text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#7a8a3d] transition-colors"
+                  >
+                    {teamLoading ? "..." : "Connect"}
+                  </button>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 border-t border-rust-border"></div>
+                  <span className="text-xs text-rust-text-muted">or</span>
+                  <div className="flex-1 border-t border-rust-border"></div>
+                </div>
                 <button
-                  onClick={handleTeamConnect}
-                  disabled={teamLoading || teamCodeInput.trim().length < 2}
-                  className="px-3 py-1.5 rounded-md bg-[#8B9A46] text-white text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#7a8a3d] transition-colors"
+                  onClick={() => setShowCreateTeam(true)}
+                  className="w-full px-3 py-1.5 rounded-md border border-[#8B9A46]/40 text-[#8B9A46] text-sm font-medium hover:bg-[#8B9A46]/10 transition-colors"
                 >
-                  {teamLoading ? "..." : "Connect"}
+                  Create Team
                 </button>
               </div>
             )}

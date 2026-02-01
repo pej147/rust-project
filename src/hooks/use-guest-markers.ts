@@ -41,6 +41,37 @@ function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
+// Auto-sync guest markers to team (fire-and-forget)
+function syncToTeam(seed: string, markers: GuestMarker[]) {
+  const code = localStorage.getItem(`rust-intel-team-code-${seed}`);
+  const guestToken = localStorage.getItem(`rust-intel-team-token-${seed}`);
+  const guestName = localStorage.getItem("rust-intel-guest-name");
+
+  if (!code || !guestToken || !guestName) return;
+
+  // Only sync own markers (not team markers)
+  const ownMarkers = markers.filter((m) => m._source !== "team");
+
+  fetch("/api/teams/guest/sync", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      guestToken,
+      code,
+      seed,
+      guestName,
+      markers: ownMarkers.map((m) => ({
+        title: m.title,
+        description: m.description,
+        type: m.type,
+        x: m.x,
+        y: m.y,
+        color: m.color,
+      })),
+    }),
+  }).catch((err) => console.error("Team sync failed:", err));
+}
+
 export function useGuestMarkers() {
   const [maps, setMaps] = useState<GuestMapSession[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -110,8 +141,8 @@ export function useGuestMarkers() {
         createdAt: new Date().toISOString(),
       };
 
-      setMaps((prev) =>
-        prev.map((map) =>
+      setMaps((prev) => {
+        const updated = prev.map((map) =>
           map.seed === seed
             ? {
                 ...map,
@@ -119,8 +150,11 @@ export function useGuestMarkers() {
                 updatedAt: new Date().toISOString(),
               }
             : map
-        )
-      );
+        );
+        const mapData = updated.find((m) => m.seed === seed);
+        if (mapData) syncToTeam(seed, mapData.markers);
+        return updated;
+      });
 
       return newMarker;
     },
@@ -130,8 +164,8 @@ export function useGuestMarkers() {
   // Update a marker
   const updateMarker = useCallback(
     (seed: string, markerId: string, updates: Partial<Omit<GuestMarker, "id" | "createdAt">>) => {
-      setMaps((prev) =>
-        prev.map((map) =>
+      setMaps((prev) => {
+        const updated = prev.map((map) =>
           map.seed === seed
             ? {
                 ...map,
@@ -141,16 +175,19 @@ export function useGuestMarkers() {
                 updatedAt: new Date().toISOString(),
               }
             : map
-        )
-      );
+        );
+        const mapData = updated.find((m) => m.seed === seed);
+        if (mapData) syncToTeam(seed, mapData.markers);
+        return updated;
+      });
     },
     []
   );
 
   // Delete a marker
   const deleteMarker = useCallback((seed: string, markerId: string) => {
-    setMaps((prev) =>
-      prev.map((map) =>
+    setMaps((prev) => {
+      const updated = prev.map((map) =>
         map.seed === seed
           ? {
               ...map,
@@ -158,8 +195,11 @@ export function useGuestMarkers() {
               updatedAt: new Date().toISOString(),
             }
           : map
-      )
-    );
+      );
+      const mapData = updated.find((m) => m.seed === seed);
+      if (mapData) syncToTeam(seed, mapData.markers);
+      return updated;
+    });
   }, []);
 
   // Delete a map session
@@ -178,6 +218,15 @@ export function useGuestMarkers() {
     localStorage.removeItem(STORAGE_KEY);
   }, []);
 
+  // Manually trigger sync for a seed (e.g. after creating a team)
+  const triggerSync = useCallback(
+    (seed: string) => {
+      const mapData = maps.find((m) => m.seed === seed);
+      if (mapData) syncToTeam(seed, mapData.markers);
+    },
+    [maps]
+  );
+
   return {
     maps,
     isLoaded,
@@ -189,5 +238,6 @@ export function useGuestMarkers() {
     deleteMap,
     getAllMaps,
     clearAllData,
+    triggerSync,
   };
 }
