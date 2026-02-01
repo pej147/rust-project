@@ -1,3 +1,8 @@
+/* Dark background for Leaflet map container */
+.leaflet-container {
+  background: #09090b;
+}
+
 /* Custom Leaflet popup styling voor dark theme */
 
 .custom-popup .leaflet-popup-content-wrapper {

@@ -147,11 +147,11 @@ export default function MapDetailPage({
     setSelectedMarker(null);
   };
 
-  const handleCloseEnemyPopup = () => {
+  const handleCloseEnemyPopup = useCallback(() => {
     setShowEnemyPopup(false);
     setEnemyPopupPosition(null);
     setSelectedMarker(null);
-  };
+  }, []);
 
   const handleOpenSettingsFromEnemy = () => {
     // Close enemy popup, open marker detail sheet
@@ -278,6 +278,7 @@ export default function MapDetailPage({
           markers={filteredMarkers}
           onMapClick={handleMapClick}
           onMarkerClick={handleMarkerClick}
+          onMapMove={handleCloseEnemyPopup}
         />
 
         {/* Marker Filter */}

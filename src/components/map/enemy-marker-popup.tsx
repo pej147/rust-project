@@ -82,20 +82,6 @@ export function EnemyMarkerPopup({
     return () => { clearTimeout(t); document.removeEventListener("mousedown", handle); };
   }, [isOpen, onClose]);
 
-  // Close on map move (listen for any mouse drag on the map container)
-  useEffect(() => {
-    if (!isOpen) return;
-    const mapContainer = document.querySelector(".leaflet-container");
-    if (!mapContainer) return;
-
-    const handleMove = () => onClose();
-    mapContainer.addEventListener("mousedown", (e) => {
-      if (popupRef.current?.contains(e.target as Node)) return;
-      const handleDrag = () => { handleMove(); document.removeEventListener("mousemove", handleDrag); };
-      document.addEventListener("mousemove", handleDrag, { once: true });
-    });
-  }, [isOpen, onClose]);
-
   if (!isOpen || !marker || !position) return null;
 
   const popupWidth = 160;

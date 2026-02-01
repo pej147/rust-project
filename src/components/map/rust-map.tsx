@@ -38,9 +38,10 @@ interface RustMapProps {
   markers?: MarkerData[];
   onMapClick?: (x: number, y: number) => void;
   onMarkerClick?: (marker: MarkerData, screenPosition: { x: number; y: number }) => void;
+  onMapMove?: () => void;
 }
 
-export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick }: RustMapProps) {
+export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick, onMapMove }: RustMapProps) {
   const mapRef = useRef<L.Map | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const markerClickedRef = useRef(false); // Flag to prevent map click after marker click
@@ -109,6 +110,13 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
       setCoords(null);
     });
 
+    // Notify parent when map moves (pan/zoom)
+    if (onMapMove) {
+      map.on("movestart", () => {
+        onMapMove();
+      });
+    }
+
     // Handle click events
     if (onMapClick) {
       map.on("click", (e) => {
@@ -130,7 +138,7 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
       map.remove();
       mapRef.current = null;
     };
-  }, [seed, mapSize, onMapClick]);
+  }, [seed, mapSize, onMapClick, onMapMove]);
 
   // Update markers when they change
   useEffect(() => {
