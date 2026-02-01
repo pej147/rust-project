@@ -55,7 +55,7 @@ export function BottomSheet({
       {/* Sheet */}
       <div
         className={cn(
-          "fixed bottom-0 left-0 right-0 z-[1002] max-h-[90vh] overflow-y-auto rounded-t-3xl bg-zinc-900 shadow-xl",
+          "fixed bottom-0 left-0 right-0 z-[1002] max-h-[90vh] overflow-y-auto rounded-t-2xl border-t border-rust-border bg-rust-surface shadow-xl",
           "animate-in slide-in-from-bottom duration-300",
           className
         )}
@@ -64,22 +64,22 @@ export function BottomSheet({
         aria-labelledby={title ? "bottom-sheet-title" : undefined}
       >
         {/* Handle bar */}
-        <div className="sticky top-0 flex justify-center bg-zinc-900 pb-2 pt-3">
-          <div className="h-1.5 w-12 rounded-full bg-zinc-700" />
+        <div className="sticky top-0 flex justify-center bg-rust-surface pb-2 pt-3">
+          <div className="h-1.5 w-12 rounded-full bg-rust-border" />
         </div>
 
         {/* Header */}
         {title && (
-          <div className="flex items-center justify-between border-b border-zinc-800 px-4 pb-4">
+          <div className="flex items-center justify-between border-b border-rust-border px-4 pb-4">
             <h2
               id="bottom-sheet-title"
-              className="text-xl font-bold text-white"
+              className="text-xl font-bold uppercase tracking-wide text-rust-text"
             >
               {title}
             </h2>
             <button
               onClick={onClose}
-              className="rounded-full p-2 text-zinc-400 hover:bg-zinc-800 hover:text-white"
+              className="rounded-full p-2 text-rust-text-secondary hover:bg-rust-surface-elevated hover:text-rust-text"
               aria-label="Sluiten"
             >
               <svg

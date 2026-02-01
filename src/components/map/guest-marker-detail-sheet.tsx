@@ -97,8 +97,8 @@ export function GuestMarkerDetailSheet({
     >
       <div className="space-y-4">
         {/* Guest mode indicator */}
-        <div className="rounded-xl bg-orange-500/10 border border-orange-500/20 p-3 text-center">
-          <span className="text-sm text-orange-400">
+        <div className="rounded-lg bg-rust-primary/10 border border-rust-primary/20 p-3 text-center">
+          <span className="text-sm text-rust-primary">
             Guest mode - saved locally
           </span>
         </div>
@@ -124,7 +124,7 @@ export function GuestMarkerDetailSheet({
 
             <div className="flex items-center gap-3">
               <div
-                className="h-8 w-8 rounded-full border-2 border-zinc-600"
+                className="h-8 w-8 rounded-full border-2 border-rust-border"
                 style={{ backgroundColor: editColor }}
               />
               <div className="flex-1">
@@ -140,7 +140,7 @@ export function GuestMarkerDetailSheet({
             <div className="w-full">
               <label
                 htmlFor="edit-description"
-                className="mb-2 block text-sm font-medium text-zinc-300"
+                className="mb-2 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary"
               >
                 Description
               </label>
@@ -149,7 +149,7 @@ export function GuestMarkerDetailSheet({
                 value={editDescription}
                 onChange={(e) => setEditDescription(e.target.value)}
                 rows={2}
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white placeholder-zinc-500 transition-colors focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="w-full rounded-lg border border-rust-border bg-rust-surface-elevated px-4 py-3 text-rust-text placeholder-rust-text-muted transition-colors focus:border-rust-primary focus:outline-none focus:ring-1 focus:ring-rust-primary"
               />
             </div>
 
@@ -174,11 +174,11 @@ export function GuestMarkerDetailSheet({
         ) : showDeleteConfirm ? (
           // Delete Confirmation
           <div className="space-y-4">
-            <div className="rounded-xl bg-red-500/10 p-4 text-center">
-              <p className="text-red-400">
+            <div className="rounded-lg bg-rust-danger/10 p-4 text-center">
+              <p className="text-rust-danger">
                 Are you sure you want to delete this marker?
               </p>
-              <p className="mt-1 text-sm text-zinc-500">
+              <p className="mt-1 text-sm text-rust-text-muted">
                 This cannot be undone.
               </p>
             </div>
@@ -216,8 +216,8 @@ export function GuestMarkerDetailSheet({
             </div>
 
             {/* Coordinates */}
-            <div className="rounded-xl bg-zinc-800 p-3">
-              <span className="text-sm text-zinc-400">Position: </span>
+            <div className="rounded-lg bg-rust-surface p-3">
+              <span className="text-sm text-rust-text-secondary">Position: </span>
               <span className="font-mono text-white">
                 {Math.round(marker.x)}, {Math.round(marker.y)}
               </span>
@@ -226,7 +226,7 @@ export function GuestMarkerDetailSheet({
             {/* Description */}
             {marker.description && (
               <div>
-                <h4 className="mb-1 text-sm font-medium text-zinc-400">
+                <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">
                   Description
                 </h4>
                 <p className="text-white">{marker.description}</p>
@@ -234,7 +234,7 @@ export function GuestMarkerDetailSheet({
             )}
 
             {/* Created date */}
-            <div className="text-sm text-zinc-500">
+            <div className="text-sm text-rust-text-muted">
               Created on{" "}
               {new Date(marker.createdAt).toLocaleDateString("en-US", {
                 day: "numeric",

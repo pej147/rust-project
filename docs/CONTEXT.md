@@ -9,9 +9,9 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | Marker Visibility + Map Polish |
+| **Huidige fase** | UI Restyling COMPLEET — Klaar voor nieuwe features |
 | **Laatste update** | 2026-02-01 |
-| **Volgende taak** | FASE 9: Command Bar of FASE 10: Polish |
+| **Volgende taak** | FASE 9: Command Bar / FASE 10: Polish & Extras |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 | **Totaal Wiki Pagina's** | 208 |
@@ -151,6 +151,94 @@
 ## 🔄 HUIDIGE SESSIE
 
 ### Wat er deze sessie is gedaan (2026-02-01):
+
+#### UI Restyling: iOS → Rust Console Game — IN PROGRESS
+Volledige restyling van de app: van iOS-stijl (blauw, rounded, bottom nav) naar Rust Console game-stijl (donker, olive groen, uppercase, top nav).
+
+**Kleurenpalet:**
+| Variabele | Waarde | Gebruik |
+|-----------|--------|--------|
+| `--rust-bg` | `#111111` | Pagina achtergrond |
+| `--rust-surface` | `#1a1a1a` | Cards, panelen |
+| `--rust-surface-elevated` | `#2d2d2d` | Inputs, inner boxes |
+| `--rust-primary` | `#8B9A46` | Olive groene knoppen/accenten |
+| `--rust-danger` | `#CC3333` | Destructieve acties |
+| `--rust-text` | `#FFFFFF` | Primaire tekst |
+| `--rust-text-secondary` | `#A0A0A0` | Secundaire tekst |
+| `--rust-border` | `#333333` | Randen |
+
+**Voortgang (7 fases):**
+
+| Fase | Beschrijving | Status |
+|------|-------------|--------|
+| FASE 1 | Global Theme CSS variabelen | ✅ KLAAR |
+| FASE 2 | UI Componenten (button, card, input, select, bottom-sheet) | ✅ KLAAR |
+| FASE 3 | Navigatie: bottom → top (TopNav component) | ✅ KLAAR |
+| FASE 4 | Map Componenten (rust-map, forms, filters, sheets, popups) | ✅ KLAAR |
+| FASE 5 | Auth Pagina's (login, register, layout) | ✅ KLAAR |
+| FASE 6 | Alle overige pagina's (landing, map pages, teams, profile, admin, wiki) | ✅ KLAAR |
+| FASE 7 | Polish & Cleanup (grep scan, final fixes, build verified) | ✅ KLAAR |
+
+**Bestanden gewijzigd (45 totaal):**
+
+FASE 1-3 (eerder):
+- `src/app/globals.css` — Nieuwe CSS custom properties, Tailwind @theme inline
+- `src/components/ui/button.tsx` — Olive groen primary, uppercase, rounded-lg
+- `src/components/ui/card.tsx` — rust-surface bg, rust-border, uppercase titles
+- `src/components/ui/input.tsx` — Donkere bg, olive groene focus ring, uppercase labels
+- `src/components/ui/select.tsx` — Zelfde als input
+- `src/components/ui/bottom-sheet.tsx` — Donker panel, uppercase titels
+- `src/components/layout/top-nav.tsx` — **NIEUW** — Horizontale tab-bar bovenaan
+- `src/components/layout/header.tsx` — Donker, uppercase
+- `src/app/(dashboard)/layout.tsx` — TopNav ipv BottomNav
+
+FASE 4 — Map Componenten:
+- `src/components/map/map-styles.css` — Leaflet overrides naar rust kleuren
+- `src/components/map/rust-map.tsx` — Popup styles, error state, coordinates overlay
+- `src/components/map/add-marker-form.tsx` — Coordinates, textarea, error box
+- `src/components/map/marker-filter.tsx` — Filter panel, chips, visibility section
+- `src/components/map/marker-detail-sheet.tsx` — View/edit mode, info grid
+- `src/components/map/enemy-marker-popup.tsx` — Leaflet popup overlay
+- `src/components/map/enemy-marker-sheet.tsx` — Residents list, add form
+- `src/components/map/guest-add-marker-form.tsx` — Guest mode indicator
+- `src/components/map/guest-marker-detail-sheet.tsx` — Edit/delete/view
+- `src/components/map/guest-enemy-marker-popup.tsx` — Full popup
+- `src/components/map/guest-enemy-marker-sheet.tsx` — Residents, threats
+
+FASE 5 — Auth Pagina's:
+- `src/app/(auth)/layout.tsx` — bg-rust-bg
+- `src/app/(auth)/login/page.tsx` — Card, inputs, labels, buttons, links
+- `src/app/(auth)/register/page.tsx` — Zelfde als login
+
+FASE 6 — Alle Overige Pagina's:
+- `src/app/page.tsx` — Hero gradient, feature cards, CTAs, footer
+- `src/app/(dashboard)/map/page.tsx` — Guest banner, map cards, badges
+- `src/app/(dashboard)/map/new/page.tsx` — Back link, error box, select
+- `src/app/(dashboard)/map/[id]/page.tsx` — Loading, links, info bar, FAB
+- `src/app/(dashboard)/map/guest/[seed]/page.tsx` — Guest banner, badge
+- `src/app/(dashboard)/teams/page.tsx` — Role badges, team cards, delete
+- `src/app/(dashboard)/profile/page.tsx` — Avatar, user ID box, logout
+- `src/app/(dashboard)/admin/page.tsx` — Stat cards, quick links
+- `src/app/(dashboard)/admin/users/page.tsx` — Table, buttons, modal
+- `src/app/(dashboard)/admin/maps/page.tsx` — Map cards, badges
+- `src/app/(dashboard)/admin/audit/page.tsx` — Action colors, pagination
+- `src/app/wiki/page.tsx` — Main wiki hub
+- `src/app/wiki/ammo/page.tsx` + `[id]/page.tsx`
+- `src/app/wiki/items/page.tsx` + `[id]/page.tsx`
+- `src/app/wiki/monuments/page.tsx` + `[id]/page.tsx`
+- `src/app/wiki/raiding/page.tsx` + `[id]/page.tsx`
+- `src/app/wiki/weapons/page.tsx` + `[id]/page.tsx`
+
+FASE 7 — Polish:
+- Final grep scan: 0 onbedoelde zinc/blue/orange kleuren over
+- 9 intentionele uitzonderingen: bottom-nav.tsx (backup), wiki monument tier-kleuren
+
+**Structurele wijziging:**
+- Bottom navigation vervangen door top navigation (tab-bar)
+- `bottom-nav.tsx` behouden als backup, niet meer geïmporteerd
+- Dashboard layout: `bg-zinc-950` → `bg-rust-bg`, geen `pb-24` meer
+
+---
 
 #### Marker Visibility — Visuele Feedback ✅ COMPLEET
 - [x] Visibility badge op map markers (🔒 Private, 👥 Team, 🌐 Public)
@@ -353,14 +441,15 @@
 | **Pagina's** | **208** | |
 
 ### Wat er nog kan:
-1. **FASE 9: Command Bar** - Floating input voor snelle marker commands
-2. **FASE 10: Polish & Extras** - Backup script, error handling, responsive check
-3. **Building wiki:** Base designs, upkeep
-4. **Wiki Translation:** Translate wiki pages from Dutch to English
-5. ~~**Marker team visibility:** Markers delen met team (private/team/public)~~ ✅ Visuele feedback toegevoegd
+1. ~~**🔄 UI Restyling afronden**~~ ✅ COMPLEET — Alle 7 fases afgerond
+2. **FASE 9: Command Bar** - Floating input voor snelle marker commands
+3. **FASE 10: Polish & Extras** - Backup script, error handling, responsive check
+4. **Building wiki:** Base designs, upkeep
+5. **Wiki Translation:** Translate wiki pages from Dutch to English
+6. ~~**Marker team visibility:** Markers delen met team (private/team/public)~~ ✅ Visuele feedback toegevoegd
 
 ### Volgende stap:
-User can choose: Command Bar (FASE 9), Polish (FASE 10), Building wiki, or Wiki translation.
+FASE 9: Command Bar, FASE 10: Polish & Extras, of Wiki uitbreiden.
 
 ---
 
@@ -606,4 +695,4 @@ De volgende taak is: [TAAK]
 
 ---
 
-*Laatste update: 2026-02-01 — Marker Visibility + Map Polish*
+*Laatste update: 2026-02-01 — UI Restyling COMPLEET (iOS → Rust Console Game)*

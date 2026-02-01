@@ -9,9 +9,9 @@ export default function WikiItemsPage() {
   const medicalItems = wikiItems.filter(i => i.category === "medical");
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
+    <div className="min-h-screen bg-rust-bg text-white">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-800">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-rust-bg/80 backdrop-blur-xl border-b border-rust-border">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <span className="text-2xl">🗺️</span>
@@ -21,13 +21,13 @@ export default function WikiItemsPage() {
           <nav className="flex items-center gap-4">
             <Link
               href="/wiki"
-              className="text-zinc-400 hover:text-white transition-colors text-sm"
+              className="text-rust-text-secondary hover:text-white transition-colors text-sm"
             >
               Wiki
             </Link>
             <Link
               href="/map"
-              className="text-zinc-400 hover:text-white transition-colors text-sm"
+              className="text-rust-text-secondary hover:text-white transition-colors text-sm"
             >
               Map
             </Link>
@@ -39,34 +39,34 @@ export default function WikiItemsPage() {
       <main className="pt-24 pb-16 px-4">
         <div className="max-w-4xl mx-auto">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-sm text-zinc-500 mb-6">
-            <Link href="/wiki" className="hover:text-zinc-300">Wiki</Link>
+          <div className="flex items-center gap-2 text-sm text-rust-text-muted mb-6">
+            <Link href="/wiki" className="hover:text-rust-text">Wiki</Link>
             <span>/</span>
-            <span className="text-zinc-300">Items</span>
+            <span className="text-rust-text">Items</span>
           </div>
 
           <h1 className="text-4xl font-bold mb-4">🎒 Items</h1>
-          <p className="text-zinc-400 mb-8">
+          <p className="text-rust-text-secondary mb-8">
             Alle items in Rust Console - resources, components, tools en medical.
           </p>
 
           {/* Quick Stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
-            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+            <div className="bg-rust-surface rounded-lg p-4 border border-rust-border">
               <div className="text-3xl font-bold text-amber-500">{resourceItems.length}</div>
-              <div className="text-zinc-400 text-sm">Resources</div>
+              <div className="text-rust-text-secondary text-sm">Resources</div>
             </div>
-            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
-              <div className="text-3xl font-bold text-blue-500">{componentItems.length}</div>
-              <div className="text-zinc-400 text-sm">Components</div>
+            <div className="bg-rust-surface rounded-lg p-4 border border-rust-border">
+              <div className="text-3xl font-bold text-rust-primary">{componentItems.length}</div>
+              <div className="text-rust-text-secondary text-sm">Components</div>
             </div>
-            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+            <div className="bg-rust-surface rounded-lg p-4 border border-rust-border">
               <div className="text-3xl font-bold text-green-500">{toolItems.length}</div>
-              <div className="text-zinc-400 text-sm">Tools</div>
+              <div className="text-rust-text-secondary text-sm">Tools</div>
             </div>
-            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+            <div className="bg-rust-surface rounded-lg p-4 border border-rust-border">
               <div className="text-3xl font-bold text-red-500">{medicalItems.length}</div>
-              <div className="text-zinc-400 text-sm">Medical</div>
+              <div className="text-rust-text-secondary text-sm">Medical</div>
             </div>
           </div>
 
@@ -75,7 +75,7 @@ export default function WikiItemsPage() {
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <span>🪨</span> Resources
             </h2>
-            <p className="text-zinc-400 text-sm mb-6">
+            <p className="text-rust-text-secondary text-sm mb-6">
               Raw and refined materials for crafting and building
             </p>
 
@@ -83,7 +83,7 @@ export default function WikiItemsPage() {
             <div className="space-y-6">
               {/* Raw Resources */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Raw Materials</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Raw Materials</h3>
                 <div className="grid gap-2">
                   {resourceItems
                     .filter(i => i.subcategory === "raw")
@@ -95,7 +95,7 @@ export default function WikiItemsPage() {
 
               {/* Refined Resources */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Refined Materials</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Refined Materials</h3>
                 <div className="grid gap-2">
                   {resourceItems
                     .filter(i => i.subcategory === "refined")
@@ -107,7 +107,7 @@ export default function WikiItemsPage() {
 
               {/* Special */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Special</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Special</h3>
                 <div className="grid gap-2">
                   {resourceItems
                     .filter(i => i.subcategory === "special")
@@ -124,7 +124,7 @@ export default function WikiItemsPage() {
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <span>⚙️</span> Components
             </h2>
-            <p className="text-zinc-400 text-sm mb-6">
+            <p className="text-rust-text-secondary text-sm mb-6">
               Parts used for crafting weapons, tools, and electronics
             </p>
 
@@ -140,14 +140,14 @@ export default function WikiItemsPage() {
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <span>🛠️</span> Tools
             </h2>
-            <p className="text-zinc-400 text-sm mb-6">
+            <p className="text-rust-text-secondary text-sm mb-6">
               Equipment for gathering resources and building bases
             </p>
 
             <div className="space-y-6">
               {/* Starter Tools */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Starter</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Starter</h3>
                 <div className="grid gap-2">
                   {toolItems
                     .filter(i => i.subcategory === "starter")
@@ -159,7 +159,7 @@ export default function WikiItemsPage() {
 
               {/* Stone Tools */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Stone Tier</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Stone Tier</h3>
                 <div className="grid gap-2">
                   {toolItems
                     .filter(i => i.subcategory === "stone")
@@ -171,7 +171,7 @@ export default function WikiItemsPage() {
 
               {/* Metal Tools */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Metal Tier</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Metal Tier</h3>
                 <div className="grid gap-2">
                   {toolItems
                     .filter(i => i.subcategory === "metal")
@@ -183,7 +183,7 @@ export default function WikiItemsPage() {
 
               {/* Salvaged Tools */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Salvaged Tier</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Salvaged Tier</h3>
                 <div className="grid gap-2">
                   {toolItems
                     .filter(i => i.subcategory === "salvaged")
@@ -195,7 +195,7 @@ export default function WikiItemsPage() {
 
               {/* Power Tools */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Power Tools</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Power Tools</h3>
                 <div className="grid gap-2">
                   {toolItems
                     .filter(i => i.subcategory === "power")
@@ -207,7 +207,7 @@ export default function WikiItemsPage() {
 
               {/* Building Tools */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Building</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Building</h3>
                 <div className="grid gap-2">
                   {toolItems
                     .filter(i => i.subcategory === "building")
@@ -219,7 +219,7 @@ export default function WikiItemsPage() {
 
               {/* Utility Tools */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Utility</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Utility</h3>
                 <div className="grid gap-2">
                   {toolItems
                     .filter(i => i.subcategory === "utility")
@@ -236,14 +236,14 @@ export default function WikiItemsPage() {
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <span>💊</span> Medical
             </h2>
-            <p className="text-zinc-400 text-sm mb-6">
+            <p className="text-rust-text-secondary text-sm mb-6">
               Healing items and medical supplies
             </p>
 
             <div className="space-y-6">
               {/* Basic Medical */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Basic</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Basic</h3>
                 <div className="grid gap-2">
                   {medicalItems
                     .filter(i => i.subcategory === "basic")
@@ -255,7 +255,7 @@ export default function WikiItemsPage() {
 
               {/* Advanced Medical */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Advanced</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Advanced</h3>
                 <div className="grid gap-2">
                   {medicalItems
                     .filter(i => i.subcategory === "advanced")
@@ -267,7 +267,7 @@ export default function WikiItemsPage() {
 
               {/* Military Medical */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Military</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Military</h3>
                 <div className="grid gap-2">
                   {medicalItems
                     .filter(i => i.subcategory === "military")
@@ -279,7 +279,7 @@ export default function WikiItemsPage() {
 
               {/* Radiation */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Radiation</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Radiation</h3>
                 <div className="grid gap-2">
                   {medicalItems
                     .filter(i => i.subcategory === "radiation")
@@ -291,7 +291,7 @@ export default function WikiItemsPage() {
 
               {/* Teas */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Teas</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Teas</h3>
                 <div className="grid gap-2">
                   {medicalItems
                     .filter(i => i.subcategory === "tea")
@@ -321,17 +321,17 @@ function ItemRow({ item }: { item: typeof wikiItems[0] }) {
 
   return (
     <Link href={`/wiki/items/${item.id}`}>
-      <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800 hover:border-zinc-600 transition-colors flex items-center justify-between">
+      <div className="bg-rust-surface rounded-lg p-4 border border-rust-border hover:border-rust-border transition-colors flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center text-xl">
+          <div className="w-10 h-10 bg-rust-surface-elevated rounded-lg flex items-center justify-center text-xl">
             {getEmoji(item.category)}
           </div>
           <div>
             <div className="font-medium">{item.name}</div>
-            <div className="text-zinc-500 text-sm">Stack: {item.stackSize}</div>
+            <div className="text-rust-text-muted text-sm">Stack: {item.stackSize}</div>
           </div>
         </div>
-        <div className="text-zinc-500">
+        <div className="text-rust-text-muted">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>

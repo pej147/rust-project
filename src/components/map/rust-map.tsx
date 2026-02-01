@@ -180,14 +180,14 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
               bottom: -4px;
               right: -4px;
               font-size: 10px;
-              background: #18181b;
+              background: #1a1a1a;
               border-radius: 50%;
               width: 16px;
               height: 16px;
               display: flex;
               align-items: center;
               justify-content: center;
-              border: 1.5px solid #3f3f46;
+              border: 1.5px solid #333333;
               line-height: 1;
             ">${visibilityIcon}</span>
           </div>
@@ -196,13 +196,14 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
         iconAnchor: [18, 18],
       });
 
-      // Popup content with dark theme styling
+      // Popup content with Rust Console theme styling
       const popupContent = `
         <div style="
-          background: #18181b;
+          background: #1a1a1a;
           color: white;
           padding: 12px;
-          border-radius: 12px;
+          border-radius: 8px;
+          border: 1px solid #333333;
           min-width: 180px;
           font-family: system-ui, -apple-system, sans-serif;
         ">
@@ -215,14 +216,16 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
             <span style="font-size: 20px;">${config.icon}</span>
             <span style="
               font-weight: 600;
-              font-size: 16px;
+              font-size: 14px;
+              text-transform: uppercase;
+              letter-spacing: 0.05em;
             ">${marker.title}</span>
           </div>
           <div style="
             display: flex;
             align-items: center;
             gap: 6px;
-            color: #a1a1aa;
+            color: #A0A0A0;
             font-size: 12px;
             margin-bottom: 4px;
           ">
@@ -236,15 +239,15 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
           </div>
           ${marker.description ? `
             <div style="
-              color: #d4d4d8;
+              color: #A0A0A0;
               font-size: 13px;
               margin-top: 8px;
               padding-top: 8px;
-              border-top: 1px solid #27272a;
+              border-top: 1px solid #333333;
             ">${marker.description}</div>
           ` : ""}
           <div style="
-            color: #71717a;
+            color: #666666;
             font-size: 11px;
             margin-top: 8px;
           ">
@@ -257,10 +260,10 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
             gap: 4px;
             margin-top: 6px;
             padding: 2px 8px;
-            background: #27272a;
+            background: #2d2d2d;
             border-radius: 9999px;
             font-size: 10px;
-            color: #a1a1aa;
+            color: #A0A0A0;
           ">
             <span>${visibilityIcon}</span>
             ${marker.visibility === "PRIVATE" ? "Private" : marker.visibility === "PUBLIC" ? "Public" : "Team"}
@@ -279,10 +282,11 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
         // Enemy markers: Leaflet popup with residents + settings button
         const enemyPopupContent = `
           <div style="
-            background: #18181b;
+            background: #1a1a1a;
             color: white;
             padding: 0;
-            border-radius: 12px;
+            border-radius: 8px;
+            border: 1px solid #333333;
             min-width: 160px;
             font-family: system-ui, -apple-system, sans-serif;
           ">
@@ -291,9 +295,9 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
               align-items: center;
               gap: 6px;
               padding: 8px 10px;
-              border-bottom: 1px solid #27272a;
+              border-bottom: 1px solid #333333;
             ">
-              <span style="font-size: 12px; font-weight: 600;">${marker.title}</span>
+              <span style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">${marker.title}</span>
               <span style="font-size: 9px;">${visibilityIcon}</span>
             </div>
             <div class="enemy-residents" data-marker-id="${marker.id}" style="
@@ -301,16 +305,18 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
               max-height: 120px;
               overflow-y: auto;
             ">
-              <span style="color: #71717a; font-size: 10px;">Loading...</span>
+              <span style="color: #666666; font-size: 10px;">Loading...</span>
             </div>
             <div style="
               padding: 6px 10px;
-              border-top: 1px solid #27272a;
+              border-top: 1px solid #333333;
             ">
               <span class="enemy-settings-btn" data-marker-id="${marker.id}" style="
-                color: #60a5fa;
+                color: #8B9A46;
                 font-size: 10px;
                 cursor: pointer;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
               ">&#9881; Settings</span>
             </div>
           </div>
@@ -331,11 +337,11 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
           const renderResidents = (list: { name: string; clanTag?: string; threatLevel: number }[]) => {
             if (!el) return;
             if (list.length === 0) {
-              el.innerHTML = '<span style="color:#71717a;font-size:10px;font-style:italic;">No players</span>';
+              el.innerHTML = '<span style="color:#666666;font-size:10px;font-style:italic;">No players</span>';
             } else {
               el.innerHTML = list.map((r) => {
-                let html = '<div style="font-size:11px;color:#d4d4d8;padding:1px 0;">';
-                if (r.clanTag) html += `<span style="color:#71717a;">[${r.clanTag}]</span> `;
+                let html = '<div style="font-size:11px;color:#A0A0A0;padding:1px 0;">';
+                if (r.clanTag) html += `<span style="color:#666666;">[${r.clanTag}]</span> `;
                 html += r.name;
                 if (r.threatLevel > 2) html += ' ' + '💀'.repeat(Math.min(r.threatLevel - 2, 3));
                 html += '</div>';
@@ -390,9 +396,9 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
 
   if (imageError) {
     return (
-      <div className="flex h-full flex-col items-center justify-center bg-zinc-800 p-8 text-center">
+      <div className="flex h-full flex-col items-center justify-center bg-rust-surface-elevated p-8 text-center">
         <svg
-          className="mb-4 h-16 w-16 text-zinc-600"
+          className="mb-4 h-16 w-16 text-rust-text-muted"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -404,11 +410,11 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
             d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
           />
         </svg>
-        <p className="mb-2 text-zinc-400">Map image not found</p>
-        <p className="text-sm text-zinc-500">
+        <p className="mb-2 text-rust-text-secondary">Map image not found</p>
+        <p className="text-sm text-rust-text-muted">
           Upload the map to:
           <br />
-          <code className="rounded bg-zinc-700 px-2 py-1">
+          <code className="rounded bg-rust-surface-elevated px-2 py-1">
             public/maps/{seed}.png
           </code>
         </p>
@@ -418,11 +424,11 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
 
   return (
     <div className="relative h-full w-full">
-      <div ref={containerRef} className="h-full w-full bg-zinc-900" />
+      <div ref={containerRef} className="h-full w-full bg-rust-surface" />
 
       {/* Coordinates overlay */}
       {coords && (
-        <div className="absolute bottom-2 left-2 z-[1000] rounded-lg bg-zinc-900/90 px-3 py-1.5 font-mono text-sm text-white backdrop-blur-sm">
+        <div className="absolute bottom-2 left-2 z-[1000] rounded-lg bg-rust-bg/90 px-3 py-1.5 font-mono text-sm text-white backdrop-blur-sm">
           X: {coords.x} | Y: {coords.y}
         </div>
       )}
@@ -430,7 +436,7 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
       {/* Grid toggle - for later */}
       <div className="absolute right-2 top-16 z-[1000]">
         <button
-          className="rounded-lg bg-zinc-900/90 p-2 text-zinc-400 backdrop-blur-sm transition-colors hover:bg-zinc-800 hover:text-white"
+          className="rounded-lg bg-rust-bg/90 p-2 text-rust-text-secondary backdrop-blur-sm transition-colors hover:bg-rust-surface hover:text-white"
           title="Grid overlay (coming soon)"
           disabled
         >

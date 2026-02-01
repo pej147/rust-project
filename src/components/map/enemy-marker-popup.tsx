@@ -96,9 +96,9 @@ export function EnemyMarkerPopup({
       className="fixed z-[2000]"
       style={{ left: `${left}px`, top: `${top}px` }}
     >
-      <div className="rounded-lg border border-zinc-700/60 bg-zinc-900/95 shadow-lg backdrop-blur-sm">
+      <div className="rounded-lg border border-rust-border/60 bg-rust-bg/95 shadow-lg backdrop-blur-sm">
         {/* Compact header */}
-        <div className="flex items-center justify-between gap-2 border-b border-zinc-800/40 px-2.5 py-1.5">
+        <div className="flex items-center justify-between gap-2 border-b border-rust-border/40 px-2.5 py-1.5">
           <div className="flex items-center gap-1.5 min-w-0">
             <span className="text-xs font-medium text-white truncate max-w-[100px]">{marker.title}</span>
             <span className="shrink-0 text-[9px]" title={marker.visibility === "PRIVATE" ? "Private" : marker.visibility === "PUBLIC" ? "Public" : "Team"}>
@@ -108,7 +108,7 @@ export function EnemyMarkerPopup({
           <div className="flex items-center gap-1">
             <button
               onClick={onOpenSettings}
-              className="p-1 text-zinc-500 hover:text-zinc-300"
+              className="p-1 text-rust-text-muted hover:text-rust-text"
               title="Settings"
             >
               <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -116,7 +116,7 @@ export function EnemyMarkerPopup({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
             </button>
-            <button onClick={onClose} className="p-1 text-zinc-500 hover:text-zinc-300">
+            <button onClick={onClose} className="p-1 text-rust-text-muted hover:text-rust-text">
               <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -127,16 +127,16 @@ export function EnemyMarkerPopup({
         {/* Names only */}
         <div className="px-2.5 py-2 max-h-[120px] overflow-y-auto">
           {isLoading ? (
-            <div className="text-[10px] text-zinc-500">...</div>
+            <div className="text-[10px] text-rust-text-muted">...</div>
           ) : residents.length === 0 ? (
-            <div className="text-[10px] text-zinc-500 italic">No players</div>
+            <div className="text-[10px] text-rust-text-muted italic">No players</div>
           ) : (
             <div className="space-y-0.5">
               {residents.map((r) => (
-                <div key={r.id} className="text-[11px] text-zinc-300 truncate">
-                  {r.enemy.clanTag && <span className="text-zinc-500">[{r.enemy.clanTag}] </span>}
+                <div key={r.id} className="text-[11px] text-rust-text truncate">
+                  {r.enemy.clanTag && <span className="text-rust-text-muted">[{r.enemy.clanTag}] </span>}
                   {r.enemy.name}
-                  {r.enemy.threatLevel > 2 && <span className="ml-1 text-red-500">{"💀".repeat(Math.min(r.enemy.threatLevel - 2, 3))}</span>}
+                  {r.enemy.threatLevel > 2 && <span className="ml-1 text-rust-danger">{"💀".repeat(Math.min(r.enemy.threatLevel - 2, 3))}</span>}
                 </div>
               ))}
             </div>
@@ -145,10 +145,10 @@ export function EnemyMarkerPopup({
 
         {/* Add button for owner */}
         {isOwner && (
-          <div className="border-t border-zinc-800/40 px-2.5 py-1.5">
+          <div className="border-t border-rust-border/40 px-2.5 py-1.5">
             <button
               onClick={onOpenSettings}
-              className="text-[10px] text-blue-400 hover:text-blue-300"
+              className="text-[10px] text-rust-primary hover:text-rust-primary-hover"
             >
               + Add player
             </button>

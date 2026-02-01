@@ -12,9 +12,9 @@ import { useSession } from "next-auth/react";
 // Role badge component
 function RoleBadge({ role }: { role: string }) {
   const colors = {
-    OWNER: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-    ADMIN: "bg-blue-500/20 text-blue-400 border-blue-500/30",
-    MEMBER: "bg-zinc-500/20 text-zinc-400 border-zinc-500/30",
+    OWNER: "bg-rust-primary/20 text-rust-primary border-rust-primary/30",
+    ADMIN: "bg-rust-surface-elevated text-rust-text border-rust-border",
+    MEMBER: "bg-rust-surface text-rust-text-secondary border-rust-border",
   };
 
   const labels = {
@@ -50,14 +50,14 @@ function TeamCard({
         <div className="flex items-start justify-between">
           <div>
             <h3 className="text-lg font-semibold text-white">{team.name}</h3>
-            <p className="mt-1 text-sm text-zinc-400">
-              Code: <span className="font-mono text-zinc-300">{team.code}</span>
+            <p className="mt-1 text-sm text-rust-text-secondary">
+              Code: <span className="font-mono text-rust-text">{team.code}</span>
             </p>
           </div>
           <RoleBadge role={team.userRole || "MEMBER"} />
         </div>
 
-        <div className="mt-4 flex gap-4 text-sm text-zinc-400">
+        <div className="mt-4 flex gap-4 text-sm text-rust-text-secondary">
           <span className="flex items-center gap-1">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -125,7 +125,7 @@ function CreateTeamSheet({
           autoFocus
         />
 
-        <p className="text-sm text-zinc-400">
+        <p className="text-sm text-rust-text-secondary">
           After creating, you&apos;ll get a unique code for others to join.
         </p>
 
@@ -193,7 +193,7 @@ function JoinTeamSheet({
           className="font-mono text-center text-xl tracking-widest"
         />
 
-        <p className="text-sm text-zinc-400">
+        <p className="text-sm text-rust-text-secondary">
           Ask the team owner for the 6-character code.
         </p>
 
@@ -268,10 +268,10 @@ function TeamDetailSheet({
     <BottomSheet isOpen={!!team} onClose={onClose} title={team.name}>
       <div className="space-y-6">
         {/* Team code */}
-        <div className="rounded-xl bg-zinc-800 p-4">
+        <div className="rounded-lg bg-rust-surface p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-zinc-400">Team Code</p>
+              <p className="text-sm text-rust-text-secondary">Team Code</p>
               <p className="mt-1 font-mono text-2xl font-bold tracking-widest text-white">
                 {team.code}
               </p>
@@ -280,7 +280,7 @@ function TeamDetailSheet({
               {copied ? "Copied!" : "Copy"}
             </Button>
           </div>
-          <p className="mt-2 text-xs text-zinc-500">
+          <p className="mt-2 text-xs text-rust-text-muted">
             Share this code with friends to let them join
           </p>
         </div>
@@ -294,17 +294,17 @@ function TeamDetailSheet({
             {team.members.map((member) => (
               <div
                 key={member.id}
-                className="flex items-center justify-between rounded-xl bg-zinc-800 p-3"
+                className="flex items-center justify-between rounded-lg bg-rust-surface p-3"
               >
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-700 text-lg font-bold text-white">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-rust-surface-elevated text-lg font-bold text-white">
                     {member.user.displayName.charAt(0).toUpperCase()}
                   </div>
                   <div>
                     <p className="font-medium text-white">
                       {member.user.displayName}
                       {member.userId === currentUserId && (
-                        <span className="ml-2 text-xs text-zinc-400">(you)</span>
+                        <span className="ml-2 text-xs text-rust-text-secondary">(you)</span>
                       )}
                     </p>
                     <RoleBadge role={member.role} />
@@ -322,13 +322,13 @@ function TeamDetailSheet({
                           member.role === "ADMIN" ? "MEMBER" : "ADMIN"
                         )
                       }
-                      className="rounded-lg bg-zinc-700 px-2 py-1 text-xs text-zinc-300 hover:bg-zinc-600"
+                      className="rounded-lg bg-rust-surface-elevated px-2 py-1 text-xs text-rust-text hover:brightness-125"
                     >
                       {member.role === "ADMIN" ? "Demote" : "Promote"}
                     </button>
                     <button
                       onClick={() => onRemoveMember(team.id, member.id)}
-                      className="rounded-lg bg-red-500/20 px-2 py-1 text-xs text-red-400 hover:bg-red-500/30"
+                      className="rounded-lg bg-rust-danger/20 px-2 py-1 text-xs text-rust-danger hover:bg-rust-danger/30"
                     >
                       Kick
                     </button>
@@ -339,7 +339,7 @@ function TeamDetailSheet({
                 {!isOwner && isAdmin && member.role === "MEMBER" && member.userId !== currentUserId && (
                   <button
                     onClick={() => onRemoveMember(team.id, member.id)}
-                    className="rounded-lg bg-red-500/20 px-2 py-1 text-xs text-red-400 hover:bg-red-500/30"
+                    className="rounded-lg bg-rust-danger/20 px-2 py-1 text-xs text-rust-danger hover:bg-rust-danger/30"
                   >
                     Kick
                   </button>
@@ -350,7 +350,7 @@ function TeamDetailSheet({
         </div>
 
         {/* Actions */}
-        <div className="space-y-2 border-t border-zinc-800 pt-4">
+        <div className="space-y-2 border-t border-rust-border pt-4">
           {!isOwner && (
             <Button
               variant="secondary"
@@ -364,7 +364,7 @@ function TeamDetailSheet({
           {isOwner && !showDeleteConfirm && (
             <Button
               variant="secondary"
-              className="w-full text-red-400 hover:bg-red-500/20"
+              className="w-full"
               onClick={() => setShowDeleteConfirm(true)}
             >
               Delete Team
@@ -372,8 +372,8 @@ function TeamDetailSheet({
           )}
 
           {isOwner && showDeleteConfirm && (
-            <div className="rounded-xl bg-red-500/10 p-4">
-              <p className="mb-3 text-sm text-red-400">
+            <div className="rounded-lg bg-rust-danger/10 p-4">
+              <p className="mb-3 text-sm text-rust-danger">
                 Are you sure you want to delete this team? This cannot be undone.
               </p>
               <div className="flex gap-2">
@@ -389,7 +389,7 @@ function TeamDetailSheet({
                   variant="primary"
                   size="sm"
                   onClick={handleDelete}
-                  className="flex-1 bg-red-500 hover:bg-red-600"
+                  className="flex-1 bg-rust-danger hover:brightness-125"
                 >
                   Delete
                 </Button>
@@ -413,9 +413,9 @@ function EmptyState({
   return (
     <Card variant="elevated">
       <CardContent className="flex flex-col items-center justify-center py-16">
-        <div className="mb-4 rounded-full bg-zinc-800 p-4">
+        <div className="mb-4 rounded-full bg-rust-surface p-4">
           <svg
-            className="h-12 w-12 text-zinc-500"
+            className="h-12 w-12 text-rust-text-muted"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -429,7 +429,7 @@ function EmptyState({
           </svg>
         </div>
         <h2 className="mb-2 text-xl font-semibold text-white">No teams yet</h2>
-        <p className="mb-6 text-center text-zinc-400">
+        <p className="mb-6 text-center text-rust-text-secondary">
           Create a team or join an existing one
         </p>
         <div className="flex gap-3">
@@ -550,7 +550,7 @@ export default function TeamsPage() {
       <div className="p-4">
         {isLoading ? (
           <div className="flex items-center justify-center py-16">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-600 border-t-white" />
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-rust-border border-t-white" />
           </div>
         ) : teams.length === 0 ? (
           <EmptyState

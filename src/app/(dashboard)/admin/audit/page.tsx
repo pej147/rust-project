@@ -24,8 +24,8 @@ export default function AdminAuditPage() {
 
   if (status === "loading" || loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-950">
-        <div className="text-zinc-400">Loading...</div>
+      <div className="flex min-h-screen items-center justify-center bg-rust-bg">
+        <div className="text-rust-text-secondary">Loading...</div>
       </div>
     );
   }
@@ -38,52 +38,52 @@ export default function AdminAuditPage() {
   const currentPage = Math.floor(offset / limit) + 1;
 
   const actionColors: Record<string, string> = {
-    CREATE_USER: "bg-green-500/20 text-green-400",
-    UPDATE_USER: "bg-blue-500/20 text-blue-400",
-    DELETE_USER: "bg-red-500/20 text-red-400",
-    DELETE_MAP: "bg-red-500/20 text-red-400",
-    CREATE_MARKER: "bg-green-500/20 text-green-400",
-    UPDATE_MARKER: "bg-blue-500/20 text-blue-400",
-    DELETE_MARKER: "bg-red-500/20 text-red-400",
+    CREATE_USER: "bg-rust-primary/20 text-rust-primary",
+    UPDATE_USER: "bg-rust-surface-elevated text-rust-text-secondary",
+    DELETE_USER: "bg-rust-danger/20 text-rust-danger",
+    DELETE_MAP: "bg-rust-danger/20 text-rust-danger",
+    CREATE_MARKER: "bg-rust-primary/20 text-rust-primary",
+    UPDATE_MARKER: "bg-rust-surface-elevated text-rust-text-secondary",
+    DELETE_MARKER: "bg-rust-danger/20 text-rust-danger",
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 px-4 py-6">
+    <div className="min-h-screen bg-rust-bg px-4 py-6">
       {/* Header */}
       <div className="mb-6">
-        <Link href="/admin" className="text-sm text-zinc-400 hover:text-white">
+        <Link href="/admin" className="text-sm text-rust-text-secondary hover:text-white">
           &larr; Back to Dashboard
         </Link>
         <h1 className="mt-2 text-3xl font-bold text-white">Audit Logs</h1>
-        <p className="text-zinc-400">{total} total entries</p>
+        <p className="text-rust-text-secondary">{total} total entries</p>
       </div>
 
       {/* Error display */}
       {error && (
-        <div className="mb-4 rounded-xl bg-red-500/10 p-4 text-red-400">
+        <div className="mb-4 rounded-lg bg-rust-danger/10 p-4 text-rust-danger">
           {error}
         </div>
       )}
 
       {/* Logs Table */}
-      <div className="overflow-hidden rounded-2xl bg-zinc-900">
+      <div className="overflow-hidden rounded-lg bg-rust-surface">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[600px]">
             <thead>
-              <tr className="border-b border-zinc-800">
-                <th className="px-4 py-3 text-left text-sm font-medium text-zinc-400">
+              <tr className="border-b border-rust-border">
+                <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">
                   Timestamp
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-zinc-400">
+                <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">
                   Action
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-zinc-400">
+                <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">
                   User
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-zinc-400">
+                <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">
                   Entity
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-zinc-400">
+                <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">
                   Details
                 </th>
               </tr>
@@ -92,16 +92,16 @@ export default function AdminAuditPage() {
               {logs.map((log) => (
                 <tr
                   key={log.id}
-                  className="border-b border-zinc-800 last:border-0"
+                  className="border-b border-rust-border last:border-0"
                 >
-                  <td className="whitespace-nowrap px-4 py-3 text-sm text-zinc-400">
+                  <td className="whitespace-nowrap px-4 py-3 text-sm text-rust-text-secondary">
                     {new Date(log.createdAt).toLocaleString()}
                   </td>
                   <td className="px-4 py-3">
                     <span
                       className={`rounded-full px-2 py-0.5 text-xs ${
                         actionColors[log.action] ||
-                        "bg-zinc-700 text-zinc-400"
+                        "bg-rust-surface text-rust-text-muted"
                       }`}
                     >
                       {log.action}
@@ -109,17 +109,17 @@ export default function AdminAuditPage() {
                   </td>
                   <td className="px-4 py-3">
                     <p className="text-sm text-white">{log.user.displayName}</p>
-                    <p className="text-xs text-zinc-500">{log.user.email}</p>
+                    <p className="text-xs text-rust-text-muted">{log.user.email}</p>
                   </td>
                   <td className="px-4 py-3 text-sm">
-                    <span className="text-zinc-400">{log.entityType}</span>
-                    <span className="ml-1 font-mono text-xs text-zinc-600">
+                    <span className="text-rust-text-secondary">{log.entityType}</span>
+                    <span className="ml-1 font-mono text-xs text-rust-text-muted">
                       {log.entityId.slice(0, 8)}...
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm text-zinc-400">
+                  <td className="px-4 py-3 text-sm text-rust-text-secondary">
                     {log.details && (
-                      <code className="rounded bg-zinc-800 px-1 text-xs">
+                      <code className="rounded bg-rust-surface-elevated px-1 text-xs">
                         {JSON.stringify(log.details).slice(0, 50)}
                         {JSON.stringify(log.details).length > 50 && "..."}
                       </code>
@@ -132,7 +132,7 @@ export default function AdminAuditPage() {
         </div>
 
         {logs.length === 0 && (
-          <div className="p-8 text-center text-zinc-400">
+          <div className="p-8 text-center text-rust-text-secondary">
             No audit logs found.
           </div>
         )}
@@ -144,17 +144,17 @@ export default function AdminAuditPage() {
           <button
             onClick={() => setOffset(Math.max(0, offset - limit))}
             disabled={offset === 0}
-            className="rounded-lg bg-zinc-800 px-4 py-2 text-sm text-white disabled:opacity-50"
+            className="rounded-lg bg-rust-surface-elevated px-4 py-2 text-sm text-white disabled:opacity-50"
           >
             Previous
           </button>
-          <span className="text-sm text-zinc-400">
+          <span className="text-sm text-rust-text-secondary">
             Page {currentPage} of {totalPages}
           </span>
           <button
             onClick={() => setOffset(offset + limit)}
             disabled={offset + limit >= total}
-            className="rounded-lg bg-zinc-800 px-4 py-2 text-sm text-white disabled:opacity-50"
+            className="rounded-lg bg-rust-surface-elevated px-4 py-2 text-sm text-white disabled:opacity-50"
           >
             Next
           </button>

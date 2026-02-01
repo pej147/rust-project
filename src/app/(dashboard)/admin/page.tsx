@@ -22,8 +22,8 @@ export default function AdminDashboardPage() {
 
   if (status === "loading" || loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-950">
-        <div className="text-zinc-400">Loading...</div>
+      <div className="flex min-h-screen items-center justify-center bg-rust-bg">
+        <div className="text-rust-text-secondary">Loading...</div>
       </div>
     );
   }
@@ -34,18 +34,18 @@ export default function AdminDashboardPage() {
 
   if (error) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-950">
-        <div className="text-red-400">Error: {error}</div>
+      <div className="flex min-h-screen items-center justify-center bg-rust-bg">
+        <div className="text-rust-danger">Error: {error}</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 px-4 py-6">
+    <div className="min-h-screen bg-rust-bg px-4 py-6">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
-        <p className="mt-1 text-zinc-400">
+        <p className="mt-1 text-rust-text-secondary">
           Manage users, maps, and view activity logs
         </p>
       </div>
@@ -109,12 +109,12 @@ export default function AdminDashboardPage() {
           <h2 className="mb-4 text-xl font-semibold text-white">
             User Roles Distribution
           </h2>
-          <div className="rounded-2xl bg-zinc-900 p-4">
+          <div className="rounded-lg bg-rust-surface p-4">
             <div className="flex gap-8">
               {Object.entries(stats.usersByRole).map(([role, count]) => (
                 <div key={role}>
                   <span className="text-2xl font-bold text-white">{count}</span>
-                  <span className="ml-2 text-zinc-400">{role}</span>
+                  <span className="ml-2 text-rust-text-secondary">{role}</span>
                 </div>
               ))}
             </div>
@@ -128,15 +128,15 @@ export default function AdminDashboardPage() {
           <h2 className="mb-4 text-xl font-semibold text-white">
             Markers by Type
           </h2>
-          <div className="rounded-2xl bg-zinc-900 p-4">
+          <div className="rounded-lg bg-rust-surface p-4">
             <div className="flex flex-wrap gap-4">
               {Object.entries(stats.markersByType).map(([type, count]) => (
                 <div
                   key={type}
-                  className="rounded-lg bg-zinc-800 px-3 py-2"
+                  className="rounded-lg bg-rust-surface-elevated px-3 py-2"
                 >
                   <span className="text-white">{count}</span>
-                  <span className="ml-2 text-zinc-400">{type}</span>
+                  <span className="ml-2 text-rust-text-secondary">{type}</span>
                 </div>
               ))}
             </div>
@@ -160,19 +160,19 @@ function StatCard({
   color: "blue" | "green" | "yellow" | "purple";
 }) {
   const colorClasses = {
-    blue: "bg-blue-500/10 border-blue-500/20",
-    green: "bg-green-500/10 border-green-500/20",
-    yellow: "bg-yellow-500/10 border-yellow-500/20",
-    purple: "bg-purple-500/10 border-purple-500/20",
+    blue: "bg-rust-primary/10 border-rust-primary/20",
+    green: "bg-rust-primary/10 border-rust-primary/20",
+    yellow: "bg-rust-primary/10 border-rust-primary/20",
+    purple: "bg-rust-primary/10 border-rust-primary/20",
   };
 
   return (
     <div
-      className={`rounded-2xl border p-4 ${colorClasses[color]}`}
+      className={`rounded-lg border p-4 ${colorClasses[color]}`}
     >
-      <p className="text-sm text-zinc-400">{label}</p>
+      <p className="text-sm text-rust-text-secondary">{label}</p>
       <p className="mt-1 text-3xl font-bold text-white">{value}</p>
-      {detail && <p className="mt-1 text-xs text-zinc-500">{detail}</p>}
+      {detail && <p className="mt-1 text-xs text-rust-text-muted">{detail}</p>}
     </div>
   );
 }
@@ -192,12 +192,12 @@ function QuickLink({
   return (
     <Link
       href={href}
-      className="flex items-start gap-4 rounded-2xl bg-zinc-900 p-4 transition-colors hover:bg-zinc-800"
+      className="flex items-start gap-4 rounded-lg border border-rust-border bg-rust-surface p-4 transition-colors hover:bg-rust-surface-elevated"
     >
       <span className="text-3xl">{icon}</span>
       <div>
         <h3 className="font-semibold text-white">{title}</h3>
-        <p className="text-sm text-zinc-400">{description}</p>
+        <p className="text-sm text-rust-text-secondary">{description}</p>
       </div>
     </Link>
   );

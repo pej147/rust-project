@@ -28,7 +28,7 @@ function ThreatBadge({ level }: { level: number }) {
       {Array.from({ length: 5 }).map((_, i) => (
         <span
           key={i}
-          className={`text-sm ${i < level ? "text-red-500" : "text-zinc-600"}`}
+          className={`text-sm ${i < level ? "text-rust-danger" : "text-rust-text-muted"}`}
         >
           💀
         </span>
@@ -99,12 +99,12 @@ export function GuestEnemyMarkerSheet({
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-lg font-bold text-white">{marker.title}</h3>
-            <p className="font-mono text-sm text-zinc-400">
+            <p className="font-mono text-sm text-rust-text-secondary">
               {Math.round(marker.x)}, {Math.round(marker.y)}
             </p>
           </div>
           <div
-            className="flex h-12 w-12 items-center justify-center rounded-xl text-xl"
+            className="flex h-12 w-12 items-center justify-center rounded-lg text-xl"
             style={{ backgroundColor: marker.color || "#FF3B30" }}
           >
             👤
@@ -112,15 +112,15 @@ export function GuestEnemyMarkerSheet({
         </div>
 
         {/* Residents list */}
-        <div className="rounded-xl bg-zinc-800/50 p-3">
+        <div className="rounded-lg bg-rust-surface/50 p-3">
           <div className="mb-3 flex items-center justify-between">
-            <h4 className="text-sm font-medium text-zinc-300">
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-rust-text-secondary">
               Residents ({residents.length})
             </h4>
             {!isAdding && (
               <button
                 onClick={() => setIsAdding(true)}
-                className="text-sm text-blue-400 hover:text-blue-300"
+                className="text-sm text-rust-primary hover:text-rust-primary-hover"
               >
                 + Add Player
               </button>
@@ -128,7 +128,7 @@ export function GuestEnemyMarkerSheet({
           </div>
 
           {residents.length === 0 ? (
-            <div className="py-4 text-center text-zinc-500">
+            <div className="py-4 text-center text-rust-text-muted">
               No players added yet
             </div>
           ) : (
@@ -136,13 +136,13 @@ export function GuestEnemyMarkerSheet({
               {residents.map((resident) => (
                 <div
                   key={resident.id}
-                  className="flex items-center justify-between rounded-lg bg-zinc-700/50 p-3"
+                  className="flex items-center justify-between rounded-lg bg-rust-surface-elevated/50 p-3"
                 >
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
                       <span className="text-white">
                         {resident.clanTag && (
-                          <span className="text-zinc-400">
+                          <span className="text-rust-text-secondary">
                             [{resident.clanTag}]{" "}
                           </span>
                         )}
@@ -153,7 +153,7 @@ export function GuestEnemyMarkerSheet({
                   </div>
                   <button
                     onClick={() => handleRemovePlayer(resident.id)}
-                    className="ml-2 rounded-lg p-2 text-zinc-400 hover:bg-zinc-600 hover:text-red-400"
+                    className="ml-2 rounded-lg p-2 text-rust-text-secondary hover:bg-rust-surface-elevated hover:text-rust-danger"
                     title="Remove player"
                   >
                     ✕
@@ -165,7 +165,7 @@ export function GuestEnemyMarkerSheet({
 
           {/* Add player form */}
           {isAdding && (
-            <form onSubmit={handleAddPlayer} className="mt-3 space-y-3 border-t border-zinc-700 pt-3">
+            <form onSubmit={handleAddPlayer} className="mt-3 space-y-3 border-t border-rust-border pt-3">
               <Input
                 id="player-name"
                 label="Player Name"
@@ -184,7 +184,7 @@ export function GuestEnemyMarkerSheet({
                 maxLength={10}
               />
               <div>
-                <label className="mb-2 block text-sm font-medium text-zinc-300">
+                <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">
                   Threat Level
                 </label>
                 <div className="flex items-center gap-1">
@@ -195,8 +195,8 @@ export function GuestEnemyMarkerSheet({
                       onClick={() => setNewThreatLevel(level)}
                       className={`rounded-lg p-2 text-xl transition-colors ${
                         level <= newThreatLevel
-                          ? "text-red-500"
-                          : "text-zinc-600 hover:text-zinc-400"
+                          ? "text-rust-danger"
+                          : "text-rust-text-muted hover:text-rust-text-secondary"
                       }`}
                     >
                       💀

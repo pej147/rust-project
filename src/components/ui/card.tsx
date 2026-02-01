@@ -11,7 +11,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={cn(
-          "rounded-2xl bg-zinc-900 p-4",
+          "rounded-lg border border-rust-border bg-rust-surface p-4",
           {
             "": variant === "default",
             "shadow-xl shadow-black/20": variant === "elevated",
@@ -47,7 +47,7 @@ const CardTitle = forwardRef<
   return (
     <h3
       ref={ref}
-      className={cn("text-lg font-semibold text-white", className)}
+      className={cn("text-lg font-semibold uppercase tracking-wide text-rust-text", className)}
       {...props}
     />
   );

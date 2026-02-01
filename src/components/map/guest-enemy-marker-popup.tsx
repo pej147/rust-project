@@ -26,7 +26,7 @@ function ThreatBadge({ level }: { level: number }) {
       {Array.from({ length: 5 }).map((_, i) => (
         <span
           key={i}
-          className={`text-xs ${i < level ? "text-red-500" : "text-zinc-600"}`}
+          className={`text-xs ${i < level ? "text-rust-danger" : "text-rust-text-muted"}`}
         >
           💀
         </span>
@@ -139,9 +139,9 @@ export function GuestEnemyMarkerPopup({
         width: `${popupWidth}px`,
       }}
     >
-      <div className="rounded-xl border border-zinc-700/50 bg-zinc-900/95 shadow-xl shadow-black/40 backdrop-blur-sm">
+      <div className="rounded-lg border border-rust-border/50 bg-rust-bg/95 shadow-xl shadow-black/40 backdrop-blur-sm">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-zinc-800/50 px-3 py-2">
+        <div className="flex items-center justify-between border-b border-rust-border/50 px-3 py-2">
           <div className="flex items-center gap-2">
             <div
               className="flex h-7 w-7 items-center justify-center rounded-lg text-sm"
@@ -151,14 +151,14 @@ export function GuestEnemyMarkerPopup({
             </div>
             <div>
               <h3 className="text-sm font-medium text-white">{marker.title}</h3>
-              <p className="font-mono text-[10px] text-zinc-500">
+              <p className="font-mono text-[10px] text-rust-text-muted">
                 {Math.round(marker.x)}, {Math.round(marker.y)}
               </p>
             </div>
           </div>
           <button
             onClick={handleClose}
-            className="rounded p-1 text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300"
+            className="rounded p-1 text-rust-text-muted hover:bg-rust-surface hover:text-rust-text"
           >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -170,13 +170,13 @@ export function GuestEnemyMarkerPopup({
         <div className="max-h-[180px] overflow-y-auto p-2">
           {/* Residents list */}
           <div className="mb-2 flex items-center justify-between">
-            <h4 className="text-xs font-medium text-zinc-500">
+            <h4 className="text-xs font-medium text-rust-text-muted">
               Residents ({residents.length})
             </h4>
             {!isAdding && (
               <button
                 onClick={() => setIsAdding(true)}
-                className="text-[10px] text-blue-400 hover:text-blue-300"
+                className="text-[10px] text-rust-primary hover:text-rust-primary-hover"
               >
                 + Add
               </button>
@@ -184,7 +184,7 @@ export function GuestEnemyMarkerPopup({
           </div>
 
           {residents.length === 0 && !isAdding ? (
-            <div className="py-3 text-center text-xs text-zinc-500">
+            <div className="py-3 text-center text-xs text-rust-text-muted">
               No players yet
             </div>
           ) : (
@@ -192,12 +192,12 @@ export function GuestEnemyMarkerPopup({
               {residents.map((resident) => (
                 <div
                   key={resident.id}
-                  className="flex items-center justify-between rounded-md bg-zinc-800/50 px-2 py-1.5"
+                  className="flex items-center justify-between rounded-md bg-rust-surface/50 px-2 py-1.5"
                 >
                   <div className="min-w-0 flex-1">
                     <div className="truncate text-xs text-white">
                       {resident.clanTag && (
-                        <span className="text-zinc-400">
+                        <span className="text-rust-text-secondary">
                           [{resident.clanTag}]{" "}
                         </span>
                       )}
@@ -207,7 +207,7 @@ export function GuestEnemyMarkerPopup({
                   </div>
                   <button
                     onClick={() => handleRemovePlayer(resident.id)}
-                    className="ml-1 rounded p-1 text-zinc-500 hover:bg-zinc-700 hover:text-red-400"
+                    className="ml-1 rounded p-1 text-rust-text-muted hover:bg-rust-surface-elevated hover:text-rust-danger"
                     title="Remove"
                   >
                     <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -221,13 +221,13 @@ export function GuestEnemyMarkerPopup({
 
           {/* Add player form */}
           {isAdding && (
-            <form onSubmit={handleAddPlayer} className="mt-2 space-y-1.5 border-t border-zinc-800/50 pt-2">
+            <form onSubmit={handleAddPlayer} className="mt-2 space-y-1.5 border-t border-rust-border/50 pt-2">
               <input
                 type="text"
                 placeholder="Player name"
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
-                className="w-full rounded-md bg-zinc-800 px-2 py-1.5 text-xs text-white placeholder-zinc-500 outline-none focus:ring-1 focus:ring-blue-500"
+                className="w-full rounded-md bg-rust-surface-elevated px-2 py-1.5 text-xs text-white placeholder-rust-text-muted outline-none focus:ring-1 focus:ring-rust-primary"
                 required
                 autoFocus
               />
@@ -236,7 +236,7 @@ export function GuestEnemyMarkerPopup({
                 placeholder="Clan tag (optional)"
                 value={newClanTag}
                 onChange={(e) => setNewClanTag(e.target.value)}
-                className="w-full rounded-md bg-zinc-800 px-2 py-1.5 text-xs text-white placeholder-zinc-500 outline-none focus:ring-1 focus:ring-blue-500"
+                className="w-full rounded-md bg-rust-surface-elevated px-2 py-1.5 text-xs text-white placeholder-rust-text-muted outline-none focus:ring-1 focus:ring-rust-primary"
                 maxLength={10}
               />
               <div className="flex items-center justify-between">
@@ -248,8 +248,8 @@ export function GuestEnemyMarkerPopup({
                       onClick={() => setNewThreatLevel(level)}
                       className={`p-0.5 text-xs transition-colors ${
                         level <= newThreatLevel
-                          ? "text-red-500"
-                          : "text-zinc-600 hover:text-zinc-400"
+                          ? "text-rust-danger"
+                          : "text-rust-text-muted hover:text-rust-text-secondary"
                       }`}
                     >
                       💀
@@ -260,14 +260,14 @@ export function GuestEnemyMarkerPopup({
                   <button
                     type="button"
                     onClick={() => setIsAdding(false)}
-                    className="rounded px-2 py-1 text-[10px] text-zinc-400 hover:bg-zinc-800"
+                    className="rounded px-2 py-1 text-[10px] text-rust-text-secondary hover:bg-rust-surface"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={!newName.trim()}
-                    className="rounded bg-blue-600 px-2 py-1 text-[10px] text-white hover:bg-blue-500 disabled:opacity-50"
+                    className="rounded bg-rust-primary px-2 py-1 text-[10px] text-white hover:bg-rust-primary-hover disabled:opacity-50"
                   >
                     Add
                   </button>
@@ -278,10 +278,10 @@ export function GuestEnemyMarkerPopup({
         </div>
 
         {/* Footer - Settings button */}
-        <div className="border-t border-zinc-800/50 p-2">
+        <div className="border-t border-rust-border/50 p-2">
           <button
             onClick={onOpenSettings}
-            className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-zinc-800/50 py-1.5 text-xs text-zinc-400 transition-colors hover:bg-zinc-700 hover:text-zinc-300"
+            className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-rust-surface/50 py-1.5 text-xs text-rust-text-secondary transition-colors hover:bg-rust-surface-elevated hover:text-rust-text"
           >
             <span>⚙️</span>
             <span>Settings</span>
@@ -291,7 +291,7 @@ export function GuestEnemyMarkerPopup({
 
       {/* Arrow pointer to marker */}
       <div
-        className="absolute top-1/3 h-2 w-2 -translate-y-1/2 rotate-45 border-zinc-700/50 bg-zinc-900/95"
+        className="absolute top-1/3 h-2 w-2 -translate-y-1/2 rotate-45 border-rust-border/50 bg-rust-bg/95"
         style={{
           [positionRight ? "left" : "right"]: "-4px",
           borderLeft: positionRight ? "1px solid" : "none",

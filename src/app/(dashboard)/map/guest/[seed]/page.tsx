@@ -29,8 +29,8 @@ const RustMap = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex h-full items-center justify-center bg-zinc-900">
-        <p className="text-zinc-400">Loading map...</p>
+      <div className="flex h-full items-center justify-center bg-rust-surface">
+        <p className="text-rust-text-secondary">Loading map...</p>
       </div>
     ),
   }
@@ -145,7 +145,7 @@ export default function GuestMapDetailPage({
       <>
         <Header title="Loading..." />
         <div className="flex h-[calc(100vh-8rem)] items-center justify-center">
-          <p className="text-zinc-400">Loading map...</p>
+          <p className="text-rust-text-secondary">Loading map...</p>
         </div>
       </>
     );
@@ -174,14 +174,14 @@ export default function GuestMapDetailPage({
         title={`Seed: ${seed}`}
         subtitle={map?.serverName || "Guest Mode"}
         leftAction={
-          <Link href="/map" className="text-blue-500">
+          <Link href="/map" className="text-rust-primary">
             ←
           </Link>
         }
         rightAction={
           <button
             onClick={() => setShowInfo(!showInfo)}
-            className="text-blue-500"
+            className="text-rust-primary"
           >
             ⓘ
           </button>
@@ -189,17 +189,17 @@ export default function GuestMapDetailPage({
       />
 
       {/* Guest Mode Banner */}
-      <div className="bg-orange-500/10 border-b border-orange-500/20 px-4 py-2">
+      <div className="bg-rust-primary/10 border-b border-rust-primary/20 px-4 py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-orange-400">👤</span>
-            <span className="text-sm text-orange-400">
+            <span className="text-rust-primary">👤</span>
+            <span className="text-sm text-rust-primary">
               Guest Mode - markers saved locally
             </span>
           </div>
           <Link
             href="/login"
-            className="text-xs text-orange-400 hover:text-orange-300 underline"
+            className="text-xs text-rust-primary hover:text-rust-primary-hover underline"
           >
             Login to sync
           </Link>
@@ -208,13 +208,13 @@ export default function GuestMapDetailPage({
 
       {/* Info panel */}
       {showInfo && (
-        <div className="border-b border-zinc-800 bg-zinc-900 px-4 py-3">
+        <div className="border-b border-rust-border bg-rust-surface px-4 py-3">
           <div className="flex items-center justify-between text-sm">
-            <div className="flex items-center gap-4 text-zinc-400">
+            <div className="flex items-center gap-4 text-rust-text-secondary">
               <span>{mapSize}m</span>
               <span>{markers.length} markers</span>
             </div>
-            <span className="rounded-full bg-orange-500/20 px-2 py-0.5 text-xs text-orange-400">
+            <span className="rounded-full bg-rust-primary/20 px-2 py-0.5 text-xs text-rust-primary">
               Guest
             </span>
           </div>
@@ -244,7 +244,7 @@ export default function GuestMapDetailPage({
             setMarkerPosition({ x: mapSize / 2, y: mapSize / 2 });
             setShowAddMarker(true);
           }}
-          className="absolute bottom-20 right-4 z-[1000] flex h-14 w-14 items-center justify-center rounded-full bg-orange-600 text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
+          className="absolute bottom-20 right-4 z-[1000] flex h-14 w-14 items-center justify-center rounded-full bg-rust-primary text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
           title="Add marker"
         >
           <svg
@@ -263,7 +263,7 @@ export default function GuestMapDetailPage({
         </button>
 
         {/* Tip for user */}
-        <div className="absolute bottom-20 left-4 z-[1000] rounded-lg bg-zinc-800/80 px-3 py-2 text-xs text-zinc-300 backdrop-blur-sm">
+        <div className="absolute bottom-20 left-4 z-[1000] rounded-lg bg-rust-surface-elevated/80 px-3 py-2 text-xs text-rust-text backdrop-blur-sm">
           Click on the map to place a marker
         </div>
       </div>

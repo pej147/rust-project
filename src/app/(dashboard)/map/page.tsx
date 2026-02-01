@@ -88,7 +88,7 @@ export default function MapPage() {
       <>
         <Header title="Intel Map" subtitle="Track your enemies" />
         <div className="flex justify-center py-8">
-          <p className="text-zinc-400">Loading...</p>
+          <p className="text-rust-text-secondary">Loading...</p>
         </div>
       </>
     );
@@ -102,7 +102,7 @@ export default function MapPage() {
           title="Intel Map"
           subtitle="Guest Mode"
           rightAction={
-            <Link href="/login" className="text-blue-500 text-sm">
+            <Link href="/login" className="text-rust-primary text-sm">
               Login
             </Link>
           }
@@ -110,14 +110,14 @@ export default function MapPage() {
 
         <div className="p-4 space-y-6">
           {/* Guest Mode Banner */}
-          <div className="rounded-2xl bg-gradient-to-r from-orange-500/20 to-red-500/20 border border-orange-500/30 p-4">
+          <div className="rounded-lg bg-gradient-to-r from-rust-primary/20 to-rust-primary/10 border border-rust-primary/30 p-4">
             <div className="flex items-start gap-3">
               <span className="text-2xl">👤</span>
               <div>
                 <h3 className="font-semibold text-white">Guest Mode</h3>
-                <p className="text-sm text-zinc-400 mt-1">
+                <p className="text-sm text-rust-text-secondary mt-1">
                   Your markers are saved locally in your browser.{" "}
-                  <Link href="/register" className="text-orange-400 hover:underline">
+                  <Link href="/register" className="text-rust-primary hover:underline">
                     Create an account
                   </Link>{" "}
                   to sync across devices.
@@ -165,7 +165,7 @@ export default function MapPage() {
                 {guestMaps.map((map) => (
                   <Card
                     key={map.id}
-                    className="transition-colors hover:bg-zinc-800/50 cursor-pointer"
+                    className="transition-colors hover:bg-rust-surface/50 cursor-pointer"
                     onClick={() => handleGuestMapClick(map)}
                   >
                     <CardContent className="py-3">
@@ -175,20 +175,20 @@ export default function MapPage() {
                             <h3 className="font-semibold text-white">
                               Seed: {map.seed}
                             </h3>
-                            <span className="rounded-full bg-orange-500/20 px-2 py-0.5 text-xs text-orange-400">
+                            <span className="rounded-full bg-rust-primary/20 px-2 py-0.5 text-xs text-rust-primary">
                               Guest
                             </span>
                           </div>
                           {map.serverName && (
-                            <p className="text-sm text-zinc-400">{map.serverName}</p>
+                            <p className="text-sm text-rust-text-secondary">{map.serverName}</p>
                           )}
-                          <div className="mt-1 flex items-center gap-3 text-xs text-zinc-500">
+                          <div className="mt-1 flex items-center gap-3 text-xs text-rust-text-muted">
                             <span>{map.mapSize}m</span>
                             <span>{map.markers.length} markers</span>
                           </div>
                         </div>
                         <svg
-                          className="h-5 w-5 text-zinc-500"
+                          className="h-5 w-5 text-rust-text-muted"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -219,7 +219,7 @@ export default function MapPage() {
         title="Intel Map"
         subtitle="Track your enemies"
         rightAction={
-          <Link href="/map/new" className="text-blue-500">
+          <Link href="/map/new" className="text-rust-primary">
             + New
           </Link>
         }
@@ -228,7 +228,7 @@ export default function MapPage() {
         {error ? (
           <Card variant="elevated">
             <CardContent className="py-8 text-center">
-              <p className="text-red-400">{error}</p>
+              <p className="text-rust-danger">{error}</p>
               <Button
                 variant="secondary"
                 className="mt-4"
@@ -245,9 +245,9 @@ export default function MapPage() {
         ) : maps.length === 0 ? (
           <Card variant="elevated">
             <CardContent className="flex flex-col items-center justify-center py-16">
-              <div className="mb-4 rounded-full bg-zinc-800 p-4">
+              <div className="mb-4 rounded-full bg-rust-surface p-4">
                 <svg
-                  className="h-12 w-12 text-zinc-500"
+                  className="h-12 w-12 text-rust-text-muted"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -263,7 +263,7 @@ export default function MapPage() {
               <h2 className="mb-2 text-xl font-semibold text-white">
                 No map sessions yet
               </h2>
-              <p className="mb-6 text-center text-zinc-400">
+              <p className="mb-6 text-center text-rust-text-secondary">
                 Start a new map session to add markers
               </p>
               <Link href="/map/new">
@@ -275,7 +275,7 @@ export default function MapPage() {
           <div className="space-y-3">
             {maps.map((map) => (
               <Link key={map.id} href={`/map/${map.id}`}>
-                <Card className="transition-colors hover:bg-zinc-800/50">
+                <Card className="transition-colors hover:bg-rust-surface/50">
                   <CardContent className="py-3">
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
@@ -284,17 +284,17 @@ export default function MapPage() {
                             Seed: {map.seed}
                           </h3>
                           {map.isActive && (
-                            <span className="rounded-full bg-green-500/20 px-2 py-0.5 text-xs text-green-400">
+                            <span className="rounded-full bg-rust-primary/20 px-2 py-0.5 text-xs text-rust-primary">
                               Active
                             </span>
                           )}
                         </div>
                         {map.serverName && (
-                          <p className="text-sm text-zinc-400">
+                          <p className="text-sm text-rust-text-secondary">
                             {map.serverName}
                           </p>
                         )}
-                        <div className="mt-1 flex items-center gap-3 text-xs text-zinc-500">
+                        <div className="mt-1 flex items-center gap-3 text-xs text-rust-text-muted">
                           <span>{map.mapSize}m</span>
                           <span>{map._count.markers} markers</span>
                           {map.wipeDate && (
@@ -306,7 +306,7 @@ export default function MapPage() {
                         </div>
                       </div>
                       <svg
-                        className="h-5 w-5 text-zinc-500"
+                        className="h-5 w-5 text-rust-text-muted"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"

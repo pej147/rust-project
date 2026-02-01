@@ -43,7 +43,7 @@ function LoginForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {error && (
-        <div className="rounded-xl bg-red-500/10 p-4 text-sm text-red-400">
+        <div className="rounded-lg bg-rust-danger/10 p-4 text-sm text-rust-danger">
           {error}
         </div>
       )}
@@ -51,7 +51,7 @@ function LoginForm() {
       <div>
         <label
           htmlFor="email"
-          className="mb-2 block text-sm font-medium text-zinc-300"
+          className="mb-2 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary"
         >
           Email
         </label>
@@ -61,7 +61,7 @@ function LoginForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="w-full rounded-lg border border-rust-border bg-rust-surface-elevated px-4 py-3 text-rust-text placeholder-rust-text-muted transition-colors focus:border-rust-primary focus:outline-none focus:ring-1 focus:ring-rust-primary"
           placeholder="your@email.com"
         />
       </div>
@@ -69,7 +69,7 @@ function LoginForm() {
       <div>
         <label
           htmlFor="password"
-          className="mb-2 block text-sm font-medium text-zinc-300"
+          className="mb-2 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary"
         >
           Password
         </label>
@@ -79,7 +79,7 @@ function LoginForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="w-full rounded-lg border border-rust-border bg-rust-surface-elevated px-4 py-3 text-rust-text placeholder-rust-text-muted transition-colors focus:border-rust-primary focus:outline-none focus:ring-1 focus:ring-rust-primary"
           placeholder="••••••••"
         />
       </div>
@@ -87,7 +87,7 @@ function LoginForm() {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+        className="w-full rounded-lg bg-rust-primary py-3 font-semibold uppercase tracking-wide text-white transition-colors hover:bg-rust-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
       >
         {isLoading ? "Logging in..." : "Log in"}
       </button>
@@ -97,29 +97,29 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="rounded-3xl bg-zinc-900 p-8 shadow-xl">
+    <div className="rounded-lg border border-rust-border bg-rust-surface p-8 shadow-xl">
       <h1 className="mb-2 text-center text-3xl font-bold text-white">
         Welcome back
       </h1>
-      <p className="mb-8 text-center text-zinc-400">
+      <p className="mb-8 text-center text-rust-text-secondary">
         Log in to your Rust Intel account
       </p>
 
       <Suspense
         fallback={
           <div className="flex justify-center py-8">
-            <div className="text-zinc-400">Loading...</div>
+            <div className="text-rust-text-secondary">Loading...</div>
           </div>
         }
       >
         <LoginForm />
       </Suspense>
 
-      <p className="mt-6 text-center text-sm text-zinc-400">
+      <p className="mt-6 text-center text-sm text-rust-text-secondary">
         Don't have an account?{" "}
         <Link
           href="/register"
-          className="font-medium text-blue-400 hover:text-blue-300"
+          className="font-medium text-rust-primary hover:text-rust-primary-hover"
         >
           Register here
         </Link>

@@ -25,9 +25,9 @@ export default function RaidingPage() {
   const itemsWithoutData = allItems.filter((item) => item.hp === null);
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
+    <div className="min-h-screen bg-rust-bg text-white">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-800">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-rust-bg/80 backdrop-blur-xl border-b border-rust-border">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <span className="text-2xl">🗺️</span>
@@ -37,13 +37,13 @@ export default function RaidingPage() {
           <nav className="flex items-center gap-4">
             <Link
               href="/wiki"
-              className="text-zinc-400 hover:text-white transition-colors text-sm"
+              className="text-rust-text-secondary hover:text-white transition-colors text-sm"
             >
               Wiki
             </Link>
             <Link
               href="/map"
-              className="text-zinc-400 hover:text-white transition-colors text-sm"
+              className="text-rust-text-secondary hover:text-white transition-colors text-sm"
             >
               Map
             </Link>
@@ -55,7 +55,7 @@ export default function RaidingPage() {
       <main className="pt-24 pb-16 px-4">
         <div className="max-w-6xl mx-auto">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-sm text-zinc-400 mb-6">
+          <div className="flex items-center gap-2 text-sm text-rust-text-secondary mb-6">
             <Link href="/wiki" className="hover:text-white">
               Wiki
             </Link>
@@ -64,32 +64,32 @@ export default function RaidingPage() {
           </div>
 
           <h1 className="text-4xl font-bold mb-4">Raid Cost Chart</h1>
-          <p className="text-zinc-400 mb-8 max-w-2xl">
+          <p className="text-rust-text-secondary mb-8 max-w-2xl">
             Hoeveel explosives heb je nodig om doors, walls en deployables te
             raiden? Bekijk de sulfur kosten en kies de goedkoopste methode.
           </p>
 
           {/* Legend */}
-          <div className="flex flex-wrap gap-4 mb-8 p-4 bg-zinc-900 rounded-xl border border-zinc-800">
+          <div className="flex flex-wrap gap-4 mb-8 p-4 bg-rust-surface rounded-lg border border-rust-border">
             <div className="flex items-center gap-2">
               <span className="text-xl">🚀</span>
-              <span className="text-sm text-zinc-400">Rockets</span>
+              <span className="text-sm text-rust-text-secondary">Rockets</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xl">💣</span>
-              <span className="text-sm text-zinc-400">C4</span>
+              <span className="text-sm text-rust-text-secondary">C4</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xl">🎒</span>
-              <span className="text-sm text-zinc-400">Satchels</span>
+              <span className="text-sm text-rust-text-secondary">Satchels</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xl">🔫</span>
-              <span className="text-sm text-zinc-400">Explosive Ammo</span>
+              <span className="text-sm text-rust-text-secondary">Explosive Ammo</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-              <span className="text-sm text-zinc-400">Cheapest method</span>
+              <span className="text-sm text-rust-text-secondary">Cheapest method</span>
             </div>
           </div>
 
@@ -114,26 +114,26 @@ export default function RaidingPage() {
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <span>🏠</span> Building Blocks
             </h2>
-            <p className="text-zinc-400 mb-4 text-sm">
+            <p className="text-rust-text-secondary mb-4 text-sm">
               Note: Building blocks have different HP for soft side vs hard
               side.
             </p>
             <RaidTable
               items={raidData.buildings.slice(0, 10) as RaidTarget[]}
             />
-            <p className="text-zinc-500 text-sm mt-4">
+            <p className="text-rust-text-muted text-sm mt-4">
               Showing first 10 building blocks. More coming soon.
             </p>
           </section>
 
           {/* Data Status */}
-          <div className="mt-12 p-4 bg-zinc-900/50 rounded-xl border border-zinc-800">
+          <div className="mt-12 p-4 bg-rust-surface/50 rounded-lg border border-rust-border">
             <h3 className="font-bold mb-2">Data Status</h3>
-            <p className="text-zinc-400 text-sm">
+            <p className="text-rust-text-secondary text-sm">
               Items with data: {itemsWithData.length} | Pending:{" "}
               {itemsWithoutData.length}
             </p>
-            <p className="text-zinc-500 text-sm mt-1">
+            <p className="text-rust-text-muted text-sm mt-1">
               Source: wiki.rustclash.com | Last updated: 2026-01-26
             </p>
           </div>
@@ -148,26 +148,26 @@ function RaidTable({ items }: { items: RaidTarget[] }) {
     <div className="overflow-x-auto">
       <table className="w-full border-collapse">
         <thead>
-          <tr className="border-b border-zinc-800">
-            <th className="text-left py-3 px-4 text-sm font-medium text-zinc-400">
+          <tr className="border-b border-rust-border">
+            <th className="text-left py-3 px-4 text-sm font-medium text-rust-text-secondary">
               Target
             </th>
-            <th className="text-center py-3 px-2 text-sm font-medium text-zinc-400">
+            <th className="text-center py-3 px-2 text-sm font-medium text-rust-text-secondary">
               HP
             </th>
-            <th className="text-center py-3 px-2 text-sm font-medium text-zinc-400">
+            <th className="text-center py-3 px-2 text-sm font-medium text-rust-text-secondary">
               🚀 Rockets
             </th>
-            <th className="text-center py-3 px-2 text-sm font-medium text-zinc-400">
+            <th className="text-center py-3 px-2 text-sm font-medium text-rust-text-secondary">
               💣 C4
             </th>
-            <th className="text-center py-3 px-2 text-sm font-medium text-zinc-400">
+            <th className="text-center py-3 px-2 text-sm font-medium text-rust-text-secondary">
               🎒 Satchels
             </th>
-            <th className="text-center py-3 px-2 text-sm font-medium text-zinc-400">
+            <th className="text-center py-3 px-2 text-sm font-medium text-rust-text-secondary">
               🔫 Exp. Ammo
             </th>
-            <th className="text-center py-3 px-2 text-sm font-medium text-zinc-400">
+            <th className="text-center py-3 px-2 text-sm font-medium text-rust-text-secondary">
               Cheapest
             </th>
           </tr>
@@ -187,9 +187,9 @@ function RaidRow({ item }: { item: RaidTarget }) {
   const cheapest = item.cheapest_method;
 
   const getCellClass = (method: string) => {
-    if (!hasData) return "text-zinc-600";
+    if (!hasData) return "text-rust-text-muted";
     if (cheapest === method) return "text-green-400 font-bold";
-    return "text-zinc-300";
+    return "text-rust-text";
   };
 
   const formatCell = (
@@ -200,7 +200,7 @@ function RaidRow({ item }: { item: RaidTarget }) {
     return (
       <div className={getCellClass(method)}>
         <div className="font-mono">{data.quantity}</div>
-        <div className="text-xs text-zinc-500">
+        <div className="text-xs text-rust-text-muted">
           {data.sulfur_cost?.toLocaleString()}S
         </div>
       </div>
@@ -208,11 +208,11 @@ function RaidRow({ item }: { item: RaidTarget }) {
   };
 
   return (
-    <tr className="border-b border-zinc-800/50 hover:bg-zinc-900/50 transition-colors">
+    <tr className="border-b border-rust-border/50 hover:bg-rust-surface/50 transition-colors">
       <td className="py-3 px-4">
         <Link
           href={`/wiki/raiding/${item.id}`}
-          className="hover:text-blue-400 transition-colors flex items-center gap-2"
+          className="hover:text-rust-primary transition-colors flex items-center gap-2"
         >
           <span className="font-medium">{item.target_name}</span>
           {hasData && (
@@ -222,7 +222,7 @@ function RaidRow({ item }: { item: RaidTarget }) {
           )}
         </Link>
       </td>
-      <td className="text-center py-3 px-2 font-mono text-zinc-400">
+      <td className="text-center py-3 px-2 font-mono text-rust-text-secondary">
         {item.hp ?? "—"}
       </td>
       <td className="text-center py-3 px-2">
@@ -241,7 +241,7 @@ function RaidRow({ item }: { item: RaidTarget }) {
             <div className="font-mono">
               {item.cheapest_sulfur.toLocaleString()}
             </div>
-            <div className="text-xs text-zinc-500">sulfur</div>
+            <div className="text-xs text-rust-text-muted">sulfur</div>
           </div>
         ) : (
           "—"

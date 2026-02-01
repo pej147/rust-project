@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { BottomNav } from "@/components/layout/bottom-nav";
+import { TopNav } from "@/components/layout/top-nav";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -7,9 +7,9 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col bg-zinc-950">
-      <main className="flex-1 pb-24">{children}</main>
-      <BottomNav />
+    <div className="flex min-h-screen flex-col bg-rust-bg">
+      <TopNav />
+      <main className="flex-1">{children}</main>
     </div>
   );
 }

@@ -75,7 +75,7 @@ export function MarkerFilter({
       {!isExpanded ? (
         <button
           onClick={() => setIsExpanded(true)}
-          className="flex items-center gap-2 rounded-xl bg-zinc-900/90 px-3 py-2 text-sm text-white shadow-lg backdrop-blur-sm transition-colors hover:bg-zinc-800"
+          className="flex items-center gap-2 rounded-lg bg-rust-bg/90 px-3 py-2 text-sm uppercase tracking-wide text-white shadow-lg backdrop-blur-sm transition-colors hover:bg-rust-surface"
         >
           <svg
             className="h-4 w-4"
@@ -96,13 +96,13 @@ export function MarkerFilter({
         </button>
       ) : (
         /* Expanded state - full filter panel */
-        <div className="rounded-2xl bg-zinc-900/95 p-3 shadow-xl backdrop-blur-sm">
+        <div className="rounded-lg bg-rust-bg/95 p-3 shadow-xl backdrop-blur-sm border border-rust-border">
           {/* Header */}
           <div className="mb-2 flex items-center justify-between">
             <span className="text-sm font-medium text-white">Filters</span>
             <button
               onClick={() => setIsExpanded(false)}
-              className="rounded-lg p-1 text-zinc-400 hover:bg-zinc-800 hover:text-white"
+              className="rounded-lg p-1 text-rust-text-secondary hover:bg-rust-surface hover:text-white"
             >
               <svg
                 className="h-4 w-4"
@@ -124,13 +124,13 @@ export function MarkerFilter({
           <div className="mb-2 flex gap-2">
             <button
               onClick={selectAll}
-              className="flex-1 rounded-lg bg-zinc-800 px-2 py-1 text-xs text-zinc-300 hover:bg-zinc-700"
+              className="flex-1 rounded-lg bg-rust-surface px-2 py-1 text-xs uppercase tracking-wide text-rust-text-secondary hover:bg-rust-surface-elevated"
             >
               All
             </button>
             <button
               onClick={selectNone}
-              className="flex-1 rounded-lg bg-zinc-800 px-2 py-1 text-xs text-zinc-300 hover:bg-zinc-700"
+              className="flex-1 rounded-lg bg-rust-surface px-2 py-1 text-xs uppercase tracking-wide text-rust-text-secondary hover:bg-rust-surface-elevated"
             >
               None
             </button>
@@ -148,8 +148,8 @@ export function MarkerFilter({
                   onClick={() => toggleFilter(type.value)}
                   className={`flex items-center gap-1 rounded-lg px-2 py-1.5 text-xs transition-all ${
                     isActive
-                      ? "bg-zinc-700 text-white"
-                      : "bg-zinc-800/50 text-zinc-500"
+                      ? "bg-rust-surface-elevated text-white"
+                      : "bg-rust-surface/50 text-rust-text-muted"
                   }`}
                   style={{
                     borderLeft: isActive
@@ -163,8 +163,8 @@ export function MarkerFilter({
                     <span
                       className={`ml-0.5 rounded-full px-1.5 text-[10px] ${
                         isActive
-                          ? "bg-zinc-600 text-white"
-                          : "bg-zinc-700 text-zinc-400"
+                          ? "bg-rust-surface text-white"
+                          : "bg-rust-surface-elevated text-rust-text-secondary"
                       }`}
                     >
                       {count}
@@ -178,7 +178,7 @@ export function MarkerFilter({
           {/* Visibility filter */}
           {onVisibilityFilterChange && (
             <>
-              <div className="mt-3 mb-1.5 text-[10px] font-medium uppercase tracking-wider text-zinc-500">
+              <div className="mt-3 mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-rust-text-secondary">
                 Visibility
               </div>
               <div className="flex flex-wrap gap-1.5">
@@ -192,8 +192,8 @@ export function MarkerFilter({
                       onClick={() => toggleVisibility(vis.value)}
                       className={`flex items-center gap-1 rounded-lg px-2 py-1.5 text-xs transition-all ${
                         isActive
-                          ? "bg-zinc-700 text-white"
-                          : "bg-zinc-800/50 text-zinc-500"
+                          ? "bg-rust-surface-elevated text-white"
+                          : "bg-rust-surface/50 text-rust-text-muted"
                       }`}
                     >
                       <span>{vis.icon}</span>
@@ -202,8 +202,8 @@ export function MarkerFilter({
                         <span
                           className={`ml-0.5 rounded-full px-1.5 text-[10px] ${
                             isActive
-                              ? "bg-zinc-600 text-white"
-                              : "bg-zinc-700 text-zinc-400"
+                              ? "bg-rust-surface text-white"
+                              : "bg-rust-surface-elevated text-rust-text-secondary"
                           }`}
                         >
                           {count}
@@ -217,7 +217,7 @@ export function MarkerFilter({
           )}
 
           {/* Summary */}
-          <div className="mt-2 text-center text-xs text-zinc-500">
+          <div className="mt-2 text-center text-xs text-rust-text-secondary">
             {visibleMarkers} of {totalMarkers} markers visible
           </div>
         </div>

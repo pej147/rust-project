@@ -65,15 +65,15 @@ export function GuestAddMarkerForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Guest mode indicator */}
-      <div className="rounded-xl bg-orange-500/10 border border-orange-500/20 p-3 text-center">
-        <span className="text-sm text-orange-400">
+      <div className="rounded-lg bg-rust-primary/10 border border-rust-primary/20 p-3 text-center">
+        <span className="text-sm text-rust-primary">
           Guest mode - markers are saved locally
         </span>
       </div>
 
       {/* Coordinates display */}
-      <div className="rounded-xl bg-zinc-800 p-3 text-center">
-        <span className="text-sm text-zinc-400">Position: </span>
+      <div className="rounded-lg bg-rust-surface p-3 text-center">
+        <span className="text-sm text-rust-text-secondary">Position: </span>
         <span className="font-mono text-white">
           {Math.round(initialX)}, {Math.round(initialY)}
         </span>
@@ -102,7 +102,7 @@ export function GuestAddMarkerForm({
       {/* Color preview */}
       <div className="flex items-center gap-3">
         <div
-          className="h-8 w-8 rounded-full border-2 border-zinc-600"
+          className="h-8 w-8 rounded-full border-2 border-rust-border"
           style={{ backgroundColor: color }}
         />
         <div className="flex-1">
@@ -120,7 +120,7 @@ export function GuestAddMarkerForm({
       <div className="w-full">
         <label
           htmlFor="description"
-          className="mb-2 block text-sm font-medium text-zinc-300"
+          className="mb-2 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary"
         >
           Description
         </label>
@@ -130,7 +130,7 @@ export function GuestAddMarkerForm({
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={2}
-          className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white placeholder-zinc-500 transition-colors focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="w-full rounded-lg border border-rust-border bg-rust-surface-elevated px-4 py-3 text-rust-text placeholder-rust-text-muted transition-colors focus:border-rust-primary focus:outline-none focus:ring-1 focus:ring-rust-primary"
         />
       </div>
 

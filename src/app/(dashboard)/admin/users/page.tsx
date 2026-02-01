@@ -25,8 +25,8 @@ export default function AdminUsersPage() {
 
   if (status === "loading" || loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-950">
-        <div className="text-zinc-400">Loading...</div>
+      <div className="flex min-h-screen items-center justify-center bg-rust-bg">
+        <div className="text-rust-text-secondary">Loading...</div>
       </div>
     );
   }
@@ -62,22 +62,22 @@ export default function AdminUsersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 px-4 py-6">
+    <div className="min-h-screen bg-rust-bg px-4 py-6">
       {/* Header */}
       <div className="mb-6 flex items-center justify-between">
         <div>
           <Link
             href="/admin"
-            className="text-sm text-zinc-400 hover:text-white"
+            className="text-sm text-rust-text-secondary hover:text-white"
           >
             &larr; Back to Dashboard
           </Link>
           <h1 className="mt-2 text-3xl font-bold text-white">Users</h1>
-          <p className="text-zinc-400">{users.length} total users</p>
+          <p className="text-rust-text-secondary">{users.length} total users</p>
         </div>
         <button
           onClick={() => setShowCreateForm(true)}
-          className="rounded-xl bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700"
+          className="rounded-lg bg-rust-primary px-4 py-2 font-medium text-white hover:bg-rust-primary-hover"
         >
           + Add User
         </button>
@@ -85,7 +85,7 @@ export default function AdminUsersPage() {
 
       {/* Error display */}
       {(error || actionError) && (
-        <div className="mb-4 rounded-xl bg-red-500/10 p-4 text-red-400">
+        <div className="mb-4 rounded-lg bg-rust-danger/10 p-4 text-rust-danger">
           {error || actionError}
         </div>
       )}
@@ -100,23 +100,23 @@ export default function AdminUsersPage() {
       )}
 
       {/* Users Table */}
-      <div className="overflow-hidden rounded-2xl bg-zinc-900">
+      <div className="overflow-hidden rounded-lg bg-rust-surface">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-zinc-800">
-              <th className="px-4 py-3 text-left text-sm font-medium text-zinc-400">
+            <tr className="border-b border-rust-border">
+              <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">
                 User
               </th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-zinc-400">
+              <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">
                 Role
               </th>
-              <th className="hidden px-4 py-3 text-left text-sm font-medium text-zinc-400 sm:table-cell">
+              <th className="hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-rust-text-secondary sm:table-cell">
                 Stats
               </th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-zinc-400">
+              <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">
                 Joined
               </th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-zinc-400">
+              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">
                 Actions
               </th>
             </tr>
@@ -125,12 +125,12 @@ export default function AdminUsersPage() {
             {users.map((user) => (
               <tr
                 key={user.id}
-                className="border-b border-zinc-800 last:border-0"
+                className="border-b border-rust-border last:border-0"
               >
                 <td className="px-4 py-3">
                   <div>
                     <p className="font-medium text-white">{user.displayName}</p>
-                    <p className="text-sm text-zinc-400">{user.email}</p>
+                    <p className="text-sm text-rust-text-secondary">{user.email}</p>
                   </div>
                 </td>
                 <td className="px-4 py-3">
@@ -143,27 +143,27 @@ export default function AdminUsersPage() {
                       )
                     }
                     disabled={user.id === session.user.id}
-                    className="rounded-lg bg-zinc-800 px-2 py-1 text-sm text-white disabled:opacity-50"
+                    className="rounded-lg bg-rust-surface-elevated px-2 py-1 text-sm text-white disabled:opacity-50"
                   >
                     <option value="USER">USER</option>
                     <option value="ADMIN">ADMIN</option>
                   </select>
                 </td>
                 <td className="hidden px-4 py-3 sm:table-cell">
-                  <div className="flex gap-3 text-sm text-zinc-400">
+                  <div className="flex gap-3 text-sm text-rust-text-secondary">
                     <span>{user._count.markers} markers</span>
                     <span>{user._count.mapSessions} maps</span>
                     <span>{user._count.teamMembers} teams</span>
                   </div>
                 </td>
-                <td className="px-4 py-3 text-sm text-zinc-400">
+                <td className="px-4 py-3 text-sm text-rust-text-secondary">
                   {new Date(user.createdAt).toLocaleDateString()}
                 </td>
                 <td className="px-4 py-3 text-right">
                   {user.id !== session.user.id && (
                     <button
                       onClick={() => handleDelete(user)}
-                      className="text-sm text-red-400 hover:text-red-300"
+                      className="text-sm text-rust-danger hover:text-rust-danger"
                     >
                       Delete
                     </button>
@@ -218,12 +218,12 @@ function CreateUserForm({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="w-full max-w-md rounded-2xl bg-zinc-900 p-6">
+      <div className="w-full max-w-md rounded-lg bg-rust-surface p-6">
         <h2 className="mb-4 text-xl font-bold text-white">Create New User</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="mb-1 block text-sm text-zinc-400">
+            <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">
               Display Name
             </label>
             <input
@@ -232,41 +232,41 @@ function CreateUserForm({
               onChange={(e) =>
                 setFormData({ ...formData, displayName: e.target.value })
               }
-              className="w-full rounded-xl bg-zinc-800 px-4 py-2 text-white"
+              className="w-full rounded-lg bg-rust-surface-elevated px-4 py-2 text-white placeholder-rust-text-muted focus:border-rust-primary focus:ring-rust-primary"
               required
               minLength={2}
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm text-zinc-400">Email</label>
+            <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">Email</label>
             <input
               type="email"
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className="w-full rounded-xl bg-zinc-800 px-4 py-2 text-white"
+              className="w-full rounded-lg bg-rust-surface-elevated px-4 py-2 text-white placeholder-rust-text-muted focus:border-rust-primary focus:ring-rust-primary"
               required
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm text-zinc-400">Password</label>
+            <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">Password</label>
             <input
               type="password"
               value={formData.password}
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
               }
-              className="w-full rounded-xl bg-zinc-800 px-4 py-2 text-white"
+              className="w-full rounded-lg bg-rust-surface-elevated px-4 py-2 text-white placeholder-rust-text-muted focus:border-rust-primary focus:ring-rust-primary"
               required
               minLength={6}
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm text-zinc-400">Role</label>
+            <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary">Role</label>
             <select
               value={formData.role}
               onChange={(e) =>
@@ -275,7 +275,7 @@ function CreateUserForm({
                   role: e.target.value as "ADMIN" | "USER",
                 })
               }
-              className="w-full rounded-xl bg-zinc-800 px-4 py-2 text-white"
+              className="w-full rounded-lg bg-rust-surface-elevated px-4 py-2 text-white"
             >
               <option value="USER">USER</option>
               <option value="ADMIN">ADMIN</option>
@@ -286,14 +286,14 @@ function CreateUserForm({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 rounded-xl bg-zinc-800 px-4 py-2 text-white hover:bg-zinc-700"
+              className="flex-1 rounded-lg bg-rust-surface-elevated px-4 py-2 text-white hover:bg-rust-surface-elevated"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="flex-1 rounded-xl bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+              className="flex-1 rounded-lg bg-rust-primary px-4 py-2 font-medium text-white hover:bg-rust-primary-hover disabled:opacity-50"
             >
               {submitting ? "Creating..." : "Create User"}
             </button>

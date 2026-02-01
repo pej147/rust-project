@@ -15,7 +15,7 @@ export default function ProfilePage() {
       <>
         <Header title="Profile" />
         <div className="flex items-center justify-center p-8">
-          <div className="text-zinc-400">Loading...</div>
+          <div className="text-rust-text-secondary">Loading...</div>
         </div>
       </>
     );
@@ -38,14 +38,14 @@ export default function ProfilePage() {
         <Card variant="elevated">
           <CardContent>
             <div className="flex flex-col items-center py-4">
-              <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-blue-600 text-3xl font-bold text-white">
+              <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-rust-primary text-3xl font-bold text-white">
                 {session.user.name?.charAt(0).toUpperCase() || "?"}
               </div>
               <h2 className="text-xl font-semibold text-white">
                 {session.user.name}
               </h2>
-              <p className="text-zinc-400">{session.user.email}</p>
-              <span className="mt-2 rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-400">
+              <p className="text-rust-text-secondary">{session.user.email}</p>
+              <span className="mt-2 rounded-full bg-rust-surface px-3 py-1 text-xs text-rust-text-secondary">
                 {session.user.role}
               </span>
             </div>
@@ -54,9 +54,9 @@ export default function ProfilePage() {
 
         <Card className="mt-4">
           <CardContent className="space-y-3 py-2">
-            <div className="rounded-xl bg-zinc-800 p-4">
-              <div className="text-sm text-zinc-400">User ID</div>
-              <div className="font-mono text-sm text-zinc-300">
+            <div className="rounded-lg bg-rust-surface p-4">
+              <div className="text-xs uppercase tracking-wide text-rust-text-secondary">User ID</div>
+              <div className="font-mono text-sm text-rust-text">
                 {session.user.id}
               </div>
             </div>
@@ -66,7 +66,7 @@ export default function ProfilePage() {
         <div className="mt-6">
           <Button
             variant="danger"
-            className="w-full bg-red-600/20 text-red-400 hover:bg-red-600/30"
+            className="w-full"
             onClick={handleLogout}
           >
             Log out

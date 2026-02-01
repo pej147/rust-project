@@ -180,7 +180,7 @@ export function MarkerDetailSheet({
 
           <div className="flex items-center gap-3">
             <div
-              className="h-8 w-8 rounded-full border-2 border-zinc-600"
+              className="h-8 w-8 rounded-full border-2 border-rust-border"
               style={{ backgroundColor: color }}
             />
             <input
@@ -194,7 +194,7 @@ export function MarkerDetailSheet({
           <div className="w-full">
             <label
               htmlFor="edit-description"
-              className="mb-2 block text-sm font-medium text-zinc-300"
+              className="mb-2 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary"
             >
               Description
             </label>
@@ -203,7 +203,7 @@ export function MarkerDetailSheet({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={2}
-              className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full rounded-lg border border-rust-border bg-rust-surface-elevated px-4 py-3 text-rust-text placeholder-rust-text-muted transition-colors focus:border-rust-primary focus:outline-none focus:ring-1 focus:ring-rust-primary"
             />
           </div>
 
@@ -216,7 +216,7 @@ export function MarkerDetailSheet({
           />
 
           {error && (
-            <div className="rounded-xl bg-red-500/10 p-3 text-center text-sm text-red-400">
+            <div className="rounded-lg bg-rust-danger/10 p-3 text-center text-sm text-rust-danger">
               {error}
             </div>
           )}
@@ -248,14 +248,14 @@ export function MarkerDetailSheet({
           {/* Header with icon and title */}
           <div className="flex items-start gap-4">
             <div
-              className="flex h-14 w-14 items-center justify-center rounded-2xl text-2xl"
+              className="flex h-14 w-14 items-center justify-center rounded-lg text-2xl"
               style={{ backgroundColor: marker.color || markerConfig?.color }}
             >
               {markerConfig?.icon || "📍"}
             </div>
             <div className="flex-1">
               <h3 className="text-xl font-bold text-white">{marker.title}</h3>
-              <p className="text-sm text-zinc-400">
+              <p className="text-sm text-rust-text-secondary">
                 {markerConfig?.label || marker.type}
               </p>
             </div>
@@ -263,21 +263,21 @@ export function MarkerDetailSheet({
 
           {/* Description */}
           {marker.description && (
-            <div className="rounded-xl bg-zinc-800 p-4">
-              <p className="text-zinc-300">{marker.description}</p>
+            <div className="rounded-lg bg-rust-surface p-4">
+              <p className="text-rust-text">{marker.description}</p>
             </div>
           )}
 
           {/* Info grid */}
           <div className="grid grid-cols-2 gap-3">
-            <div className="rounded-xl bg-zinc-800 p-3">
-              <p className="text-xs text-zinc-500">Position</p>
+            <div className="rounded-lg bg-rust-surface p-3">
+              <p className="text-xs uppercase tracking-wide text-rust-text-secondary">Position</p>
               <p className="font-mono text-white">
                 {Math.round(marker.x)}, {Math.round(marker.y)}
               </p>
             </div>
-            <div className="rounded-xl bg-zinc-800 p-3">
-              <p className="text-xs text-zinc-500">Visibility</p>
+            <div className="rounded-lg bg-rust-surface p-3">
+              <p className="text-xs uppercase tracking-wide text-rust-text-secondary">Visibility</p>
               <p className="text-white">
                 {VISIBILITY_OPTIONS.find((v) => v.value === marker.visibility)?.label || "Team"}
               </p>
@@ -286,11 +286,11 @@ export function MarkerDetailSheet({
 
           {/* Created by */}
           {marker.createdBy && (
-            <div className="rounded-xl bg-zinc-800 p-3">
-              <p className="text-xs text-zinc-500">Added by</p>
+            <div className="rounded-lg bg-rust-surface p-3">
+              <p className="text-xs uppercase tracking-wide text-rust-text-secondary">Added by</p>
               <p className="text-white">{marker.createdBy.displayName}</p>
               {marker.createdAt && (
-                <p className="text-xs text-zinc-500">
+                <p className="text-xs text-rust-text-secondary">
                   {new Date(marker.createdAt).toLocaleDateString("en-US", {
                     day: "numeric",
                     month: "long",
@@ -304,7 +304,7 @@ export function MarkerDetailSheet({
           )}
 
           {error && (
-            <div className="rounded-xl bg-red-500/10 p-3 text-center text-sm text-red-400">
+            <div className="rounded-lg bg-rust-danger/10 p-3 text-center text-sm text-rust-danger">
               {error}
             </div>
           )}
@@ -333,7 +333,7 @@ export function MarkerDetailSheet({
           )}
 
           {!isOwner && (
-            <p className="text-center text-sm text-zinc-500">
+            <p className="text-center text-sm text-rust-text-secondary">
               Only the owner can edit this marker
             </p>
           )}

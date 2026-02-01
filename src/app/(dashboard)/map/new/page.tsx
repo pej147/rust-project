@@ -55,7 +55,7 @@ export default function NewMapPage() {
       <Header
         title="New Map"
         leftAction={
-          <Link href="/map" className="text-blue-500">
+          <Link href="/map" className="text-rust-primary">
             Back
           </Link>
         }
@@ -65,7 +65,7 @@ export default function NewMapPage() {
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4 py-2">
               {error && (
-                <div className="rounded-xl bg-red-500/10 p-4 text-sm text-red-400">
+                <div className="rounded-lg bg-rust-danger/10 p-4 text-sm text-rust-danger">
                   {error}
                 </div>
               )}
@@ -90,7 +90,7 @@ export default function NewMapPage() {
               <div>
                 <label
                   htmlFor="mapSize"
-                  className="mb-2 block text-sm font-medium text-zinc-300"
+                  className="mb-2 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary"
                 >
                   Map Size
                 </label>
@@ -98,7 +98,7 @@ export default function NewMapPage() {
                   id="mapSize"
                   value={mapSize}
                   onChange={(e) => setMapSize(e.target.value)}
-                  className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  className="w-full rounded-lg border border-rust-border bg-rust-surface-elevated px-4 py-3 text-rust-text transition-colors focus:border-rust-primary focus:outline-none focus:ring-1 focus:ring-rust-primary"
                 >
                   <option value="3000">3000 (Small)</option>
                   <option value="3500">3500</option>
@@ -130,9 +130,9 @@ export default function NewMapPage() {
           </CardContent>
         </Card>
 
-        <p className="mt-4 text-center text-sm text-zinc-500">
+        <p className="mt-4 text-center text-sm text-rust-text-muted">
           You need to upload the map image to{" "}
-          <code className="rounded bg-zinc-800 px-1">public/maps/[seed].png</code>
+          <code className="rounded bg-rust-surface px-1">public/maps/[seed].png</code>
         </p>
       </div>
     </>

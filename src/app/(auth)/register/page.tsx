@@ -55,17 +55,17 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="rounded-3xl bg-zinc-900 p-8 shadow-xl">
+    <div className="rounded-lg border border-rust-border bg-rust-surface p-8 shadow-xl">
       <h1 className="mb-2 text-center text-3xl font-bold text-white">
         Create Account
       </h1>
-      <p className="mb-8 text-center text-zinc-400">
+      <p className="mb-8 text-center text-rust-text-secondary">
         Start tracking your Rust intel
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
-          <div className="rounded-xl bg-red-500/10 p-4 text-sm text-red-400">
+          <div className="rounded-lg bg-rust-danger/10 p-4 text-sm text-rust-danger">
             {error}
           </div>
         )}
@@ -73,7 +73,7 @@ export default function RegisterPage() {
         <div>
           <label
             htmlFor="displayName"
-            className="mb-2 block text-sm font-medium text-zinc-300"
+            className="mb-2 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary"
           >
             Display Name
           </label>
@@ -85,7 +85,7 @@ export default function RegisterPage() {
             required
             minLength={2}
             maxLength={50}
-            className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full rounded-lg border border-rust-border bg-rust-surface-elevated px-4 py-3 text-rust-text placeholder-rust-text-muted transition-colors focus:border-rust-primary focus:outline-none focus:ring-1 focus:ring-rust-primary"
             placeholder="Your gamer tag"
           />
         </div>
@@ -93,7 +93,7 @@ export default function RegisterPage() {
         <div>
           <label
             htmlFor="email"
-            className="mb-2 block text-sm font-medium text-zinc-300"
+            className="mb-2 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary"
           >
             Email
           </label>
@@ -103,7 +103,7 @@ export default function RegisterPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full rounded-lg border border-rust-border bg-rust-surface-elevated px-4 py-3 text-rust-text placeholder-rust-text-muted transition-colors focus:border-rust-primary focus:outline-none focus:ring-1 focus:ring-rust-primary"
             placeholder="your@email.com"
           />
         </div>
@@ -111,7 +111,7 @@ export default function RegisterPage() {
         <div>
           <label
             htmlFor="password"
-            className="mb-2 block text-sm font-medium text-zinc-300"
+            className="mb-2 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary"
           >
             Password
           </label>
@@ -122,7 +122,7 @@ export default function RegisterPage() {
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={8}
-            className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full rounded-lg border border-rust-border bg-rust-surface-elevated px-4 py-3 text-rust-text placeholder-rust-text-muted transition-colors focus:border-rust-primary focus:outline-none focus:ring-1 focus:ring-rust-primary"
             placeholder="Minimum 8 characters"
           />
         </div>
@@ -130,7 +130,7 @@ export default function RegisterPage() {
         <div>
           <label
             htmlFor="confirmPassword"
-            className="mb-2 block text-sm font-medium text-zinc-300"
+            className="mb-2 block text-xs font-semibold uppercase tracking-wide text-rust-text-secondary"
           >
             Confirm Password
           </label>
@@ -140,7 +140,7 @@ export default function RegisterPage() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
-            className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full rounded-lg border border-rust-border bg-rust-surface-elevated px-4 py-3 text-rust-text placeholder-rust-text-muted transition-colors focus:border-rust-primary focus:outline-none focus:ring-1 focus:ring-rust-primary"
             placeholder="Repeat your password"
           />
         </div>
@@ -148,17 +148,17 @@ export default function RegisterPage() {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full rounded-lg bg-rust-primary py-3 font-semibold uppercase tracking-wide text-white transition-colors hover:bg-rust-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isLoading ? "Create Account..." : "Register"}
         </button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-zinc-400">
+      <p className="mt-6 text-center text-sm text-rust-text-secondary">
         Already have an account?{" "}
         <Link
           href="/login"
-          className="font-medium text-blue-400 hover:text-blue-300"
+          className="font-medium text-rust-primary hover:text-rust-primary-hover"
         >
           Log in here
         </Link>

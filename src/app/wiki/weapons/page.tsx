@@ -10,9 +10,9 @@ export default function WikiWeaponsPage() {
   const shotgunWeapons = weapons.filter(w => w.category === "shotgun");
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
+    <div className="min-h-screen bg-rust-bg text-white">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-800">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-rust-bg/80 backdrop-blur-xl border-b border-rust-border">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <span className="text-2xl">🗺️</span>
@@ -22,13 +22,13 @@ export default function WikiWeaponsPage() {
           <nav className="flex items-center gap-4">
             <Link
               href="/wiki"
-              className="text-zinc-400 hover:text-white transition-colors text-sm"
+              className="text-rust-text-secondary hover:text-white transition-colors text-sm"
             >
               Wiki
             </Link>
             <Link
               href="/map"
-              className="text-zinc-400 hover:text-white transition-colors text-sm"
+              className="text-rust-text-secondary hover:text-white transition-colors text-sm"
             >
               Map
             </Link>
@@ -40,42 +40,42 @@ export default function WikiWeaponsPage() {
       <main className="pt-24 pb-16 px-4">
         <div className="max-w-4xl mx-auto">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-sm text-zinc-500 mb-6">
-            <Link href="/wiki" className="hover:text-zinc-300">Wiki</Link>
+          <div className="flex items-center gap-2 text-sm text-rust-text-muted mb-6">
+            <Link href="/wiki" className="hover:text-rust-text">Wiki</Link>
             <span>/</span>
-            <span className="text-zinc-300">Weapons</span>
+            <span className="text-rust-text">Weapons</span>
           </div>
 
           <h1 className="text-4xl font-bold mb-4">🔫 Weapons</h1>
-          <p className="text-zinc-400 mb-8">
+          <p className="text-rust-text-secondary mb-8">
             Alle wapens in Rust Console met damage stats en crafting info.
           </p>
 
           {/* Quick Stats */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
-            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
-              <div className="text-3xl font-bold text-orange-500">{meleeWeapons.length}</div>
-              <div className="text-zinc-400 text-sm">Melee</div>
+            <div className="bg-rust-surface rounded-lg p-4 border border-rust-border">
+              <div className="text-3xl font-bold text-rust-primary">{meleeWeapons.length}</div>
+              <div className="text-rust-text-secondary text-sm">Melee</div>
             </div>
-            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+            <div className="bg-rust-surface rounded-lg p-4 border border-rust-border">
               <div className="text-3xl font-bold text-green-500">{bowWeapons.length}</div>
-              <div className="text-zinc-400 text-sm">Bows</div>
+              <div className="text-rust-text-secondary text-sm">Bows</div>
             </div>
-            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
-              <div className="text-3xl font-bold text-blue-500">{pistolWeapons.length}</div>
-              <div className="text-zinc-400 text-sm">Pistols</div>
+            <div className="bg-rust-surface rounded-lg p-4 border border-rust-border">
+              <div className="text-3xl font-bold text-rust-primary">{pistolWeapons.length}</div>
+              <div className="text-rust-text-secondary text-sm">Pistols</div>
             </div>
-            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+            <div className="bg-rust-surface rounded-lg p-4 border border-rust-border">
               <div className="text-3xl font-bold text-purple-500">{smgWeapons.length}</div>
-              <div className="text-zinc-400 text-sm">SMGs</div>
+              <div className="text-rust-text-secondary text-sm">SMGs</div>
             </div>
-            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+            <div className="bg-rust-surface rounded-lg p-4 border border-rust-border">
               <div className="text-3xl font-bold text-red-500">{rifleWeapons.length}</div>
-              <div className="text-zinc-400 text-sm">Rifles</div>
+              <div className="text-rust-text-secondary text-sm">Rifles</div>
             </div>
-            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+            <div className="bg-rust-surface rounded-lg p-4 border border-rust-border">
               <div className="text-3xl font-bold text-yellow-500">{shotgunWeapons.length}</div>
-              <div className="text-zinc-400 text-sm">Shotguns</div>
+              <div className="text-rust-text-secondary text-sm">Shotguns</div>
             </div>
           </div>
 
@@ -84,14 +84,14 @@ export default function WikiWeaponsPage() {
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <span>🗡️</span> Melee Weapons
             </h2>
-            <p className="text-zinc-400 text-sm mb-6">
+            <p className="text-rust-text-secondary text-sm mb-6">
               Close combat weapons - from rocks to longswords
             </p>
 
             <div className="space-y-6">
               {/* Primitive */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Primitive</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Primitive</h3>
                 <div className="grid gap-2">
                   {meleeWeapons
                     .filter(w => w.subcategory === "primitive")
@@ -103,7 +103,7 @@ export default function WikiWeaponsPage() {
 
               {/* Salvaged */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Salvaged</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Salvaged</h3>
                 <div className="grid gap-2">
                   {meleeWeapons
                     .filter(w => w.subcategory === "salvaged")
@@ -115,7 +115,7 @@ export default function WikiWeaponsPage() {
 
               {/* Military */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Military</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Military</h3>
                 <div className="grid gap-2">
                   {meleeWeapons
                     .filter(w => w.subcategory === "military")
@@ -132,14 +132,14 @@ export default function WikiWeaponsPage() {
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <span>🏹</span> Bows & Arrows
             </h2>
-            <p className="text-zinc-400 text-sm mb-6">
+            <p className="text-rust-text-secondary text-sm mb-6">
               Silent ranged weapons - essential for early game
             </p>
 
             <div className="space-y-6">
               {/* Bows */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Bows</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Bows</h3>
                 <div className="grid gap-2">
                   {bowWeapons
                     .filter(w => w.subcategory === "primitive" || w.subcategory === "advanced" || w.subcategory === "tool")
@@ -151,7 +151,7 @@ export default function WikiWeaponsPage() {
 
               {/* Arrows */}
               <div>
-                <h3 className="text-lg font-semibold text-zinc-300 mb-3">Arrows</h3>
+                <h3 className="text-lg font-semibold text-rust-text mb-3">Arrows</h3>
                 <div className="grid gap-2">
                   {bowWeapons
                     .filter(w => w.subcategory === "ammo")
@@ -168,7 +168,7 @@ export default function WikiWeaponsPage() {
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <span>🔫</span> Pistols
             </h2>
-            <p className="text-zinc-400 text-sm mb-6">
+            <p className="text-rust-text-secondary text-sm mb-6">
               Sidearms and handguns - from Eoka to M92
             </p>
 
@@ -176,7 +176,7 @@ export default function WikiWeaponsPage() {
               {/* Primitive */}
               {pistolWeapons.filter(w => w.subcategory === "primitive").length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Primitive</h3>
+                  <h3 className="text-lg font-semibold text-rust-text mb-3">Primitive</h3>
                   <div className="grid gap-2">
                     {pistolWeapons
                       .filter(w => w.subcategory === "primitive")
@@ -190,7 +190,7 @@ export default function WikiWeaponsPage() {
               {/* Craftable */}
               {pistolWeapons.filter(w => w.subcategory === "craftable").length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Craftable</h3>
+                  <h3 className="text-lg font-semibold text-rust-text mb-3">Craftable</h3>
                   <div className="grid gap-2">
                     {pistolWeapons
                       .filter(w => w.subcategory === "craftable")
@@ -204,7 +204,7 @@ export default function WikiWeaponsPage() {
               {/* Military */}
               {pistolWeapons.filter(w => w.subcategory === "military").length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Military</h3>
+                  <h3 className="text-lg font-semibold text-rust-text mb-3">Military</h3>
                   <div className="grid gap-2">
                     {pistolWeapons
                       .filter(w => w.subcategory === "military")
@@ -222,7 +222,7 @@ export default function WikiWeaponsPage() {
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <span>🔫</span> SMGs
             </h2>
-            <p className="text-zinc-400 text-sm mb-6">
+            <p className="text-rust-text-secondary text-sm mb-6">
               Submachine guns - fast fire rate, close to medium range
             </p>
 
@@ -230,7 +230,7 @@ export default function WikiWeaponsPage() {
               {/* Craftable */}
               {smgWeapons.filter(w => w.subcategory === "craftable").length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Craftable</h3>
+                  <h3 className="text-lg font-semibold text-rust-text mb-3">Craftable</h3>
                   <div className="grid gap-2">
                     {smgWeapons
                       .filter(w => w.subcategory === "craftable")
@@ -244,7 +244,7 @@ export default function WikiWeaponsPage() {
               {/* Military */}
               {smgWeapons.filter(w => w.subcategory === "military").length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Military</h3>
+                  <h3 className="text-lg font-semibold text-rust-text mb-3">Military</h3>
                   <div className="grid gap-2">
                     {smgWeapons
                       .filter(w => w.subcategory === "military")
@@ -262,7 +262,7 @@ export default function WikiWeaponsPage() {
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <span>🎯</span> Rifles
             </h2>
-            <p className="text-zinc-400 text-sm mb-6">
+            <p className="text-rust-text-secondary text-sm mb-6">
               Assault rifles and sniper rifles - medium to long range dominance
             </p>
 
@@ -270,7 +270,7 @@ export default function WikiWeaponsPage() {
               {/* Craftable */}
               {rifleWeapons.filter(w => w.subcategory === "craftable").length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Craftable</h3>
+                  <h3 className="text-lg font-semibold text-rust-text mb-3">Craftable</h3>
                   <div className="grid gap-2">
                     {rifleWeapons
                       .filter(w => w.subcategory === "craftable")
@@ -284,7 +284,7 @@ export default function WikiWeaponsPage() {
               {/* Military */}
               {rifleWeapons.filter(w => w.subcategory === "military").length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Military</h3>
+                  <h3 className="text-lg font-semibold text-rust-text mb-3">Military</h3>
                   <div className="grid gap-2">
                     {rifleWeapons
                       .filter(w => w.subcategory === "military")
@@ -298,7 +298,7 @@ export default function WikiWeaponsPage() {
               {/* Snipers */}
               {rifleWeapons.filter(w => w.subcategory === "sniper").length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Sniper Rifles</h3>
+                  <h3 className="text-lg font-semibold text-rust-text mb-3">Sniper Rifles</h3>
                   <div className="grid gap-2">
                     {rifleWeapons
                       .filter(w => w.subcategory === "sniper")
@@ -316,7 +316,7 @@ export default function WikiWeaponsPage() {
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <span>💥</span> Shotguns
             </h2>
-            <p className="text-zinc-400 text-sm mb-6">
+            <p className="text-rust-text-secondary text-sm mb-6">
               Close range devastation - from Waterpipe to Spas-12
             </p>
 
@@ -324,7 +324,7 @@ export default function WikiWeaponsPage() {
               {/* Primitive */}
               {shotgunWeapons.filter(w => w.subcategory === "primitive").length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Primitive</h3>
+                  <h3 className="text-lg font-semibold text-rust-text mb-3">Primitive</h3>
                   <div className="grid gap-2">
                     {shotgunWeapons
                       .filter(w => w.subcategory === "primitive")
@@ -338,7 +338,7 @@ export default function WikiWeaponsPage() {
               {/* Craftable */}
               {shotgunWeapons.filter(w => w.subcategory === "craftable").length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Craftable</h3>
+                  <h3 className="text-lg font-semibold text-rust-text mb-3">Craftable</h3>
                   <div className="grid gap-2">
                     {shotgunWeapons
                       .filter(w => w.subcategory === "craftable")
@@ -352,7 +352,7 @@ export default function WikiWeaponsPage() {
               {/* Military */}
               {shotgunWeapons.filter(w => w.subcategory === "military").length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-zinc-300 mb-3">Military</h3>
+                  <h3 className="text-lg font-semibold text-rust-text mb-3">Military</h3>
                   <div className="grid gap-2">
                     {shotgunWeapons
                       .filter(w => w.subcategory === "military")
@@ -387,20 +387,20 @@ function WeaponRow({ weapon }: { weapon: typeof weapons[0] }) {
 
   return (
     <Link href={`/wiki/weapons/${weapon.id}`}>
-      <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800 hover:border-zinc-600 transition-colors">
+      <div className="bg-rust-surface rounded-lg p-4 border border-rust-border hover:border-rust-border transition-colors">
         <div className="flex items-start justify-between">
           <div className="flex items-start gap-3">
-            <div className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center text-xl">
+            <div className="w-10 h-10 bg-rust-surface-elevated rounded-lg flex items-center justify-center text-xl">
               {getCategoryEmoji(weapon.category)}
             </div>
             <div>
               <div className="font-medium">{weapon.name}</div>
-              <div className="text-zinc-500 text-sm mt-1 flex items-center gap-3 flex-wrap">
+              <div className="text-rust-text-muted text-sm mt-1 flex items-center gap-3 flex-wrap">
                 {!isAmmo && (
                   <span className="text-red-400">{weapon.damage} DMG</span>
                 )}
                 {weapon.rateOfFire && (
-                  <span className="text-blue-400">{weapon.rateOfFire} RPM</span>
+                  <span className="text-rust-primary">{weapon.rateOfFire} RPM</span>
                 )}
                 {weapon.magazineSize && (
                   <span className="text-green-400">{weapon.magazineSize} mag</span>
@@ -414,7 +414,7 @@ function WeaponRow({ weapon }: { weapon: typeof weapons[0] }) {
               </div>
             </div>
           </div>
-          <div className="text-zinc-500">
+          <div className="text-rust-text-muted">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

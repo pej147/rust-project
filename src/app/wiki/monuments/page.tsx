@@ -8,9 +8,9 @@ export default function WikiMonumentsPage() {
   const safeZones = monuments.filter(m => m.tier === "safe");
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
+    <div className="min-h-screen bg-rust-bg text-white">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-800">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-rust-bg/80 backdrop-blur-xl border-b border-rust-border">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <span className="text-2xl">🗺️</span>
@@ -20,13 +20,13 @@ export default function WikiMonumentsPage() {
           <nav className="flex items-center gap-4">
             <Link
               href="/wiki"
-              className="text-zinc-400 hover:text-white transition-colors text-sm"
+              className="text-rust-text-secondary hover:text-white transition-colors text-sm"
             >
               Wiki
             </Link>
             <Link
               href="/map"
-              className="text-zinc-400 hover:text-white transition-colors text-sm"
+              className="text-rust-text-secondary hover:text-white transition-colors text-sm"
             >
               Map
             </Link>
@@ -38,54 +38,54 @@ export default function WikiMonumentsPage() {
       <main className="pt-24 pb-16 px-4">
         <div className="max-w-4xl mx-auto">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-sm text-zinc-500 mb-6">
-            <Link href="/wiki" className="hover:text-zinc-300">Wiki</Link>
+          <div className="flex items-center gap-2 text-sm text-rust-text-muted mb-6">
+            <Link href="/wiki" className="hover:text-rust-text">Wiki</Link>
             <span>/</span>
-            <span className="text-zinc-300">Monuments</span>
+            <span className="text-rust-text">Monuments</span>
           </div>
 
           <h1 className="text-4xl font-bold mb-4">🏛️ Monuments</h1>
-          <p className="text-zinc-400 mb-8">
+          <p className="text-rust-text-secondary mb-8">
             Alle monuments in Rust Console met loot, puzzles en tips.
           </p>
 
           {/* Quick Stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
-            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+            <div className="bg-rust-surface rounded-lg p-4 border border-rust-border">
               <div className="text-3xl font-bold text-green-500">{tier1.length}</div>
-              <div className="text-zinc-400 text-sm">Tier 1 (Green)</div>
+              <div className="text-rust-text-secondary text-sm">Tier 1 (Green)</div>
             </div>
-            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+            <div className="bg-rust-surface rounded-lg p-4 border border-rust-border">
               <div className="text-3xl font-bold text-blue-500">{tier2.length}</div>
-              <div className="text-zinc-400 text-sm">Tier 2 (Blue)</div>
+              <div className="text-rust-text-secondary text-sm">Tier 2 (Blue)</div>
             </div>
-            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+            <div className="bg-rust-surface rounded-lg p-4 border border-rust-border">
               <div className="text-3xl font-bold text-red-500">{tier3.length}</div>
-              <div className="text-zinc-400 text-sm">Tier 3 (Red)</div>
+              <div className="text-rust-text-secondary text-sm">Tier 3 (Red)</div>
             </div>
-            <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+            <div className="bg-rust-surface rounded-lg p-4 border border-rust-border">
               <div className="text-3xl font-bold text-emerald-500">{safeZones.length}</div>
-              <div className="text-zinc-400 text-sm">Safe Zones</div>
+              <div className="text-rust-text-secondary text-sm">Safe Zones</div>
             </div>
           </div>
 
           {/* Keycard Progression Info */}
-          <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800 mb-12">
+          <div className="bg-rust-surface rounded-lg p-6 border border-rust-border mb-12">
             <h2 className="text-lg font-bold mb-4">🔑 Keycard Progression</h2>
             <div className="flex flex-wrap items-center gap-2 text-sm">
               <span className="bg-green-500/20 text-green-400 px-3 py-1 rounded-full">
                 Green Card
               </span>
-              <span className="text-zinc-500">→</span>
+              <span className="text-rust-text-muted">→</span>
               <span className="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full">
                 Blue Card
               </span>
-              <span className="text-zinc-500">→</span>
+              <span className="text-rust-text-muted">→</span>
               <span className="bg-red-500/20 text-red-400 px-3 py-1 rounded-full">
                 Red Card
               </span>
             </div>
-            <p className="text-zinc-500 text-sm mt-3">
+            <p className="text-rust-text-muted text-sm mt-3">
               Green cards spawn at Tier 1 monuments. Complete green puzzles to find blue cards, then blue puzzles for red cards.
             </p>
           </div>
@@ -96,7 +96,7 @@ export default function WikiMonumentsPage() {
               <span className="w-3 h-3 rounded-full bg-green-500"></span>
               <h2 className="text-2xl font-bold">Tier 1 - Green Card</h2>
             </div>
-            <p className="text-zinc-400 text-sm mb-6">
+            <p className="text-rust-text-secondary text-sm mb-6">
               Low difficulty monuments. Safe for beginners with basic loot.
             </p>
 
@@ -113,7 +113,7 @@ export default function WikiMonumentsPage() {
               <span className="w-3 h-3 rounded-full bg-blue-500"></span>
               <h2 className="text-2xl font-bold">Tier 2 - Blue Card</h2>
             </div>
-            <p className="text-zinc-400 text-sm mb-6">
+            <p className="text-rust-text-secondary text-sm mb-6">
               Medium difficulty. Better loot and more complex puzzles.
             </p>
 
@@ -131,7 +131,7 @@ export default function WikiMonumentsPage() {
                 <span className="w-3 h-3 rounded-full bg-red-500"></span>
                 <h2 className="text-2xl font-bold">Tier 3 - Red Card</h2>
               </div>
-              <p className="text-zinc-400 text-sm mb-6">
+              <p className="text-rust-text-secondary text-sm mb-6">
                 High difficulty. Best loot in the game but dangerous.
               </p>
 
@@ -150,8 +150,8 @@ export default function WikiMonumentsPage() {
                 <span className="w-3 h-3 rounded-full bg-red-500"></span>
                 <h2 className="text-2xl font-bold">Tier 3 - Red Card</h2>
               </div>
-              <div className="bg-zinc-900 rounded-xl p-6 border border-zinc-800 text-center">
-                <p className="text-zinc-500">Coming soon: Launch Site, Military Tunnels, Oil Rig, Labs</p>
+              <div className="bg-rust-surface rounded-lg p-6 border border-rust-border text-center">
+                <p className="text-rust-text-muted">Coming soon: Launch Site, Military Tunnels, Oil Rig, Labs</p>
               </div>
             </section>
           )}
@@ -163,7 +163,7 @@ export default function WikiMonumentsPage() {
                 <span className="w-3 h-3 rounded-full bg-emerald-500"></span>
                 <h2 className="text-2xl font-bold">Safe Zones</h2>
               </div>
-              <p className="text-zinc-400 text-sm mb-6">
+              <p className="text-rust-text-secondary text-sm mb-6">
                 No PvP allowed. Trading, recycling, and shopping.
               </p>
 
@@ -182,8 +182,8 @@ export default function WikiMonumentsPage() {
                 <span className="w-3 h-3 rounded-full bg-emerald-500"></span>
                 <h2 className="text-2xl font-bold">Safe Zones</h2>
               </div>
-              <div className="bg-zinc-900 rounded-xl p-6 border border-zinc-800 text-center">
-                <p className="text-zinc-500">Coming soon: Outpost, Bandit Camp</p>
+              <div className="bg-rust-surface rounded-lg p-6 border border-rust-border text-center">
+                <p className="text-rust-text-muted">Coming soon: Outpost, Bandit Camp</p>
               </div>
             </section>
           )}
@@ -210,7 +210,7 @@ function MonumentRow({ monument }: { monument: typeof monuments[0] }) {
 
   return (
     <Link href={`/wiki/monuments/${monument.id}`}>
-      <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800 hover:border-zinc-600 transition-colors">
+      <div className="bg-rust-surface rounded-lg p-4 border border-rust-border hover:border-rust-border transition-colors">
         <div className="flex items-start justify-between">
           <div className="flex items-start gap-3">
             <div className={`w-2 h-2 rounded-full ${tierColor} mt-2`}></div>
@@ -218,17 +218,17 @@ function MonumentRow({ monument }: { monument: typeof monuments[0] }) {
               <div className="font-medium flex items-center gap-2">
                 {monument.name}
                 {monument.scientists && (
-                  <span className="text-xs bg-zinc-700 text-zinc-300 px-2 py-0.5 rounded">Scientists</span>
+                  <span className="text-xs bg-rust-surface-elevated text-rust-text px-2 py-0.5 rounded">Scientists</span>
                 )}
                 {radiationBadge}
               </div>
-              <div className="text-zinc-500 text-sm mt-1 line-clamp-1">
+              <div className="text-rust-text-muted text-sm mt-1 line-clamp-1">
                 {monument.puzzle ? `${monument.puzzle.keycard.charAt(0).toUpperCase() + monument.puzzle.keycard.slice(1)} Card Puzzle` : "No puzzle required"}
                 {monument.loot.crates.includes("elite") && " • Elite Crates"}
               </div>
             </div>
           </div>
-          <div className="text-zinc-500">
+          <div className="text-rust-text-muted">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

@@ -29,8 +29,8 @@ const RustMap = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex h-full items-center justify-center bg-zinc-900">
-        <p className="text-zinc-400">Loading map...</p>
+      <div className="flex h-full items-center justify-center bg-rust-surface">
+        <p className="text-rust-text-secondary">Loading map...</p>
       </div>
     ),
   }
@@ -173,7 +173,7 @@ export default function MapDetailPage({
       <>
         <Header title="Loading..." />
         <div className="flex h-[calc(100vh-8rem)] items-center justify-center">
-          <p className="text-zinc-400">Loading map...</p>
+          <p className="text-rust-text-secondary">Loading map...</p>
         </div>
       </>
     );
@@ -185,7 +185,7 @@ export default function MapDetailPage({
         <Header
           title="Error"
           leftAction={
-            <Link href="/map" className="text-blue-500">
+            <Link href="/map" className="text-rust-primary">
               Back
             </Link>
           }
@@ -193,7 +193,7 @@ export default function MapDetailPage({
         <div className="p-4">
           <Card variant="elevated">
             <CardContent className="py-8 text-center">
-              <p className="text-red-400">{error || "Map not found"}</p>
+              <p className="text-rust-danger">{error || "Map not found"}</p>
               <Link href="/map">
                 <Button variant="secondary" className="mt-4">
                   Back to overview
@@ -212,14 +212,14 @@ export default function MapDetailPage({
         title={`Seed: ${map.seed}`}
         subtitle={map.serverName || undefined}
         leftAction={
-          <Link href="/map" className="text-blue-500">
+          <Link href="/map" className="text-rust-primary">
             ←
           </Link>
         }
         rightAction={
           <button
             onClick={() => setShowInfo(!showInfo)}
-            className="text-blue-500"
+            className="text-rust-primary"
           >
             ⓘ
           </button>
@@ -228,9 +228,9 @@ export default function MapDetailPage({
 
       {/* Info panel */}
       {showInfo && (
-        <div className="border-b border-zinc-800 bg-zinc-900 px-4 py-3">
+        <div className="border-b border-rust-border bg-rust-surface px-4 py-3">
           <div className="flex items-center justify-between text-sm">
-            <div className="flex items-center gap-4 text-zinc-400">
+            <div className="flex items-center gap-4 text-rust-text-secondary">
               <span>{map.mapSize}m</span>
               <span>{map.markers.length} markers</span>
               {map.wipeDate && (
@@ -275,7 +275,7 @@ export default function MapDetailPage({
             setMarkerPosition({ x: map.mapSize / 2, y: map.mapSize / 2 });
             setShowAddMarker(true);
           }}
-          className="absolute bottom-20 right-4 z-[1000] flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
+          className="absolute bottom-20 right-4 z-[1000] flex h-14 w-14 items-center justify-center rounded-full bg-rust-primary text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
           title="Add marker"
         >
           <svg
@@ -294,7 +294,7 @@ export default function MapDetailPage({
         </button>
 
         {/* Tip for user */}
-        <div className="absolute bottom-20 left-4 z-[1000] rounded-lg bg-zinc-800/80 px-3 py-2 text-xs text-zinc-300 backdrop-blur-sm">
+        <div className="absolute bottom-20 left-4 z-[1000] rounded-lg bg-rust-surface-elevated/80 px-3 py-2 text-xs text-rust-text backdrop-blur-sm">
           Click on the map to place a marker
         </div>
       </div>

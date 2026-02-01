@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function WikiPage() {
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
+    <div className="min-h-screen bg-rust-bg text-white">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-800">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-rust-bg/80 backdrop-blur-xl border-b border-rust-border">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <span className="text-2xl">🗺️</span>
@@ -20,7 +20,7 @@ export default function WikiPage() {
             </Link>
             <Link
               href="/map"
-              className="text-zinc-400 hover:text-white transition-colors text-sm"
+              className="text-rust-text-secondary hover:text-white transition-colors text-sm"
             >
               Map
             </Link>
@@ -32,7 +32,7 @@ export default function WikiPage() {
       <main className="pt-24 pb-16 px-4">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold mb-4">Rust Wiki</h1>
-          <p className="text-zinc-400 mb-12">
+          <p className="text-rust-text-secondary mb-12">
             Alles wat je moet weten over Rust Console.
           </p>
 
@@ -98,15 +98,15 @@ function WikiCard({
   comingSoon?: boolean;
 }) {
   return (
-    <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800 hover:border-zinc-700 transition-colors relative">
+    <div className="bg-rust-surface rounded-lg p-6 border border-rust-border hover:border-rust-border transition-colors relative">
       {comingSoon && (
-        <span className="absolute top-4 right-4 text-xs bg-zinc-800 text-zinc-400 px-2 py-1 rounded-full">
+        <span className="absolute top-4 right-4 text-xs bg-rust-surface-elevated text-rust-text-secondary px-2 py-1 rounded-full">
           Binnenkort
         </span>
       )}
       <div className="text-3xl mb-3">{emoji}</div>
       <h2 className="text-xl font-bold mb-2">{title}</h2>
-      <p className="text-zinc-400 text-sm">{description}</p>
+      <p className="text-rust-text-secondary text-sm">{description}</p>
     </div>
   );
 }
