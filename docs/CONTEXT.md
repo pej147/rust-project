@@ -9,9 +9,9 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | Enemy Marker UI Redesign |
-| **Laatste update** | 2026-01-27 |
-| **Volgende taak** | Testing popup + possible improvements |
+| **Huidige fase** | Marker Visibility + Map Polish |
+| **Laatste update** | 2026-02-01 |
+| **Volgende taak** | FASE 9: Command Bar of FASE 10: Polish |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 | **Totaal Wiki Pagina's** | 208 |
@@ -150,7 +150,47 @@
 
 ## 🔄 HUIDIGE SESSIE
 
-### Wat er deze sessie is gedaan (2026-01-27):
+### Wat er deze sessie is gedaan (2026-02-01):
+
+#### Marker Visibility — Visuele Feedback ✅ COMPLEET
+- [x] Visibility badge op map markers (🔒 Private, 👥 Team, 🌐 Public)
+- [x] Visibility label in Leaflet popups (non-enemy markers)
+- [x] Visibility badge in enemy popup header
+- [x] Visibility filter sectie in filter panel (3 chips met counts)
+- [x] Filter logica: markers filteren op zowel type ALS visibility
+
+**Files modified:**
+- `src/components/map/rust-map.tsx` — badge op markers + visibility in popup
+- `src/components/map/enemy-marker-popup.tsx` — visibility badge in header
+- `src/components/map/marker-filter.tsx` — visibility filter sectie
+- `src/app/(dashboard)/map/[id]/page.tsx` — visibility filter state + logica
+
+#### Enemy Popup Fix — Leaflet Popup ✅ COMPLEET
+- **Issue:** Custom React popup (position: fixed) bleef op oude screen-positie staan bij map pan/zoom
+- **Fix:** Vervangen door Leaflet's ingebouwde popup systeem — popup beweegt nu automatisch mee
+- **Bonus:** Popup werkt nu in zowel guest mode als logged-in mode
+  - Guest mode: leest residents direct van marker object (localStorage)
+  - Logged-in mode: haalt residents op via API
+- **Settings knop:** Opent de detail bottom sheet vanuit de Leaflet popup
+
+**Files modified:**
+- `src/components/map/rust-map.tsx` — Leaflet popup voor enemy markers, residents laden
+- `src/app/(dashboard)/map/[id]/page.tsx` — verwijderd: EnemyMarkerPopup, vereenvoudigd marker click
+- `src/app/(dashboard)/map/guest/[seed]/page.tsx` — verwijderd: GuestEnemyMarkerPopup
+
+#### Map Achtergrond Fix ✅ COMPLEET
+- **Issue:** Lege ruimte (zwart) zichtbaar rond de kaart bij pannen/zoomen
+- **Eerste poging:** CSS background-image — veroorzaakte dubbel-beeld effect
+- **Definitieve fix:** maxBounds strakker (geen padding), minZoom -2 → -1
+- **Resultaat:** Kaart vult het scherm, geen lege randen meer
+
+**Files modified:**
+- `src/components/map/rust-map.tsx` — bounds en zoom limieten
+- `src/components/map/map-styles.css` — donkere achtergrond voor Leaflet container
+
+---
+
+### Wat er vorige sessie is gedaan (2026-01-27):
 
 #### Enemy Marker Click Fix ✅ FIXED
 - **Issue:** Clicking ENEMY marker didn't show player names (residents)
@@ -317,7 +357,7 @@
 2. **FASE 10: Polish & Extras** - Backup script, error handling, responsive check
 3. **Building wiki:** Base designs, upkeep
 4. **Wiki Translation:** Translate wiki pages from Dutch to English
-5. **Marker team visibility:** Markers delen met team (private/team/public)
+5. ~~**Marker team visibility:** Markers delen met team (private/team/public)~~ ✅ Visuele feedback toegevoegd
 
 ### Volgende stap:
 User can choose: Command Bar (FASE 9), Polish (FASE 10), Building wiki, or Wiki translation.
@@ -399,6 +439,8 @@ Zie `docs/WIKI-EXTRACTION-PLAN.md` voor volledige instructies.
 | Issue | Prioriteit | Status | Notities |
 |-------|------------|--------|----------|
 | ~~Enemy marker click~~ | ~~High~~ | ✅ Fixed | Event propagation fix applied |
+| ~~Enemy popup positie~~ | ~~High~~ | ✅ Fixed | Replaced with Leaflet popup |
+| ~~Map lege randen~~ | ~~Medium~~ | ✅ Fixed | Tighter bounds + higher minZoom |
 | Wiki 403 block | Medium | Workaround | Handmatige browser extractie nodig |
 
 ---
@@ -563,4 +605,4 @@ De volgende taak is: [TAAK]
 
 ---
 
-*Laatste update: 2026-01-27 — Enemy Marker Click Fix IN PROGRESS*
+*Laatste update: 2026-02-01 — Marker Visibility + Map Polish*
