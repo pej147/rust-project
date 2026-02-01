@@ -21,6 +21,7 @@ interface MarkerData {
   x: number;
   y: number;
   color?: string;
+  visibility?: string;
   createdBy?: {
     id: string;
   };
@@ -112,7 +113,12 @@ export function EnemyMarkerPopup({
       <div className="rounded-lg border border-zinc-700/60 bg-zinc-900/95 shadow-lg backdrop-blur-sm">
         {/* Compact header */}
         <div className="flex items-center justify-between gap-2 border-b border-zinc-800/40 px-2.5 py-1.5">
-          <span className="text-xs font-medium text-white truncate max-w-[100px]">{marker.title}</span>
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className="text-xs font-medium text-white truncate max-w-[100px]">{marker.title}</span>
+            <span className="shrink-0 text-[9px]" title={marker.visibility === "PRIVATE" ? "Private" : marker.visibility === "PUBLIC" ? "Public" : "Team"}>
+              {marker.visibility === "PRIVATE" ? "🔒" : marker.visibility === "PUBLIC" ? "🌐" : "👥"}
+            </span>
+          </div>
           <div className="flex items-center gap-1">
             <button
               onClick={onOpenSettings}

@@ -148,10 +148,14 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
       const latLng: L.LatLngExpression = [mapSize - marker.y, marker.x];
       const config = MARKER_CONFIG[marker.type] || { icon: "📍", label: marker.type };
 
+      const visibilityIcon = marker.visibility === "PRIVATE" ? "🔒"
+        : marker.visibility === "PUBLIC" ? "🌐" : "👥";
+
       const icon = L.divIcon({
         className: "custom-marker",
         html: `
           <div style="
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -163,7 +167,24 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
             box-shadow: 0 2px 8px rgba(0,0,0,0.4);
             font-size: 18px;
             cursor: pointer;
-          ">${config.icon}</div>
+          ">
+            ${config.icon}
+            <span style="
+              position: absolute;
+              bottom: -4px;
+              right: -4px;
+              font-size: 10px;
+              background: #18181b;
+              border-radius: 50%;
+              width: 16px;
+              height: 16px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border: 1.5px solid #3f3f46;
+              line-height: 1;
+            ">${visibilityIcon}</span>
+          </div>
         `,
         iconSize: [36, 36],
         iconAnchor: [18, 18],
@@ -223,6 +244,20 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
           ">
             📍 ${Math.round(marker.x)}, ${Math.round(marker.y)}
             ${marker.createdBy ? `<br>By: ${marker.createdBy.displayName}` : ""}
+          </div>
+          <div style="
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 6px;
+            padding: 2px 8px;
+            background: #27272a;
+            border-radius: 9999px;
+            font-size: 10px;
+            color: #a1a1aa;
+          ">
+            <span>${visibilityIcon}</span>
+            ${marker.visibility === "PRIVATE" ? "Private" : marker.visibility === "PUBLIC" ? "Public" : "Team"}
           </div>
         </div>
       `;

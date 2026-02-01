@@ -13,16 +13,28 @@ const MARKER_TYPES = [
   { value: "RAID", label: "Raid", icon: "💥", color: "#AF52DE" },
 ];
 
+const VISIBILITY_TYPES = [
+  { value: "PRIVATE", label: "Private", icon: "🔒" },
+  { value: "TEAM", label: "Team", icon: "👥" },
+  { value: "PUBLIC", label: "Public", icon: "🌐" },
+];
+
 interface MarkerFilterProps {
   activeFilters: string[];
   onFilterChange: (filters: string[]) => void;
   markerCounts?: Record<string, number>;
+  activeVisibilityFilters?: string[];
+  onVisibilityFilterChange?: (filters: string[]) => void;
+  visibilityCounts?: Record<string, number>;
 }
 
 export function MarkerFilter({
   activeFilters,
   onFilterChange,
   markerCounts = {},
+  activeVisibilityFilters = [],
+  onVisibilityFilterChange,
+  visibilityCounts = {},
 }: MarkerFilterProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -31,6 +43,15 @@ export function MarkerFilter({
       onFilterChange(activeFilters.filter((f) => f !== type));
     } else {
       onFilterChange([...activeFilters, type]);
+    }
+  };
+
+  const toggleVisibility = (vis: string) => {
+    if (!onVisibilityFilterChange) return;
+    if (activeVisibilityFilters.includes(vis)) {
+      onVisibilityFilterChange(activeVisibilityFilters.filter((f) => f !== vis));
+    } else {
+      onVisibilityFilterChange([...activeVisibilityFilters, vis]);
     }
   };
 
@@ -153,6 +174,47 @@ export function MarkerFilter({
               );
             })}
           </div>
+
+          {/* Visibility filter */}
+          {onVisibilityFilterChange && (
+            <>
+              <div className="mt-3 mb-1.5 text-[10px] font-medium uppercase tracking-wider text-zinc-500">
+                Visibility
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {VISIBILITY_TYPES.map((vis) => {
+                  const isActive = activeVisibilityFilters.includes(vis.value);
+                  const count = visibilityCounts[vis.value] || 0;
+
+                  return (
+                    <button
+                      key={vis.value}
+                      onClick={() => toggleVisibility(vis.value)}
+                      className={`flex items-center gap-1 rounded-lg px-2 py-1.5 text-xs transition-all ${
+                        isActive
+                          ? "bg-zinc-700 text-white"
+                          : "bg-zinc-800/50 text-zinc-500"
+                      }`}
+                    >
+                      <span>{vis.icon}</span>
+                      <span>{vis.label}</span>
+                      {count > 0 && (
+                        <span
+                          className={`ml-0.5 rounded-full px-1.5 text-[10px] ${
+                            isActive
+                              ? "bg-zinc-600 text-white"
+                              : "bg-zinc-700 text-zinc-400"
+                          }`}
+                        >
+                          {count}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </>
+          )}
 
           {/* Summary */}
           <div className="mt-2 text-center text-xs text-zinc-500">

@@ -92,6 +92,8 @@ export default function MapDetailPage({
 
   // Filter state
   const [activeFilters, setActiveFilters] = useState<string[]>(ALL_MARKER_TYPES);
+  const ALL_VISIBILITY_TYPES = ["PRIVATE", "TEAM", "PUBLIC"];
+  const [activeVisibilityFilters, setActiveVisibilityFilters] = useState<string[]>(ALL_VISIBILITY_TYPES);
 
   const fetchMap = useCallback(async () => {
     try {
@@ -172,9 +174,20 @@ export default function MapDetailPage({
     {} as Record<string, number>
   ) || {};
 
-  // Filter markers based on active filters
+  // Calculate marker counts per visibility
+  const visibilityCounts = map?.markers.reduce(
+    (acc, marker) => {
+      const vis = marker.visibility || "TEAM";
+      acc[vis] = (acc[vis] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  ) || {};
+
+  // Filter markers based on active type AND visibility filters
   const filteredMarkers = map?.markers.filter((marker) =>
-    activeFilters.includes(marker.type)
+    activeFilters.includes(marker.type) &&
+    activeVisibilityFilters.includes(marker.visibility || "TEAM")
   ) || [];
 
   if (isLoading) {
@@ -272,6 +285,9 @@ export default function MapDetailPage({
           activeFilters={activeFilters}
           onFilterChange={setActiveFilters}
           markerCounts={markerCounts}
+          activeVisibilityFilters={activeVisibilityFilters}
+          onVisibilityFilterChange={setActiveVisibilityFilters}
+          visibilityCounts={visibilityCounts}
         />
 
         {/* Floating action button */}
