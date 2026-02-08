@@ -2,7 +2,7 @@ import Link from "next/link";
 import { wikiItems, itemCategories, type ItemCategory } from "@/data/wiki-items";
 
 export default function WikiItemsPage() {
-  // Groepeer items per categorie
+  // Group items by category
   const resourceItems = wikiItems.filter(i => i.category === "resources");
   const componentItems = wikiItems.filter(i => i.category === "components");
   const toolItems = wikiItems.filter(i => i.category === "tools");
@@ -47,7 +47,7 @@ export default function WikiItemsPage() {
 
           <h1 className="text-4xl font-bold mb-4">🎒 Items</h1>
           <p className="text-rust-text-secondary mb-8">
-            Alle items in Rust Console - resources, components, tools en medical.
+            All items in Rust Console - resources, components, tools and medical.
           </p>
 
           {/* Quick Stats */}

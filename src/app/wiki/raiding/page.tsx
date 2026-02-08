@@ -65,8 +65,8 @@ export default function RaidingPage() {
 
           <h1 className="text-4xl font-bold mb-4">Raid Cost Chart</h1>
           <p className="text-rust-text-secondary mb-8 max-w-2xl">
-            Hoeveel explosives heb je nodig om doors, walls en deployables te
-            raiden? Bekijk de sulfur kosten en kies de goedkoopste methode.
+            How many explosives do you need to raid doors, walls and
+            deployables? Check the sulfur costs and choose the cheapest method.
           </p>
 
           {/* Legend */}

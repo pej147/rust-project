@@ -46,7 +46,7 @@ export default function WikiMonumentsPage() {
 
           <h1 className="text-4xl font-bold mb-4">🏛️ Monuments</h1>
           <p className="text-rust-text-secondary mb-8">
-            Alle monuments in Rust Console met loot, puzzles en tips.
+            All monuments in Rust Console with loot, puzzles and tips.
           </p>
 
           {/* Quick Stats */}

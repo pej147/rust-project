@@ -33,7 +33,7 @@ export default function WikiPage() {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold mb-4">Rust Wiki</h1>
           <p className="text-rust-text-secondary mb-12">
-            Alles wat je moet weten over Rust Console.
+            Everything you need to know about Rust Console.
           </p>
 
           {/* Categories */}
@@ -42,41 +42,41 @@ export default function WikiPage() {
               <WikiCard
                 emoji="🏛️"
                 title="Monuments"
-                description="Alle monuments met loot tabellen en puzzels"
+                description="All monuments with loot tables and puzzles"
               />
             </Link>
             <Link href="/wiki/weapons">
               <WikiCard
                 emoji="🔫"
-                title="Wapens"
-                description="Melee, bows, en meer - met damage stats"
+                title="Weapons"
+                description="Melee, bows, and more - with damage stats"
               />
             </Link>
             <Link href="/wiki/ammo">
               <WikiCard
                 emoji="🎯"
                 title="Ammo"
-                description="Alle ammo types met crafting en tips"
+                description="All ammo types with crafting info and tips"
               />
             </Link>
             <Link href="/wiki/raiding">
               <WikiCard
                 emoji="💣"
                 title="Raiding"
-                description="Raid costs, explosives, en strategieen"
+                description="Raid costs, explosives, and strategies"
               />
             </Link>
             <Link href="/wiki/items">
               <WikiCard
                 emoji="🎒"
                 title="Items"
-                description="Resources, components, en meer"
+                description="Resources, components, and more"
               />
             </Link>
             <WikiCard
               emoji="🗺️"
               title="Map Tips"
-              description="Console-specifieke tips en tricks"
+              description="Console-specific tips and tricks"
               comingSoon
             />
           </div>
@@ -101,7 +101,7 @@ function WikiCard({
     <div className="bg-rust-surface rounded-lg p-6 border border-rust-border hover:border-rust-border transition-colors relative">
       {comingSoon && (
         <span className="absolute top-4 right-4 text-xs bg-rust-surface-elevated text-rust-text-secondary px-2 py-1 rounded-full">
-          Binnenkort
+          Coming Soon
         </span>
       )}
       <div className="text-3xl mb-3">{emoji}</div>

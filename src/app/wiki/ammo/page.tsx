@@ -48,7 +48,7 @@ export default function WikiAmmoPage() {
 
           <h1 className="text-4xl font-bold mb-4">🎯 Ammunition</h1>
           <p className="text-rust-text-secondary mb-8">
-            Alle ammo types in Rust Console met crafting info en tips.
+            All ammo types in Rust Console with crafting info and tips.
           </p>
 
           {/* Quick Stats */}

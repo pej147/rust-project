@@ -48,7 +48,7 @@ export default function WikiWeaponsPage() {
 
           <h1 className="text-4xl font-bold mb-4">🔫 Weapons</h1>
           <p className="text-rust-text-secondary mb-8">
-            Alle wapens in Rust Console met damage stats en crafting info.
+            All weapons in Rust Console with damage stats and crafting info.
           </p>
 
           {/* Quick Stats */}
