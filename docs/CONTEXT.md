@@ -682,11 +682,15 @@ NEXTAUTH_URL="http://localhost:3000"
   "dev": "next dev",
   "build": "next build",
   "start": "next start",
-  "lint": "next lint",
+  "lint": "eslint",
+  "format": "prettier --write .",
   "type-check": "tsc --noEmit",
+  "db:migrate": "prisma migrate dev",
   "db:push": "prisma db push",
   "db:studio": "prisma studio",
-  "db:backup": "ts-node scripts/backup.ts"
+  "db:backup": "npx ts-node scripts/backup.ts create",
+  "db:restore": "npx ts-node scripts/backup.ts restore",
+  "db:backups": "npx ts-node scripts/backup.ts list"
 }
 ```
 
@@ -748,10 +752,18 @@ prettier
 Wanneer je een nieuwe sessie start met Claude Code, stuur dit bericht:
 
 ```
-Lees docs/CONTEXT.md en ga verder waar we gebleven waren.
-De laatste voltooide taak was: [TAAK]
-De volgende taak is: [TAAK]
+ga verder
 ```
+
+Claude leest automatisch CONTEXT.md en CLAUDE.md om de context te begrijpen.
+
+### Huidige Status (2026-02-09):
+- **v1.0 MVP is COMPLEET** met alle 10 fases afgerond
+- Mogelijke volgende taken:
+  - Building Wiki (base designs, upkeep)
+  - Wiki Translation (Dutch → English)
+  - Deployment (Vercel/Railway)
+  - Real-time updates (WebSocket)
 
 ---
 
