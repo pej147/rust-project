@@ -9,9 +9,9 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | Guest Team Feature COMPLEET — Klaar voor volgende features |
-| **Laatste update** | 2026-02-01 |
-| **Volgende taak** | FASE 9: Command Bar / FASE 10: Polish & Extras |
+| **Huidige fase** | FASE 9: Command Bar COMPLEET |
+| **Laatste update** | 2026-02-09 |
+| **Volgende taak** | FASE 10: Polish & Extras |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 | **Totaal Wiki Pagina's** | 208 |
@@ -185,6 +185,37 @@
 - [x] E.6 - Create Team UI in guest map page (create flow + sync status)
 - [x] E.7 - Prisma db push + build check succesvol
 
+### FASE 9: Command Bar ✅ COMPLEET
+- [x] 9.1 - Floating command bar component (`src/components/command-bar/command-bar.tsx`)
+- [x] 9.2 - Command parser (`src/lib/command-parser.ts`)
+- [x] 9.3 - Commands implemented:
+  - `M18` - Quick enemy marker at grid M18
+  - `M18+3` - Enemy marker with offset
+  - `/enemy PlayerName M18` - Named enemy at grid
+  - `/marker type grid` - Add marker of type at grid
+  - `/goto grid` - Navigate to grid position
+- [x] 9.4 - Autocomplete for commands (suggestions shown while typing)
+- [x] 9.5 - Recent commands history (localStorage, ↑ key for history)
+- [x] 9.6 - Keyboard shortcut "/" to open command bar
+- [x] 9.7 - Integrated in both logged-in and guest map pages
+- [x] 9.8 - Map pan to position (`/goto` command navigates map)
+- [x] 9.9 - Build tested and committed
+
+**Files created:**
+- `src/lib/command-parser.ts` - Grid coordinate conversion, command parsing
+- `src/components/command-bar/command-bar.tsx` - Floating input component
+
+**Features:**
+- Press "/" to open command bar from map page
+- Quick grid markers: "M18" adds enemy at grid M18
+- Offset support: "M18+3" adds marker 3 cells down
+- Named enemies: "/enemy Nakeds M18"
+- Any marker type: "/marker loot K12"
+- Navigate: "/goto A0" pans map to grid
+- History: ↑↓ keys navigate command history
+- Tab completion for command types
+- ESC to close
+
 **Schema wijzigingen:**
 - `Team.guestToken` — secret token for guest team management
 - `MapSession.createdById` — nullable (guests have no userId)
@@ -213,7 +244,18 @@
 
 ## 🔄 HUIDIGE SESSIE
 
-### Wat er deze sessie is gedaan (2026-02-01):
+### Wat er deze sessie is gedaan (2026-02-09):
+
+#### FASE 9: Command Bar ✅ COMPLEET
+- **Command Parser:** Grid coordinate system (A0-Z25), offset support (+3, -2+1)
+- **Command Bar Component:** Floating input with suggestions, history, keyboard shortcuts
+- **Commands:** Quick grid (`M18`), offsets (`M18+3`), `/enemy`, `/marker`, `/goto`
+- **Integration:** Both logged-in and guest map pages
+- **Map Navigation:** `/goto` command pans map to specified grid position
+
+---
+
+### Wat er vorige sessie is gedaan (2026-02-01):
 
 #### UI Restyling: iOS → Rust Console Game ✅ COMPLEET
 Volledige restyling afgerond in 7 fases. Zie FASE D in Voltooide Taken voor details.
@@ -422,14 +464,14 @@ Commit: `style: Complete UI restyling from iOS to Rust Console game theme` (46 b
 ### Wat er nog kan:
 1. ~~**🔄 UI Restyling afronden**~~ ✅ COMPLEET — Alle 7 fases afgerond
 2. ~~**Guest Team Feature**~~ ✅ COMPLEET — Gasten kunnen teams aanmaken en markers syncen
-3. **FASE 9: Command Bar** - Floating input voor snelle marker commands
+3. ~~**FASE 9: Command Bar**~~ ✅ COMPLEET — Floating input voor snelle marker commands
 4. **FASE 10: Polish & Extras** - Backup script, error handling, responsive check
 5. **Building wiki:** Base designs, upkeep
 6. **Wiki Translation:** Translate wiki pages from Dutch to English
 7. ~~**Marker team visibility:** Markers delen met team (private/team/public)~~ ✅ Visuele feedback toegevoegd
 
 ### Volgende stap:
-FASE 9: Command Bar, FASE 10: Polish & Extras, of Wiki uitbreiden.
+FASE 10: Polish & Extras, of Wiki uitbreiden.
 
 ---
 
@@ -675,4 +717,4 @@ De volgende taak is: [TAAK]
 
 ---
 
-*Laatste update: 2026-02-01 — Guest Team Feature COMPLEET*
+*Laatste update: 2026-02-09 — FASE 9: Command Bar COMPLEET*

@@ -11,6 +11,8 @@ import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { AddMarkerForm } from "@/components/map/add-marker-form";
 import { MarkerDetailSheet } from "@/components/map/marker-detail-sheet";
 import { MarkerFilter } from "@/components/map/marker-filter";
+import { CommandBar } from "@/components/command-bar/command-bar";
+import type { MarkerType } from "@/lib/command-parser";
 
 // All marker types for default filter
 const ALL_MARKER_TYPES = [
@@ -92,6 +94,10 @@ export default function MapDetailPage({
   const ALL_VISIBILITY_TYPES = ["PRIVATE", "TEAM", "PUBLIC"];
   const [activeVisibilityFilters, setActiveVisibilityFilters] = useState<string[]>(ALL_VISIBILITY_TYPES);
 
+  // Command bar state
+  const [showCommandBar, setShowCommandBar] = useState(false);
+  const [gotoPosition, setGotoPosition] = useState<{ x: number; y: number } | null>(null);
+
   const fetchMap = useCallback(async () => {
     try {
       const response = await fetch(`/api/maps/${id}`);
@@ -110,6 +116,55 @@ export default function MapDetailPage({
   useEffect(() => {
     fetchMap();
   }, [fetchMap]);
+
+  // Keyboard shortcut to open command bar
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't trigger if typing in an input
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+      // "/" opens command bar
+      if (e.key === "/" && !showCommandBar) {
+        e.preventDefault();
+        setShowCommandBar(true);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [showCommandBar]);
+
+  // Handle command bar add marker
+  const handleCommandAddMarker = async (type: MarkerType, x: number, y: number, name?: string) => {
+    try {
+      const response = await fetch("/api/markers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          mapSessionId: id,
+          title: name || `${type} marker`,
+          type,
+          x,
+          y,
+          visibility: "TEAM",
+        }),
+      });
+
+      if (response.ok) {
+        fetchMap();
+      }
+    } catch (error) {
+      console.error("Failed to add marker:", error);
+    }
+  };
+
+  // Handle command bar goto
+  const handleCommandGoto = (x: number, y: number) => {
+    setGotoPosition({ x, y });
+    // Clear after a short delay to allow re-navigation to same position
+    setTimeout(() => setGotoPosition(null), 100);
+  };
 
   const handleMapClick = (x: number, y: number) => {
     setMarkerPosition({ x, y });
@@ -256,6 +311,7 @@ export default function MapDetailPage({
           markers={filteredMarkers}
           onMapClick={handleMapClick}
           onMarkerClick={handleMarkerClick}
+          gotoPosition={gotoPosition}
         />
 
         {/* Marker Filter */}
@@ -293,10 +349,36 @@ export default function MapDetailPage({
           </svg>
         </button>
 
-        {/* Tip for user */}
-        <div className="absolute bottom-20 left-4 z-[1000] rounded-lg bg-rust-surface-elevated/80 px-3 py-2 text-xs text-rust-text backdrop-blur-sm">
-          Click on the map to place a marker
-        </div>
+        {/* Tip for user - hide when command bar is open */}
+        {!showCommandBar && (
+          <div className="absolute bottom-20 left-4 z-[1000] rounded-lg bg-rust-surface-elevated/80 px-3 py-2 text-xs text-rust-text backdrop-blur-sm">
+            Click on the map to place a marker • Press <span className="font-mono">/</span> for commands
+          </div>
+        )}
+
+        {/* Command bar toggle button */}
+        <button
+          onClick={() => setShowCommandBar(!showCommandBar)}
+          className={`absolute bottom-20 left-1/2 -translate-x-1/2 z-[1000] flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
+            showCommandBar
+              ? "bg-rust-primary text-white"
+              : "bg-rust-surface-elevated/80 text-rust-text hover:bg-rust-surface-elevated backdrop-blur-sm"
+          }`}
+          title="Toggle command bar (press /)"
+        >
+          <span className="font-mono">/</span>
+          <span>Command</span>
+        </button>
+
+        {/* Command Bar */}
+        {showCommandBar && (
+          <CommandBar
+            mapSize={map.mapSize}
+            onAddMarker={handleCommandAddMarker}
+            onGoto={handleCommandGoto}
+            onClose={() => setShowCommandBar(false)}
+          />
+        )}
       </div>
 
       {/* Add Marker Bottom Sheet */}

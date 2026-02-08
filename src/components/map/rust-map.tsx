@@ -46,9 +46,10 @@ interface RustMapProps {
   markers?: MarkerData[];
   onMapClick?: (x: number, y: number) => void;
   onMarkerClick?: (marker: MarkerData, screenPosition: { x: number; y: number }) => void;
+  gotoPosition?: { x: number; y: number } | null;
 }
 
-export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick }: RustMapProps) {
+export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick, gotoPosition }: RustMapProps) {
   const mapRef = useRef<L.Map | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const markerClickedRef = useRef(false); // Flag to prevent map click after marker click
@@ -139,6 +140,14 @@ export function RustMap({ seed, mapSize, markers = [], onMapClick, onMarkerClick
       mapRef.current = null;
     };
   }, [seed, mapSize, onMapClick]);
+
+  // Handle goto position (pan map to coordinates)
+  useEffect(() => {
+    if (gotoPosition && mapRef.current) {
+      const latLng: L.LatLngExpression = [mapSize - gotoPosition.y, gotoPosition.x];
+      mapRef.current.setView(latLng, 1, { animate: true });
+    }
+  }, [gotoPosition, mapSize]);
 
   // Update markers when they change
   useEffect(() => {
