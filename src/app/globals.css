@@ -41,3 +41,59 @@ body {
   color: var(--rust-text);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Toast animations */
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out-to-right {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-in {
+  animation-duration: 200ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+.animate-out {
+  animation-duration: 150ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+.slide-in-from-bottom-full {
+  animation-name: slide-in-from-bottom;
+}
+
+.slide-out-to-right-full {
+  animation-name: slide-out-to-right;
+}
+
+.fade-out-80 {
+  animation-name: fade-out;
+}

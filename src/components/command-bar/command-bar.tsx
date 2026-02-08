@@ -185,7 +185,7 @@ export function CommandBar({ mapSize, onAddMarker, onGoto, onClose }: CommandBar
   }, [error, success]);
 
   return (
-    <div className="absolute bottom-4 left-4 right-4 z-[1001]">
+    <div className="absolute bottom-4 left-2 right-2 z-[1001] sm:left-4 sm:right-4">
       {/* Suggestions */}
       {suggestions.length > 0 && input && (
         <div className="mb-2 rounded-lg border border-rust-border bg-rust-surface/95 p-2 backdrop-blur-sm">

@@ -5,7 +5,7 @@ export default function WikiPage() {
     <div className="min-h-screen bg-rust-bg text-white">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-rust-bg/80 backdrop-blur-xl border-b border-rust-border">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-3 sm:px-4 h-14 sm:h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <span className="text-2xl">🗺️</span>
             <span className="font-bold text-lg">Rust Intel Map</span>

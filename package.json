@@ -12,7 +12,10 @@
     "type-check": "tsc --noEmit",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
-    "db:push": "prisma db push"
+    "db:push": "prisma db push",
+    "db:backup": "npx ts-node scripts/backup.ts create",
+    "db:restore": "npx ts-node scripts/backup.ts restore",
+    "db:backups": "npx ts-node scripts/backup.ts list"
   },
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "^7.3.0",

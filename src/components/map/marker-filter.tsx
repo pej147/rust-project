@@ -70,7 +70,7 @@ export function MarkerFilter({
   );
 
   return (
-    <div className="absolute left-4 top-4 z-[1000]">
+    <div className="absolute left-2 top-2 z-[1000] sm:left-4 sm:top-4 max-w-[calc(100vw-1rem)] sm:max-w-none">
       {/* Collapsed state - just a button */}
       {!isExpanded ? (
         <button

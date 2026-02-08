@@ -9,9 +9,9 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | FASE 9: Command Bar COMPLEET |
+| **Huidige fase** | v1.0 MVP COMPLEET |
 | **Laatste update** | 2026-02-09 |
-| **Volgende taak** | FASE 10: Polish & Extras |
+| **Volgende taak** | Uitbreidingen: Building wiki, Wiki translation |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 | **Totaal Wiki Pagina's** | 208 |
@@ -201,6 +201,24 @@
 - [x] 9.8 - Map pan to position (`/goto` command navigates map)
 - [x] 9.9 - Build tested and committed
 
+### FASE 10: Polish & Extras ✅ COMPLEET
+- [x] 10.1 - Backup script (`scripts/backup.ts`) met create/restore/list commands
+- [x] 10.2 - Toast notifications (Radix UI Toast + useToast hook)
+- [x] 10.3 - Responsive design fixes (admin grid, marker filter, command bar, wiki header)
+- [x] 10.4 - Bottom sheet keyboard handling (extra padding)
+- [x] 10.5 - README met complete setup instructies
+- [x] 10.6 - Final commit: v1.0 MVP complete
+
+**NPM Scripts added:**
+- `npm run db:backup` - Create database backup
+- `npm run db:restore` - Restore from backup
+- `npm run db:backups` - List available backups
+
+**Toast System:**
+- `src/components/ui/toast.tsx` - Toast component
+- `src/components/ui/toaster.tsx` - Toaster provider
+- `src/hooks/use-toast.ts` - useToast hook with toast(), toastSuccess(), toastError()
+
 **Files created:**
 - `src/lib/command-parser.ts` - Grid coordinate conversion, command parsing
 - `src/components/command-bar/command-bar.tsx` - Floating input component
@@ -252,6 +270,26 @@
 - **Commands:** Quick grid (`M18`), offsets (`M18+3`), `/enemy`, `/marker`, `/goto`
 - **Integration:** Both logged-in and guest map pages
 - **Map Navigation:** `/goto` command pans map to specified grid position
+
+#### FASE 10: Polish & Extras ✅ COMPLEET
+- **Backup Script:** Create, restore, list database backups
+- **Toast Notifications:** Radix UI Toast system with success/error/warning variants
+- **Responsive Fixes:** Admin dashboard, marker filter, command bar, wiki header
+- **README:** Complete setup and usage documentation
+
+#### v1.0 MVP COMPLETE
+All 10 phases completed. The app includes:
+- User authentication (register/login)
+- Interactive map with Leaflet
+- Marker CRUD with visibility settings
+- Team collaboration with codes
+- Guest mode with local storage
+- Command bar for quick actions
+- Admin dashboard with audit logs
+- Rust Wiki (208 pages)
+- Database backup system
+- Toast notifications
+- Responsive design
 
 ---
 
@@ -465,13 +503,13 @@ Commit: `style: Complete UI restyling from iOS to Rust Console game theme` (46 b
 1. ~~**🔄 UI Restyling afronden**~~ ✅ COMPLEET — Alle 7 fases afgerond
 2. ~~**Guest Team Feature**~~ ✅ COMPLEET — Gasten kunnen teams aanmaken en markers syncen
 3. ~~**FASE 9: Command Bar**~~ ✅ COMPLEET — Floating input voor snelle marker commands
-4. **FASE 10: Polish & Extras** - Backup script, error handling, responsive check
+4. ~~**FASE 10: Polish & Extras**~~ ✅ COMPLEET — Backup, toasts, responsive, README
 5. **Building wiki:** Base designs, upkeep
 6. **Wiki Translation:** Translate wiki pages from Dutch to English
 7. ~~**Marker team visibility:** Markers delen met team (private/team/public)~~ ✅ Visuele feedback toegevoegd
 
 ### Volgende stap:
-FASE 10: Polish & Extras, of Wiki uitbreiden.
+v1.0 MVP is compleet. Mogelijke uitbreidingen: Building wiki, Wiki translation, of nieuwe features.
 
 ---
 
@@ -717,4 +755,4 @@ De volgende taak is: [TAAK]
 
 ---
 
-*Laatste update: 2026-02-09 — FASE 9: Command Bar COMPLEET*
+*Laatste update: 2026-02-09 — v1.0 MVP COMPLEET*

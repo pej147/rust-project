@@ -100,7 +100,7 @@ export function BottomSheet({
         )}
 
         {/* Content */}
-        <div className="p-4">{children}</div>
+        <div className="p-4 pb-8">{children}</div>
       </div>
     </>
   );
