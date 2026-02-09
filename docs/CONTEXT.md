@@ -9,13 +9,14 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Huidige fase** | v1.0 MVP COMPLEET |
+| **Huidige fase** | v1.0 MVP COMPLEET + Polish |
 | **Laatste update** | 2026-02-09 |
-| **Volgende taak** | Uitbreidingen: Building wiki, Wiki translation |
+| **Volgende taak** | Uitbreidingen: Building wiki, Deployment |
 | **Blokkades** | Geen |
 | **CEO Dashboard** | ✅ Actief in alle sessies |
 | **Totaal Wiki Pagina's** | 208 |
-| **Taal** | English (UI) / Dutch (Wiki - to be translated) |
+| **Taal** | English (volledig — UI + Wiki) |
+| **Lint** | ✅ 0 errors, 0 warnings |
 
 ---
 
@@ -264,6 +265,46 @@
 
 ### Wat er deze sessie is gedaan (2026-02-09):
 
+#### Wiki Translation: Dutch → English ✅ COMPLEET
+- [x] Wiki home page (`/wiki`) — intro tekst, card beschrijvingen, "Binnenkort" → "Coming Soon", "Wapens" → "Weapons"
+- [x] Raiding page (`/wiki/raiding`) — intro beschrijving vertaald
+- [x] Weapons page (`/wiki/weapons`) — intro beschrijving vertaald
+- [x] Ammo page (`/wiki/ammo`) — intro beschrijving vertaald
+- [x] Monuments page (`/wiki/monuments`) — intro beschrijving vertaald
+- [x] Items page (`/wiki/items`) — intro beschrijving + Dutch comment vertaald
+
+**Resultaat:** Hele wiki is nu 100% Engels. Data bestanden en detail pagina's waren al Engels.
+**Commit:** `i18n: Translate wiki pages from Dutch to English` (6 bestanden, 16 regels)
+
+#### Lint & Bug Fix Sweep ✅ COMPLEET (16 → 0 problemen)
+
+**Errors gefixt (5):**
+| Bestand | Probleem | Fix |
+|---------|----------|-----|
+| `login/page.tsx` | Unescaped `'` in "Don't" | HTML entity `&apos;` |
+| `command-bar.tsx` | setState in useEffect (history load) | Lazy useState initializer |
+| `command-bar.tsx` | setState in useEffect (suggestions) | Replaced with useMemo |
+| `guest-enemy-marker-popup.tsx` | Variable used before declaration | Moved handleClose before useEffect + useCallback |
+| `use-guest-markers.ts` | setState in useEffect (localStorage) | Lazy useState initializer |
+
+**Warnings gefixt (11):**
+- Removed unused imports: `ammoCategories`, `itemCategories`, `ItemCategory`, `monumentTiers`, `MonumentTier`, `weaponCategories`
+- Removed unused variables: `session` (GET admin/users), `handleUpdateResidents`, `GuestResident`, `setIsLoaded`
+- Replaced `actionTypes` const with inline type definition in `use-toast.ts`
+
+**Commit:** `fix: Resolve all lint errors and warnings (16 to 0)` (12 bestanden)
+
+#### Checks na fix:
+| Check | Resultaat |
+|-------|-----------|
+| `npm run lint` | ✅ 0 errors, 0 warnings |
+| `npm run type-check` | ✅ 0 errors |
+| `npm run build` | ✅ 225 pagina's succesvol |
+
+---
+
+### Wat er vorige sessie is gedaan (2026-02-09, eerder):
+
 #### FASE 9: Command Bar ✅ COMPLEET
 - **Command Parser:** Grid coordinate system (A0-Z25), offset support (+3, -2+1)
 - **Command Bar Component:** Floating input with suggestions, history, keyboard shortcuts
@@ -505,11 +546,12 @@ Commit: `style: Complete UI restyling from iOS to Rust Console game theme` (46 b
 3. ~~**FASE 9: Command Bar**~~ ✅ COMPLEET — Floating input voor snelle marker commands
 4. ~~**FASE 10: Polish & Extras**~~ ✅ COMPLEET — Backup, toasts, responsive, README
 5. **Building wiki:** Base designs, upkeep
-6. **Wiki Translation:** Translate wiki pages from Dutch to English
+6. ~~**Wiki Translation:** Translate wiki pages from Dutch to English~~ ✅ COMPLEET — Alle 6 wiki pagina's vertaald
 7. ~~**Marker team visibility:** Markers delen met team (private/team/public)~~ ✅ Visuele feedback toegevoegd
+8. ~~**Lint & Bug Fix Sweep**~~ ✅ COMPLEET — 16 → 0 problemen (5 errors + 11 warnings gefixt)
 
 ### Volgende stap:
-v1.0 MVP is compleet. Mogelijke uitbreidingen: Building wiki, Wiki translation, of nieuwe features.
+v1.0 MVP is compleet en schoon (0 lint errors/warnings). Mogelijke uitbreidingen: Building wiki, Deployment, of nieuwe features.
 
 ---
 
@@ -759,12 +801,13 @@ Claude leest automatisch CONTEXT.md en CLAUDE.md om de context te begrijpen.
 
 ### Huidige Status (2026-02-09):
 - **v1.0 MVP is COMPLEET** met alle 10 fases afgerond
+- **Wiki is 100% Engels** — alle pagina's vertaald
+- **Code is schoon** — 0 lint errors, 0 warnings, 0 type errors
 - Mogelijke volgende taken:
   - Building Wiki (base designs, upkeep)
-  - Wiki Translation (Dutch → English)
   - Deployment (Vercel/Railway)
   - Real-time updates (WebSocket)
 
 ---
 
-*Laatste update: 2026-02-09 — v1.0 MVP COMPLEET*
+*Laatste update: 2026-02-09 — v1.0 MVP COMPLEET + Wiki Translation + Lint Sweep*
