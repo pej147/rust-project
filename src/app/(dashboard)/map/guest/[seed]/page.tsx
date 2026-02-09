@@ -9,7 +9,7 @@ import { GuestAddMarkerForm } from "@/components/map/guest-add-marker-form";
 import { GuestMarkerDetailSheet } from "@/components/map/guest-marker-detail-sheet";
 import { MarkerFilter } from "@/components/map/marker-filter";
 import { CommandBar } from "@/components/command-bar/command-bar";
-import { useGuestMarkers, type GuestMarker, type GuestResident } from "@/hooks/use-guest-markers";
+import { useGuestMarkers, type GuestMarker } from "@/hooks/use-guest-markers";
 import type { MarkerType } from "@/lib/command-parser";
 
 // All marker types for default filter
@@ -322,17 +322,6 @@ export default function GuestMapDetailPage({
     setShowMarkerDetail(false);
     setSelectedMarker(null);
   };
-
-  const handleUpdateResidents = useCallback(
-    (markerId: string, residents: GuestResident[]) => {
-      updateMarker(seed, markerId, { residents });
-      // Update selected marker to reflect changes
-      if (selectedMarker && selectedMarker.id === markerId) {
-        setSelectedMarker({ ...selectedMarker, residents });
-      }
-    },
-    [seed, updateMarker, selectedMarker]
-  );
 
   const handleMarkerUpdate = useCallback(
     (markerId: string, updates: Partial<Omit<GuestMarker, "id" | "createdAt">>) => {

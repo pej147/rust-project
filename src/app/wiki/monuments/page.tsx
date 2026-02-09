@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { monuments, monumentTiers, type MonumentTier } from "@/data/monuments";
+import { monuments } from "@/data/monuments";
 
 export default function WikiMonumentsPage() {
   const tier1 = monuments.filter(m => m.tier === "tier1");

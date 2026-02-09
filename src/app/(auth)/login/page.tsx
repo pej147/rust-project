@@ -116,7 +116,7 @@ export default function LoginPage() {
       </Suspense>
 
       <p className="mt-6 text-center text-sm text-rust-text-secondary">
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <Link
           href="/register"
           className="font-medium text-rust-primary hover:text-rust-primary-hover"

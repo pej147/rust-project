@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { weapons, weaponCategories } from "@/data/weapons";
+import { weapons } from "@/data/weapons";
 
 export default function WikiWeaponsPage() {
   const meleeWeapons = weapons.filter(w => w.category === "melee");

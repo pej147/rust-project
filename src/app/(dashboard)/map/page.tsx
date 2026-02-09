@@ -28,7 +28,7 @@ interface MapSession {
 }
 
 export default function MapPage() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
 
   // Guest mode state

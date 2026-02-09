@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import {
   parseCommand,
   getCommandSuggestions,
@@ -20,35 +20,27 @@ const MAX_HISTORY = 20;
 
 export function CommandBar({ mapSize, onAddMarker, onGoto, onClose }: CommandBarProps) {
   const [input, setInput] = useState("");
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [history, setHistory] = useState<string[]>([]);
+  const [history, setHistory] = useState<string[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      const saved = localStorage.getItem(HISTORY_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch {
+      // Ignore localStorage errors
+    }
+    return [];
+  });
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Load history from localStorage
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(HISTORY_KEY);
-      if (saved) {
-        setHistory(JSON.parse(saved));
-      }
-    } catch {
-      // Ignore localStorage errors
-    }
-  }, []);
+  const suggestions = useMemo(() => getCommandSuggestions(input), [input]);
 
   // Focus input on mount
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
-
-  // Update suggestions based on input
-  useEffect(() => {
-    const newSuggestions = getCommandSuggestions(input);
-    setSuggestions(newSuggestions);
-  }, [input]);
 
   // Save to history
   const saveToHistory = useCallback((command: string) => {

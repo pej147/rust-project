@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { wikiItems, itemCategories, type ItemCategory } from "@/data/wiki-items";
+import { wikiItems } from "@/data/wiki-items";
 
 export default function WikiItemsPage() {
   // Group items by category

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { type GuestMarker } from "@/hooks/use-guest-markers";
 
 interface Resident {
@@ -54,6 +54,15 @@ export function GuestEnemyMarkerPopup({
   const [newClanTag, setNewClanTag] = useState("");
   const [newThreatLevel, setNewThreatLevel] = useState(1);
 
+  // Reset form on close
+  const handleClose = useCallback(() => {
+    setIsAdding(false);
+    setNewName("");
+    setNewClanTag("");
+    setNewThreatLevel(1);
+    onClose();
+  }, [onClose]);
+
   // Handle click outside
   useEffect(() => {
     if (!isOpen) return;
@@ -73,16 +82,7 @@ export function GuestEnemyMarkerPopup({
       clearTimeout(timer);
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isOpen]);
-
-  // Reset form on close
-  const handleClose = () => {
-    setIsAdding(false);
-    setNewName("");
-    setNewClanTag("");
-    setNewThreatLevel(1);
-    onClose();
-  };
+  }, [isOpen, handleClose]);
 
   // Add new player
   const handleAddPlayer = (e: React.FormEvent) => {

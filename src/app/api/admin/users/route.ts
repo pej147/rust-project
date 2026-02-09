@@ -6,7 +6,7 @@ import { z } from "zod";
 
 // GET /api/admin/users - List all users
 export async function GET() {
-  const { error, session } = await requireAdmin();
+  const { error } = await requireAdmin();
   if (error) return error;
 
   try {

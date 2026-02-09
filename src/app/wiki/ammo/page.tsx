@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ammo, ammoCategories } from "@/data/ammo";
+import { ammo } from "@/data/ammo";
 
 export default function WikiAmmoPage() {
   const pistolAmmo = ammo.filter(a => a.category === "pistol");

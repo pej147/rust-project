@@ -73,21 +73,17 @@ function syncToTeam(seed: string, markers: GuestMarker[]) {
 }
 
 export function useGuestMarkers() {
-  const [maps, setMaps] = useState<GuestMapSession[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  // Load from localStorage on mount
-  useEffect(() => {
+  const [maps, setMaps] = useState<GuestMapSession[]>(() => {
+    if (typeof window === "undefined") return [];
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        setMaps(JSON.parse(stored));
-      }
+      if (stored) return JSON.parse(stored);
     } catch (error) {
       console.error("Failed to load guest maps:", error);
     }
-    setIsLoaded(true);
-  }, []);
+    return [];
+  });
+  const [isLoaded] = useState(() => typeof window !== "undefined");
 
   // Save to localStorage whenever maps change
   useEffect(() => {
